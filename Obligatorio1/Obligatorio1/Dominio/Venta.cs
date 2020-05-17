@@ -1,0 +1,79 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace Obligatorio1.Dominio
+{
+    public class Venta
+    {
+        private int _id;
+        private DateTime _fecha;
+        private List<Item> _listaItems;
+        private Cliente _cliente;
+        private int _montoTotal;
+        private string _tarjeta; // credito o debito;
+
+
+        public int Id
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
+        public DateTime Fecha
+        {
+            get { return _fecha; }
+            set { _fecha = value; }
+        }
+        public Cliente Cliente
+        {
+            get { return _cliente;}
+            set { _cliente = value; }
+        }
+        public int MontoTotal
+        {
+            get { return _montoTotal; }
+            set { _montoTotal = value; }
+        }
+        public List<Item> ListaItems
+        {
+            get { return _listaItems; }
+            set { _listaItems = value; }
+        }
+
+        public string Tarjeta
+        {
+            get { return _tarjeta; }
+            set { _tarjeta = value; }
+        }
+
+        public int idCliente
+        {
+            get { return Cliente.Id; }
+        }
+
+        private int CalcularMontoTotal(List<Item> pLista)
+        {
+            int total =0;
+            foreach (Item unItem in pLista)
+            {
+                total += unItem.Precio;
+            }
+            return total;
+        }
+        
+        public Venta(DateTime pFecha, List<Item> pListaItems, Cliente pCliente, string pTarjeta)
+        {
+            this.Fecha = pFecha;
+            this.ListaItems = pListaItems;
+            this.Cliente = pCliente;
+            this.Tarjeta = pTarjeta;
+            this.MontoTotal = this.CalcularMontoTotal(pListaItems);
+        }
+        public Venta()
+        {
+
+        }
+
+    }
+}
