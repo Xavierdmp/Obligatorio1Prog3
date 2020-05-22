@@ -1,0 +1,98 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Web;
+using System.Web.Configuration;
+namespace Obligatorio1.Persistencia
+{
+    public class Conexion
+    {
+        private static string _cadenaConexion;
+        private static Conexion _instancia;
+
+        public Conexion()
+        {
+            _cadenaConexion = WebConfigurationManager.ConnectionStrings["ConexionAplicacion"].ConnectionString;
+        }
+
+        public static Conexion Instancia
+        {
+            get
+            {
+                if (_instancia == null)
+                {
+                    _instancia = new Conexion();
+                }
+                return _instancia;
+            }
+        }
+
+        public static SqlConnection Conectar()
+        {
+            SqlConnection conexion = new SqlConnection(_cadenaConexion);
+            try
+            {
+                conexion.Open();
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine(error.Message);
+            }
+            return conexion;
+        }
+
+        public bool InicializarConsulta(string pConsulta)
+        {
+            bool SeAplicaronCambios = false;
+
+            try
+            {
+                SqlConnection conexion = Conectar();
+                SqlCommand comandos = new SqlCommand();
+
+                comandos.CommandText = pConsulta;
+                comandos.CommandType = CommandType.Text;
+
+                comandos.Connection = conexion;
+                SeAplicaronCambios = comandos.ExecuteNonQuery() > 0;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return SeAplicaronCambios;
+
+        }
+
+        public DataSet InicializarSeleccion(string pConsulta)
+        {
+            DataSet datos = null;
+            SqlCommand comandoSql = null;
+            try
+            {
+                comandoSql = new SqlCommand();
+                comandoSql.CommandText = pConsulta;
+                comandoSql.CommandType = CommandType.Text;
+
+                datos = new DataSet();
+
+                SqlDataAdapter adaptador = new SqlDataAdapter(comandoSql);
+                SqlConnection conexion = Conectar();
+                comandoSql.Connection = conexion;
+                adaptador.Fill(datos);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return datos;
+        }
+
+    
+    }
+
+}
