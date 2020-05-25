@@ -225,7 +225,9 @@
     <Content Include="Global.asax" />
     <Content Include="Site.Master" />
     <Content Include="ViewSwitcher.ascx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Bundle.config" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
@@ -383,6 +385,7 @@
     <Compile Include="Dominio\Encryptar.cs" />
     <Compile Include="Dominio\Fabricante.cs" />
     <Compile Include="Dominio\Instrumento.cs" />
+    <Compile Include="Dominio\Intefaces\IABMLBC.cs" />
     <Compile Include="Dominio\Item.cs" />
     <Compile Include="Dominio\Persona.cs" />
     <Compile Include="Dominio\SubTipo.cs" />

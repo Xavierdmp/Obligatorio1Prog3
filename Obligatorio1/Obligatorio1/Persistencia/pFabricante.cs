@@ -43,7 +43,7 @@ namespace Obligatorio1.Persistencia
             string sql = "Select * from Fabricantes where id_Fabricante=" +  pId + ";";
             DataSet datos = Conexion.Instancia.InicializarSeleccion(sql);
             Dominio.Fabricante unFabricante = new Fabricante();
-            if (datos != null)
+            if (datos.Tables[0].Rows.Count > 0)
             {
                 DataRowCollection tabla = datos.Tables[0].Rows;
                 foreach(DataRow row in tabla)
@@ -83,7 +83,7 @@ namespace Obligatorio1.Persistencia
             string select = "Select * from Fabricantes";
             DataSet datos = Conexion.Instancia.InicializarSeleccion(select);
             List<Fabricante> listaDeFabricantes = new List<Fabricante>();
-            if(datos != null)
+            if(datos.Tables[0].Rows.Count > 0)
             {
                 DataRowCollection tabla = datos.Tables[0].Rows;
                 foreach(DataRow row in tabla)

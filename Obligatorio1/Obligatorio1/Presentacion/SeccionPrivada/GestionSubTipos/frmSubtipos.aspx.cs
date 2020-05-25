@@ -21,7 +21,7 @@ namespace Obligatorio1.Presentacion.GestionSubTipos
         {
             Dominio.Controladoras.ControladoraSubTipos ControladoraSubTipos = new Dominio.Controladoras.ControladoraSubTipos();
             this.gvListarSubtipos.DataSource = null;
-            this.gvListarSubtipos.DataSource = ControladoraSubTipos.ListarSubtipos();
+            this.gvListarSubtipos.DataSource = ControladoraSubTipos.Listar();
             this.gvListarSubtipos.DataBind();
         }
 
@@ -29,7 +29,7 @@ namespace Obligatorio1.Presentacion.GestionSubTipos
         {
             Dominio.Controladoras.ControladoraTipo unaControladoraTipo = new Dominio.Controladoras.ControladoraTipo();
             this.dplListaTipos.DataSource = null;
-            this.dplListaTipos.DataSource = unaControladoraTipo.ListaTipo();
+            this.dplListaTipos.DataSource = unaControladoraTipo.Listar();
             this.dplListaTipos.DataBind();
         }
         private bool ComprobarDatos()
@@ -51,31 +51,34 @@ namespace Obligatorio1.Presentacion.GestionSubTipos
         }
         protected void btnAlta_Click(object sender, EventArgs e)
         {
-            if (this.ComprobarDatos())
+            if (this.dplListaTipos.SelectedValue != "Seleccione un Tipo de instrumento")
             {
-                string nombre = this.txtNombre.Text;
-                string ItemTipoInstrumento = this.dplListaTipos.SelectedItem.ToString();
-                string[] partesItem = ItemTipoInstrumento.Split(' ');
-                int IdTipo = int.Parse(partesItem[1]);
-                Dominio.Controladoras.ControladoraTipo unaControladoraTipo = new Dominio.Controladoras.ControladoraTipo();
-                Dominio.Controladoras.ControladoraSubTipos unaControladoraSubTipo = new Dominio.Controladoras.ControladoraSubTipos();
-                Dominio.Tipo unTipo = unaControladoraTipo.BuscarTipo(IdTipo);
-                Dominio.SubTipo unSubtipo = new Dominio.SubTipo(nombre, unTipo);
-                if (unaControladoraSubTipo.AltaSubtipo(unSubtipo))
+                if (this.ComprobarDatos())
                 {
-                    this.lblMensaje.MensajeActivo(1, "Subtipo ingresado con exito");
-                    this.LimpiarCampos();
-                    this.ListarSubtipos();
+                    string nombre = this.txtNombre.Text;
+                    string ItemTipoInstrumento = this.dplListaTipos.SelectedItem.ToString();
+                    string[] partesItem = ItemTipoInstrumento.Split(' ');
+                    int IdTipo = int.Parse(partesItem[1]);
+                    Dominio.Controladoras.ControladoraTipo unaControladoraTipo = new Dominio.Controladoras.ControladoraTipo();
+                    Dominio.Controladoras.ControladoraSubTipos unaControladoraSubTipo = new Dominio.Controladoras.ControladoraSubTipos();
+                    Dominio.Tipo unTipo = unaControladoraTipo.Buscar(IdTipo);
+                    Dominio.SubTipo unSubtipo = new Dominio.SubTipo(nombre, unTipo);
+                    if (unaControladoraSubTipo.Alta(unSubtipo))
+                    {
+                        this.lblMensaje.MensajeActivo(1, "Subtipo ingresado con exito");
+                        this.LimpiarCampos();
+                        this.ListarSubtipos();
+                    }
+                    else
+                    {
+                        this.lblMensaje.MensajeActivo(2, "No se pudo ingresar");
+                        this.ListarSubtipos();
+                    }
                 }
                 else
                 {
-                    this.lblMensaje.MensajeActivo(2, "No se pudo ingresar");
-                    this.ListarSubtipos();
+                    this.lblMensaje.MensajeActivo(2, "Complete todos los datos");
                 }
-            }
-            else
-            {
-                this.lblMensaje.MensajeActivo(2, "Complete todos los datos");
             }
         }
 
@@ -86,7 +89,7 @@ namespace Obligatorio1.Presentacion.GestionSubTipos
                 GridViewRow row = this.gvListarSubtipos.SelectedRow;
                 int id = int.Parse(row.Cells[1].Text);
                 Dominio.Controladoras.ControladoraSubTipos unaControladoraSubtipo = new Dominio.Controladoras.ControladoraSubTipos();
-                if (unaControladoraSubtipo.BajaSubTipo(id))
+                if (unaControladoraSubtipo.Baja(id))
                 {
                     this.LimpiarCampos();
                     this.ListarSubtipos();
@@ -109,7 +112,7 @@ namespace Obligatorio1.Presentacion.GestionSubTipos
             GridViewRow row = this.gvListarSubtipos.SelectedRow;
             int id = int.Parse(row.Cells[1].Text);
             Dominio.Controladoras.ControladoraSubTipos unaControladoraSubtipo = new Dominio.Controladoras.ControladoraSubTipos();
-            this.txtNombre.Text = unaControladoraSubtipo.BuscarSubtipo(id).Nombre;
+            this.txtNombre.Text = unaControladoraSubtipo.Buscar(id).Nombre;
         }
 
         protected void btnModificar_Click(object sender, EventArgs e)
@@ -119,7 +122,7 @@ namespace Obligatorio1.Presentacion.GestionSubTipos
                 GridViewRow row = this.gvListarSubtipos.SelectedRow;
                 int id = int.Parse(row.Cells[1].Text);
                 Dominio.Controladoras.ControladoraSubTipos unaControladoraSubtipo = new Dominio.Controladoras.ControladoraSubTipos();
-                Dominio.SubTipo unSubtipo = unaControladoraSubtipo.BuscarSubtipo(id);
+                Dominio.SubTipo unSubtipo = unaControladoraSubtipo.Buscar(id);
 
                 string nombre = this.txtNombre.Text;
                 string ItemTipoInstrumento = this.dplListaTipos.SelectedItem.ToString();
@@ -127,12 +130,12 @@ namespace Obligatorio1.Presentacion.GestionSubTipos
                 int IdTipo = int.Parse(partesItem[1]);
                 Dominio.Controladoras.ControladoraTipo unaControladoraTipo = new Dominio.Controladoras.ControladoraTipo();
 
-                Dominio.Tipo unTipo = unaControladoraTipo.BuscarTipo(IdTipo);
+                Dominio.Tipo unTipo = unaControladoraTipo.Buscar(IdTipo);
 
                 unSubtipo.Nombre = nombre;
                 unSubtipo.TipoInstrumento = unTipo;
 
-                if (unaControladoraSubtipo.ModificarSubTipo(unSubtipo))
+                if (unaControladoraSubtipo.Modificar(unSubtipo))
                 {
                     this.LimpiarCampos();
                     this.ListarSubtipos();

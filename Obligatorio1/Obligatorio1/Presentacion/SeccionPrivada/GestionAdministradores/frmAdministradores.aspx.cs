@@ -21,14 +21,14 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionAdministradores
         {
             Dominio.Controladoras.ControladoraAdministrador unaControladoraAdmin = new Dominio.Controladoras.ControladoraAdministrador();
             this.gvListarAdministradores.DataSource = null;
-            this.gvListarAdministradores.DataSource = unaControladoraAdmin.ListarAdministradores();
+            this.gvListarAdministradores.DataSource = unaControladoraAdmin.Listar();
             this.gvListarAdministradores.DataBind();
         }
         private void AdministradorConPermisos()
         {
             int IdAdmin = int.Parse(Session["AdministradorLogeado"].ToString());
             Dominio.Controladoras.ControladoraAdministrador unaControladoraAdmin = new Dominio.Controladoras.ControladoraAdministrador();
-            Dominio.Administrador unAdministrador = unaControladoraAdmin.BuscarAdministrador(IdAdmin);
+            Dominio.Administrador unAdministrador = unaControladoraAdmin.Buscar(IdAdmin);
             if (unAdministrador.Permisos)
             {
                 this.btnEliminarAdmninstrador.Visible = true;
@@ -69,7 +69,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionAdministradores
                     Dominio.Controladoras.ControladoraAdministrador unaControladoraAdmin = new Dominio.Controladoras.ControladoraAdministrador();
                     Dominio.Administrador unAdministrador = new Dominio.Administrador(correoelectronico, contraseña);
 
-                    if (unaControladoraAdmin.AltaAdministrador(unAdministrador))
+                    if (unaControladoraAdmin.Alta(unAdministrador))
                     {
                         this.lblMensaje.MensajeActivo(1, "Ha sido dado de alta");
                         this.ListarAdmininstradores();
@@ -106,7 +106,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionAdministradores
                 {
                     Dominio.Controladoras.ControladoraAdministrador unaControladoraAdmin = new Dominio.Controladoras.ControladoraAdministrador();
 
-                    if (unaControladoraAdmin.BajaAdministrador(id))
+                    if (unaControladoraAdmin.Baja(id))
                     {
                         this.lblMensaje.MensajeActivo(1, "Ha sido dado de baja Correctamente");
                         this.LimpiarCampos();
@@ -139,7 +139,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionAdministradores
             if (IdAdmin != id)
             {
                 Dominio.Controladoras.ControladoraAdministrador unaControladoraAdmin = new Dominio.Controladoras.ControladoraAdministrador();
-                Dominio.Administrador unAdministrador = unaControladoraAdmin.BuscarAdministrador(id);
+                Dominio.Administrador unAdministrador = unaControladoraAdmin.Buscar(id);
                 this.txtCorreoElectronico.Text = unAdministrador.CorreoElectronico;
                 this.txtContraseña.Text = unAdministrador.Contraseña;
             }

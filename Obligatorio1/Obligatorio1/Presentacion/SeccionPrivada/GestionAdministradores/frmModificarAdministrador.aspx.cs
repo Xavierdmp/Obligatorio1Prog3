@@ -17,7 +17,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionAdministradores
         {
             int IdAdmin = int.Parse(Session["AdministradorLogeado"].ToString());
             Dominio.Controladoras.ControladoraAdministrador unaControladoraAdmin = new Dominio.Controladoras.ControladoraAdministrador();
-            Dominio.Administrador unAdministrador = unaControladoraAdmin.BuscarAdministrador(IdAdmin);
+            Dominio.Administrador unAdministrador = unaControladoraAdmin.Buscar(IdAdmin);
             this.txtCorreoElectronico.Text = unAdministrador.CorreoElectronico;
         }
 
@@ -28,14 +28,14 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionAdministradores
                 string confirmarcontraseña = this.txtConfirmarContraseña.Text;
             Dominio.Controladoras.ControladoraAdministrador unaControladoraAdmin = new Dominio.Controladoras.ControladoraAdministrador();
             int IdAdmin = int.Parse(Session["AdministradorLogeado"].ToString());
-                Dominio.Administrador unAdministrador = unaControladoraAdmin.BuscarAdministrador(IdAdmin);
+                Dominio.Administrador unAdministrador = unaControladoraAdmin.Buscar(IdAdmin);
 
                 unAdministrador.CorreoElectronico = correoelectronico;
                 unAdministrador.Contraseña = contraseña;
                 string confirmarContraseña = this.txtConfirmarContraseña.Text;
                 if (contraseña == confirmarContraseña)
                 {
-                    if (unaControladoraAdmin.ModificarAdministrador(unAdministrador))
+                    if (unaControladoraAdmin.Modificar(unAdministrador))
                     {
                         this.lblMensaje.MensajeActivo(1, "Se ha modificado con exito");
                         this.LimpiarDatos();
@@ -51,7 +51,10 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionAdministradores
                 }
             }
 
-        private void LimpiarDatos()        {            this.txtCorreoElectronico.Text = "";            this.txtConfirmarContraseña.Text = "";
+        private void LimpiarDatos()
+        {
+            this.txtCorreoElectronico.Text = "";
+            this.txtConfirmarContraseña.Text = "";
             this.txtConfirmarContraseña.Text = "";
         }
 

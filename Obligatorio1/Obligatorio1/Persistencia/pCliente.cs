@@ -48,7 +48,7 @@ namespace Obligatorio1.Persistencia
             DataSet data = Conexion.Instancia.InicializarSeleccion(introduccion);
 
             Dominio.Cliente unCLiente = new Cliente();
-            if (data != null)
+            if (data.Tables[0].Rows.Count > 0)
             {
                 DataRowCollection table = data.Tables[0].Rows;
                 foreach (DataRow row in table)
@@ -100,7 +100,7 @@ namespace Obligatorio1.Persistencia
             DataSet data = Conexion.Instancia.InicializarSeleccion(introduccion);
             List<Cliente> ListadeCLientes = new List<Cliente>();
 
-            if (data != null)
+            if (data.Tables[0].Rows.Count > 0)
             {
                 DataRowCollection table = data.Tables[0].Rows;
                 foreach (DataRow row in table)

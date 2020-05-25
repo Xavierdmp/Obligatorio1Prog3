@@ -3,23 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Obligatorio1.Persistencia;
+using Obligatorio1.Dominio.Intefaces;
 namespace Obligatorio1.Dominio.Controladoras
 {
-    public class ControladoraFabricante
+    public class ControladoraFabricante:IABMLBC<Fabricante>
     {
-        public bool ComprobarExistenciaFabricante(string pNombre)
+        public bool ComprobarExistencia(string pNombre)
         {
             return Controladora.Instancia.ComprobarExistenciaFabricante(pNombre);
         }
 
-        public Fabricante BuscarFabricante(int pId)
+        public Fabricante Buscar(int pId)
         {
             return Controladora.Instancia.BuscarFabricante(pId);
         }
 
-        public bool AltaFabricante(Fabricante pFabricante)
+        public bool Alta(Fabricante pFabricante)
         {
-            if (!this.ComprobarExistenciaFabricante(pFabricante.Nombre))
+            if (!this.ComprobarExistencia(pFabricante.Nombre))
             {
                 return Controladora.Instancia.AltaFabricante(pFabricante);
             }
@@ -29,18 +30,18 @@ namespace Obligatorio1.Dominio.Controladoras
             }
         }
 
-        public bool BajaFabricante(int pId)
+        public bool Baja(int pId)
         {
-            Dominio.Fabricante unFabricante = this.BuscarFabricante(pId);
+            Dominio.Fabricante unFabricante = this.Buscar(pId);
             if (unFabricante != null)
             {
                 return Controladora.Instancia.BajaFabricante(pId);
             }
             return false;
         }
-        public bool ModificarFabricante(Fabricante pFabricante)
+        public bool Modificar(Fabricante pFabricante)
         {
-            Dominio.Fabricante unFabricante = this.BuscarFabricante(pFabricante.Id);
+            Dominio.Fabricante unFabricante = this.Buscar(pFabricante.Id);
             if (unFabricante != null)
             {
                 return Controladora.Instancia.ModificarFabricante(pFabricante);
@@ -50,7 +51,7 @@ namespace Obligatorio1.Dominio.Controladoras
                 return false;
             }
         }
-        public List<Fabricante> ListaFabricantes()
+        public List<Fabricante> Listar()
         {
             return pFabricante.Instancia.Listar();
         }

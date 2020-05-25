@@ -10,6 +10,7 @@ namespace Obligatorio1.Dominio
         private int _id;
         private string _nombre;
         private int _cantidad;
+        private string _codigo;
 
         public int Id
         {
@@ -27,15 +28,21 @@ namespace Obligatorio1.Dominio
             get { return _cantidad; }
             set { _cantidad = value; }
         }
-
-        public Color(string pNombre)
+        public string Codigo
+        {
+            get { return _codigo; }
+            set { _codigo = value; }
+        }
+        public Color(string pNombre,string pCodigo)
         {
             this.Nombre = pNombre;
+            this.Codigo = pCodigo;
         }
-        public Color(string pNombre,int pCantidad)
+        public Color(string pNombre,int pCantidad,string pCodigo)
         {
             this.Nombre = pNombre;
             this.Cantidad = pCantidad;
+            this.Codigo = pCodigo;
         }
         public Color()
         {

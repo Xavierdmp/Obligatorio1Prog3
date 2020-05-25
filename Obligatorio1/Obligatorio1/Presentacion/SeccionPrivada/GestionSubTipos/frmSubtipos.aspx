@@ -16,7 +16,7 @@
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label2" runat="server" Text="Tipo: " CssClass="EstilosLabel"></asp:Label>
-                    <asp:DropDownList ID="dplListaTipos" runat="server" AutoPostBack="True" CssClass="ListasDesplegables">
+                    <asp:DropDownList ID="dplListaTipos" runat="server" AutoPostBack="True" CssClass="ListasDesplegables" AppendDataBoundItems="True">
                         <asp:ListItem>Seleccione un Tipo de instrumento</asp:ListItem>
                     </asp:DropDownList>
                     <br />
@@ -36,7 +36,7 @@
             </div>
             <div class="row" style="margin-top:50px;">
                 <div class="col-md-12">
-                    <asp:GridView ID="gvListarSubtipos" runat="server" CssClass="table" BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="3px" CellPadding="4" GridLines="None" HorizontalAlign="Center" AutoGenerateColumns="False" EmptyDataText="La lista se encuentra vacia" ShowHeaderWhenEmpty="True" Width="1366px" AllowPaging="True" OnSelectedIndexChanged="gvListarSubtipos_SelectedIndexChanged" UseAccessibleHeader="False">
+                    <asp:GridView ID="gvListarSubtipos" runat="server" CssClass="table" BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="3px" CellPadding="4" GridLines="None" HorizontalAlign="Center" AutoGenerateColumns="False" EmptyDataText="La lista se encuentra vacia" ShowHeaderWhenEmpty="True" Width="846px" AllowPaging="True" OnSelectedIndexChanged="gvListarSubtipos_SelectedIndexChanged" UseAccessibleHeader="False">
                         <Columns>
                             <asp:CommandField ShowSelectButton="True" AccessibleHeaderText="Editar-Modificar" HeaderText="Editar-Modificar" SelectText="&lt;i class=&quot;far fa-edit&quot;&gt;&lt;/i&gt;" >
                             <ItemStyle HorizontalAlign="Center" />

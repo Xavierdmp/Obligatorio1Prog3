@@ -3,30 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Obligatorio1.Persistencia;
+using Obligatorio1.Dominio.Intefaces;
 namespace Obligatorio1.Dominio.Controladoras
 {
-    public class ControladoraTipo
+    public class ControladoraTipo:IABMLBC<Tipo>
     {
-        public bool ComprobarExistenciaTipo(string pNombre)
+        public bool ComprobarExistencia(string pNombre)
         {
             return Controladora.Instancia.ComprobarExistenciaTipo(pNombre);
         }
-        public Tipo BuscarTipo(int pId)
+        public Tipo Buscar(int pId)
         {
             return Controladora.Instancia.BuscarTipo(pId);
         }
-        public bool AltaTipo(Tipo pTipo)
+        public bool Alta(Tipo pTipo)
         {
-            if (!this.ComprobarExistenciaTipo(pTipo.Nombre))
+            if (!this.ComprobarExistencia(pTipo.Nombre))
             {
                 return Controladora.Instancia.AltaTipo(pTipo);
             }
             return false;
         }
 
-        public bool BajaTipo(int pId)
+        public bool Baja(int pId)
         {
-            Dominio.Tipo unTipo = this.BuscarTipo(pId);
+            Dominio.Tipo unTipo = this.Buscar(pId);
             if (unTipo != null)
             {
                 return Controladora.Instancia.BajaTipo(pId);
@@ -34,9 +35,9 @@ namespace Obligatorio1.Dominio.Controladoras
             return false;
         }
 
-        public bool ModificarTipo(Tipo pTipo)
+        public bool Modificar(Tipo pTipo)
         {
-            Dominio.Tipo unTipo = this.BuscarTipo(pTipo.Id);
+            Dominio.Tipo unTipo = this.Buscar(pTipo.Id);
             if (unTipo != null)
             {
                 return Controladora.Instancia.ModificarTipo(pTipo);
@@ -44,7 +45,7 @@ namespace Obligatorio1.Dominio.Controladoras
             return false;
         }
 
-        public List<Tipo> ListaTipo()
+        public List<Tipo> Listar()
         {
             return pTipo.Instancia.Listar();
         }

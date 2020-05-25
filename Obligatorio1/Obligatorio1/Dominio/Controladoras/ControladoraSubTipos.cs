@@ -3,21 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Obligatorio1.Persistencia;
+using Obligatorio1.Dominio.Intefaces;
 namespace Obligatorio1.Dominio.Controladoras
 {
-    public class ControladoraSubTipos
+    public class ControladoraSubTipos:IABMLBC<SubTipo>
     {
-        public bool ComprobarExistenciaSubTipo(string pNombre)
+        public bool ComprobarExistencia(string pNombre)
         {
             return Controladora.Instancia.ComprobarExistenciaSubTipo(pNombre);
         }
-        public SubTipo BuscarSubtipo(int pId)
+        public SubTipo Buscar(int pId)
         {
             return Controladora.Instancia.BuscarSubTipo(pId);
         }
-        public bool AltaSubtipo(SubTipo pSubtipo)
+        public bool Alta(SubTipo pSubtipo)
         {
-            if (!this.ComprobarExistenciaSubTipo(pSubtipo.Nombre))
+            if (!this.ComprobarExistencia(pSubtipo.Nombre))
             {
                 return Controladora.Instancia.AltaSubTipo(pSubtipo);
             }
@@ -26,9 +27,9 @@ namespace Obligatorio1.Dominio.Controladoras
                 return false;
             }
         }
-        public bool BajaSubTipo(int pId)
+        public bool Baja(int pId)
         {
-            Dominio.SubTipo unSubtipo = this.BuscarSubtipo(pId);
+            Dominio.SubTipo unSubtipo = this.Buscar(pId);
             if (unSubtipo != null)
             {
                 return Controladora.Instancia.BajaSubTipo(pId);
@@ -38,16 +39,16 @@ namespace Obligatorio1.Dominio.Controladoras
                 return false;
             }
         }
-        public bool ModificarSubTipo(SubTipo pSubtipo)
+        public bool Modificar(SubTipo pSubtipo)
         {
-            Dominio.SubTipo unSubtipo = this.BuscarSubtipo(pSubtipo.Id);
+            Dominio.SubTipo unSubtipo = this.Buscar(pSubtipo.Id);
             if (unSubtipo != null)
             {
                 return Controladora.Instancia.ModificarSubTipo(pSubtipo);
             }
             return false;
         }
-        public List<SubTipo> ListarSubtipos()
+        public List<SubTipo> Listar()
         {
             return Controladora.Instancia.ListarSubtipos();
         }

@@ -8,11 +8,11 @@
                 <h1>Gestion de Tipos</h1>
             </div>
         </div>
-        <div class="row">
+        <div class="row DistanciaDelTitulo">
             <div class="col-md-12">
 
                 <div class="form-group">
-                    <asp:Label ID="Label1" runat="server" Text="Nombre : "></asp:Label>
+                    <asp:Label ID="Label1" runat="server" Text="Nombre : " CssClass="EstilosLabel"></asp:Label>
                     <br>
                     <asp:TextBox ID="txtNombre" runat="server" CssClass="EstiloTexbox"></asp:TextBox>
                     <br />
@@ -35,22 +35,22 @@
 
         <div class="row">
             <div class="col-md-12">
-                <asp:GridView ID="GvListarTipos" runat="server" HorizontalAlign="Center" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GvListarTipos_SelectedIndexChanged" Width="536px">
-                    <AlternatingRowStyle BackColor="White" />
-                    <Columns>
-                        <asp:CommandField ButtonType="Button" ShowSelectButton="True" />
-                    </Columns>
-                    <EditRowStyle BackColor="#7C6F57" />
-                    <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-                    <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-                    <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
-                    <RowStyle BackColor="#E3EAEB" />
-                    <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
-                    <SortedAscendingCellStyle BackColor="#F8FAFA" />
-                    <SortedAscendingHeaderStyle BackColor="#246B61" />
-                    <SortedDescendingCellStyle BackColor="#D4DFE1" />
-                    <SortedDescendingHeaderStyle BackColor="#15524A" />
-                </asp:GridView>
+               <asp:GridView ID="GvListarTipos" runat="server" CssClass="table" BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="3px" CellPadding="4" GridLines="None" HorizontalAlign="Center" EmptyDataText="La lista se encuentra vacia" ShowHeaderWhenEmpty="True" Width="846px" AllowPaging="True" OnSelectedIndexChanged="GvListarTipos_SelectedIndexChanged" UseAccessibleHeader="False">
+                        <Columns>
+                            <asp:CommandField ShowSelectButton="True" AccessibleHeaderText="Editar-Modificar" HeaderText="Editar-Modificar" SelectText="&lt;i class=&quot;far fa-edit&quot;&gt;&lt;/i&gt;" >
+                            <ItemStyle HorizontalAlign="Center" />
+                            </asp:CommandField>
+                        </Columns>
+                        <FooterStyle BackColor="White" ForeColor="#333333" />
+                        <HeaderStyle BackColor="#336666" Font-Bold="True" ForeColor="White" />
+                        <PagerStyle BackColor="#336666" ForeColor="White" HorizontalAlign="Center" />
+                        <RowStyle BackColor="White" ForeColor="#333333" />
+                        <SelectedRowStyle BackColor="#339966" Font-Bold="True" ForeColor="White" />
+                        <SortedAscendingCellStyle BackColor="#F7F7F7" />
+                        <SortedAscendingHeaderStyle BackColor="#487575" />
+                        <SortedDescendingCellStyle BackColor="#E5E5E5" />
+                        <SortedDescendingHeaderStyle BackColor="#275353" />
+                    </asp:GridView>
 
             </div>
         </div>

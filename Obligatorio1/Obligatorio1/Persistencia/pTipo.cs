@@ -44,7 +44,7 @@ namespace Obligatorio1.Persistencia
             string sql = "select * from Tipos where id_Tipo =" + pId + ";";
             DataSet datos = Conexion.Instancia.InicializarSeleccion(sql);
             Dominio.Tipo unTipo = new Tipo();
-            if (datos != null)
+            if (datos.Tables[0].Rows.Count > 0)
             {
                 DataRowCollection tabla = datos.Tables[0].Rows;
                 foreach (DataRow row in tabla)
@@ -65,7 +65,11 @@ namespace Obligatorio1.Persistencia
         }
         public bool Baja(int pId)
         {
-            return Conexion.Instancia.InicializarConsulta("delete from Tipos where id_Tipo =" + pId);
+            if (!this.BuscarSiTipoEstaEnSubTipo(pId))
+            {
+                return Conexion.Instancia.InicializarConsulta("delete from Tipos where id_Tipo =" + pId);
+            }
+            return false;
         }
         public bool Modificar(Tipo pTipo)
         {
@@ -77,7 +81,7 @@ namespace Obligatorio1.Persistencia
             string seleccion = "select * from Tipos";
             DataSet datos = Conexion.Instancia.InicializarSeleccion(seleccion);
             List<Tipo> listaDeTipos = new List<Tipo>();
-            if (datos != null)
+            if (datos.Tables[0].Rows.Count > 0)
             {
                 DataRowCollection tablas = datos.Tables[0].Rows;
                 {
@@ -95,7 +99,21 @@ namespace Obligatorio1.Persistencia
             return listaDeTipos;
         }
 
+        private bool BuscarSiTipoEstaEnSubTipo(int pId)
+        {
+            string seleccion = "select * from Tipos m, SubTipos st where m.Id_Tipo = st.Id_Tipo and m.id_Tipo=" + pId;
+            DataSet datos = Conexion.Instancia.InicializarSeleccion(seleccion);
+            if (datos.Tables[0].Rows.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 
+        }
 
     }
 }
+
