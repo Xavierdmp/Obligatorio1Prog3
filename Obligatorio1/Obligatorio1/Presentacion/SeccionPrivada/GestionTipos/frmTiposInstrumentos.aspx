@@ -1,11 +1,11 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Presentacion/SeccionPrivada/SiteMasterPrivate/frmPrivate.Master" AutoEventWireup="true" CodeBehind="frmTiposInstrumentos.aspx.cs" Inherits="Obligatorio1.Presentacion.SeccionPrivada.GestionTipos.frmTiposInstrumentos" %>
+﻿<%@ Page Title="Gestion Tipos" Language="C#" MasterPageFile="~/Presentacion/SeccionPrivada/SiteMasterPrivate/frmPrivate.Master" AutoEventWireup="true" CodeBehind="frmTiposInstrumentos.aspx.cs" Inherits="Obligatorio1.Presentacion.SeccionPrivada.GestionTipos.frmTiposInstrumentos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container-fluid text-center">
 
         <div class="row text-center">
             <div class="col-md-12">
-                <h1>Gestion de Tipos</h1>
+                <h1>Gestion de Tipos de instrumentos</h1>
             </div>
         </div>
         <div class="row DistanciaDelTitulo">

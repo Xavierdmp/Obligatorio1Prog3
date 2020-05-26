@@ -10,15 +10,15 @@ namespace Obligatorio1.Dominio
 
         public Accesorio(string pNombre, string pDescripcion, Fabricante pFabricante,
                         string pFotoPrincipal, List<string> pFotosAdicionales,
-                        int pPrecio, SubTipo pSubtipo)
-            :base(pNombre,pDescripcion,pFabricante,pFotoPrincipal,pFotosAdicionales,pPrecio,pSubtipo)
+                        int pPrecio, SubTipo pSubtipo, int pStock)
+            :base(pNombre,pDescripcion,pFabricante,pFotoPrincipal,pFotosAdicionales,pPrecio,pSubtipo,pStock)
         {
 
         }
 
         public Accesorio(string pNombre, string pDescripcion, Fabricante pFabricante,
-                        string pFotoPrincipal, int pPrecio, SubTipo pSubtipo)
-            : base(pNombre, pDescripcion, pFabricante, pFotoPrincipal, pPrecio, pSubtipo)
+                        string pFotoPrincipal, int pPrecio, SubTipo pSubtipo,int pStock)
+            : base(pNombre, pDescripcion, pFabricante, pFotoPrincipal, pPrecio, pSubtipo,pStock)
         {
 
         }

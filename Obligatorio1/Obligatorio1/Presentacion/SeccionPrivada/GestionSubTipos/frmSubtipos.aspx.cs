@@ -117,7 +117,7 @@ namespace Obligatorio1.Presentacion.GestionSubTipos
 
         protected void btnModificar_Click(object sender, EventArgs e)
         {
-            if (this.txtNombre.Text != "" && this.gvListarSubtipos.SelectedRow.Cells[1] != null)
+            if (this.txtNombre.Text != "" && this.dplListaTipos.SelectedValue !="Seleccione un Tipo de instrumento" && this.gvListarSubtipos.SelectedRow !=null)
             {
                 GridViewRow row = this.gvListarSubtipos.SelectedRow;
                 int id = int.Parse(row.Cells[1].Text);

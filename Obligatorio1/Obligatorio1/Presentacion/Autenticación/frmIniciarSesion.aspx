@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmIniciarSesion.aspx.cs" Inherits="Obligatorio1.Presentacion.Autenticación.frmIniciarSesion" %>
+﻿<%@ Page Title="Inciciar Sesion" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmIniciarSesion.aspx.cs" Inherits="Obligatorio1.Presentacion.Autenticación.frmIniciarSesion" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container-fluid text-center DivPrincipal">
@@ -11,7 +11,7 @@
             <div class="row SectionLogin">
                 <div class="col-md-12">
                     <div class="group-form">
-                        <asp:TextBox ID="txtCorreo" runat="server" placeholder="Tu email" CssClass="InputsLogin"></asp:TextBox>
+                      <asp:TextBox ID="txtCorreo" runat="server" placeholder="Tu email" CssClass="InputsLogin" TextMode="Email"></asp:TextBox>
                     </div>
                     <div class="group-form">
                         <asp:TextBox ID="txtContraseña" runat="server" placeholder="Contraseña" CssClass="InputsLogin" TextMode="Password"></asp:TextBox>

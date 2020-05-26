@@ -399,6 +399,7 @@
     <Compile Include="Persistencia\Controladora.cs" />
     <Compile Include="Persistencia\Interfaces\IABM.cs" />
     <Compile Include="Persistencia\Interfaces\IBuscar.cs" />
+    <Compile Include="Persistencia\pAccesorio.cs" />
     <Compile Include="Persistencia\pAdministrador.cs" />
     <Compile Include="Persistencia\pCliente.cs" />
     <Compile Include="Persistencia\pFabricante.cs" />

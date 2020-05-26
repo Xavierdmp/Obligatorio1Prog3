@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - Mi aplicación ASP.NET</title>
+    <title> Inicio</title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -47,12 +47,14 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" runat="server" href="~/">Nombre de la aplicación</a>
+                    <a class="navbar-brand" runat="server" href="~/">
+                        <img src="" runat="server" class="Logo" />
+                    </a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a runat="server" href="~/Presentacion/SeccionPrivada/frmInicioSeccionPrivada.aspx">Inicio</a></li>
-                        <li><a runat="server" href="~/Presentacion/SeccionPrivada/GestionAdministradores/frmAdministradores.aspx">Gestion Administradores</a></li>
+                        <li><a runat="server" href="~/Presentacion/SeccionPrivada/frmInicioSeccionPrivada.aspx"><i class="fas fa-home"></i> Inicio</a></li>
+                        <li><a runat="server" href="~/Presentacion/SeccionPrivada/GestionAdministradores/frmAdministradores.aspx"><i class="fas fa-user-shield"></i> Gestion Administradores</a></li>
                         <li><a runat="server" href="~/Presentacion/SeccionPrivada/GestionTipos/frmTiposInstrumentos.aspx">Gestion Tipos</a></li>
                         <li><a runat="server" href="~/Presentacion/SeccionPrivada/GestionSubTipos/frmSubtipos.aspx">Gestion SubTipos</a></li>
                     </ul>
@@ -70,7 +72,7 @@
                                     <asp:Label ID="lblAdminConectado" runat="server" Text=""></asp:Label>
                                 </span>
                                 <hr />
-                                <a  runat="server" class="dropdown-item" href="~/Presentacion/SeccionPrivada/GestionAdministradores/frmModificarAdministrador.aspx"><i class="fas fa-user-edit"></i> Modificar datos</a>
+                                <a runat="server" class="dropdown-item" href="~/Presentacion/SeccionPrivada/GestionAdministradores/frmModificarAdministrador.aspx"><i class="fas fa-user-edit"></i> Modificar datos</a>
                                 <hr />
                                 <a class="dropdown-item" href="../../../Default.aspx"><i class="fas fa-sign-out-alt"></i> Cerrar Sesion</a>
                             </div>

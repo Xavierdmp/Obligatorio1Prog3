@@ -41,9 +41,9 @@ namespace Obligatorio1.Dominio
 
         public Instrumento(string pNombre, string pDescripcion, Fabricante pFabricante,
                         string pFotoPrincipal, List<string> pFotosAdicionales,
-                        int pPrecio, SubTipo pSubtipo, DateTime pFecha, string pUrlVideo,
+                        int pPrecio, SubTipo pSubtipo, int pStock, DateTime pFecha, string pUrlVideo,
                         int pDescuento,List<Color> pListaColores, bool pDestacado)
-            :base(pNombre,pDescripcion,pFabricante,pFotoPrincipal,pFotosAdicionales,pPrecio,pSubtipo)
+            :base(pNombre,pDescripcion,pFabricante,pFotoPrincipal,pFotosAdicionales,pPrecio,pSubtipo, pStock)
         {
             this.FechaFabricacion = pFecha;
             this.VideoYoutube = pUrlVideo;
@@ -54,9 +54,9 @@ namespace Obligatorio1.Dominio
 
         public Instrumento(string pNombre, string pDescripcion, Fabricante pFabricante,
                         string pFotoPrincipal,
-                        int pPrecio, SubTipo pSubtipo, DateTime pFecha, string pUrlVideo,
+                        int pPrecio, SubTipo pSubtipo, int pStock, DateTime pFecha, string pUrlVideo,
                         int pDescuento, List<Color> pListaColores, bool pDestacado)
-            : base(pNombre, pDescripcion, pFabricante, pFotoPrincipal, pPrecio, pSubtipo)
+            : base(pNombre, pDescripcion, pFabricante, pFotoPrincipal, pPrecio, pSubtipo, pStock)
         {
             this.FechaFabricacion = pFecha;
             this.VideoYoutube = pUrlVideo;

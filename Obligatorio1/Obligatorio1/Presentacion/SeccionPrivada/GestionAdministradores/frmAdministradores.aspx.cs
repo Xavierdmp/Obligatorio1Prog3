@@ -24,6 +24,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionAdministradores
             this.gvListarAdministradores.DataSource = unaControladoraAdmin.Listar();
             this.gvListarAdministradores.DataBind();
         }
+
         private void AdministradorConPermisos()
         {
             int IdAdmin = int.Parse(Session["AdministradorLogeado"].ToString());
@@ -96,39 +97,47 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionAdministradores
 
         protected void btnEliminarAdmninstrador_Click(object sender, EventArgs e)
         {
-            if (this.VerificarCamposNoOcupados())
+            if (this.gvListarAdministradores.SelectedIndex > -1)
             {
-                GridViewRow row = this.gvListarAdministradores.SelectedRow;
-                int id = int.Parse(row.Cells[2].Text);
-
-                int IdAdmin = int.Parse(Session["AdministradorLogeado"].ToString());
-                if (IdAdmin != id)
+                if (this.VerificarCamposNoOcupados())
                 {
-                    Dominio.Controladoras.ControladoraAdministrador unaControladoraAdmin = new Dominio.Controladoras.ControladoraAdministrador();
+                    GridViewRow row = this.gvListarAdministradores.SelectedRow;
+                    int id = int.Parse(row.Cells[2].Text);
 
-                    if (unaControladoraAdmin.Baja(id))
+                    int IdAdmin = int.Parse(Session["AdministradorLogeado"].ToString());
+                    if (IdAdmin != id)
                     {
-                        this.lblMensaje.MensajeActivo(1, "Ha sido dado de baja Correctamente");
-                        this.LimpiarCampos();
-                        this.ListarAdmininstradores();
+                        Dominio.Controladoras.ControladoraAdministrador unaControladoraAdmin = new Dominio.Controladoras.ControladoraAdministrador();
 
+                        if (unaControladoraAdmin.Baja(id))
+                        {
+                            this.lblMensaje.MensajeActivo(1, "Ha sido dado de baja Correctamente");
+                            this.LimpiarCampos();
+                            this.ListarAdmininstradores();
+
+                        }
+                        else
+                        {
+                            this.lblMensaje.MensajeActivo(2, "No se ha podido dar de baja");
+                        }
                     }
                     else
                     {
-                        this.lblMensaje.MensajeActivo(2, "No se ha podido dar de baja");
+                        this.lblMensaje.MensajeActivo(2, "No te puedes eliminar a ti mismo");
                     }
+
                 }
                 else
                 {
-                    this.lblMensaje.MensajeActivo(2, "No te puedes eliminar a ti mismo");
+                    this.lblMensaje.MensajeActivo(2, "Seleccione un administrador de la lista de Administradores");
                 }
-
             }
             else
             {
                 this.lblMensaje.MensajeActivo(2, "Seleccione un administrador de la lista de Administradores");
             }
         }
+    
 
         
         protected void gvListarAdministradores_SelectedIndexChanged(object sender, EventArgs e)

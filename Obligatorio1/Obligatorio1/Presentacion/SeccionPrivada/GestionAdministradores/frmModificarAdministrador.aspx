@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Presentacion/SeccionPrivada/SiteMasterPrivate/frmPrivate.Master" AutoEventWireup="true" CodeBehind="frmModificarAdministrador.aspx.cs" Inherits="Obligatorio1.Presentacion.SeccionPrivada.GestionAdministradores.frmModificarAdministrador" %>
+﻿<%@ Page Title="Cambiar contraseña" Language="C#" MasterPageFile="~/Presentacion/SeccionPrivada/SiteMasterPrivate/frmPrivate.Master" AutoEventWireup="true" CodeBehind="frmModificarAdministrador.aspx.cs" Inherits="Obligatorio1.Presentacion.SeccionPrivada.GestionAdministradores.frmModificarAdministrador" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container-fluid">
         <div class="row text-center">

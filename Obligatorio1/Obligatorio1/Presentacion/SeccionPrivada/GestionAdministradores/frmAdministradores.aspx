@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Presentacion/SeccionPrivada/SiteMasterPrivate/frmPrivate.Master" AutoEventWireup="true" CodeBehind="frmAdministradores.aspx.cs" Inherits="Obligatorio1.Presentacion.SeccionPrivada.GestionAdministradores.frmAdministradores" %>
+﻿<%@ Page Title="Gestion admins" Language="C#" MasterPageFile="~/Presentacion/SeccionPrivada/SiteMasterPrivate/frmPrivate.Master" AutoEventWireup="true" CodeBehind="frmAdministradores.aspx.cs" Inherits="Obligatorio1.Presentacion.SeccionPrivada.GestionAdministradores.frmAdministradores" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container-fluid">
@@ -34,11 +34,13 @@
             </div>
         </div>
         <br />
-        <div class="row">
+        <div class="row text-center">
             <div class="col-md-12">
-                <asp:GridView ID="gvListarAdministradores" runat="server" CssClass="table" BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="3px" CellPadding="4" GridLines="Horizontal" HorizontalAlign="Center" OnSelectedIndexChanged="gvListarAdministradores_SelectedIndexChanged">
+                <asp:GridView ID="gvListarAdministradores" runat="server" CssClass="table" BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="3px" CellPadding="4" GridLines="None" HorizontalAlign="Center" EmptyDataText="La lista se encuentra vacia" ShowHeaderWhenEmpty="True" Width="846px" AllowPaging="True" OnSelectedIndexChanged="gvListarAdministradores_SelectedIndexChanged" UseAccessibleHeader="False">
                     <Columns>
-                        <asp:CommandField ButtonType="Button" ShowSelectButton="True" />
+                        <asp:CommandField ShowSelectButton="True" AccessibleHeaderText="Editar-Modificar" HeaderText="Editar-Modificar" SelectText="&lt;i class=&quot;far fa-edit&quot;&gt;&lt;/i&gt;">
+                            <ItemStyle HorizontalAlign="Center" />
+                        </asp:CommandField>
                     </Columns>
                     <FooterStyle BackColor="White" ForeColor="#333333" />
                     <HeaderStyle BackColor="#336666" Font-Bold="True" ForeColor="White" />
