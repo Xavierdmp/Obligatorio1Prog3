@@ -22,6 +22,7 @@ namespace Obligatorio1.Dominio
         {
 
         }
+
         public Accesorio()
         {
 

@@ -15,6 +15,7 @@ namespace Obligatorio1.Dominio
         private string _tarjeta; // credito o debito;
         private string _pais;
 
+
         public int Id
         {
             get { return _id; }

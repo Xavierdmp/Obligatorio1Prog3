@@ -4,6 +4,7 @@
         <div class="row text-center">
             <div class="col-md-12">
                 <h1>Modificar contraseña</h1>
+                <hr />
             </div>
         </div>
         <div class="row">
@@ -27,7 +28,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12 text-center">
+            <div class="col-md-12">
                 <asp:Button ID="btnModificarAdministrador" runat="server" Text="Confirmar Modificacion" CssClass="btn btn-success" OnClick="btnModificarAdministrador_Click" />
             </div>
         </div>

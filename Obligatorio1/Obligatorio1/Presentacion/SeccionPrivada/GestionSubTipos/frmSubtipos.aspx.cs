@@ -84,7 +84,7 @@ namespace Obligatorio1.Presentacion.GestionSubTipos
 
         protected void btnBaja_Click(object sender, EventArgs e)
         {
-            if(this.txtNombre.Text != "" && this.gvListarSubtipos.SelectedRow.Cells[1] != null)
+            if(this.txtNombre.Text != "" && this.gvListarSubtipos.SelectedIndex > -1)
             {
                 GridViewRow row = this.gvListarSubtipos.SelectedRow;
                 int id = int.Parse(row.Cells[1].Text);

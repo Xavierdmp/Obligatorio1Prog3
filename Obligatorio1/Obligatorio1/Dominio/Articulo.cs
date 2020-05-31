@@ -16,6 +16,7 @@ namespace Obligatorio1.Dominio
         private int _precio;
         private SubTipo _subtipo;
         private int _stock;
+
         public int Id
         {
             get { return _id; }

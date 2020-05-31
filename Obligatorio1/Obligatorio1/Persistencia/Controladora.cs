@@ -179,5 +179,33 @@ namespace Obligatorio1.Persistencia
         }
 
         #endregion
+
+        #region "Accesorio"
+        public List<Accesorio> ListarAccesorios()
+        {
+            return pAccesorio.Instancia.ListarAccesorios();
+        }
+        public bool ComprobarExistenciaAccesorio(string pNombre)
+        {
+            return pAccesorio.Instancia.ComprobarExistencia(pNombre);
+        }
+        public Accesorio BuscarAccesorio(int pId)
+        {
+            return pAccesorio.Instancia.Buscar(pId);
+        }
+        public bool AltaAccesorio(Accesorio pAcc)
+        {
+            return pAccesorio.Instancia.Alta(pAcc);
+        }
+        public bool BajaAccesorio(int pId)
+        {
+            return pAccesorio.Instancia.Baja(pId);
+        }
+        public bool ModificarAccesorio(Accesorio pcc)
+        {
+            return pAccesorio.Instancia.Modificar(pcc);
+        }
+
+        #endregion
     }
 }
