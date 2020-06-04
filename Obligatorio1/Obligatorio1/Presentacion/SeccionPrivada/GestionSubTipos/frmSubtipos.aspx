@@ -13,6 +13,10 @@
                 <div class="form-group">
                     <asp:Label ID="Label1" runat="server" Text="Nombre: " CssClass="EstilosLabel"></asp:Label>
                     <asp:TextBox ID="txtNombre" runat="server" CssClass="EstiloTexbox"></asp:TextBox>
+                    <br />
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtNombre" ErrorMessage="El nombre es obligatorio" Font-Size="12px" ForeColor="#990000" ValidationGroup="vgGestion"></asp:RequiredFieldValidator>
+                    <br />
+                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtNombre" ErrorMessage="Solo se permiten letras" Font-Size="12px" ForeColor="#993300" ValidationExpression="^[a-zA-Z ]*$" ValidationGroup="vgGestion"></asp:RegularExpressionValidator>
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label2" runat="server" Text="Tipo: " CssClass="EstilosLabel"></asp:Label>
@@ -28,9 +32,9 @@
             <div class="row FrmBotones">
                 <div class="col-md-12">
                     <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
-                        <asp:Button ID="btnAlta" runat="server" Text="Registrar" class="BotonesFrm btn btn-success" OnClick="btnAlta_Click" Width="112px" />
-                        <asp:Button ID="btnBaja" runat="server" Text="Eliminar" class="BotonesFrm btn btn-danger" OnClick="btnBaja_Click" Width="112px" />
-                        <asp:Button ID="btnModificar" runat="server" Text="Modificar" class="BotonesFrm btn btn-success" Width="112px" OnClick="btnModificar_Click" />
+                        <asp:Button ID="btnAlta" runat="server" Text="Registrar" class="BotonesFrm btn btn-success" OnClick="btnAlta_Click" Width="112px" ValidationGroup="vgGestion" />
+                        <asp:Button ID="btnBaja" runat="server" Text="Eliminar" class="BotonesFrm btn btn-danger" OnClick="btnBaja_Click" Width="112px" ValidationGroup="vgGestion" />
+                        <asp:Button ID="btnModificar" runat="server" Text="Modificar" class="BotonesFrm btn btn-success" Width="112px" OnClick="btnModificar_Click" ValidationGroup="vgGestion" />
                     </div>
                 </div>
             </div>

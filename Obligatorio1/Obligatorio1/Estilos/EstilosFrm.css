@@ -23,7 +23,7 @@
     font-size: 4rem;
 }
 .SectionLogin .group-form {
-    margin-bottom:50px;
+    margin-bottom:20px;
 
 }
 
@@ -157,4 +157,43 @@ margin-top:10px;
 }
 .Logo{
  
+}
+
+
+.MenuGestiones{
+    font-size:15px;
+}
+/* Para el dropDown del menu instrumentos*/
+.MenuInstrumentos{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    list-style: none;
+    background-color:#333333;
+    border: 1px solid #cccccc;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    background-clip: padding-box;
+}
+.MenuInstrumentos a{
+   color:white;
+   padding:10px;
+        display:inline-block;
+        text-decoration:none;
+    
+}
+.MenuInstrumentos a:hover{
+    color:green;
+    font-size: 16px;
+    border-bottom: 1px solid green;
+    width:100%;
 }

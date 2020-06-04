@@ -19,41 +19,37 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionAdministradores
             Dominio.Controladoras.ControladoraAdministrador unaControladoraAdmin = new Dominio.Controladoras.ControladoraAdministrador();
             Dominio.Administrador unAdministrador = unaControladoraAdmin.Buscar(IdAdmin);
             this.txtCorreoElectronico.Text = unAdministrador.CorreoElectronico;
+            this.txtContraseña.Attributes.Add("value", unAdministrador.Contraseña);
+            this.txtConfirmarContraseña.Attributes.Add("value", unAdministrador.Contraseña);
         }
 
         protected void btnModificarAdministrador_Click(object sender, EventArgs e)
         {
-                string correoelectronico = this.txtCorreoElectronico.Text;
-                string contraseña = this.txtContraseña.Text;
-                string confirmarcontraseña = this.txtConfirmarContraseña.Text;
+            string correoelectronico = this.txtCorreoElectronico.Text;
+            string contraseña = this.txtContraseña.Text;
+            string confirmarcontraseña = this.txtConfirmarContraseña.Text;
             Dominio.Controladoras.ControladoraAdministrador unaControladoraAdmin = new Dominio.Controladoras.ControladoraAdministrador();
             int IdAdmin = int.Parse(Session["AdministradorLogeado"].ToString());
-                Dominio.Administrador unAdministrador = unaControladoraAdmin.Buscar(IdAdmin);
+            Dominio.Administrador unAdministrador = unaControladoraAdmin.Buscar(IdAdmin);
 
-                unAdministrador.CorreoElectronico = correoelectronico;
-                unAdministrador.Contraseña = contraseña;
-                string confirmarContraseña = this.txtConfirmarContraseña.Text;
-                if (contraseña == confirmarContraseña)
-                {
-                    if (unaControladoraAdmin.Modificar(unAdministrador))
-                    {
-                        this.lblMensaje.MensajeActivo(1, "Se ha modificado con exito");
-                        this.LimpiarDatos();
-                    }
-                    else
-                    {
-                        this.lblMensaje.MensajeActivo(2, "No se ha modificado ");
-                    }
-                }
-                else
-                {
-                    this.lblMensaje.MensajeActivo(2, "Las contraseñas deben coincidir ");
-                }
+            unAdministrador.CorreoElectronico = correoelectronico;
+            unAdministrador.Contraseña = contraseña;
+            string confirmarContraseña = this.txtConfirmarContraseña.Text;
+
+            if (unaControladoraAdmin.Modificar(unAdministrador))
+            {
+                this.lblMensaje.MensajeActivo(1, "Se ha modificado con exito");
+                this.LimpiarDatos();
             }
+            else
+            {
+                this.lblMensaje.MensajeActivo(2, "No se ha modificado ");
+            }
+            
+        }
 
         private void LimpiarDatos()
         {
-            this.txtCorreoElectronico.Text = "";
             this.txtConfirmarContraseña.Text = "";
             this.txtConfirmarContraseña.Text = "";
         }

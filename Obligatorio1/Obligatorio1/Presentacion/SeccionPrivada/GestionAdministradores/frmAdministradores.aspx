@@ -13,14 +13,19 @@
                     <asp:Label ID="Label1" runat="server" Text="Correo Electronico: "></asp:Label>
                     <br>
                     <asp:TextBox ID="txtCorreoElectronico" runat="server" CssClass="form-control form-control-lg" TextMode="Email"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtCorreoElectronico" ErrorMessage="El campo no puede estar vacio" ForeColor="Maroon" ValidationGroup="vgGestion"></asp:RequiredFieldValidator>
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Contraseña" runat="server" Text="Contraseña"></asp:Label>
                     <asp:TextBox ID="txtContraseña" runat="server" CssClass="form-control form-control-lg" TextMode="Password"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtContraseña" ErrorMessage="El campo no puede estar vacio" ForeColor="Maroon" ValidationGroup="vgGestion"></asp:RequiredFieldValidator>
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label2" runat="server" Text="Confirmar Contraseña: "></asp:Label>
                     <asp:TextBox ID="txtConfirmarContraseña" runat="server" CssClass="form-control form-control-lg" TextMode="Password"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtConfirmarContraseña" ErrorMessage="El campo no puede estar vacio" ForeColor="Maroon" ValidationGroup="vgGestion"></asp:RequiredFieldValidator>
+                    <br />
+                    <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToCompare="txtContraseña" ControlToValidate="txtConfirmarContraseña" ErrorMessage="Las contraseñas deben coincidir" ForeColor="Maroon" ValidationGroup="vgGestion"></asp:CompareValidator>
                     <br />
                     <br />
                     <usrMensaje:AsignarMensaje ID="lblMensaje" runat="server"></usrMensaje:AsignarMensaje>
@@ -29,8 +34,8 @@
         </div>
         <div class="row">
             <div class="col-md-12 text-center">
-                <asp:Button ID="btnAltaAdministrador" runat="server" CssClass="btn btn-success" Text="Registrar Administrador" OnClick="btnAlta_Click" />
-                <asp:Button ID="btnEliminarAdmninstrador" runat="server" Text="Eliminar Administrador" CssClass="btn btn-danger" OnClick="btnEliminarAdmninstrador_Click" Visible="False" />
+                <asp:Button ID="btnAltaAdministrador" runat="server" CssClass="btn btn-success" Text="Registrar Administrador" OnClick="btnAlta_Click" ValidationGroup="vgGestion" />
+                <asp:Button ID="btnEliminarAdmninstrador" runat="server" Text="Eliminar Administrador" CssClass="btn btn-danger" OnClick="btnEliminarAdmninstrador_Click" Visible="False" ValidationGroup="vgGestion" />
             </div>
         </div>
         <br />
