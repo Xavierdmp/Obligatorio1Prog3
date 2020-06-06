@@ -55,7 +55,8 @@
                     <ul class="nav navbar-nav MenuGestiones">
                         <li><a runat="server" href="~/Presentacion/SeccionPrivada/frmInicioSeccionPrivada.aspx"><i class="fas fa-home"></i> Inicio</a></li>
                         <li><a runat="server" href="~/Presentacion/SeccionPrivada/GestionAdministradores/frmAdministradores.aspx"><i class="fas fa-user-shield"></i> Gestion Administradores</a></li>
-
+                        <li><a runat="server" href="~/Presentacion/SeccionPrivada/GestionArticulos/frmGestionAccesorio.aspx"> Gestion Accesorios</a></li>
+                        <li><a runat="server" href="~/Presentacion/SeccionPrivada/GestionFabricantes/frmFabricantes.aspx">Gestion Fabricantes</a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bars"></i> Instrumentos
@@ -81,9 +82,9 @@
                                     <asp:Label ID="lblAdminConectado" runat="server" Text=""></asp:Label>
                                 </span>
                                 <hr />
-                                <a runat="server" class="dropdown-item" href="~/Presentacion/SeccionPrivada/GestionAdministradores/frmModificarAdministrador.aspx"><i class="fas fa-user-edit"></i>Modificar datos</a>
+                                <a runat="server" class="dropdown-item" href="~/Presentacion/SeccionPrivada/GestionAdministradores/frmModificarAdministrador.aspx"><i class="fas fa-user-edit"></i> Modificar datos</a>
                                 <hr />
-                                <a class="dropdown-item" href="../../../Default.aspx"><i class="fas fa-sign-out-alt"></i>Cerrar Sesion</a>
+                                <a class="dropdown-item" href="../../../Default.aspx"><i class="fas fa-sign-out-alt"></i> Cerrar Sesion</a>
                             </div>
                         </li>
                     </ul>

@@ -180,6 +180,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Account\Web.config" />
+    <Content Include="Presentacion\SeccionPrivada\GestionArticulos\frmGestionAccesorio.aspx" />
+    <Content Include="Presentacion\SeccionPrivada\GestionFabricantes\frmFabricantes.aspx" />
     <Content Include="Presentacion\SeccionPrivada\GestionSubTipos\frmSubtipos.aspx" />
     <Content Include="Presentacion\SeccionPrivada\frmInicioSeccionPrivada.aspx" />
     <Content Include="Presentacion\SeccionPrivada\GestionAdministradores\frmAdministradores.aspx" />
@@ -385,6 +387,7 @@
     <Compile Include="Dominio\Controladoras\ControladoraTipo.cs" />
     <Compile Include="Dominio\Encryptar.cs" />
     <Compile Include="Dominio\Fabricante.cs" />
+    <Compile Include="Dominio\FotosAdicionales.cs" />
     <Compile Include="Dominio\Instrumento.cs" />
     <Compile Include="Dominio\Intefaces\IABMLBC.cs" />
     <Compile Include="Dominio\Item.cs" />
@@ -420,6 +423,20 @@
     </Compile>
     <Compile Include="Presentacion\Controles\lblMensaje.ascx.designer.cs">
       <DependentUpon>lblMensaje.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\SeccionPrivada\GestionArticulos\frmGestionAccesorio.aspx.cs">
+      <DependentUpon>frmGestionAccesorio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\SeccionPrivada\GestionArticulos\frmGestionAccesorio.aspx.designer.cs">
+      <DependentUpon>frmGestionAccesorio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\SeccionPrivada\GestionFabricantes\frmFabricantes.aspx.cs">
+      <DependentUpon>frmFabricantes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\SeccionPrivada\GestionFabricantes\frmFabricantes.aspx.designer.cs">
+      <DependentUpon>frmFabricantes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\SeccionPrivada\GestionSubTipos\frmSubtipos.aspx.cs">
       <DependentUpon>frmSubtipos.aspx</DependentUpon>
@@ -489,6 +506,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Imagenes\FotosAdicionales\" />
+    <Folder Include="Imagenes\ImgPrincipalAcessorios\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -206,6 +206,10 @@ namespace Obligatorio1.Persistencia
             return pAccesorio.Instancia.Modificar(pcc);
         }
 
+        public List<FotosAdicionales> ListarFotosAdicionalesAccesorio(int pId)
+        {
+            return pAccesorio.Instancia.ListarFotosAdicionalesParaAccesorio(pId);
+        }
         #endregion
     }
 }

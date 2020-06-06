@@ -15,10 +15,13 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.SiteMasterPrivate
         }
         private void AdministradorConectado()
         {
-            int IdAdmin = int.Parse(Session["AdministradorLogeado"].ToString());
-            Dominio.Controladoras.ControladoraAdministrador unaControladoraAdmin = new Dominio.Controladoras.ControladoraAdministrador();
-            Dominio.Administrador unAdministrador = unaControladoraAdmin.Buscar(IdAdmin);
-            this.lblAdminConectado.Text = unAdministrador.CorreoElectronico;
+            if (Session["AdministradorLogeado"] != null)
+            {
+                int IdAdmin = int.Parse(Session["AdministradorLogeado"].ToString());
+                Dominio.Controladoras.ControladoraAdministrador unaControladoraAdmin = new Dominio.Controladoras.ControladoraAdministrador();
+                Dominio.Administrador unAdministrador = unaControladoraAdmin.Buscar(IdAdmin);
+                this.lblAdminConectado.Text = unAdministrador.CorreoElectronico;
+            }
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            this.AdministradorActivo();
         }
 
         private void AdministradorActivo()

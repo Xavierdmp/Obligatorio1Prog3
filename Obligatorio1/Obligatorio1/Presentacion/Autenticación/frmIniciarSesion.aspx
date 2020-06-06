@@ -21,7 +21,6 @@
                         <br />
                         <br />
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="debe completar todos los campos" ForeColor="#990000" ValidationGroup="vgLogin" ControlToValidate="txtContraseña"></asp:RequiredFieldValidator>
-                        <br />
                         <a href="#">Recuperar Contraseña</a>
                     </div>
                 </div>

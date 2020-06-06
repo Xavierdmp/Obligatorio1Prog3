@@ -126,45 +126,107 @@ namespace Obligatorio1.Persistencia
                 int Id = this.TraerUltimaIdArticulo();
                 if (Id != -1)
                 {
-                    if (pAccesorio.ListaFotosAdicionales.Count > 0)
+                    if (pAccesorio.ListaFotosAdicionales != null)
                     {
                         if (Conexion.Instancia.InicializarConsulta("Insert into Accesorios values(" + Id + ");"))
                         {
-                            foreach (string unaUrl in pAccesorio.ListaFotosAdicionales)
+                            foreach (FotosAdicionales unaFotoAdicional in pAccesorio.ListaFotosAdicionales)
                             {
-                                Conexion.Instancia.InicializarConsulta("insert into Articulos_tienen_Fotos_Adicionale(Id_Articulo,Url_Imagen)" +
-                                                                        " values(" + Id + ",'" + unaUrl + "'");
+                               Conexion.Instancia.InicializarConsulta("insert into Articulos_tienen_Fotos_Adicionales(Id_Articulo,Url_Imagen)" +
+                                                                        " values(" + Id + ",'" + unaFotoAdicional.Url + "')");
                             }
+                            return true;
                         }
+                        
                     }
                     else
                     {
-                        Conexion.Instancia.InicializarConsulta("Insert into Accesorios values(" + Id + ");");
+                        return Conexion.Instancia.InicializarConsulta("Insert into Accesorios values(" + Id + ");");
                     }
                 }
-                return false;
+                else
+                {
+                    return false;
+                }
             }
             else
             {
-                return false;
+                return false;   
             }
+            return false;
         }
 
         public bool Baja(int pId)
         {
             if (Conexion.Instancia.InicializarConsulta("delete from Accesorios where Id_Accesorio=" + pId))
             {
-                return Conexion.Instancia.InicializarConsulta("delete from Articulos where Id_Articulo=" + pId);
+
+                    if (this.ListarFotosAdicionalesParaAccesorio(pId).Count > 0)
+                    {
+                        foreach (FotosAdicionales unaFotoAd in this.ListarFotosAdicionalesParaAccesorio(pId))
+                        {
+                            Conexion.Instancia.InicializarConsulta("delete from Articulos_tienen_Fotos_Adicionales where Id_Articulo =" + pId + " ; ");
+                        }
+                        return Conexion.Instancia.InicializarConsulta("delete from Articulos where Id_Articulo=" + pId);
+                    }
+                else
+                {
+                    return Conexion.Instancia.InicializarConsulta("delete from Articulos where Id_Articulo=" + pId);
+                }
+                
             }
             return false;
         }
 
         public bool Modificar(Accesorio pAccesorio)
         {
-            return Conexion.Instancia.InicializarConsulta("exec ModificarArticulos" + pAccesorio.Id + ",'" + pAccesorio.Nombre + "','" +
+            if (Conexion.Instancia.InicializarConsulta("exec ModificarArticulos " + pAccesorio.Id + ",'" + pAccesorio.Nombre + "','" +
                                                            pAccesorio.Descripcion + "'," + pAccesorio.Fabricante.Id + ",'" +
                                                            pAccesorio.FotoPrincipal + "'," + pAccesorio.Precio + "," +
-                                                           pAccesorio.SubtipoInstrumento.Id + "," + pAccesorio.Stock + ";");
+                                                           pAccesorio.SubtipoInstrumento.Id + "," + pAccesorio.Stock + ";"))
+            {
+                if (pAccesorio.ListaFotosAdicionales != null)
+                {
+                    foreach (FotosAdicionales unaFotoAd in pAccesorio.ListaFotosAdicionales)
+                    {
+                        Conexion.Instancia.InicializarConsulta("update Articulos_tienen_Fotos_Adicionales set Url_Imagen=" + "'" + unaFotoAd.Url + "'" + " where Id_Articulo=" + pAccesorio.Id + " ;");
+                    }
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        
+        }
+
+        public List<FotosAdicionales> ListarFotosAdicionalesParaAccesorio(int pId)
+        {
+            string instruccion = "select * from Articulos_tienen_Fotos_Adicionales where Id_Articulo=" + pId + ";";
+            DataSet datos = Conexion.Instancia.InicializarSeleccion(instruccion);
+            List<FotosAdicionales> listaFotosAdicionales = new List<FotosAdicionales>();
+            if (datos.Tables[0].Rows.Count > 0)
+            {
+                DataRowCollection tabla = datos.Tables[0].Rows;
+                foreach (DataRow row in tabla)
+                {
+                    Dominio.FotosAdicionales unaFotoAdicional = new Dominio.FotosAdicionales();
+                    object[] elementos = row.ItemArray;
+                    unaFotoAdicional.Url = elementos[2].ToString();
+                    listaFotosAdicionales.Add(unaFotoAdicional);
+                }
+                return listaFotosAdicionales;
+            }
+            else
+            {
+                return listaFotosAdicionales;
+            }
         }
 
     }

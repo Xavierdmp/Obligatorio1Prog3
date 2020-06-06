@@ -12,7 +12,7 @@ namespace Obligatorio1.Dominio
         private string _descripcion;
         private Fabricante _fabricante;
         private string _urlFotoPrincipal;
-        private List<string> _listaUrlsFotosAdicionales;
+        private List<FotosAdicionales> _listaUrlsFotosAdicionales;
         private int _precio;
         private SubTipo _subtipo;
         private int _stock;
@@ -42,7 +42,7 @@ namespace Obligatorio1.Dominio
             get { return _urlFotoPrincipal; }
             set { _urlFotoPrincipal = value; }
         }
-        public List<string> ListaFotosAdicionales
+        public List<FotosAdicionales> ListaFotosAdicionales
         {
             get { return _listaUrlsFotosAdicionales; }
             set { _listaUrlsFotosAdicionales = value; }
@@ -70,8 +70,9 @@ namespace Obligatorio1.Dominio
         {
             get { return _subtipo.Id; }
         }
+
         public Articulo(string pNombre,string pDescripcion,Fabricante pFabricante,
-                        string pFotoPrincipal, List<string> pFotosAdicionales,
+                        string pFotoPrincipal, List<FotosAdicionales> pFotosAdicionales,
                         int pPrecio, SubTipo pSubtipo,int pStock)
         {
             this.Nombre = pNombre;
