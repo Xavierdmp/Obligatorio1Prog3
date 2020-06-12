@@ -69,13 +69,30 @@ namespace Obligatorio1.Persistencia
         }
         public bool Baja(int pId)
         {
-            return Conexion.Instancia.InicializarConsulta("delete from Fabricantes where id_Fabricante=" + pId);
+            if (!this.EstaFabricanteEnOtraTabla(pId))
+            {
+                return Conexion.Instancia.InicializarConsulta("delete from Fabricantes where id_Fabricante=" + pId);
+            }
+            return false;
         }
 
         public bool Modificar(Fabricante pFabricante)
         {
             return Conexion.Instancia.InicializarConsulta("Exec ModificarFabricante " + pFabricante.Id + ",'" + pFabricante.Nombre + "','" + pFabricante.Direccion +
                                                            "','" + pFabricante.CorreoElectronico + "'");
+        }
+        private bool EstaFabricanteEnOtraTabla(int pId)
+        {
+            string consulta = "select  f.* from Fabricantes f where f.id_Fabricante=" + pId +" and f.id_Fabricante in(select id_Fabricante from Articulos);";
+            DataSet datos = Conexion.Instancia.InicializarSeleccion(consulta);
+            if(datos.Tables[0].Rows.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public List<Fabricante> Listar()
