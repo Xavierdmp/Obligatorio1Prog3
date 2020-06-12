@@ -80,7 +80,7 @@ namespace Obligatorio1.Persistencia
                 int id = this.UltimaIdPersona();
                 return Conexion.Instancia.InicializarConsulta("exec AltaCliente " + id + ",'" + pCliente.Nombre + "','"
                                                             + pCliente.Apellido + "','" + pCliente.CedulaIdentidad + "','" +
-                                                            pCliente.Direccion + "'," + pCliente.Telefono + "')");
+                                                            pCliente.Direccion + "'," + pCliente.Telefono + ",");
             }
             return false;
         }
