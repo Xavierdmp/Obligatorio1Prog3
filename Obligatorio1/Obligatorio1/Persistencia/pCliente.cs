@@ -12,6 +12,11 @@ namespace Obligatorio1.Persistencia
     {
         private static pCliente _instancia;
 
+
+        const string UltimaId = "Declare @UltimaId int; set @UltimaId = @@Identity; ";//Captura el ultimo id del identity en la misma consulta
+
+
+
         public static pCliente Instancia
         {
             get
@@ -25,14 +30,12 @@ namespace Obligatorio1.Persistencia
             }
         }
 
-        public bool ComprobarExistencia(string pCedula)
+              public bool ComprobarExistencia(string pCedula, string pCorreo)
         {
-
-
             string introduccion = "Select * from Personas p, Clientes c where c.Id_Cliente = p.Id_Persona and c.Cedula_Identidad_Cliente=" + " '" + pCedula + "'";
             DataSet datos = Conexion.Instancia.InicializarSeleccion(introduccion);
 
-            if (datos.Tables[0].Rows.Count > 0)
+            if (datos.Tables[0].Rows.Count > 0 && this.ComprobarExistenciaCorreo(pCorreo))
             {
                 return true;
             }
@@ -40,9 +43,24 @@ namespace Obligatorio1.Persistencia
             {
                 return false;
             }
-
-
         }
+        public bool ComprobarExistenciaCorreo(string pCorreo)
+        {
+            string introduccion = "Select * from Personas p, Clientes c where c.Id_Cliente = p.Id_Persona and p.Correo_Persona=" + "'" + pCorreo + "'";
+            string introduccion2 = "Select * from Personas p, Administradores a where a.Id_Admin = p.Id_Persona and p.Correo_Persona=" + "'" + pCorreo + "'";
+            DataSet datos = Conexion.Instancia.InicializarSeleccion(introduccion);
+            DataSet datos2 = Conexion.Instancia.InicializarSeleccion(introduccion2);
+            if (datos.Tables[0].Rows.Count > 0 || datos2.Tables[0].Rows.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
 
         public Cliente Buscar(int pId)
         {
@@ -73,16 +91,21 @@ namespace Obligatorio1.Persistencia
         }
 
         public bool Alta(Cliente pCliente)
+
+          
         {
-            if (Conexion.Instancia.InicializarConsulta("Insert into Personas values(" + "'" + pCliente.CorreoElectronico + "','" +
-                                                         pCliente.Contraseña + "' )"))
-            {
-                int id = this.UltimaIdPersona();
-                return Conexion.Instancia.InicializarConsulta("exec AltaCliente " + id + ",'" + pCliente.Nombre + "','"
+            int estadoActivado = 1;
+
+            List<string> ListaTransaccion = new List<string>();
+
+
+            ListaTransaccion.Add("Insert into Personas values(" + "'" + pCliente.CorreoElectronico + "','" +
+                                                         pCliente.Contraseña + "')");
+
+            ListaTransaccion.Add(UltimaId + "exec AltaCliente " + "@UltimaId " + ",'" + pCliente.Nombre + "','"
                                                             + pCliente.Apellido + "','" + pCliente.CedulaIdentidad + "','" +
-                                                            pCliente.Direccion + "'," + pCliente.Telefono + ",");
-            }
-            return false;
+                                                            pCliente.Direccion + "'," + pCliente.Telefono + "," + estadoActivado + ";");
+            return Conexion.Instancia.EjecutarTransaccionSql(ListaTransaccion);           
         }
 
         public bool Baja(int pId)
@@ -127,32 +150,7 @@ namespace Obligatorio1.Persistencia
             return ListadeCLientes;
         }
 
-        private int UltimaIdPersona()
-        {
-            string consulta = "select top 1 p.Id_Persona from Personas p order by(Id_Persona) desc";
-
-            int id = 0;
-
-            DataSet datos = Conexion.Instancia.InicializarSeleccion(consulta);
-
-            if (datos.Tables[0].Rows.Count > 0)
-            {
-                DataRowCollection tabla = datos.Tables[0].Rows;
-                foreach (DataRow fila in tabla)
-                {
-                    object[] element = fila.ItemArray;
-                    id = int.Parse(element[0].ToString());
-
-                }
-                return id;
-            }
-            else
-
-            {
-                return -1;
-
-            }
-        }
+       
 
     }
 }

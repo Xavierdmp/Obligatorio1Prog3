@@ -13,9 +13,9 @@ namespace Obligatorio1.Dominio.Controladoras
             return Controladora.Instancia.ListarClientes();
         }
 
-        public bool ComprobarExistencia(string pCedula)
+        public bool ComprobarExistencia(string pCedula, string pCorreo)
         {
-            return Controladora.Instancia.ComprobarExisteCliente(pCedula);
+            return Controladora.Instancia.ComprobarExisteCliente(pCedula, pCorreo);
         }
 
         public Cliente Buscar(int pId)
@@ -25,7 +25,7 @@ namespace Obligatorio1.Dominio.Controladoras
 
         public bool Alta(Cliente pCliente)
         {
-            if (!this.ComprobarExistencia(pCliente.CedulaIdentidad))
+            if (!this.ComprobarExistencia(pCliente.CedulaIdentidad,pCliente.CorreoElectronico))
             {
                 return Controladora.Instancia.AltaCliente(pCliente);
             }
@@ -56,6 +56,11 @@ namespace Obligatorio1.Dominio.Controladoras
                 return Controladora.Instancia.ModificarCliente(pCliente);
             }
             return false;
+        }
+
+        public bool ComprobarExistencia(string pTexto)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -55,7 +55,7 @@
                 <div class="form-group">
                     <asp:Label ID="Label8" runat="server" Text="Contraseña"></asp:Label>
                     <br />
-                    <asp:TextBox ID="txtContraseña1" runat="server" ValidationGroup="vgRegistrarCliente" TextMode="Password"></asp:TextBox>
+                    <asp:TextBox ID="txtContraseña1" runat="server" CssClass="form-control" ValidationGroup="vgRegistrarCliente" TextMode="Password"></asp:TextBox>
                     <br />
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ErrorMessage="Falta ingresar contraseña" ValidationGroup="vgRegistrar" ControlToValidate="txtCorreo" ForeColor="Red"></asp:RequiredFieldValidator>
                 </div>
