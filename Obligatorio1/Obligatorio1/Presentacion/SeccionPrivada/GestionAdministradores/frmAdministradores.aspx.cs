@@ -27,7 +27,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionAdministradores
 
         private void AdministradorConPermisos()
         {
-            int IdAdmin = int.Parse(Session["AdministradorLogeado"].ToString());
+            int IdAdmin = int.Parse(Session["AdministradorLogueado"].ToString());
             Dominio.Controladoras.ControladoraAdministrador unaControladoraAdmin = new Dominio.Controladoras.ControladoraAdministrador();
             Dominio.Administrador unAdministrador = unaControladoraAdmin.Buscar(IdAdmin);
             if (unAdministrador.Permisos)
@@ -75,7 +75,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionAdministradores
                 GridViewRow row = this.gvListarAdministradores.SelectedRow;
                 int id = int.Parse(row.Cells[2].Text);
 
-                int IdAdmin = int.Parse(Session["AdministradorLogeado"].ToString());
+                int IdAdmin = int.Parse(Session["AdministradorLogueado"].ToString());
                 if (IdAdmin != id)
                 {
                     Dominio.Controladoras.ControladoraAdministrador unaControladoraAdmin = new Dominio.Controladoras.ControladoraAdministrador();
@@ -108,7 +108,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionAdministradores
 
         protected void gvListarAdministradores_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int IdAdmin = int.Parse(Session["AdministradorLogeado"].ToString());
+            int IdAdmin = int.Parse(Session["AdministradorLogueado"].ToString());
             Dominio.Controladoras.ControladoraAdministrador unaControladoraAdmin = new Dominio.Controladoras.ControladoraAdministrador();
             Dominio.Administrador elAdministrador = unaControladoraAdmin.Buscar(IdAdmin);
             if (elAdministrador.Permisos)

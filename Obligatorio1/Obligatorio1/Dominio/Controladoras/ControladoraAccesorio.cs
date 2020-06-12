@@ -46,5 +46,9 @@ namespace Obligatorio1.Dominio.Controladoras
         {
             return Controladora.Instancia.ListarFotosAdicionalesAccesorio(pId);
         }
+        public List<SubTipo> ListarSubTiposParaAccesorio(int pId)
+        {
+            return Controladora.Instancia.ListarSubtiposParaAccesorio(pId);
+        }
     }
 }

@@ -92,7 +92,50 @@ namespace Obligatorio1.Persistencia
             return datos;
         }
 
-    
+        public bool EjecutarTransaccionSql(List<string> sqlQueries)
+        {
+            bool transaccionExitosa = false;
+            using (SqlConnection conexion = Conectar())
+            {
+                SqlTransaction transaccion = null;
+                try
+                {
+                    transaccion = conexion.BeginTransaction();
+                    if (sqlQueries != null && sqlQueries.Count > 0)
+                    {
+                        foreach (string query in sqlQueries)
+                        {
+                            using (SqlCommand comando = new SqlCommand(query, conexion, transaccion))
+                            {
+                                comando.ExecuteNonQuery();
+                            }
+                        }
+                    }
+                    transaccion.Commit();
+                    transaccionExitosa = true;
+                }
+                catch (Exception e1)
+                {
+                    try
+                    {
+                        transaccion.Rollback();
+                        transaccionExitosa = false;
+                        Console.Write(e1);
+                    }
+                    catch (Exception e2)
+                    {
+                        transaccionExitosa = false;
+                        Console.Write(e2);
+                    }
+                }
+            }
+
+            return transaccionExitosa;
+        }
+
+ 
+
+
     }
 
 }

@@ -51,10 +51,33 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
             this.gvListarAccesorios.DataBind();
         }
 
+        private void ListarSubtiposSeleccionados()
+        {
+            this.gvListarSubtiposDeAccesorio.DataSource = null;
+            this.gvListarSubtiposDeAccesorio.DataSource = this.ListaSubtiposSeleccionados;
+            this.gvListarSubtiposDeAccesorio.DataBind();
+        }
+
         private List<Dominio.FotosAdicionales> ListarFotosAdicionales
         {
             get { return Session["FotosAdicionales"] as List<Dominio.FotosAdicionales>; }
             set { Session["FotosAdicionales"] = value; }
+        }
+
+        private List<Dominio.SubTipo> ListaSubtiposSeleccionados
+        {
+            get { return Session["SubtiposSeleccionados"] as List<Dominio.SubTipo>; }
+            set { Session["SubtiposSeleccionados"] = value; }
+        }
+
+        private List<Dominio.SubTipo> ListarSubtiposParaDarDeAlta(List<Dominio.SubTipo> pListaSubtipos)
+        {
+            List<Dominio.SubTipo> lista = new List<Dominio.SubTipo>();
+            foreach(Dominio.SubTipo unSubtipo in pListaSubtipos)
+            {
+                lista.Add(unSubtipo);
+            }
+            return lista;
         }
 
         private List<Dominio.FotosAdicionales> ListaConFotosAdicionalesParaAlta(List<Dominio.FotosAdicionales> pLista)
@@ -72,7 +95,6 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
             if (this.dplListaFabricante.SelectedIndex > 0 && this.dplListarSubtipo.SelectedIndex >0)
             {
                 Dominio.Controladoras.ControladoraFabricante unaControladoraFabricante = new Dominio.Controladoras.ControladoraFabricante();
-                Dominio.Controladoras.ControladoraSubTipos unaControladoraSubtipo = new Dominio.Controladoras.ControladoraSubTipos();
                 Dominio.Controladoras.ControladoraAccesorio unaControladoraAccesorio = new Dominio.Controladoras.ControladoraAccesorio();
                 string nombre = this.txtNombre.Text;
                 string descripcion = this.txtDescripcion.Text;
@@ -84,11 +106,8 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
                 int idFabricante = int.Parse(arrayFabricante[1]);
                 Dominio.Fabricante unFabricante = unaControladoraFabricante.Buscar(idFabricante);
 
-                string ObjetoSubtipo = this.dplListarSubtipo.SelectedItem.ToString();
-                string[] partesSubtipo = ObjetoSubtipo.Split(' ');
-                int idSubtipo = int.Parse(partesSubtipo[1]);
-                Dominio.SubTipo unSubtipo = unaControladoraSubtipo.Buscar(idSubtipo);
                 string UrlFotoPrincipal = "";
+                List<Dominio.SubTipo> listaSubtipos = this.ListarSubtiposParaDarDeAlta(ListaSubtiposSeleccionados);
 
                 if (this.fuImagenPrincipal.HasFile)
                 {
@@ -96,13 +115,14 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
                     UrlFotoPrincipal = "~/Imagenes/ImgPrincipalAcessorios/" + this.fuImagenPrincipal.FileName;
                     if (ListarFotosAdicionales == null)
                     {
-                        Dominio.Accesorio unAccesorio = new Dominio.Accesorio(nombre, descripcion, unFabricante, UrlFotoPrincipal, precio, unSubtipo, stock);
+                        Dominio.Accesorio unAccesorio = new Dominio.Accesorio(nombre, descripcion, unFabricante, UrlFotoPrincipal, precio, stock,listaSubtipos);
                         if (unaControladoraAccesorio.Alta(unAccesorio))
                         {
                             this.lblMensaje.MensajeActivo(1, "El accesorio se registro con exito");
                             this.LimpiarCampos();
                             this.ListarAccesorios();
-                            ListarFotosAdicionales.Clear();
+                            ListaSubtiposSeleccionados.Clear();
+                            this.ListarSubtiposSeleccionados();
                         }
                         else
                         {
@@ -113,12 +133,16 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
                     else
                     {
                         List<Dominio.FotosAdicionales> listaFotosAdicionales = this.ListaConFotosAdicionalesParaAlta(ListarFotosAdicionales);
-                        Dominio.Accesorio unAccesorio = new Dominio.Accesorio(nombre, descripcion, unFabricante, UrlFotoPrincipal, listaFotosAdicionales, precio, unSubtipo, stock);
+                        Dominio.Accesorio unAccesorio = new Dominio.Accesorio(nombre, descripcion, unFabricante, UrlFotoPrincipal, listaFotosAdicionales, precio, stock, listaSubtipos);
                         if (unaControladoraAccesorio.Alta(unAccesorio))
                         {
                             this.lblMensaje.MensajeActivo(1, "El accesorio se registro con exito");
                             this.LimpiarCampos();
                             this.ListarAccesorios();
+                            ListaSubtiposSeleccionados.Clear();
+                            this.ListarSubtiposSeleccionados();
+                            ListarFotosAdicionales.Clear();
+                            this.ListaFotosAdicionales();
                         }
                         else
                         {
@@ -182,13 +206,18 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
             {
                 this.lblMensaje.MensajeActivo(1,"Accesorio eliminado con exito");
                 this.ListarAccesorios();
-                this.ListarFotosAdicionales.Clear();
-                this.ListaFotosAdicionales();
                 this.LimpiarCampos();
+                this.ListaSubtiposSeleccionados.Clear();
+                this.ListarSubtiposSeleccionados();
             }
             else
             {
                 this.lblMensaje.MensajeActivo(2, "El accesorio no se pudo dar de baja");
+            }
+            if(ListarFotosAdicionales != null)
+            {
+                this.ListarFotosAdicionales.Clear();
+                this.ListaFotosAdicionales();
             }
         }
 
@@ -221,7 +250,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
                 unAccesorio.Descripcion = descripcion;
                 unAccesorio.Precio = precio;
                 unAccesorio.Stock = stock;
-                unAccesorio.SubtipoInstrumento = unSubtipo;
+                unAccesorio.ListarSubtipos = ListaSubtiposSeleccionados;
                 unAccesorio.Fabricante = unFabricante;
                 if (this.fuImagenPrincipal.HasFile)
                 {
@@ -236,6 +265,9 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
                             this.LimpiarCampos();
                             this.ListarAccesorios();
                             ListarFotosAdicionales.Clear();
+                            ListaSubtiposSeleccionados.Clear();
+                            this.ListarSubtiposSeleccionados();
+                            this.ListaFotosAdicionales();
                         }
                         else
                         {
@@ -252,6 +284,10 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
                             this.lblMensaje.MensajeActivo(1, "El accesorio se registro con exito");
                             this.LimpiarCampos();
                             this.ListarAccesorios();
+                            ListarFotosAdicionales.Clear();
+                            ListaSubtiposSeleccionados.Clear();
+                            this.ListarSubtiposSeleccionados();
+                            this.ListaFotosAdicionales();
                         }
                         else
                         {
@@ -283,6 +319,59 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
             this.txtStock.Text = unAccesorio.Stock.ToString();
             ListarFotosAdicionales = unaControladoraAccesorio.ListarFotosAdicionalesAccesorio(id);
             this.ListaFotosAdicionales();
+            ListaSubtiposSeleccionados = unaControladoraAccesorio.ListarSubTiposParaAccesorio(id);
+            this.ListarSubtiposSeleccionados();
+        }
+
+        protected void dplListarSubtipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.dplListarSubtipo.SelectedIndex > 0)
+            {
+                string SubtipoItem = this.dplListarSubtipo.SelectedItem.ToString();
+                string[] partesSubtipo = SubtipoItem.Split(' ');
+                int IdSubtipo = int.Parse(partesSubtipo[1]);
+                Dominio.Controladoras.ControladoraSubTipos ControladoraSubtipo = new Dominio.Controladoras.ControladoraSubTipos();
+                Dominio.SubTipo unSubtipo = ControladoraSubtipo.Buscar(IdSubtipo);
+
+                if (ListaSubtiposSeleccionados == null)
+                {
+                    List<Dominio.SubTipo> lista = new List<Dominio.SubTipo>();
+                    lista.Add(unSubtipo);
+                    ListaSubtiposSeleccionados = lista;
+                }
+                else
+                {
+                    if (!this.ComprobarSiSeEncuentra(unSubtipo.Id))
+                    {
+                        ListaSubtiposSeleccionados.Add(unSubtipo);
+                    }
+                }
+                this.ListarSubtiposSeleccionados();
+            }
+        }
+
+        private bool ComprobarSiSeEncuentra(int pId)
+        {
+            foreach(Dominio.SubTipo unSubtipo in ListaSubtiposSeleccionados)
+            {
+                if(unSubtipo.Id == pId)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        protected void gvListarSubtiposDeAccesorio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.dplListarSubtipo.SelectedIndex > 0)
+            {
+                GridViewRow fila = this.gvListarSubtiposDeAccesorio.SelectedRow;
+                int IdSubtipo = int.Parse(fila.Cells[1].Text);
+                Dominio.Controladoras.ControladoraSubTipos unaControladoraSubtipo = new Dominio.Controladoras.ControladoraSubTipos();
+                Dominio.SubTipo unSubtipo = unaControladoraSubtipo.Buscar(IdSubtipo);
+                ListaSubtiposSeleccionados.Remove(unSubtipo);
+                this.ListarSubtiposSeleccionados();
+            }
         }
     }
 }

@@ -14,7 +14,6 @@ namespace Obligatorio1.Presentacion.Autenticación
 
         }
 
-
         private void LimpiarCampos()
         {
             this.txtContraseña.Text = "";
@@ -27,17 +26,28 @@ namespace Obligatorio1.Presentacion.Autenticación
             string contraseña = this.txtContraseña.Text;
 
             Dominio.Controladoras.ControladoraLogin unLogin = new Dominio.Controladoras.ControladoraLogin();
-            int idCliente = unLogin.IniciarSesionCliente(correo, contraseña);
-            int IdAdministrador = unLogin.IniciarSesionAdministradores(correo, contraseña);
-            if (idCliente != -1)
+            int IdUsuario = unLogin.IniciarSesion(correo, contraseña);
+
+            if (IdUsuario != -1)
             {
-                Session["ClienteLogeado"] = idCliente;
-                Response.Redirect("~/Default.aspx");
-            }
-            else if (IdAdministrador != -1)
-            {
-                Session["AdministradorLogeado"] = IdAdministrador;
-                Response.Redirect("~/Presentacion/SeccionPrivada/frmInicioSeccionPrivada.aspx");
+                Dominio.Persona unaPersona = unLogin.BuscarPersona(IdUsuario);
+                Dominio.Cliente unCliente = unaPersona as Dominio.Cliente;
+                Dominio.Administrador unAdministrador = unaPersona as Dominio.Administrador;
+                if (unCliente != null)
+                {
+                    Session["ClienteLogueado"] = IdUsuario;
+                    Response.Redirect("~/Default.aspx");
+                }
+                else if (unAdministrador != null)
+                {
+                    Session["AdministradorLogueado"] = IdUsuario;
+                    Response.Redirect("~/Presentacion/SeccionPrivada/frmInicioSeccionPrivada.aspx");
+                }
+                else
+                {
+                    this.lblMensaje.MensajeActivo(2, "No se pudo iniciar sesion");
+                    this.LimpiarCampos();
+                }
             }
             else
             {

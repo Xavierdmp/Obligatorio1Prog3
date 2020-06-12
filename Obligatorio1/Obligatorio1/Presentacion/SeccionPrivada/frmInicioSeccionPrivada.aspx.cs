@@ -16,7 +16,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada
 
         private void AdministradorActivo()
         {
-            int idAdmin = int.Parse(Session["AdministradorLogeado"].ToString());
+            int idAdmin = int.Parse(Session["AdministradorLogueado"].ToString());
             Dominio.Controladoras.ControladoraAdministrador unaControladoraAdmin = new Dominio.Controladoras.ControladoraAdministrador();
             Dominio.Administrador unAdministrador = unaControladoraAdmin.Buscar(idAdmin);
             this.lblAdministradorActivo.Text = "Bienvenido " + unAdministrador.CorreoElectronico;

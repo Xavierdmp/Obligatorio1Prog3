@@ -12,7 +12,6 @@ namespace Obligatorio1.Dominio
         private string _cedulaIdentidad;
         private string _direccion;
         private int _telefono;
-
         public string Nombre
         {
             get { return _nombre; }

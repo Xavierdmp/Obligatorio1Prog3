@@ -57,9 +57,7 @@ namespace Obligatorio1.Persistencia
                     unAccesorio.Fabricante = Controladora.Instancia.BuscarFabricante(idFabricante);
                     unAccesorio.FotoPrincipal = elementos[4].ToString();
                     unAccesorio.Precio = int.Parse(elementos[5].ToString());
-                    int idSubTipo = int.Parse(elementos[6].ToString());
-                    unAccesorio.SubtipoInstrumento = Controladora.Instancia.BuscarSubTipo(idSubTipo);
-                    unAccesorio.Stock = int.Parse(elementos[7].ToString());
+                    unAccesorio.Stock = int.Parse(elementos[6].ToString());
                 }
                 return unAccesorio;
             }
@@ -85,9 +83,7 @@ namespace Obligatorio1.Persistencia
                     unAccesorio.Fabricante = Controladora.Instancia.BuscarFabricante(idFabricante);
                     unAccesorio.FotoPrincipal = elementos[4].ToString();
                     unAccesorio.Precio = int.Parse(elementos[5].ToString());
-                    int idSubTipo = int.Parse(elementos[6].ToString());
-                    unAccesorio.SubtipoInstrumento = Controladora.Instancia.BuscarSubTipo(idSubTipo);
-                    unAccesorio.Stock = int.Parse(elementos[7].ToString());
+                    unAccesorio.Stock = int.Parse(elementos[6].ToString());
                     listaDeAccesorios.Add(unAccesorio);
                 }
                 return listaDeAccesorios;
@@ -117,93 +113,120 @@ namespace Obligatorio1.Persistencia
         }
         public bool Alta(Accesorio pAccesorio)
         {
-            if (Conexion.Instancia.InicializarConsulta(
-                "Exec AltaArticulos " + "'" + pAccesorio.Nombre + "','" + pAccesorio.Descripcion + "',"
+            // SCOPE_IDENTITY() Buscar capturar ultima id
+
+            List<string> transaccion = new List<string>();
+            string UltimaId = "Declare @UltimaId int; Set @UltimaId = @@Identity;";
+            string UltimaId2 = "Declare @UltimaId2 int; Set @UltimaId2 = ident_current('Articulos');";
+
+            string procedure = "Exec AltaArticulos " + "'" + pAccesorio.Nombre + "','" + pAccesorio.Descripcion + "',"
                                       + pAccesorio.Fabricante.Id + " ,'" + pAccesorio.FotoPrincipal + "',"
-                                      + pAccesorio.Precio + "," + pAccesorio.SubtipoInstrumento.Id + ","
-                                      + pAccesorio.Stock + ";"))
+                                      + pAccesorio.Precio + "," + pAccesorio.Stock + ";";
+            transaccion.Add(procedure);
+
+            string InsertAccesorio = UltimaId + "Insert into Accesorios values(" + "@UltimaId" + ")";
+            transaccion.Add(InsertAccesorio);
+
+            foreach (SubTipo unSubtipo in pAccesorio.ListarSubtipos)
             {
-                int Id = this.TraerUltimaIdArticulo();
-                if (Id != -1)
+                transaccion.Add(UltimaId2 + "Insert into Accesorio_tiene_Subtipos values(" + "@UltimaId2" + "," + unSubtipo.Id + ");");
+            }
+
+            if(pAccesorio.ListaFotosAdicionales != null)
+            {
+                foreach (FotosAdicionales unaFotoAdicional in pAccesorio.ListaFotosAdicionales)
                 {
-                    if (pAccesorio.ListaFotosAdicionales != null)
-                    {
-                        if (Conexion.Instancia.InicializarConsulta("Insert into Accesorios values(" + Id + ");"))
-                        {
-                            foreach (FotosAdicionales unaFotoAdicional in pAccesorio.ListaFotosAdicionales)
-                            {
-                               Conexion.Instancia.InicializarConsulta("insert into Articulos_tienen_Fotos_Adicionales(Id_Articulo,Url_Imagen)" +
-                                                                        " values(" + Id + ",'" + unaFotoAdicional.Url + "')");
-                            }
-                            return true;
-                        }
-                        
-                    }
-                    else
-                    {
-                        return Conexion.Instancia.InicializarConsulta("Insert into Accesorios values(" + Id + ");");
-                    }
+                    transaccion.Add(UltimaId2 + "insert into Articulos_tienen_Fotos_Adicionales(Id_Articulo,Url_Imagen)" +
+                                                             " values(" + "@UltimaId2" + ",'" + unaFotoAdicional.Url + "')");
                 }
-                else
-                {
-                    return false;
-                }
+                return Conexion.Instancia.EjecutarTransaccionSql(transaccion);
             }
             else
             {
-                return false;   
+                return Conexion.Instancia.EjecutarTransaccionSql(transaccion);
+            }
+
+        }
+
+        private bool InsertarListaSubtipos(List<SubTipo> pLista,int pId)
+        {
+            foreach (SubTipo unSubtipo in pLista)
+            {
+                Conexion.Instancia.InicializarConsulta("Insert into Accesorio_tiene_Subtipos values(" + pId + "," + unSubtipo.Id + ");");
+            }
+            return true;
+        }
+        private bool InsertarFotosAdicionales(List<FotosAdicionales> pListar, int pId)
+        {
+            foreach (FotosAdicionales unaFotoAdicional in pListar)
+            {
+                Conexion.Instancia.InicializarConsulta("insert into Articulos_tienen_Fotos_Adicionales(Id_Articulo,Url_Imagen)" +
+                                                         " values(" + pId + ",'" + unaFotoAdicional.Url + "')");
+            }
+            return true;
+        }
+
+
+        public bool Baja(int pId)
+        {
+
+            List<FotosAdicionales> listaFotosAd = this.ListarFotosAdicionalesParaAccesorio(pId);
+            List<SubTipo> listaSubtipos = this.ListarSubTiposDadoUnAccesorio(pId);
+            if (listaFotosAd.Count > 0)
+            {
+                this.EliminarFotosAdicionales(listaFotosAd, pId);
+                if (listaSubtipos.Count == 0)
+                {
+                    return true;
+                }
+            }
+            if (listaSubtipos.Count > 0)
+            {
+                 this.EliminarSubtipos(listaSubtipos, pId);
+                 if(Conexion.Instancia.InicializarConsulta("delete from Accesorios where Id_Accesorio=" + pId))
+                {
+                    return Conexion.Instancia.InicializarConsulta("delete from Articulos where Id_Articulo=" + pId);
+                }
             }
             return false;
         }
 
-        public bool Baja(int pId)
+        private bool EliminarFotosAdicionales(List<FotosAdicionales> pFotosAdicionales, int pId)
         {
-            if (Conexion.Instancia.InicializarConsulta("delete from Accesorios where Id_Accesorio=" + pId))
+            foreach (FotosAdicionales unaFotoAd in pFotosAdicionales)
             {
-
-                    if (this.ListarFotosAdicionalesParaAccesorio(pId).Count > 0)
-                    {
-                        foreach (FotosAdicionales unaFotoAd in this.ListarFotosAdicionalesParaAccesorio(pId))
-                        {
-                            Conexion.Instancia.InicializarConsulta("delete from Articulos_tienen_Fotos_Adicionales where Id_Articulo =" + pId + " ; ");
-                        }
-                        return Conexion.Instancia.InicializarConsulta("delete from Articulos where Id_Articulo=" + pId);
-                    }
-                else
-                {
-                    return Conexion.Instancia.InicializarConsulta("delete from Articulos where Id_Articulo=" + pId);
-                }
-                
+                Conexion.Instancia.InicializarConsulta("delete from Articulos_tienen_Fotos_Adicionales where Id_Articulo =" + pId + " ; ");
             }
-            return false;
+            return true;
+        }
+        private bool EliminarSubtipos(List<SubTipo> pListaSubtipos, int pId)
+        {
+            foreach(SubTipo unSubtipo in pListaSubtipos)
+            {
+                Conexion.Instancia.InicializarConsulta("Delete from Accesorio_tiene_Subtipos where Id_Accesorio=" + pId);
+            }
+            return true;
         }
 
         public bool Modificar(Accesorio pAccesorio)
         {
             if (Conexion.Instancia.InicializarConsulta("exec ModificarArticulos " + pAccesorio.Id + ",'" + pAccesorio.Nombre + "','" +
                                                            pAccesorio.Descripcion + "'," + pAccesorio.Fabricante.Id + ",'" +
-                                                           pAccesorio.FotoPrincipal + "'," + pAccesorio.Precio + "," +
-                                                           pAccesorio.SubtipoInstrumento.Id + "," + pAccesorio.Stock + ";"))
+                                                           pAccesorio.FotoPrincipal + "'," + pAccesorio.Precio + "," + pAccesorio.Stock + ";"))
             {
-                if (pAccesorio.ListaFotosAdicionales != null)
+                if (pAccesorio.ListaFotosAdicionales.Count > 0)
                 {
-                    foreach (FotosAdicionales unaFotoAd in pAccesorio.ListaFotosAdicionales)
-                    {
-                        Conexion.Instancia.InicializarConsulta("update Articulos_tienen_Fotos_Adicionales set Url_Imagen=" + "'" + unaFotoAd.Url + "'" + " where Id_Articulo=" + pAccesorio.Id + " ;");
-                    }
-
-                    return true;
+                    this.EliminarFotosAdicionales(pAccesorio.ListaFotosAdicionales, pAccesorio.Id);
+                    this.InsertarFotosAdicionales(pAccesorio.ListaFotosAdicionales, pAccesorio.Id);
                 }
-                else
+                if (pAccesorio.ListarSubtipos.Count > 0)
                 {
-                    return false;
+                    this.EliminarSubtipos(pAccesorio.ListarSubtipos, pAccesorio.Id);
+                    this.InsertarListaSubtipos(pAccesorio.ListarSubtipos, pAccesorio.Id);
                 }
+                return true;
             }
-            else
-            {
-                return false;
-            }
-        
+            return false;
         }
 
         public List<FotosAdicionales> ListarFotosAdicionalesParaAccesorio(int pId)
@@ -229,5 +252,25 @@ namespace Obligatorio1.Persistencia
             }
         }
 
+        public List<SubTipo> ListarSubTiposDadoUnAccesorio(int pId)
+        {
+            string instruccion = "select * from Accesorio_tiene_Subtipos where Id_Accesorio=" + pId + ";";
+            DataSet datos = Conexion.Instancia.InicializarSeleccion(instruccion);
+            List<SubTipo> listaDeSubtipos = new List<SubTipo>();
+            if (datos.Tables[0].Rows.Count > 0)
+            {
+                DataRowCollection tabla = datos.Tables[0].Rows;
+                foreach (DataRow row in tabla)
+                {
+                    object[] elementos = row.ItemArray;
+                    Dominio.SubTipo unSubtipo = new SubTipo();
+                    int idSubtipo = int.Parse(elementos[1].ToString());
+                    unSubtipo = Controladora.Instancia.BuscarSubTipo(idSubtipo);
+                    listaDeSubtipos.Add(unSubtipo);
+                }
+                return listaDeSubtipos;
+            }
+            return listaDeSubtipos;
+        }
     }
 }

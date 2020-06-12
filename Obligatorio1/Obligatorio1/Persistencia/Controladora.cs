@@ -136,9 +136,9 @@ namespace Obligatorio1.Persistencia
 
         #region Clientes
 
-        public bool ComprobarExisteCliente(string pCeduladeIdentidad)
+        public bool ComprobarExisteCliente(string pCeduladeIdentidad,string pCorreo)
         {
-            return pCliente.Instancia.ComprobarExistencia(pCeduladeIdentidad);
+            return pCliente.Instancia.ComprobarExistencia(pCeduladeIdentidad,pCorreo);
         }
 
         public Cliente BuscarCliente(int pId)
@@ -169,13 +169,13 @@ namespace Obligatorio1.Persistencia
 
         #region "Iniciar Sesion"
 
-        public int InciarSesionAdmin(string pCorreo,string pContraseña)
+        public int IniciarSesion(string pCorreo,string pContraseña)
         {
-            return pLogin.Instancia.IdAdministradorLogin(pCorreo, pContraseña);
+            return pLogin.Instancia.IdUsuarioConectado(pCorreo, pContraseña);
         }
-        public int InciarSesionCliente(string pCorreo, string pContraseña)
+        public Persona BuscarPersona(int pId)
         {
-            return pLogin.Instancia.IdClienteLogin(pCorreo, pContraseña);
+            return pLogin.Instancia.BuscarPersona(pId);
         }
 
         #endregion
@@ -204,6 +204,11 @@ namespace Obligatorio1.Persistencia
         public bool ModificarAccesorio(Accesorio pcc)
         {
             return pAccesorio.Instancia.Modificar(pcc);
+        }
+
+        public List<SubTipo> ListarSubtiposParaAccesorio(int pId)
+        {
+            return pAccesorio.Instancia.ListarSubTiposDadoUnAccesorio(pId);
         }
 
         public List<FotosAdicionales> ListarFotosAdicionalesAccesorio(int pId)

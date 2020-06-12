@@ -41,11 +41,21 @@ namespace Obligatorio1.Dominio
         }
         public override string ToString()
         {
-            return "Id: " + this.Id + " " + "Nombre: " + this.Nombre + " " + "IdTipo: " + this.IdTipo + " " + "NombreTipo: " + this.NombreTipo;
+            return "Id: " + this.Id + " " + "Nombre: " + this.Nombre;
         }
         public SubTipo()
         {
 
+        }
+
+        public override bool Equals(object obj)
+        {
+            SubTipo unSubtipo = obj as SubTipo;
+            if(unSubtipo != null)
+            {
+                return unSubtipo.Id == this.Id;
+            }
+            return false;
         }
 
 

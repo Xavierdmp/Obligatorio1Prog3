@@ -15,7 +15,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionAdministradores
         }
         private void AdministradorConectado()
         {
-            int IdAdmin = int.Parse(Session["AdministradorLogeado"].ToString());
+            int IdAdmin = int.Parse(Session["AdministradorLogueado"].ToString());
             Dominio.Controladoras.ControladoraAdministrador unaControladoraAdmin = new Dominio.Controladoras.ControladoraAdministrador();
             Dominio.Administrador unAdministrador = unaControladoraAdmin.Buscar(IdAdmin);
             this.txtCorreoElectronico.Text = unAdministrador.CorreoElectronico;
@@ -29,7 +29,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionAdministradores
             string contraseña = this.txtContraseña.Text;
             string confirmarcontraseña = this.txtConfirmarContraseña.Text;
             Dominio.Controladoras.ControladoraAdministrador unaControladoraAdmin = new Dominio.Controladoras.ControladoraAdministrador();
-            int IdAdmin = int.Parse(Session["AdministradorLogeado"].ToString());
+            int IdAdmin = int.Parse(Session["AdministradorLogueado"].ToString());
             Dominio.Administrador unAdministrador = unaControladoraAdmin.Buscar(IdAdmin);
 
             unAdministrador.CorreoElectronico = correoelectronico;

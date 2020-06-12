@@ -12,6 +12,7 @@ namespace Obligatorio1.Dominio
         private int _descuento;
         private List<Color> _listaColores;
         private bool _destacado = false;
+        private SubTipo _subtipo;
 
         public DateTime FechaFabricacion
         {
@@ -38,31 +39,37 @@ namespace Obligatorio1.Dominio
             get { return _destacado; }
             set { _destacado = value; }
         }
-
+        public SubTipo SubTipo
+        {
+            get { return _subtipo; }
+            set { _subtipo = value; }
+        }
         public Instrumento(string pNombre, string pDescripcion, Fabricante pFabricante,
                         string pFotoPrincipal, List<FotosAdicionales> pFotosAdicionales,
                         int pPrecio, SubTipo pSubtipo, int pStock, DateTime pFecha, string pUrlVideo,
                         int pDescuento,List<Color> pListaColores, bool pDestacado)
-            :base(pNombre,pDescripcion,pFabricante,pFotoPrincipal,pFotosAdicionales,pPrecio,pSubtipo, pStock)
+            :base(pNombre,pDescripcion,pFabricante,pFotoPrincipal,pFotosAdicionales,pPrecio,pStock)
         {
             this.FechaFabricacion = pFecha;
             this.VideoYoutube = pUrlVideo;
             this.Descuento = pDescuento;
             this.ListaDeColores = pListaColores;
             this.Destacado = pDestacado;
+            this.SubTipo = pSubtipo;
         }
 
         public Instrumento(string pNombre, string pDescripcion, Fabricante pFabricante,
                         string pFotoPrincipal,
                         int pPrecio, SubTipo pSubtipo, int pStock, DateTime pFecha, string pUrlVideo,
                         int pDescuento, List<Color> pListaColores, bool pDestacado)
-            : base(pNombre, pDescripcion, pFabricante, pFotoPrincipal, pPrecio, pSubtipo, pStock)
+            : base(pNombre, pDescripcion, pFabricante, pFotoPrincipal, pPrecio,pStock)
         {
             this.FechaFabricacion = pFecha;
             this.VideoYoutube = pUrlVideo;
             this.Descuento = pDescuento;
             this.ListaDeColores = pListaColores;
             this.Destacado = pDestacado;
+            this.SubTipo = pSubtipo;
         }
         public Instrumento()
         {

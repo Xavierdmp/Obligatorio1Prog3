@@ -1,11 +1,11 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Presentacion/SeccionPrivada/SiteMasterPrivate/frmPrivate.Master" AutoEventWireup="true" CodeBehind="frmGestionAccesorio.aspx.cs" Inherits="Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos.frmGestionAccesorio" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Presentacion/SeccionPrivada/SiteMasterPrivate/frmPrivate.Master" AutoEventWireup="true" CodeBehind="frmGestionInstrumento.aspx.cs" Inherits="Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos.frmGestionInstrumento" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container-fluid">
 
         <div class="row text-center" style="margin-bottom: 20px;">
             <div class="col-md-12">
-                <h1>Gestion de Accesorios</h1>
+                <h1>Gestion de Instrumento</h1>
             </div>
         </div>
         <section class="row" style="margin-top: 50px;">
@@ -39,8 +39,10 @@
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtStock" ErrorMessage="El stock es obligatorio" ForeColor="#CC3300" ValidationGroup="vgGestion"></asp:RequiredFieldValidator>
                 </div>
                 <div class="form-group">
-                    <asp:Label ID="Label4" runat="server" Text="Imagen principal" Font-Bold="True"></asp:Label>
-                    <asp:FileUpload ID="fuImagenPrincipal" runat="server" class="form-control" Width="281px" ToolTip="Seleccione una imagen principal" />
+                    <asp:Label ID="Label6" runat="server" Text="Subtipo" Font-Bold="True"></asp:Label>
+                    <asp:DropDownList ID="dplListarSubtipo" runat="server" class="form-control" Width="280px" AutoPostBack="True" AppendDataBoundItems="True">
+                        <asp:ListItem>Seleccione un subtipo de instrumento</asp:ListItem>
+                    </asp:DropDownList>
                 </div>
             </article>
             <aside class="col-md-6 text-center">
@@ -55,10 +57,10 @@
                         <asp:FileUpload ID="fuFotosAdicionales" runat="server" class="form-control cargarFotosAdicionales" />
                     </div>
                     <div class="form-group">
-                        <asp:Button ID="btnAgregarImagenAdicional" runat="server" class="btn btn-success" Text="Agregar foto adicional" OnClick="btnAgregarImagenAdicional_Click" />
+                        <asp:Button ID="btnAgregarImagenAdicional" runat="server" class="btn btn-success" Text="Agregar foto adicional" />
                     </div>
                     <div class="form-group table-responsive">
-                        <asp:GridView ID="gvListarImagenesAdicionales" runat="server" EmptyDataText="No hay imagenes adicionales" ShowHeaderWhenEmpty="True" Height="16px" Width="57px" CellPadding="4" ForeColor="#333333" GridLines="None" HorizontalAlign="Center" AutoGenerateColumns="False" OnSelectedIndexChanged="gvListarImagenesAdicionales_SelectedIndexChanged">
+                        <asp:GridView ID="gvListarImagenesAdicionales" runat="server" EmptyDataText="No hay imagenes adicionales" ShowHeaderWhenEmpty="True" Height="16px" Width="57px" CellPadding="4" ForeColor="#333333" GridLines="None" HorizontalAlign="Center" AutoGenerateColumns="False">
                             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                             <Columns>
                                 <asp:CommandField SelectText="&lt;i class=&quot;fas fa-trash&quot;&gt;&lt;/i&gt;" ShowSelectButton="True" AccessibleHeaderText="Eliminar" HeaderText="Eliminar" />
@@ -82,40 +84,56 @@
                         </asp:GridView>
                     </div>
                 </div>
-
+            </aside>
+        </section>
+        <section class="row">
+            <article class="col-md-3">
                 <div class="form-group">
-                    <asp:Label ID="Label6" runat="server" Text="Subtipo" Font-Bold="True"></asp:Label>
-                    <asp:DropDownList ID="dplListarSubtipo" runat="server" class="form-control CargarSubtipos" Width="281px" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="dplListarSubtipo_SelectedIndexChanged">
-                        <asp:ListItem>Seleccione un subtipo de instrumento</asp:ListItem>
+                    <asp:Label ID="Label11" runat="server" Text="Fecha Fabricacion" Font-Bold="True"></asp:Label>
+                    <asp:TextBox ID="txtFechaFabricacion" runat="server" placeholder="Ingrese Fecha" class="form-control" Width="281px"></asp:TextBox>
+                </div>
+                <div class="form-group">
+                    <asp:Label ID="Label13" runat="server" Text="Url Video" Font-Bold="True"></asp:Label>
+                    <asp:TextBox ID="txtVideoYoutube" runat="server" placeholder="Ingrese una url" class="form-control" Width="281px" TextMode="Url"></asp:TextBox>
+                </div>
+            </article>
+
+            <article class="col-md-3">
+                <div class="form-group">
+                    <asp:Label ID="Label12" runat="server" Text="Descuento" Font-Bold="True"></asp:Label>
+                    <asp:DropDownList ID="dplListaDescuentos" runat="server" AppendDataBoundItems="True" class="form-control" Width="281px" AutoPostBack="True">
+                        <asp:ListItem>Seleccione un descuento</asp:ListItem>
                     </asp:DropDownList>
                 </div>
                 <div class="form-group">
-                    <asp:GridView ID="gvListarSubtiposDeAccesorio" runat="server" HorizontalAlign="Center" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="gvListarSubtiposDeAccesorio_SelectedIndexChanged">
-                        <AlternatingRowStyle BackColor="White" />
-                        <Columns>
-                            <asp:CommandField SelectText="&lt;i class=&quot;fas fa-trash&quot;&gt;&lt;/i&gt;" ShowSelectButton="True" AccessibleHeaderText="Eliminar" HeaderText="Eliminar" />
-                        </Columns>
-                        <EditRowStyle BackColor="#2461BF" />
-                        <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-                        <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-                        <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                        <RowStyle BackColor="#EFF3FB" />
-                        <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
-                        <SortedAscendingCellStyle BackColor="#F5F7FB" />
-                        <SortedAscendingHeaderStyle BackColor="#6D95E1" />
-                        <SortedDescendingCellStyle BackColor="#E9EBEF" />
-                        <SortedDescendingHeaderStyle BackColor="#4870BE" />
-                    </asp:GridView>
+                    <asp:Label ID="Label14" runat="server" Text="Destacado" Font-Bold="True"></asp:Label>
+                    <asp:DropDownList ID="dplDestacado" runat="server" AppendDataBoundItems="True" class="form-control" Width="281px" AutoPostBack="True">
+                        <asp:ListItem Value="Seleccione si es destacado"></asp:ListItem>
+                    </asp:DropDownList>
+                </div>
+            </article>
+            <aside class="col-md-6">
+                <div class="form-group">
+                    <asp:Label ID="Label4" runat="server" Text="Imagen principal" Font-Bold="True"></asp:Label>
+                    <asp:FileUpload ID="fuImagenPrincipal" runat="server" class="form-control" Width="281px" ToolTip="Seleccione una imagen principal" />
+                </div>
+                <div class="form-group">
+                    <asp:Label ID="Label15" runat="server" Text="Colores: " Font-Bold="True"></asp:Label>
+                    <asp:DropDownList ID="dplListarColores" runat="server" class="form-control" Width="281px" AppendDataBoundItems="True" AutoPostBack="True">
+                        <asp:ListItem>Seleccionar un Color</asp:ListItem>
+                    </asp:DropDownList>
+                    <asp:Button ID="btnAgregarColor" runat="server" Text="Agregar Color" CssClass="AgregarColor btn btn-success" />
                 </div>
             </aside>
         </section>
+
         <section class="row text-center">
             <div class="col-md-12">
                 <usrMensaje:AsignarMensaje ID="lblMensaje" runat="server" />
                 <br />
-                <asp:Button ID="Button1" runat="server" Text="Registar" class="btn btn-success" OnClick="Button1_Click" ValidationGroup="vgGestion" />
-                <asp:Button ID="btnBaja" runat="server" Text="Eliminar" class="btn btn-danger" ValidationGroup="vgGestion" OnClick="btnBaja_Click" />
-                <asp:Button ID="btnModificar" runat="server" Text="Modificar" class="btn btn-primary" ValidationGroup="vgGestion" OnClick="btnModificar_Click" />
+                <asp:Button ID="btnAlta" runat="server" Text="Registar" class="btn btn-success" ValidationGroup="vgGestion" />
+                <asp:Button ID="btnBaja" runat="server" Text="Eliminar" class="btn btn-danger" ValidationGroup="vgGestion" />
+                <asp:Button ID="btnModificar" runat="server" Text="Modificar" class="btn btn-primary" ValidationGroup="vgGestion" />
             </div>
         </section>
         <section class="row text-center">
@@ -123,7 +141,7 @@
                 <asp:Label ID="Label9" runat="server" Text="Lista de accesorios" Font-Bold="True"></asp:Label>
                 <br />
                 <div class="table-responsive">
-                    <asp:GridView ID="gvListarAccesorios" runat="server" HorizontalAlign="Center" CssClass="table" BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="3px" CellPadding="4" GridLines="None" Width="846px" EmptyDataText="No hay accesorios registrados" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" OnSelectedIndexChanged="gvListarAccesorios_SelectedIndexChanged">
+                    <asp:GridView ID="gvListarAccesorios" runat="server" HorizontalAlign="Center" CssClass="table" BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="3px" CellPadding="4" GridLines="None" Width="846px" EmptyDataText="No hay accesorios registrados" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False">
                         <Columns>
                             <asp:CommandField ShowSelectButton="True" AccessibleHeaderText="Editar-Modificar" HeaderText="Editar-Modificar" SelectText="&lt;i class=&quot;far fa-edit&quot;&gt;&lt;/i&gt;">
                                 <ItemStyle HorizontalAlign="Center" />
@@ -134,6 +152,7 @@
                             <asp:BoundField AccessibleHeaderText="IdFabricante" DataField="IdFabricante" HeaderText="IdFabricante" />
                             <asp:BoundField AccessibleHeaderText="Precio" DataField="Precio" HeaderText="Precio" />
                             <asp:BoundField AccessibleHeaderText="Stock" DataField="Stock" HeaderText="Stock" />
+                            <asp:BoundField AccessibleHeaderText="IdSubtipo" DataField="IdSubtipo" HeaderText="IdSubtipo" />
                             <asp:ImageField AccessibleHeaderText="FotoPrincipal" DataImageUrlField="FotoPrincipal" HeaderText="FotoPrincipal">
                                 <ControlStyle Height="30px" Width="90px" />
                             </asp:ImageField>
