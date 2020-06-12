@@ -13,7 +13,6 @@ namespace Obligatorio1.Presentacion.SeccionPublica.GestionCliente
         {
 
         }
-
         private void LimpiarCampos()
         {
             this.txtNombre.Text = "";

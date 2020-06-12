@@ -24,15 +24,15 @@ namespace Obligatorio1.Persistencia
 
             }
         }
+        const string UltimaId = "Declare @UltimaId int;Set @UltimaId = @@Identity;";
+
 
         public bool ComprobarExistencia(string pCedula, string pCorreo)
         {
-
-
             string introduccion = "Select * from Personas p, Clientes c where c.Id_Cliente = p.Id_Persona and c.Cedula_Identidad_Cliente=" + " '" + pCedula + "'";
             DataSet datos = Conexion.Instancia.InicializarSeleccion(introduccion);
 
-            if (datos.Tables[0].Rows.Count > 0 && this.ComprobarExistenciaCorreo(pCorreo) == true)
+            if (datos.Tables[0].Rows.Count > 0 && this.ComprobarExistenciaCorreo(pCorreo))
             {
                 return true;
             }
@@ -40,16 +40,14 @@ namespace Obligatorio1.Persistencia
             {
                 return false;
             }
-
-
         }
-        public bool ComprobarExistenciaCorreo(string pCorreo)
+        private bool ComprobarExistenciaCorreo(string pCorreo)
         {
-            string introduccion = "Select * from Personas p, Clientes c where c.Id_Cliente = p.Id_Persona and p.Correo_Persona=" + " '" + pCorreo + "'";
-            string introduccion2 = "Select * from Personas p, Administradores a where a.Id_Admin = p.Id_Persona and p.Correo_Persona=" + " '" + pCorreo + "'";
+            string introduccion = "Select * from Personas p, Clientes c where c.Id_Cliente = p.Id_Persona and p.Correo_Persona=" + "'" + pCorreo + "'";
+            string introduccion2 = "Select * from Personas p, Administradores a where a.Id_Admin = p.Id_Persona and p.Correo_Persona=" + "'" + pCorreo + "'";
             DataSet datos = Conexion.Instancia.InicializarSeleccion(introduccion);
             DataSet datos2 = Conexion.Instancia.InicializarSeleccion(introduccion2);
-            if (datos.Tables[0].Rows.Count > 0 && datos2.Tables[0].Rows.Count > 0)
+            if (datos.Tables[0].Rows.Count > 0 || datos2.Tables[0].Rows.Count > 0)
             {
                 return true;
             }
@@ -89,15 +87,15 @@ namespace Obligatorio1.Persistencia
 
         public bool Alta(Cliente pCliente)
         {
-            if (Conexion.Instancia.InicializarConsulta("Insert into Personas values(" + "'" + pCliente.CorreoElectronico + "','" +
-                                                         pCliente.Contraseña + "' )"))
-            {
-                int id = this.UltimaIdPersona();
-                return Conexion.Instancia.InicializarConsulta("exec AltaCliente " + id + ",'" + pCliente.Nombre + "','"
-                                                            + pCliente.Apellido + "','" + pCliente.CedulaIdentidad + "','" +
-                                                            pCliente.Direccion + "'," + pCliente.Telefono + ";");
-            }
-            return false;
+            int EstadoActivado = 1;
+            List<string> transaccion = new List<string>();
+
+            transaccion.Add("Insert into Personas values(" + "'" + pCliente.CorreoElectronico + "','" +
+                                                         pCliente.Contraseña + "' )");
+            transaccion.Add(UltimaId + "exec AltaCliente " + "@UltimaId" + ",'" + pCliente.Nombre + "','"
+                                                        + pCliente.Apellido + "','" + pCliente.CedulaIdentidad + "','" +
+                                                        pCliente.Direccion + "'," + pCliente.Telefono + "," + EstadoActivado + ";");
+            return Conexion.Instancia.EjecutarTransaccionSql(transaccion);
         }
 
         public bool Baja(int pId)
@@ -140,33 +138,6 @@ namespace Obligatorio1.Persistencia
                 return ListadeCLientes;
             }
             return ListadeCLientes;
-        }
-
-        private int UltimaIdPersona()
-        {
-            string consulta = "select top 1 p.Id_Persona from Personas p order by(Id_Persona) desc";
-
-            int id = 0;
-
-            DataSet datos = Conexion.Instancia.InicializarSeleccion(consulta);
-
-            if (datos.Tables[0].Rows.Count > 0)
-            {
-                DataRowCollection tabla = datos.Tables[0].Rows;
-                foreach (DataRow fila in tabla)
-                {
-                    object[] element = fila.ItemArray;
-                    id = int.Parse(element[0].ToString());
-
-                }
-                return id;
-            }
-            else
-
-            {
-                return -1;
-
-            }
         }
 
     }

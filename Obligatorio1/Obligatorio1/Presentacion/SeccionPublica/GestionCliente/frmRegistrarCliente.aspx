@@ -43,9 +43,6 @@
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="Debe Ingresar un Telefono" ForeColor="Red" ValidationGroup="vgRegistrar" ControlToValidate="txtTelefono"></asp:RequiredFieldValidator>
                 </div>
                 <div class="form-group">
-                    <br />
-                </div>
-                <div class="form-group">
                     <asp:Label ID="Label7" runat="server" Text="Correo"></asp:Label>
                     <br />
                     <asp:TextBox ID="txtCorreo" runat="server" TextMode="Email" CssClass="form-control"></asp:TextBox>
@@ -57,7 +54,7 @@
                 <div class="form-group">
                     <asp:Label ID="Label8" runat="server" Text="Contraseña"></asp:Label>
                     <br />
-                    <asp:TextBox ID="txtContraseña1" runat="server" ValidationGroup="vgRegistrarCliente" TextMode="Password"></asp:TextBox>
+                    <asp:TextBox ID="txtContraseña1" runat="server" ValidationGroup="vgRegistrarCliente" CssClass="form-control" TextMode="Password"></asp:TextBox>
                     <br />
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ErrorMessage="Falta ingresar contraseña" ValidationGroup="vgRegistrar" ControlToValidate="txtCorreo" ForeColor="Red"></asp:RequiredFieldValidator>
                 </div>
