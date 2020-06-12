@@ -39,47 +39,48 @@
 
 
         </div>
-            <usrMensaje:AsignarMensaje ID="lblMensaje" runat="server" />
+        <usrMensaje:AsignarMensaje ID="lblMensaje" runat="server" />
     </div>
 
-     <!-- Modal -->
-    <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Confirmar eliminacion</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body text-center">
-                    <asp:Label ID="Label1" runat="server" Text="ID" Font-Bold="True"></asp:Label>
-                    <asp:Label ID="lblId" runat="server" Text="Label"></asp:Label>
-                    <br />
-                    <asp:Label ID="Label2" runat="server" Text="Nombre" Font-Bold="True"></asp:Label>
-                    <asp:Label ID="lblNombre" runat="server" Text="Label"></asp:Label>
-                    <br />
-                    <asp:Label ID="Label4" runat="server" Text="Apellido" Font-Bold="True"></asp:Label>
-                   <asp:Label ID="lblApellido" runat="server" Text="Label"> </asp:Label>
-                    <br />
-                    <asp:Label ID="Label8" runat="server" Text="Cedula de Identidad" Font-Bold="True"></asp:Label>
-                     <asp:Label ID="lblCedulaIdentidad" runat="server" Text="Label"></asp:Label>
-                    <br />
-                    <asp:Label ID="Label3" runat="server" Text="Direccion" Font-Bold="True"></asp:Label>
-                    <asp:Label ID="lblDireccion" runat="server" Text="Label"></asp:Label>
-                    <br />
-                    <asp:Label ID="Label5" runat="server" Text="Telefono" Font-Bold="True"></asp:Label>
-                    <asp:Label ID="lblTelefono" runat="server" Text="Label"></asp:Label>
-                </div>
-                
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
-                    <asp:Button ID="btnBaja" runat="server"  class="btn btn-danger" Text="Eliminar" OnClick="btnBaja_Click" />
-                </div>
+    <!-- Modal -->
+    <div class=" container-fluid>">
+        <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Confirmar eliminacion</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <asp:Label ID="Label1" runat="server" Text="ID" Font-Bold="True"></asp:Label>
+                        <asp:Label ID="lblId" runat="server" Text="Label"></asp:Label>
+                        <br />
+                        <asp:Label ID="Label2" runat="server" Text="Nombre" Font-Bold="True"></asp:Label>
+                        <asp:Label ID="lblNombre" runat="server" Text="Label"></asp:Label>
+                        <br />
+                        <asp:Label ID="Label4" runat="server" Text="Apellido" Font-Bold="True"></asp:Label>
+                        <asp:Label ID="lblApellido" runat="server" Text="Label"> </asp:Label>
+                        <br />
+                        <asp:Label ID="Label8" runat="server" Text="Cedula de Identidad" Font-Bold="True"></asp:Label>
+                        <asp:Label ID="lblCedulaIdentidad" runat="server" Text="Label"></asp:Label>
+                        <br />
+                        <asp:Label ID="Label3" runat="server" Text="Direccion" Font-Bold="True"></asp:Label>
+                        <asp:Label ID="lblDireccion" runat="server" Text="Label"></asp:Label>
+                        <br />
+                        <asp:Label ID="Label5" runat="server" Text="Telefono" Font-Bold="True"></asp:Label>
+                        <asp:Label ID="lblTelefono" runat="server" Text="Label"></asp:Label>
+                    </div>
 
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+                        <asp:Button ID="btnBaja" runat="server" class="btn btn-danger" Text="Eliminar" OnClick="btnBaja_Click" />
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
-
 
 </asp:Content>
