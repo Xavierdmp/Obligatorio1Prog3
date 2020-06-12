@@ -180,6 +180,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Account\Web.config" />
+    <Content Include="Presentacion\SeccionPrivada\Gestion Clientes\frmEliminarCliente.aspx" />
     <Content Include="Presentacion\SeccionPrivada\GestionArticulos\frmGestionAccesorio.aspx" />
     <Content Include="Presentacion\SeccionPrivada\GestionArticulos\frmGestionInstrumento.aspx" />
     <Content Include="Presentacion\SeccionPrivada\GestionFabricantes\frmFabricantes.aspx" />
@@ -425,6 +426,13 @@
     </Compile>
     <Compile Include="Presentacion\Controles\lblMensaje.ascx.designer.cs">
       <DependentUpon>lblMensaje.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\SeccionPrivada\Gestion Clientes\frmEliminarCliente.aspx.cs">
+      <DependentUpon>frmEliminarCliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\SeccionPrivada\Gestion Clientes\frmEliminarCliente.aspx.designer.cs">
+      <DependentUpon>frmEliminarCliente.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\SeccionPrivada\GestionArticulos\frmGestionAccesorio.aspx.cs">
       <DependentUpon>frmGestionAccesorio.aspx</DependentUpon>
