@@ -55,6 +55,7 @@ namespace Obligatorio1.Presentacion.Seccion_Publica.Gestion_Clientes
             {
                 this.lblMensaje.MensajeActivo(1, " se ha Ingresado con exito");
                 this.LimpiarCampos();
+                Response.Redirect("~/Default.aspx");
 
             }
             else
