@@ -22,6 +22,7 @@ namespace Obligatorio1.Persistencia
                 return _instancia;
             }
         }
+        const string UltimaId = "Declare @UltimaId int; Set @UltimaId = @@Identity;";
 
         public bool ComprobarExistencia(string pNombre)
         {
@@ -114,9 +115,7 @@ namespace Obligatorio1.Persistencia
         public bool Alta(Accesorio pAccesorio)
         {
             // SCOPE_IDENTITY() Buscar capturar ultima id
-
             List<string> transaccion = new List<string>();
-            string UltimaId = "Declare @UltimaId int; Set @UltimaId = @@Identity;";
             string UltimaId2 = "Declare @UltimaId2 int; Set @UltimaId2 = ident_current('Articulos');";
 
             string procedure = "Exec AltaArticulos " + "'" + pAccesorio.Nombre + "','" + pAccesorio.Descripcion + "',"
@@ -148,85 +147,58 @@ namespace Obligatorio1.Persistencia
 
         }
 
-        private bool InsertarListaSubtipos(List<SubTipo> pLista,int pId)
-        {
-            foreach (SubTipo unSubtipo in pLista)
-            {
-                Conexion.Instancia.InicializarConsulta("Insert into Accesorio_tiene_Subtipos values(" + pId + "," + unSubtipo.Id + ");");
-            }
-            return true;
-        }
-        private bool InsertarFotosAdicionales(List<FotosAdicionales> pListar, int pId)
-        {
-            foreach (FotosAdicionales unaFotoAdicional in pListar)
-            {
-                Conexion.Instancia.InicializarConsulta("insert into Articulos_tienen_Fotos_Adicionales(Id_Articulo,Url_Imagen)" +
-                                                         " values(" + pId + ",'" + unaFotoAdicional.Url + "')");
-            }
-            return true;
-        }
-
-
         public bool Baja(int pId)
         {
-
+            List<string> transaccion = new List<string>();
             List<FotosAdicionales> listaFotosAd = this.ListarFotosAdicionalesParaAccesorio(pId);
             List<SubTipo> listaSubtipos = this.ListarSubTiposDadoUnAccesorio(pId);
             if (listaFotosAd.Count > 0)
             {
-                this.EliminarFotosAdicionales(listaFotosAd, pId);
-                if (listaSubtipos.Count == 0)
+                foreach (FotosAdicionales unaFotoAd in listaFotosAd)
                 {
-                    return true;
+                    transaccion.Add("delete from Articulos_tienen_Fotos_Adicionales where Id_Articulo =" + pId + " ; ");
                 }
             }
-            if (listaSubtipos.Count > 0)
+            foreach (SubTipo unSubtipo in listaSubtipos)
             {
-                 this.EliminarSubtipos(listaSubtipos, pId);
-                 if(Conexion.Instancia.InicializarConsulta("delete from Accesorios where Id_Accesorio=" + pId))
-                {
-                    return Conexion.Instancia.InicializarConsulta("delete from Articulos where Id_Articulo=" + pId);
-                }
+                transaccion.Add("Delete from Accesorio_tiene_Subtipos where Id_Accesorio=" + pId);
             }
-            return false;
-        }
+            transaccion.Add("delete from Accesorios where Id_Accesorio=" + pId);
 
-        private bool EliminarFotosAdicionales(List<FotosAdicionales> pFotosAdicionales, int pId)
-        {
-            foreach (FotosAdicionales unaFotoAd in pFotosAdicionales)
-            {
-                Conexion.Instancia.InicializarConsulta("delete from Articulos_tienen_Fotos_Adicionales where Id_Articulo =" + pId + " ; ");
-            }
-            return true;
-        }
-        private bool EliminarSubtipos(List<SubTipo> pListaSubtipos, int pId)
-        {
-            foreach(SubTipo unSubtipo in pListaSubtipos)
-            {
-                Conexion.Instancia.InicializarConsulta("Delete from Accesorio_tiene_Subtipos where Id_Accesorio=" + pId);
-            }
-            return true;
+            transaccion.Add("delete from Articulos where Id_Articulo=" + pId);
+
+            return Conexion.Instancia.EjecutarTransaccionSql(transaccion);
         }
 
         public bool Modificar(Accesorio pAccesorio)
         {
-            if (Conexion.Instancia.InicializarConsulta("exec ModificarArticulos " + pAccesorio.Id + ",'" + pAccesorio.Nombre + "','" +
+            List<SubTipo> listaSubtipos = this.ListarSubTiposDadoUnAccesorio(pAccesorio.Id);
+            List<FotosAdicionales> listaFotosAd = this.ListarFotosAdicionalesParaAccesorio(pAccesorio.Id);
+            List<string> transaccion = new List<string>();
+            transaccion.Add("exec ModificarArticulos " + pAccesorio.Id + ",'" + pAccesorio.Nombre + "','" +
                                                            pAccesorio.Descripcion + "'," + pAccesorio.Fabricante.Id + ",'" +
-                                                           pAccesorio.FotoPrincipal + "'," + pAccesorio.Precio + "," + pAccesorio.Stock + ";"))
+                                                           pAccesorio.FotoPrincipal + "'," + pAccesorio.Precio + "," + pAccesorio.Stock + ";");
+
+            if (pAccesorio.ListaFotosAdicionales.Count > 0)
             {
-                if (pAccesorio.ListaFotosAdicionales.Count > 0)
+                foreach (FotosAdicionales unaFotoAd in listaFotosAd)
                 {
-                    this.EliminarFotosAdicionales(pAccesorio.ListaFotosAdicionales, pAccesorio.Id);
-                    this.InsertarFotosAdicionales(pAccesorio.ListaFotosAdicionales, pAccesorio.Id);
+                    transaccion.Add("delete from Articulos_tienen_Fotos_Adicionales where Id_Articulo =" + pAccesorio.Id + " ; ");
                 }
-                if (pAccesorio.ListarSubtipos.Count > 0)
+                foreach (FotosAdicionales unaFotoNueva in pAccesorio.ListaFotosAdicionales)
                 {
-                    this.EliminarSubtipos(pAccesorio.ListarSubtipos, pAccesorio.Id);
-                    this.InsertarListaSubtipos(pAccesorio.ListarSubtipos, pAccesorio.Id);
+                    transaccion.Add("Insert into Articulos_tienen_Fotos_Adicionales values(" + pAccesorio.Id + ",'" + unaFotoNueva.Url + "'" + ")");
                 }
-                return true;
             }
-            return false;
+            foreach (SubTipo unSubtipo in listaSubtipos )
+            {
+                transaccion.Add("Delete from Accesorio_tiene_Subtipos where Id_Accesorio=" + pAccesorio.Id);
+            }
+            foreach(SubTipo unSubtipo in pAccesorio.ListarSubtipos)
+            {
+                transaccion.Add("Insert into Accesorio_tiene_Subtipos values(" + pAccesorio.Id + "," + unSubtipo.Id + ");");
+            }
+            return Conexion.Instancia.EjecutarTransaccionSql(transaccion);
         }
 
         public List<FotosAdicionales> ListarFotosAdicionalesParaAccesorio(int pId)
