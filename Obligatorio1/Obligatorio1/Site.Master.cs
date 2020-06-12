@@ -69,7 +69,16 @@ namespace Obligatorio1
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if(Session["ClienteLogueado"] != null)
+            {
+                this.SeInicioSesion.Visible = false;
+                this.OcultarRegister.Visible = false;
+            }
+            else
+            {
+                this.SeInicioSesion.Visible = true;
+                this.OcultarRegister.Visible = true;
+            }
         }
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)

@@ -56,8 +56,8 @@
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a runat="server" href="~/Presentacion/SeccionPublica/GestionCliente/frmRegistrarCliente.aspx">Registrarse</a></li>
-                        <li><a runat="server" href="~/Presentacion/Autenticación/frmIniciarSesion.aspx"><i class="fas fa-key"></i> Iniciar sesión</a></li>
+                        <li><a runat="server" href="~/Presentacion/SeccionPublica/GestionCliente/frmRegistrarCliente.aspx" Id="OcultarRegister">Registrarse</a></li>
+                        <li><a runat="server" href="~/Presentacion/Autenticación/frmIniciarSesion.aspx" Id="SeInicioSesion"><i class="fas fa-key"></i> Iniciar sesión</a></li>
                     </ul>
 
                 </div>
