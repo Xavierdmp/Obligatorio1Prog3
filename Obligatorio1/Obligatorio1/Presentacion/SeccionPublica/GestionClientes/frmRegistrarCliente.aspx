@@ -46,7 +46,7 @@
                     <br />
                     <asp:TextBox ID="txtGenero" runat="server"></asp:TextBox>
                     <br />
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="Debe Ingresar un Genero" ForeColor="Red" ValidationGroup="vgRegistrarClientes"></asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="Debe Ingresar un Genero" ForeColor="Red" ValidationGroup="vgRegistrarClientes" ControlToValidate="txtGenero"></asp:RequiredFieldValidator>
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label7" runat="server" Text="Correo" CssClass="form-control form-control-lg"></asp:Label>
@@ -70,7 +70,7 @@
                     <asp:TextBox ID="txtContraseña2" runat="server" TextMode="Password" ValidationGroup="vgRegistrarCliente"></asp:TextBox>
                     <br />
                     <br />
-                    <asp:CompareValidator ID="CompareValidator1" runat="server" ErrorMessage="las Contraseñas deben coincidir" ControlToCompare="txtContraseña1" ControlToValidate="txtContraseña2" ForeColor="Red"></asp:CompareValidator>
+                    <asp:CompareValidator ID="CompareValidator1" runat="server" ErrorMessage="las Contraseñas deben coincidir" ControlToCompare="txtContraseña1" ControlToValidate="txtContraseña2" ForeColor="Red" ValidationGroup="vgRegistrarCliente"></asp:CompareValidator>
                 </div>
                 <div class="col-md-12 text-center">
                     <asp:Button ID="btnAlta" runat="server" Text="Alta" Width="366px" CssClass="btn-success active" OnClick="btnAlta_Click" ValidationGroup="vgRegistrarClientes" />
