@@ -22,42 +22,63 @@ namespace Obligatorio1.Persistencia
             }
         }
 
-        public int IdAdministradorLogin(string pCorreo, string pContraseña)
+        public int IdUsuarioConectado(string pCorreo, string pContraseña)
         {
-            string consulta = "Select * from Administradores where Correo_Electronico_Admin=" + "'" + pCorreo + "' " + "and Contraseña_Admin= " + "'" + pContraseña + "'";
+            string consulta = "Select * from Personas where Correo_Persona=" + "'" + pCorreo + "' " + "and Contraseña_Persona= " + "'" + pContraseña + "'";
             DataSet datos = Conexion.Instancia.InicializarSeleccion(consulta);
 
-            Dominio.Administrador unAdministrador = new Dominio.Administrador();
             if (datos.Tables[0].Rows.Count > 0)
             {
+                int Id = 0;
                 DataRowCollection table = datos.Tables[0].Rows;
                 foreach (DataRow row in table)
                 {
                     object[] posiciones = row.ItemArray;
-                    unAdministrador.Id = int.Parse(posiciones[0].ToString());
+                    Id = int.Parse(posiciones[0].ToString());
                 }
-                return unAdministrador.Id;
+                return Id;
             }
             return -1;
         }
 
-        public int IdClienteLogin(string pCorreo, string pContraseña)
+        //Metodo para saber quien inicio sesion(Cliente o Administrador);
+        public Dominio.Persona BuscarPersona(int pId)
         {
-            string consulta = "Select * from Clientes where Correo_Electronico_Cliente=" + "'" + pCorreo + "' " + "and Contraseña_Cliente= " + "'" + pContraseña + "'";
-            DataSet datos = Conexion.Instancia.InicializarSeleccion(consulta);
+            string consultaAdmin = "Select * from Administradores a, Personas p where a.Id_Admin = p.Id_Persona and a.Id_Admin=" + pId + ";";
+            string consultaCliente = "Select * from Clientes c, Personas p where c.Id_Cliente = p.Id_Persona and c.Id_Cliente=" + pId + ";";
 
-            Dominio.Cliente unCliente = new Dominio.Cliente();
-            if (datos.Tables[0].Rows.Count > 0)
+            DataSet datosAdmin = Conexion.Instancia.InicializarSeleccion(consultaAdmin);
+            DataSet datosCliente = Conexion.Instancia.InicializarSeleccion(consultaCliente);
+            if(datosAdmin.Tables[0].Rows.Count > 0)
             {
-                DataRowCollection table = datos.Tables[0].Rows;
-                foreach (DataRow row in table)
+                Dominio.Administrador unAdministrador = new Dominio.Administrador();
+                DataRowCollection tabla = datosAdmin.Tables[0].Rows;
+                foreach(DataRow fila in tabla)
                 {
-                    object[] posiciones = row.ItemArray;
-                    unCliente.Id = int.Parse(posiciones[0].ToString());
+                    object[] element = fila.ItemArray;
+                    int id = int.Parse(element[0].ToString());
+                    unAdministrador.Id = id;
                 }
-                return unCliente.Id;
+                return unAdministrador;
             }
-            return -1;
+            else if(datosCliente.Tables[0].Rows.Count > 0)
+            {
+                Dominio.Cliente unCliente = new Dominio.Cliente();
+                DataRowCollection tabla = datosAdmin.Tables[0].Rows;
+                foreach (DataRow fila in tabla)
+                {
+                    object[] element = fila.ItemArray;
+                    int id = int.Parse(element[0].ToString());
+                    unCliente.Id = id;
+                }
+                return unCliente;
+            }
+            else
+            {
+                return null;
+            }
         }
+
+   
     }
 }

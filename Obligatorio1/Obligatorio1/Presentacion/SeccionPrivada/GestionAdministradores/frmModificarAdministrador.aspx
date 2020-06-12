@@ -17,10 +17,15 @@
                 <div class="form-group">
                     <asp:Label ID="Contraseña" runat="server" Text="Contraseña"></asp:Label>
                     <asp:TextBox ID="txtContraseña" runat="server" CssClass="form-control form-control-lg" TextMode="Password"></asp:TextBox>
+                    <br />
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtContraseña" ErrorMessage="El campo no puede estar vacio" ForeColor="Maroon" ValidationGroup="vgGestion"></asp:RequiredFieldValidator>
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label2" runat="server" Text="Confirmar Contraseña: "></asp:Label>
                     <asp:TextBox ID="txtConfirmarContraseña" runat="server" CssClass="form-control form-control-lg" TextMode="Password"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtConfirmarContraseña" ErrorMessage="El campo no puede estar vacio" ForeColor="Maroon" ValidationGroup="vgGestion"></asp:RequiredFieldValidator>
+                    <br />
+                    <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToCompare="txtContraseña" ControlToValidate="txtConfirmarContraseña" ErrorMessage="Las contraseñas deben coincidir" ForeColor="Maroon" ValidationGroup="vgGestion"></asp:CompareValidator>
                     <br />
                     <br />
                     <usrMensaje:AsignarMensaje ID="lblMensaje" runat="server"></usrMensaje:AsignarMensaje>
@@ -29,7 +34,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <asp:Button ID="btnModificarAdministrador" runat="server" Text="Confirmar Modificacion" CssClass="btn btn-success" OnClick="btnModificarAdministrador_Click" />
+                <asp:Button ID="btnModificarAdministrador" runat="server" Text="Confirmar Modificacion" CssClass="btn btn-success" OnClick="btnModificarAdministrador_Click" ValidationGroup="vgGestion" />
             </div>
         </div>
         <br />

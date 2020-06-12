@@ -12,7 +12,13 @@ namespace Obligatorio1.Dominio
         private string _cedulaIdentidad;
         private string _direccion;
         private int _telefono;
+        private string _genero;
 
+        public string Genero
+        {
+            get { return _genero; }
+            set { _genero = value; }
+        }
         public string Nombre
         {
             get { return _nombre; }
@@ -39,7 +45,7 @@ namespace Obligatorio1.Dominio
             set { _telefono = value; }
         }
 
-        public Cliente(string pCorreo,string pContraseña,string pNombre,
+        public Cliente(string pGenero, string pCorreo,string pContraseña,string pNombre,
                        string pApellido,string pCedulaIdentidad,string pDireccion,int pTelefono)
             : base(pCorreo, pContraseña)
         {
@@ -48,6 +54,7 @@ namespace Obligatorio1.Dominio
             this.CedulaIdentidad = pCedulaIdentidad;
             this.Direccion = pDireccion;
             this.Telefono = pTelefono;
+            this.Genero = pGenero;
         }
         public Cliente()
         {

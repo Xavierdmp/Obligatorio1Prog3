@@ -32,59 +32,47 @@ namespace Obligatorio1.Presentacion.GestionSubTipos
             this.dplListaTipos.DataSource = unaControladoraTipo.Listar();
             this.dplListaTipos.DataBind();
         }
-        private bool ComprobarDatos()
-        {
-            if(this.txtNombre.Text != "" || this.dplListaTipos.SelectedItem != null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+
         private void LimpiarCampos()
         {
             this.txtNombre.Text = "";
             this.txtNombre.Text = "";
-            this.ListarTiposInstrumentos();
+            //this.ListarTiposInstrumentos();
         }
         protected void btnAlta_Click(object sender, EventArgs e)
         {
             if (this.dplListaTipos.SelectedValue != "Seleccione un Tipo de instrumento")
             {
-                if (this.ComprobarDatos())
+                string nombre = this.txtNombre.Text;
+                string ItemTipoInstrumento = this.dplListaTipos.SelectedItem.ToString();
+                string[] partesItem = ItemTipoInstrumento.Split(' ');
+                int IdTipo = int.Parse(partesItem[1]);
+                Dominio.Controladoras.ControladoraTipo unaControladoraTipo = new Dominio.Controladoras.ControladoraTipo();
+                Dominio.Controladoras.ControladoraSubTipos unaControladoraSubTipo = new Dominio.Controladoras.ControladoraSubTipos();
+                Dominio.Tipo unTipo = unaControladoraTipo.Buscar(IdTipo);
+                Dominio.SubTipo unSubtipo = new Dominio.SubTipo(nombre, unTipo);
+                if (unaControladoraSubTipo.Alta(unSubtipo))
                 {
-                    string nombre = this.txtNombre.Text;
-                    string ItemTipoInstrumento = this.dplListaTipos.SelectedItem.ToString();
-                    string[] partesItem = ItemTipoInstrumento.Split(' ');
-                    int IdTipo = int.Parse(partesItem[1]);
-                    Dominio.Controladoras.ControladoraTipo unaControladoraTipo = new Dominio.Controladoras.ControladoraTipo();
-                    Dominio.Controladoras.ControladoraSubTipos unaControladoraSubTipo = new Dominio.Controladoras.ControladoraSubTipos();
-                    Dominio.Tipo unTipo = unaControladoraTipo.Buscar(IdTipo);
-                    Dominio.SubTipo unSubtipo = new Dominio.SubTipo(nombre, unTipo);
-                    if (unaControladoraSubTipo.Alta(unSubtipo))
-                    {
-                        this.lblMensaje.MensajeActivo(1, "Subtipo ingresado con exito");
-                        this.LimpiarCampos();
-                        this.ListarSubtipos();
-                    }
-                    else
-                    {
-                        this.lblMensaje.MensajeActivo(2, "No se pudo ingresar");
-                        this.ListarSubtipos();
-                    }
+                    this.lblMensaje.MensajeActivo(1, "Subtipo ingresado con exito");
+                    this.LimpiarCampos();
+                    this.ListarSubtipos();
                 }
                 else
                 {
-                    this.lblMensaje.MensajeActivo(2, "Complete todos los datos");
+                    this.lblMensaje.MensajeActivo(2, "No se pudo ingresar");
+                    this.ListarSubtipos();
                 }
             }
+            else
+            {
+                this.lblMensaje.MensajeActivo(2, "Seleccione un tipo de instrumento");
+            }
         }
+        
 
         protected void btnBaja_Click(object sender, EventArgs e)
         {
-            if(this.txtNombre.Text != "" && this.gvListarSubtipos.SelectedIndex > -1)
+            if(this.gvListarSubtipos.SelectedIndex > -1)
             {
                 GridViewRow row = this.gvListarSubtipos.SelectedRow;
                 int id = int.Parse(row.Cells[1].Text);
@@ -117,7 +105,7 @@ namespace Obligatorio1.Presentacion.GestionSubTipos
 
         protected void btnModificar_Click(object sender, EventArgs e)
         {
-            if (this.txtNombre.Text != "" && this.dplListaTipos.SelectedValue !="Seleccione un Tipo de instrumento" && this.gvListarSubtipos.SelectedRow !=null)
+            if (this.dplListaTipos.SelectedValue !="Seleccione un Tipo de instrumento" && this.gvListarSubtipos.SelectedRow !=null)
             {
                 GridViewRow row = this.gvListarSubtipos.SelectedRow;
                 int id = int.Parse(row.Cells[1].Text);

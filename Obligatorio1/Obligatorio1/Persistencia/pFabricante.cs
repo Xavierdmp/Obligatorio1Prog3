@@ -74,8 +74,8 @@ namespace Obligatorio1.Persistencia
 
         public bool Modificar(Fabricante pFabricante)
         {
-            return Conexion.Instancia.InicializarConsulta("Exec ModificarFabricante " + "'" + pFabricante.Nombre + "','" + pFabricante.Direccion +
-                                                           "','" + pFabricante.CorreoElectronico + "' where id_Fabricante=" + pFabricante.Id);
+            return Conexion.Instancia.InicializarConsulta("Exec ModificarFabricante " + pFabricante.Id + ",'" + pFabricante.Nombre + "','" + pFabricante.Direccion +
+                                                           "','" + pFabricante.CorreoElectronico + "'");
         }
 
         public List<Fabricante> Listar()

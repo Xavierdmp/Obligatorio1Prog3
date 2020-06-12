@@ -21,31 +21,37 @@ namespace Obligatorio1.Dominio
             get { return _id; }
             set { _id = value; }
         }
+
         public DateTime Fecha
         {
             get { return _fecha; }
             set { _fecha = value; }
         }
+
         public Cliente Cliente
         {
             get { return _cliente;}
             set { _cliente = value; }
         }
+
         public int MontoTotal
         {
             get { return _montoTotal; }
             set { _montoTotal = value; }
         }
+
         public List<Item> ListaItems
         {
             get { return _listaItems; }
             set { _listaItems = value; }
         }
+
         public string Pais
         {
             get { return _pais; }
             set { _pais = value; }
         }
+
         public string Tarjeta
         {
             get { return _tarjeta; }

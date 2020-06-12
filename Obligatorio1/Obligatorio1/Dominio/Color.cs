@@ -33,11 +33,15 @@ namespace Obligatorio1.Dominio
             get { return _codigo; }
             set { _codigo = value; }
         }
+
+        //Constructor para dar de alta un color
         public Color(string pNombre,string pCodigo)
         {
             this.Nombre = pNombre;
             this.Codigo = pCodigo;
         }
+
+        // Constructor para asignar un color a un instrumento.
         public Color(string pNombre,int pCantidad,string pCodigo)
         {
             this.Nombre = pNombre;

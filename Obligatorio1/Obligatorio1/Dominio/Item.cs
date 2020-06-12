@@ -19,57 +19,54 @@ namespace Obligatorio1.Dominio
             get { return _id; }
             set { _id = value; }
         }
+
         public Instrumento Instrumento
         {
             get { return _instrumento; }
             set { _instrumento = value; }
         }
+
         public Accesorio Acessorio
         {
             get { return _accesorio; }
             set { _accesorio = value; }
         }
+
         public int Cantidad
         {
             get { return _cantidad; }
             set { _cantidad = value; }
         }
+
         public int Precio
         {
             get { return _precio; }
             set { _precio = value; }
         }
 
-        //public int IdInstrumento
-        //{
-        //    get { return _instrumento.Id; }
-        //}
-        //public int IdAccesorio
-        //{
-        //    get { return _accesorio.Id; }
-        //}
-
         public int RetornarIdArticulo
         {
-           get { if (this.Acessorio != null)
+            get { if (this.Acessorio != null)
                 {
                     return _accesorio.Id;
                 }
-           else
+                else
                 {
                     return _instrumento.Id;
                 }
             }
         }
+
         public Color Color
         {
-            get{ return _color;}
+            get { return _color; }
             set { _color = value; }
         }
+
         private int CalcularPrecioTotal(int pCantidad)
         {
             int total = 0;
-            if(this.Acessorio != null)
+            if (this.Acessorio != null)
             {
                 total = this.Acessorio.Precio * pCantidad;
             }
@@ -79,20 +76,23 @@ namespace Obligatorio1.Dominio
             }
             return total;
         }
-        public Item(Instrumento pInstrumento,int pCantidad, Color pColor)
+
+        public Item(Instrumento pInstrumento, int pCantidad, Color pColor)
         {
             this.Instrumento = pInstrumento;
             this.Cantidad = pCantidad;
             this.Precio = this.CalcularPrecioTotal(pCantidad);
             this.Color = pColor;
         }
-        public Item(Accesorio pAccesorio,int pCantidad, Color pColor)
+
+        public Item(Accesorio pAccesorio, int pCantidad, Color pColor)
         {
             this.Acessorio = pAccesorio;
             this.Cantidad = pCantidad;
             this.Precio = this.CalcularPrecioTotal(pCantidad);
             this.Color = pColor;
         }
+
         public Item()
         {
 

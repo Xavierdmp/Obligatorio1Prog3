@@ -16,6 +16,10 @@
                     <br>
                     <asp:TextBox ID="txtNombre" runat="server" CssClass="EstiloTexbox"></asp:TextBox>
                     <br />
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtNombre" ErrorMessage="El nombre es obligatorio" Font-Size="12px" ForeColor="#990000" ValidationGroup="vgGestion"></asp:RequiredFieldValidator>
+                    <br />
+                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtNombre" ErrorMessage="Solo se permiten letras" Font-Size="12px" ForeColor="#993300" ValidationExpression="^[a-zA-Z ]*$" ValidationGroup="vgGestion"></asp:RegularExpressionValidator>
+                    <br />
                     <br />
                     <usrMensaje:AsignarMensaje ID="lblMensaje" runat="server"></usrMensaje:AsignarMensaje>
                 </div>
@@ -24,9 +28,9 @@
 
         <div class="row">
             <div class="col-md-12 text-center">
-                <asp:Button ID="btnAltaTipo" runat="server" CssClass="btn btn-success" Text="Ingresar" OnClick="btnAltaTipo_Click" />
-                <asp:Button ID="btnEliminarTipo" runat="server" CssClass="btn btn-danger" Text=" Eliminar" OnClick="btnEliminarTipo_Click" />
-                <asp:Button ID="btnModficar" runat="server" CssClass="btn btn-success" Text=" Modificar" OnClick="btnModficar_Click" />
+                <asp:Button ID="btnAltaTipo" runat="server" CssClass="btn btn-success" Text="Ingresar" OnClick="btnAltaTipo_Click" ValidationGroup="vgGestion" />
+                <asp:Button ID="btnEliminarTipo" runat="server" CssClass="btn btn-danger" Text=" Eliminar" OnClick="btnEliminarTipo_Click" ValidationGroup="vgGestion" />
+                <asp:Button ID="btnModficar" runat="server" CssClass="btn btn-success" Text=" Modificar" OnClick="btnModficar_Click" ValidationGroup="vgGestion" />
 
             </div>
         </div>

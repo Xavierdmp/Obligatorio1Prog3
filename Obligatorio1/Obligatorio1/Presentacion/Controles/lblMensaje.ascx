@@ -12,6 +12,7 @@
         font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         font-weight:bold;
     }
+    
 </style>
 <asp:Label ID="lblMensajes" runat="server" Text=""></asp:Label>
 

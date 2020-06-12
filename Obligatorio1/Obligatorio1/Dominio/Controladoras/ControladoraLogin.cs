@@ -7,16 +7,14 @@ namespace Obligatorio1.Dominio.Controladoras
 {
     public class ControladoraLogin
     {
-        public int IniciarSesionAdministradores(string pCorreo, string pContraseña)
+        public int IniciarSesion(string pCorreo, string pContraseña)
         {
             Dominio.Encryptar unaEncriptacion = new Dominio.Encryptar();
-            return Controladora.Instancia.InciarSesionAdmin(pCorreo, unaEncriptacion.Ecriptar(pContraseña, unaEncriptacion._clave));
+            return Controladora.Instancia.IniciarSesion(pCorreo, unaEncriptacion.Ecriptar(pContraseña, unaEncriptacion._clave));
         }
-
-        public int IniciarSesionCliente(string pCorreo, string pContraseña)
+        public Persona BuscarPersona(int pId)
         {
-            Dominio.Encryptar unaEncriptacion = new Dominio.Encryptar();
-            return Controladora.Instancia.InciarSesionCliente(pCorreo, unaEncriptacion.Ecriptar(pContraseña, unaEncriptacion._clave));
+            return Controladora.Instancia.BuscarPersona(pId);
         }
     }
 }

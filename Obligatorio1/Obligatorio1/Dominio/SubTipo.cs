@@ -48,6 +48,16 @@ namespace Obligatorio1.Dominio
 
         }
 
+        public override bool Equals(object obj)
+        {
+            SubTipo unSubtipo = obj as SubTipo;
+            if(unSubtipo != null)
+            {
+                return unSubtipo.Id == this.Id;
+            }
+            return false;
+        }
+
 
     }
 }
