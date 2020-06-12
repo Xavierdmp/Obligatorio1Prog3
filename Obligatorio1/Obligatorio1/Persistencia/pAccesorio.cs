@@ -180,6 +180,8 @@ namespace Obligatorio1.Persistencia
 
         public bool Modificar(Accesorio pAccesorio)
         {
+
+
             List<FotosAdicionales> ListaFotoAd = this.ListarFotosAdicionalesParaAccesorio(pAccesorio.Id);
 
             List<SubTipo> listaSubtipos = this.ListarSubTiposDadoUnAccesorio(pAccesorio.Id);
