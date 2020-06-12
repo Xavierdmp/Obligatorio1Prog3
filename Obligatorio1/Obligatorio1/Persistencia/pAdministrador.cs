@@ -23,6 +23,7 @@ namespace Obligatorio1.Persistencia
                 return _instancia;
             }
         }
+        const string UltimaId = "Declare @UltimaId int; Set @UltimaId = @@Identity;";
 
         public bool ComprobarExistencia(string pCorreoElectronico)
         {
@@ -64,25 +65,20 @@ namespace Obligatorio1.Persistencia
 
         public bool Alta(Administrador pAdministrador)
         {
+            List<string> transaccion = new List<string>();
             int bit = pAdministrador.Permisos ? 1 : 0;
-            if (Conexion.Instancia.InicializarConsulta("Insert into Personas values(" + "'" + pAdministrador.CorreoElectronico + "','" +
-                                                          pAdministrador.Contraseña + "' )"))
-            {
-                int Id = this.UltimaIdPersona();
-                if (Id != -1)
-                {
-                    return Conexion.Instancia.InicializarConsulta("Insert into Administradores values(" + Id + "," + bit + ");");
-                }
-            }
-            return false;
+            transaccion.Add("Insert into Personas values(" + "'" + pAdministrador.CorreoElectronico + "','" +
+                                                          pAdministrador.Contraseña + "' )");
+
+            transaccion.Add(UltimaId + "Insert into Administradores values(" + "@UltimaId" + "," + bit + ");");
+            return Conexion.Instancia.EjecutarTransaccionSql(transaccion);
         }
         public bool Baja(int pId)
         {
-           if(Conexion.Instancia.InicializarConsulta("delete from Administradores where Id_Admin=" + pId))
-           {
-                return Conexion.Instancia.InicializarConsulta("delete from Personas where Id_Persona=" + pId);
-           }
-            return false;
+            List<string> transaccion = new List<string>();
+            transaccion.Add("delete from Administradores where Id_Admin=" + pId);
+            transaccion.Add("delete from Personas where Id_Persona=" + pId);
+            return Conexion.Instancia.EjecutarTransaccionSql(transaccion);
         }
 
         public bool Modificar(Administrador pAdministrador)
@@ -90,7 +86,7 @@ namespace Obligatorio1.Persistencia
             return Conexion.Instancia.InicializarConsulta("Update Personas set Correo_Persona= " + "'" + pAdministrador.CorreoElectronico + "'," +
                                                           "Contraseña_Persona= " + "'" + pAdministrador.Contraseña + "' where Id_Persona=" + pAdministrador.Id);
         }
-
+          
         public List<Administrador> ListarAdministradores()
         {
             string Consulta = "Select * from Administradores a, Personas p where a.Id_Admin = p.Id_Persona";
@@ -114,26 +110,7 @@ namespace Obligatorio1.Persistencia
             return listaAdministradores;
         }
 
-        private int UltimaIdPersona()
-        {
-            string consulta = "select top 1 p.Id_Persona from Personas p order by (Id_Persona) desc";
-            DataSet datos = Conexion.Instancia.InicializarSeleccion(consulta);
-            if(datos.Tables[0].Rows.Count > 0)
-            {
-                int Id = 0;
-                DataRowCollection tabla = datos.Tables[0].Rows;
-                foreach(DataRow fila in tabla)
-                {
-                    object[] element = fila.ItemArray;
-                    Id = int.Parse(element[0].ToString());
-                }
-                return Id;    
-            }
-            else
-            {
-                return -1;
-            }
-        }
+        
 
 
     }

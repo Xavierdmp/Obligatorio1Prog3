@@ -45,8 +45,6 @@ namespace Obligatorio1.Persistencia
         }
         public bool ComprobarExistenciaCorreo(string pCorreo)
         {
-
-
             string introduccion = "Select * from Personas p, Clientes c where c.Id_Cliente = p.Id_Persona and p.Correo_Persona=" + " '" + pCorreo + "'";
             string introduccion2 = "Select * from Personas p, Administradores a where a.Id_Admin = p.Id_Persona and p.Correo_Persona=" + " '" + pCorreo + "'";
             DataSet datos = Conexion.Instancia.InicializarSeleccion(introduccion);
@@ -59,8 +57,6 @@ namespace Obligatorio1.Persistencia
             {
                 return false;
             }
-
-
         }
 
         public Cliente Buscar(int pId)
