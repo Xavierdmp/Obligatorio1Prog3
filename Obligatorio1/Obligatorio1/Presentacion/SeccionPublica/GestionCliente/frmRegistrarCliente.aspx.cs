@@ -21,15 +21,10 @@ namespace Obligatorio1.Presentacion.SeccionPublica.GestionCliente
             this.txtCedulaIdentidad.Text = "";
             this.txtDireccion.Text = "";
             this.txtNombre.Focus();
-
         }
-
 
         protected void btnAlta_Click(object sender, EventArgs e)
         {
-
-
-
             string nombre = this.txtNombre.Text;
             int telefono = int.Parse(this.txtTelefono.Text);
             string apellido = this.txtApellido.Text;
@@ -37,26 +32,18 @@ namespace Obligatorio1.Presentacion.SeccionPublica.GestionCliente
             string direccion = this.txtDireccion.Text;
             string correo = this.txtCorreo.Text;
             string contraseña = this.txtContraseña1.Text;
-
-
-
             Dominio.Controladoras.ControladoraCliente unControladorCliente = new Dominio.Controladoras.ControladoraCliente();
             Dominio.Cliente unCliente = new Dominio.Cliente(correo, contraseña, nombre, apellido, cedulaidentidad, direccion, telefono);
-
-
             if (unControladorCliente.Alta(unCliente))
             {
                 this.lblMensaje.MensajeActivo(1, " se ha Ingresado con exito");
                 this.LimpiarCampos();
                 Response.Redirect("~/Default.aspx");
-
             }
             else
             {
                 this.lblMensaje.MensajeActivo(2, "No se ha podido ingresar");
             }
-
-
         }
     }
 }

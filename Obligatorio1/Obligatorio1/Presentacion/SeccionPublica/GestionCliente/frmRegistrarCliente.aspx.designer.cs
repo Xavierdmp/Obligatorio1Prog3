@@ -49,13 +49,13 @@ namespace Obligatorio1.Presentacion.SeccionPublica.GestionCliente {
         protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
-        /// Control txtApellido.
+        /// Control txtTelefono.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtApellido;
+        protected global::System.Web.UI.WebControls.TextBox txtTelefono;
         
         /// <summary>
         /// Control RequiredFieldValidator2.
@@ -130,13 +130,13 @@ namespace Obligatorio1.Presentacion.SeccionPublica.GestionCliente {
         protected global::System.Web.UI.WebControls.Label Label5;
         
         /// <summary>
-        /// Control txtTelefono.
+        /// Control txtApellido.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTelefono;
+        protected global::System.Web.UI.WebControls.TextBox txtApellido;
         
         /// <summary>
         /// Control RequiredFieldValidator5.
@@ -166,13 +166,13 @@ namespace Obligatorio1.Presentacion.SeccionPublica.GestionCliente {
         protected global::System.Web.UI.WebControls.TextBox txtCorreo;
         
         /// <summary>
-        /// Control RequiredFieldValidator7.
+        /// Control RequiredFieldValidator6.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator7;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator6;
         
         /// <summary>
         /// Control Label8.
@@ -193,13 +193,13 @@ namespace Obligatorio1.Presentacion.SeccionPublica.GestionCliente {
         protected global::System.Web.UI.WebControls.TextBox txtContraseña1;
         
         /// <summary>
-        /// Control RequiredFieldValidator8.
+        /// Control RequiredFieldValidator7.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator8;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator7;
         
         /// <summary>
         /// Control Label9.
@@ -229,15 +229,6 @@ namespace Obligatorio1.Presentacion.SeccionPublica.GestionCliente {
         protected global::System.Web.UI.WebControls.CompareValidator CompareValidator1;
         
         /// <summary>
-        /// Control btnAlta.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAlta;
-        
-        /// <summary>
         /// Control lblMensaje.
         /// </summary>
         /// <remarks>
@@ -245,5 +236,14 @@ namespace Obligatorio1.Presentacion.SeccionPublica.GestionCliente {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::Obligatorio1.Presentacion.Controles.lblMensaje lblMensaje;
+        
+        /// <summary>
+        /// Control btnAlta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAlta;
     }
 }
