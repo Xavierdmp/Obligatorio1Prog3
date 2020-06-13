@@ -39,7 +39,7 @@ namespace Obligatorio1.Persistencia
 
         public bool ComprobarExistencia(string pNombre)
         {
-            string consulta = "select * from Colores where Nombre_Color" + "'" + pNombre + "'";
+            string consulta = "select * from Colores where Nombre_Color=" + "'" + pNombre + "'";
             DataSet datos = Conexion.Instancia.InicializarSeleccion(consulta);
             if (datos.Tables[0].Rows.Count > 0)
             {
@@ -55,7 +55,7 @@ namespace Obligatorio1.Persistencia
 
         public bool Alta(Color pColor)
         {
-            return Conexion.Instancia.InicializarConsulta("Insert into Colores values(" + "'" + pColor.Nombre + "'," + pColor.Codigo + "');");
+            return Conexion.Instancia.InicializarConsulta("Insert into Colores values(" + "'" + pColor.Nombre + "','" + pColor.Codigo + "');");
 
         }
 

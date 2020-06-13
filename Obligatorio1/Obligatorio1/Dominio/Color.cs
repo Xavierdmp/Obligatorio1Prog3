@@ -35,14 +35,14 @@ namespace Obligatorio1.Dominio
         }
 
         //Constructor para dar de alta un color
-        public Color(string pNombre,string pCodigo)
+        public Color(string pNombre, string pCodigo)
         {
             this.Nombre = pNombre;
             this.Codigo = pCodigo;
         }
 
         // Constructor para asignar un color a un instrumento.
-        public Color(string pNombre,int pCantidad,string pCodigo)
+        public Color(string pNombre, int pCantidad, string pCodigo)
         {
             this.Nombre = pNombre;
             this.Cantidad = pCantidad;
@@ -51,6 +51,10 @@ namespace Obligatorio1.Dominio
         public Color()
         {
 
+        }
+        public override string ToString()
+        {
+            return "Id: " + this.Id + "" + "Nombre: " + this.Nombre;// es lo que se va a ver en el drop down list.
         }
     }
 }
