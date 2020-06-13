@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Inciciar Sesion" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmIniciarSesion.aspx.cs" Inherits="Obligatorio1.Presentacion.Autenticación.frmIniciarSesion" %>
+﻿<%@ Page Title="Iniciar Sesion" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmIniciarSesion.aspx.cs" Inherits="Obligatorio1.Presentacion.Autenticación.frmIniciarSesion" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
         <div class="container-fluid text-center ">

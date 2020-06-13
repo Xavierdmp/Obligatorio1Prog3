@@ -136,9 +136,9 @@ namespace Obligatorio1.Persistencia
 
         #region Clientes
 
-        public bool ComprobarExisteCliente(string pCeduladeIdentidad,string pCorreo)
+        public bool ComprobarExisteCliente(string pCeduladeIdentidad, string pCorreo)
         {
-            return pCliente.Instancia.ComprobarExistencia(pCeduladeIdentidad,pCorreo);
+            return pCliente.Instancia.ComprobarExistencia(pCeduladeIdentidad, pCorreo);
         }
 
         public Cliente BuscarCliente(int pId)
@@ -169,7 +169,7 @@ namespace Obligatorio1.Persistencia
 
         #region "Iniciar Sesion"
 
-        public int IniciarSesion(string pCorreo,string pContraseña)
+        public int IniciarSesion(string pCorreo, string pContraseña)
         {
             return pLogin.Instancia.IdUsuarioConectado(pCorreo, pContraseña);
         }
@@ -214,6 +214,46 @@ namespace Obligatorio1.Persistencia
         public List<FotosAdicionales> ListarFotosAdicionalesAccesorio(int pId)
         {
             return pAccesorio.Instancia.ListarFotosAdicionalesParaAccesorio(pId);
+        }
+        #endregion
+
+        #region "Colores"
+
+        public bool ComprobarExistenciaColor(string pNombre)
+        {
+            return pColor.Instancia.ComprobarExistencia(pNombre);
+        }
+
+        public bool AltaColor(Color pColores)
+        {
+            return pColor.Instancia.Alta(pColores);
+        }
+
+        public List<Color> ListarColores()
+        {
+            return pColor.Instancia.ListarColores();
+        }
+        #endregion
+
+        #region "Instrumentos"
+        public bool ComprobarExistenciaInstrumento(string pNombre)
+        {
+            return pInstrumento.Instancia.ComprobarExistencia(pNombre);
+        }
+
+        public bool AltaInstrumento(Instrumento pInstrumentos)
+        {
+            return pInstrumento.Instancia.Alta(pInstrumentos);
+        }
+
+        public Instrumento BuscarInstrumento(int pId)
+        {
+            return pInstrumento.Instancia.Buscar(pId);
+        }
+
+        public List<Instrumento> ListarInstrumentos()
+        {
+            return pInstrumento.Instancia.ListarInstrumentos();
         }
         #endregion
     }

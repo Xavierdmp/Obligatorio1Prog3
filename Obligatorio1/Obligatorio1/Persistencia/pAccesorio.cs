@@ -94,24 +94,7 @@ namespace Obligatorio1.Persistencia
                 return listaDeAccesorios;
             }
         }
-        private int TraerUltimaIdArticulo()
-        {
-            string instruccion = "select top 1 a.Id_Articulo from Articulos a order by a.Id_Articulo desc;";
-            DataSet datos = Conexion.Instancia.InicializarSeleccion(instruccion);
-            
-            if(datos.Tables[0].Rows.Count > 0)
-            {
-                int ultimaIdArticulo = 0;
-                DataRowCollection tabla = datos.Tables[0].Rows;
-                foreach(DataRow row in tabla)
-                {
-                    object[] elementos = row.ItemArray;
-                    ultimaIdArticulo = int.Parse(elementos[0].ToString());
-                }
-                return ultimaIdArticulo;
-            }
-            return -1;
-        }
+      
         public bool Alta(Accesorio pAccesorio)
         {
             // SCOPE_IDENTITY() Buscar capturar ultima id
