@@ -11,11 +11,16 @@ namespace Obligatorio1.Persistencia
     public class pInstrumento : IABM<Instrumento>, IBuscar<Instrumento>
     {
         private static pInstrumento _instancia;
+<<<<<<< HEAD
 
         const string UltimaId = "Declare @UltimaId int; Set @UltimaId = @@Identity";//INserta en instrumento
         const string UltimaIdInstrumento = "Declare @UltimaIdInst int; Set @UltimaIdIns = ident_current('Articulos')";  //Captura ultima id y permite ingresarla en otras tablas. 
 
 
+=======
+        const string UltimaId = "Declare @UltimaId int; Set @UltimaId = @@Identity;";
+        const string UltimaIdInstrumento = "Declare @UltimaIdIns int; Set @UltimaIdIns = ident_current('Articulos');";
+>>>>>>> f27d141... alta de instrumento funcionando y cambios en pInstrumento
         private List<string> transaccion = new List<string>();
 
         public static pInstrumento Instancia
@@ -33,10 +38,17 @@ namespace Obligatorio1.Persistencia
 
         public bool ComprobarExistencia(string pNombre)
         {
+<<<<<<< HEAD
             string Consulta = "Select a.* from Articulos a, Instrumentos i" + " " + "where a.Id_Articulo = i.Id_Instrumento and a.Nombre_Articulo=" + "'" + pNombre + "';";
             DataSet datos = Conexion.Instancia.InicializarSeleccion(Consulta);
 
             if (datos.Tables[0].Rows.Count > 0)
+=======
+            string consulta = "Select a.* from Articulos a, Instrumentos i"  + " " +
+                "where a.Id_Articulo = i.Id_Instrumento and a.Nombre_Articulo=" + "'" + pNombre + "';";
+            DataSet datos = Conexion.Instancia.InicializarSeleccion(consulta);
+            if(datos.Tables[0].Rows.Count > 0)
+>>>>>>> f27d141... alta de instrumento funcionando y cambios en pInstrumento
             {
                 return true;
             }
@@ -101,7 +113,11 @@ namespace Obligatorio1.Persistencia
 
             foreach (Color unColor in pInstrumento.ListaDeColores)
             {
+<<<<<<< HEAD
                 transaccion.Add(UltimaIdInstrumento + "Insert into Instrumentos_tienen_Colores values( " + "@UltimaIdIns" + "," + unColor.Id + "," + unColor.Cantidad + ")");
+=======
+                transaccion.Add(UltimaIdInstrumento + "insert into Instrumentos_tienen_Colores values( " + "@UltimaIdIns" + "," + unColor.Id + "," + unColor.Cantidad +");");
+>>>>>>> f27d141... alta de instrumento funcionando y cambios en pInstrumento
             }
             if (pInstrumento.ListaFotosAdicionales != null)
             {

@@ -45,9 +45,13 @@ namespace Obligatorio1.Dominio
             get { return _subtipo; }
             set { _subtipo = value; }
         }
+<<<<<<< HEAD
 
         public int IdSubTipo // Para mostrar en la grilla el id- 
 
+=======
+        public int IdSubtipo
+>>>>>>> f27d141... alta de instrumento funcionando y cambios en pInstrumento
         {
             get { return this.SubTipo.Id; }
         }
@@ -78,10 +82,14 @@ namespace Obligatorio1.Dominio
             this.Destacado = pDestacado;
             this.SubTipo = pSubtipo;
         }
+<<<<<<< HEAD
         public Instrumento()
         {
 
         }
+=======
+
+>>>>>>> f27d141... alta de instrumento funcionando y cambios en pInstrumento
         public Instrumento(string pNombre, string pDescripcion, Fabricante pFabricante,
                         string pFotoPrincipal, List<FotosAdicionales> pFotosAdicionales,
                         int pPrecio, SubTipo pSubtipo, int pStock, DateTime pFecha, string pUrlVideo

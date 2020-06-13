@@ -20,9 +20,13 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
                 this.ListarFotosAdicionales();
                 this.ListarColoresSeleccionados();
                 this.ListarDescuentos();
+<<<<<<< HEAD
                 this.ListarSubtipos();
                 this.ListarInstrumentos();
 
+=======
+                this.ListarInstrumentos();
+>>>>>>> f27d141... alta de instrumento funcionando y cambios en pInstrumento
             }
         }
 
@@ -32,7 +36,25 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
             this.dplListarColores.DataSource = null;
             this.dplListarColores.DataSource = unaControladora.Listar();
             this.dplListarColores.DataBind();
+<<<<<<< HEAD
 
+=======
+        }
+        private void LimpiarCampos()
+        {
+            this.txtNombre.Text = "";
+            this.txtDescripcion.Text = "";
+            this.txtFechaFabricacion.Text = "";
+            this.txtPrecio.Text = "";
+            this.txtStock.Text = "";
+            this.txtVideoYoutube.Text = "";
+            this.txtNombre.Focus();
+            if (ListaFotosAdicionales != null)
+            {
+                this.ListaFotosAdicionales.Clear();
+            }
+            this.ListaColores.Clear();
+>>>>>>> f27d141... alta de instrumento funcionando y cambios en pInstrumento
         }
 
         private void ListarColoresModal()
@@ -57,6 +79,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
         {
             Dominio.Controladoras.ControladoraSubTipos unaControlaSubtipo = new Dominio.Controladoras.ControladoraSubTipos();
             this.dplListarSubtipo.DataSource = null;
+<<<<<<< HEAD
             this.dplListarSubtipo.DataSource = unaControlaSubtipo.Listar();
             this.dplListarSubtipo.DataBind();
         }
@@ -76,6 +99,10 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
               
             }
             this.ListaColores.Clear();
+=======
+            this.dplListarSubtipo.DataSource = unaControladora.Listar();
+            this.dplListarSubtipo.DataBind();
+>>>>>>> f27d141... alta de instrumento funcionando y cambios en pInstrumento
         }
         private void ListarDescuentos()
         {
@@ -178,9 +205,19 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
             this.gvListarInstrumentos.DataBind();
         }
 
+<<<<<<< HEAD
 
 
 
+=======
+        private void ListarInstrumentos()
+        {
+            Dominio.Controladoras.ControladoraInstrumentos unaControladora = new Dominio.Controladoras.ControladoraInstrumentos();
+            this.gvListarInstrumentos.DataSource = null;
+            this.gvListarInstrumentos.DataSource = unaControladora.Listar();
+            this.gvListarInstrumentos.DataBind();
+        }
+>>>>>>> f27d141... alta de instrumento funcionando y cambios en pInstrumento
 
         protected void dplListarColores_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -282,6 +319,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
 
         protected void btnAlta_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
 
             string nombre = this.txtNombre.Text;
             string descripcion = this.txtDescripcion.Text;
@@ -301,17 +339,36 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
             string UrlVideo = this.txtVideoYoutube.Text;
             DateTime Fechafabricacion = Convert.ToDateTime(this.txtFechaFabricacion.Text);
 
+=======
+            string nombre = this.txtNombre.Text;
+            string descripcion = this.txtDescripcion.Text;
+
+            string ObjetoFabricante = this.dplListaFabricante.SelectedItem.ToString();
+            string[] partesFabricante = ObjetoFabricante.Split(' ');
+            int idFabricante = int.Parse(partesFabricante[1]);
+            Dominio.Controladoras.ControladoraFabricante unaControladoraFabricante = new Dominio.Controladoras.ControladoraFabricante();
+            Dominio.Fabricante unFabricante = unaControladoraFabricante.Buscar(idFabricante);
+            int precio = int.Parse(this.txtPrecio.Text);
+            int stock = int.Parse(this.txtStock.Text);
+            string urlVideo = this.txtVideoYoutube.Text;
+            DateTime fechaFabricacion = Convert.ToDateTime(this.txtFechaFabricacion.Text);
+>>>>>>> f27d141... alta de instrumento funcionando y cambios en pInstrumento
             bool destacado = this.btnEsDestacado.Checked ? true : false;
 
             string ObjetoSubtipo = this.dplListarSubtipo.SelectedItem.ToString();
             string[] partesSubtipo = ObjetoSubtipo.Split(' ');
+<<<<<<< HEAD
             int idSubtipo = int.Parse(partesSubtipo[1].ToString());
 
+=======
+            int idSubtipo = int.Parse(partesSubtipo[1]);
+>>>>>>> f27d141... alta de instrumento funcionando y cambios en pInstrumento
             Dominio.Controladoras.ControladoraSubTipos unaControladoraSubtipo = new Dominio.Controladoras.ControladoraSubTipos();
             Dominio.SubTipo unSubtipo = unaControladoraSubtipo.Buscar(idSubtipo);
 
             List<Color> listaColores = this.AsignarColoresParaAlta();
             Dominio.Controladoras.ControladoraInstrumentos unaControladoraInstrumento = new Dominio.Controladoras.ControladoraInstrumentos();
+<<<<<<< HEAD
 
             if (this.fuImagenPrincipal.HasFile)
             {
@@ -362,6 +419,39 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
     }   
 
 
+=======
+            if (this.fuImagenPrincipal.HasFile)
+            {
+                string urlFotoPrincipal = "~/Imagenes/ImgPrincipalInstrumento/" + this.fuImagenPrincipal.FileName;
+                this.fuImagenPrincipal.SaveAs(Server.MapPath(urlFotoPrincipal));
+                Dominio.Instrumento unInstrumento = new Dominio.Instrumento(nombre,descripcion,unFabricante,urlFotoPrincipal,precio,unSubtipo,stock,fechaFabricacion,urlVideo,listaColores,destacado);
+                if (this.dplListaDescuentos.SelectedIndex > 0)
+                {
+                    int descuento = int.Parse(this.dplListaDescuentos.SelectedValue);
+                    unInstrumento.Descuento = descuento;
+                }
+                if(ListaFotosAdicionales != null)
+                {
+                    List<FotosAdicionales> listaFotosAd = this.AsignarFotosParaAlta();
+                    unInstrumento.ListaFotosAdicionales = listaFotosAd;
+                }
+                if (unaControladoraInstrumento.Alta(unInstrumento))
+                {
+                    this.lblMensaje.MensajeActivo(1, "El instrumento se agrego con exito");
+                    this.LimpiarCampos();
+                    this.ListarInstrumentos();
+                }
+                else
+                {
+                    this.lblMensaje.MensajeActivo(2, "El instrumento no se se agrego");
+                }
+            }
+            else
+            {
+                this.lblMensaje.MensajeActivo(2, "Seleccione una imagen principal");
+            }
+        }
+>>>>>>> f27d141... alta de instrumento funcionando y cambios en pInstrumento
     }
 
 
