@@ -20,6 +20,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
                 this.ListarColoresSeleccionados();
                 this.ListarSubtipos();
                 this.ListarDescuentos();
+                this.ListarInstrumentos();
             }
         }
 
@@ -39,6 +40,11 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
             this.txtStock.Text = "";
             this.txtVideoYoutube.Text = "";
             this.txtNombre.Focus();
+            if (ListaFotosAdicionales != null)
+            {
+                this.ListaFotosAdicionales.Clear();
+            }
+            this.ListaColores.Clear();
         }
 
         private void ListarColoresModal()
@@ -61,6 +67,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
             Dominio.Controladoras.ControladoraSubTipos unaControladora = new Dominio.Controladoras.ControladoraSubTipos();
             this.dplListarSubtipo.DataSource = null;
             this.dplListarSubtipo.DataSource = unaControladora.Listar();
+            this.dplListarSubtipo.DataBind();
         }
         private void ListarDescuentos()
         {
@@ -132,6 +139,14 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
                 lista.Add(unColor);
             }
             return lista;
+        }
+
+        private void ListarInstrumentos()
+        {
+            Dominio.Controladoras.ControladoraInstrumentos unaControladora = new Dominio.Controladoras.ControladoraInstrumentos();
+            this.gvListarInstrumentos.DataSource = null;
+            this.gvListarInstrumentos.DataSource = unaControladora.Listar();
+            this.gvListarInstrumentos.DataBind();
         }
 
         protected void dplListarColores_SelectedIndexChanged(object sender, EventArgs e)
@@ -215,6 +230,62 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
 
             }
             this.ListarFotosAdicionales();
+        }
+
+        protected void btnAlta_Click(object sender, EventArgs e)
+        {
+            string nombre = this.txtNombre.Text;
+            string descripcion = this.txtDescripcion.Text;
+
+            string ObjetoFabricante = this.dplListaFabricante.SelectedItem.ToString();
+            string[] partesFabricante = ObjetoFabricante.Split(' ');
+            int idFabricante = int.Parse(partesFabricante[1]);
+            Dominio.Controladoras.ControladoraFabricante unaControladoraFabricante = new Dominio.Controladoras.ControladoraFabricante();
+            Dominio.Fabricante unFabricante = unaControladoraFabricante.Buscar(idFabricante);
+            int precio = int.Parse(this.txtPrecio.Text);
+            int stock = int.Parse(this.txtStock.Text);
+            string urlVideo = this.txtVideoYoutube.Text;
+            DateTime fechaFabricacion = Convert.ToDateTime(this.txtFechaFabricacion.Text);
+            bool destacado = this.btnEsDestacado.Checked ? true : false;
+
+            string ObjetoSubtipo = this.dplListarSubtipo.SelectedItem.ToString();
+            string[] partesSubtipo = ObjetoSubtipo.Split(' ');
+            int idSubtipo = int.Parse(partesSubtipo[1]);
+            Dominio.Controladoras.ControladoraSubTipos unaControladoraSubtipo = new Dominio.Controladoras.ControladoraSubTipos();
+            Dominio.SubTipo unSubtipo = unaControladoraSubtipo.Buscar(idSubtipo);
+
+            List<Color> listaColores = this.AsignarColoresParaAlta();
+            Dominio.Controladoras.ControladoraInstrumentos unaControladoraInstrumento = new Dominio.Controladoras.ControladoraInstrumentos();
+            if (this.fuImagenPrincipal.HasFile)
+            {
+                string urlFotoPrincipal = "~/Imagenes/ImgPrincipalInstrumento/" + this.fuImagenPrincipal.FileName;
+                this.fuImagenPrincipal.SaveAs(Server.MapPath(urlFotoPrincipal));
+                Dominio.Instrumento unInstrumento = new Dominio.Instrumento(nombre,descripcion,unFabricante,urlFotoPrincipal,precio,unSubtipo,stock,fechaFabricacion,urlVideo,listaColores,destacado);
+                if (this.dplListaDescuentos.SelectedIndex > 0)
+                {
+                    int descuento = int.Parse(this.dplListaDescuentos.SelectedValue);
+                    unInstrumento.Descuento = descuento;
+                }
+                if(ListaFotosAdicionales != null)
+                {
+                    List<FotosAdicionales> listaFotosAd = this.AsignarFotosParaAlta();
+                    unInstrumento.ListaFotosAdicionales = listaFotosAd;
+                }
+                if (unaControladoraInstrumento.Alta(unInstrumento))
+                {
+                    this.lblMensaje.MensajeActivo(1, "El instrumento se agrego con exito");
+                    this.LimpiarCampos();
+                    this.ListarInstrumentos();
+                }
+                else
+                {
+                    this.lblMensaje.MensajeActivo(2, "El instrumento no se se agrego");
+                }
+            }
+            else
+            {
+                this.lblMensaje.MensajeActivo(2, "Seleccione una imagen principal");
+            }
         }
     }
 }

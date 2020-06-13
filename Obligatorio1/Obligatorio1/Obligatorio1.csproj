@@ -536,6 +536,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Imagenes\FotosAdicionales\" />
     <Folder Include="Imagenes\ImgPrincipalAcessorios\" />
+    <Folder Include="Imagenes\ImgPrincipalInstrumento\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

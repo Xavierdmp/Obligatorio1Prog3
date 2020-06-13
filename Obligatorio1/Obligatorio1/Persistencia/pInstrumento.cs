@@ -12,7 +12,7 @@ namespace Obligatorio1.Persistencia
     {
         private static pInstrumento _instancia;
         const string UltimaId = "Declare @UltimaId int; Set @UltimaId = @@Identity;";
-        const string UltimaIdInstrumento = "Declare @UltimaIdIns int; Set @UltimaIdIns = ident_current('Instrumentos');";
+        const string UltimaIdInstrumento = "Declare @UltimaIdIns int; Set @UltimaIdIns = ident_current('Articulos');";
         private List<string> transaccion = new List<string>();
         public static pInstrumento Instancia
         {
@@ -29,7 +29,7 @@ namespace Obligatorio1.Persistencia
         public bool ComprobarExistencia(string pNombre)
         {
             string consulta = "Select a.* from Articulos a, Instrumentos i"  + " " +
-                "where a.Id_Articulo = i.Id_Articulo and a.Nombre_Articulo=" + "'" + pNombre + "';";
+                "where a.Id_Articulo = i.Id_Instrumento and a.Nombre_Articulo=" + "'" + pNombre + "';";
             DataSet datos = Conexion.Instancia.InicializarSeleccion(consulta);
             if(datos.Tables[0].Rows.Count > 0)
             {
@@ -88,7 +88,7 @@ namespace Obligatorio1.Persistencia
 
             foreach(Color unColor in pInstrumento.ListaDeColores)
             {
-                transaccion.Add(UltimaIdInstrumento + "Exec AltaInstrumentosTienenColores " + "@UltimaIdIns" + "," + unColor.Id + "," + unColor.Cantidad);
+                transaccion.Add(UltimaIdInstrumento + "insert into Instrumentos_tienen_Colores values( " + "@UltimaIdIns" + "," + unColor.Id + "," + unColor.Cantidad +");");
             }
             if (pInstrumento.ListaFotosAdicionales != null)
             {

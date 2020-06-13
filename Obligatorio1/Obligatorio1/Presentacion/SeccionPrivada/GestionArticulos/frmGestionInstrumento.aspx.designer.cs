@@ -382,13 +382,13 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos {
         protected global::System.Web.UI.WebControls.Label Label9;
         
         /// <summary>
-        /// Control gvListarAccesorios.
+        /// Control gvListarInstrumentos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvListarAccesorios;
+        protected global::System.Web.UI.WebControls.GridView gvListarInstrumentos;
         
         /// <summary>
         /// Control Label16.

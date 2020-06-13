@@ -44,6 +44,10 @@ namespace Obligatorio1.Dominio
             get { return _subtipo; }
             set { _subtipo = value; }
         }
+        public int IdSubtipo
+        {
+            get { return this.SubTipo.Id; }
+        }
         public Instrumento(string pNombre, string pDescripcion, Fabricante pFabricante,
                         string pFotoPrincipal, List<FotosAdicionales> pFotosAdicionales,
                         int pPrecio, SubTipo pSubtipo, int pStock, DateTime pFecha, string pUrlVideo,
@@ -71,6 +75,7 @@ namespace Obligatorio1.Dominio
             this.Destacado = pDestacado;
             this.SubTipo = pSubtipo;
         }
+
         public Instrumento(string pNombre, string pDescripcion, Fabricante pFabricante,
                         string pFotoPrincipal, List<FotosAdicionales> pFotosAdicionales,
                         int pPrecio, SubTipo pSubtipo, int pStock, DateTime pFecha, string pUrlVideo,List<Color> pListaColores, bool pDestacado)

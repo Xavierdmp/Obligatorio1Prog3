@@ -90,7 +90,7 @@
             <article class="col-md-3">
                 <div class="form-group">
                     <asp:Label ID="Label11" runat="server" Text="Fecha Fabricacion" Font-Bold="True"></asp:Label>
-                    <asp:TextBox ID="txtFechaFabricacion" runat="server" placeholder="Ingrese Fecha" class="form-control" Width="281px"></asp:TextBox>
+                    <asp:TextBox ID="txtFechaFabricacion" runat="server" placeholder="Ingrese Fecha" class="form-control" Width="281px" TextMode="Date"></asp:TextBox>
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label13" runat="server" Text="Url Video" Font-Bold="True"></asp:Label>
@@ -125,10 +125,21 @@
                     <asp:Button ID="btnAgregarColor" runat="server" Text="Agregar Color" CssClass="AgregarColor btn btn-success" data-toggle="modal" data-target="#exampleModalCentered" />
                 </div>
                 <div class="form-group">
-                    <asp:GridView ID="gvListarColoresSeleccionados" runat="server" OnSelectedIndexChanged="gvListarColoresSeleccionados_SelectedIndexChanged">
+                    <asp:GridView ID="gvListarColoresSeleccionados" runat="server" OnSelectedIndexChanged="gvListarColoresSeleccionados_SelectedIndexChanged" CellPadding="4" ForeColor="#333333" GridLines="None">
+                        <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                         <Columns>
                             <asp:CommandField ShowSelectButton="True" />
                         </Columns>
+                        <EditRowStyle BackColor="#999999" />
+                        <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                        <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                        <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                        <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                        <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                        <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                        <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                        <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                        <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                     </asp:GridView>
                 </div>
             </aside>
@@ -138,7 +149,7 @@
             <div class="col-md-12">
                 <usrMensaje:AsignarMensaje ID="lblMensaje" runat="server" />
                 <br />
-                <asp:Button ID="btnAlta" runat="server" Text="Registar" class="btn btn-success" ValidationGroup="vgGestion" />
+                <asp:Button ID="btnAlta" runat="server" Text="Registar" class="btn btn-success" ValidationGroup="vgGestion" OnClick="btnAlta_Click" />
                 <asp:Button ID="btnBaja" runat="server" Text="Eliminar" class="btn btn-danger" ValidationGroup="vgGestion" />
                 <asp:Button ID="btnModificar" runat="server" Text="Modificar" class="btn btn-primary" ValidationGroup="vgGestion" />
             </div>
@@ -148,7 +159,7 @@
                 <asp:Label ID="Label9" runat="server" Text="Lista de instrumentos" Font-Bold="True"></asp:Label>
                 <br />
                 <div class="table-responsive">
-                    <asp:GridView ID="gvListarAccesorios" runat="server" HorizontalAlign="Center" CssClass="table" BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="3px" CellPadding="4" GridLines="None" Width="846px" EmptyDataText="No hay accesorios registrados" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False">
+                    <asp:GridView ID="gvListarInstrumentos" runat="server" HorizontalAlign="Center" CssClass="table" BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="3px" CellPadding="4" GridLines="None" Width="846px" EmptyDataText="No hay accesorios registrados" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False">
                         <Columns>
                             <asp:CommandField ShowSelectButton="True" AccessibleHeaderText="Editar-Modificar" HeaderText="Editar-Modificar" SelectText="&lt;i class=&quot;far fa-edit&quot;&gt;&lt;/i&gt;">
                                 <ItemStyle HorizontalAlign="Center" />
@@ -160,6 +171,10 @@
                             <asp:BoundField AccessibleHeaderText="Precio" DataField="Precio" HeaderText="Precio" />
                             <asp:BoundField AccessibleHeaderText="Stock" DataField="Stock" HeaderText="Stock" />
                             <asp:BoundField AccessibleHeaderText="IdSubtipo" DataField="IdSubtipo" HeaderText="IdSubtipo" />
+                            <asp:BoundField AccessibleHeaderText="Fecha Fabricacion" DataField="FechaFabricacion" HeaderText="Fecha Fabricación" />
+                            <asp:BoundField DataField="Descuento" HeaderText="Descuento" />
+                            <asp:BoundField DataField="Destacado" HeaderText="Destacado" />
+                            <asp:BoundField DataField="VideoYoutube" HeaderText="Url Video" />
                             <asp:ImageField AccessibleHeaderText="FotoPrincipal" DataImageUrlField="FotoPrincipal" HeaderText="FotoPrincipal">
                                 <ControlStyle Height="30px" Width="90px" />
                             </asp:ImageField>

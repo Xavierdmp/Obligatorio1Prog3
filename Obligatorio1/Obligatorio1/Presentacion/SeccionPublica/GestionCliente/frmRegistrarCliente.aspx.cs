@@ -38,7 +38,7 @@ namespace Obligatorio1.Presentacion.SeccionPublica.GestionCliente
             {
                 this.lblMensaje.MensajeActivo(1, " se ha Ingresado con exito");
                 this.LimpiarCampos();
-                Response.Redirect("~/Default.aspx");
+                Response.Redirect("~/Presentacion/Autenticación/frmIniciarSesion.aspx");
             }
             else
             {
