@@ -7,11 +7,17 @@ namespace Obligatorio1.Dominio
 {
     public class Cliente : Persona
     {
+        
         private string _nombre;
         private string _apellido;
         private string _cedulaIdentidad;
         private string _direccion;
         private int _telefono;
+
+        public int IdCliente
+        {
+            get { return this.Id; }
+        }
         public string Nombre
         {
             get { return _nombre; }

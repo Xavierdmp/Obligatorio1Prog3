@@ -59,7 +59,7 @@ namespace Obligatorio1.Persistencia
 
         public Cliente Buscar(int pId)
         {
-            string introduccion = "Select * from Personas p, Clientes c where c.Id_Cliente = p.Id_Persona and p.Id_Cliente=" + "'" + pId;
+            string introduccion = "Select * from Personas p, Clientes c where c.Id_Cliente = p.Id_Persona and c.Id_Cliente=" +  pId;
             DataSet data = Conexion.Instancia.InicializarSeleccion(introduccion);
 
             Dominio.Cliente unCLiente = new Cliente();
@@ -70,13 +70,15 @@ namespace Obligatorio1.Persistencia
                 {
                     object[] element = row.ItemArray;
                     unCLiente.Id = int.Parse(element[0].ToString());
-                    unCLiente.Nombre = element[1].ToString();
-                    unCLiente.Apellido = element[2].ToString();
-                    unCLiente.CedulaIdentidad = element[3].ToString();
-                    unCLiente.Direccion = element[4].ToString();
-                    unCLiente.Telefono = int.Parse(element[5].ToString());
-                    unCLiente.CorreoElectronico = element[7].ToString();
-                    unCLiente.Contraseña = element[8].ToString();
+                    unCLiente.CorreoElectronico = element[1].ToString();
+                    unCLiente.Contraseña = element[2].ToString();
+                    unCLiente.Nombre = element[4].ToString();
+                    unCLiente.Apellido = element[5].ToString();
+                    unCLiente.CedulaIdentidad = element[6].ToString();
+                    unCLiente.Direccion = element[7].ToString();
+                    unCLiente.Telefono = int.Parse(element[8].ToString());
+                   
+
                 }
                 return unCLiente;
             }
@@ -100,7 +102,7 @@ namespace Obligatorio1.Persistencia
 
         public bool Baja(int pId)
         {
-            return Conexion.Instancia.InicializarConsulta("update from Clientes set Estado_Cliente = 0 where Id_Cliente=" + pId);
+            return Conexion.Instancia.InicializarConsulta("update Clientes set Estado_Cliente = 0 where Id_Cliente=" + pId);
         }
 
         public bool Modificar(Cliente pCliente)
