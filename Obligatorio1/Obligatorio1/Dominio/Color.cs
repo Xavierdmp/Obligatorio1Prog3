@@ -52,5 +52,10 @@ namespace Obligatorio1.Dominio
         {
 
         }
+
+        public override string ToString()
+        {
+            return "Id: " + this.Id + " " + "Nombre: " + this.Nombre;
+        }
     }
 }

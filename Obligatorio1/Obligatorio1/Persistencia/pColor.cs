@@ -29,7 +29,7 @@ namespace Obligatorio1.Persistencia
 
         public bool ComprobarExistencia(string pNombre)
         {
-            string consulta = "Select * from Colores where Nombre_Color" + "'" + pNombre + "'";
+            string consulta = "Select * from Colores where Nombre_Color=" + "'" + pNombre + "'";
             DataSet datos = Conexion.Instancia.InicializarSeleccion(consulta);
             if(datos.Tables[0].Rows.Count > 0)
             {

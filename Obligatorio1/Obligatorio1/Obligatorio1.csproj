@@ -384,7 +384,9 @@
     <Compile Include="Dominio\Controladoras\ControladoraAccesorio.cs" />
     <Compile Include="Dominio\Controladoras\ControladoraAdministrador.cs" />
     <Compile Include="Dominio\Controladoras\ControladoraCliente.cs" />
+    <Compile Include="Dominio\Controladoras\ControladoraColor.cs" />
     <Compile Include="Dominio\Controladoras\ControladoraFabricante.cs" />
+    <Compile Include="Dominio\Controladoras\ControladoraInstrumentos.cs" />
     <Compile Include="Dominio\Controladoras\ControladoraLogin.cs" />
     <Compile Include="Dominio\Controladoras\ControladoraSubTipos.cs" />
     <Compile Include="Dominio\Controladoras\ControladoraTipo.cs" />

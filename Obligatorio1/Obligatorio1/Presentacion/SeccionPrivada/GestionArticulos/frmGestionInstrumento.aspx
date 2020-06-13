@@ -122,7 +122,7 @@
                     <asp:DropDownList ID="dplListarColores" runat="server" class="form-control" Width="281px" AppendDataBoundItems="True" AutoPostBack="True">
                         <asp:ListItem>Seleccionar un Color</asp:ListItem>
                     </asp:DropDownList>
-                    <asp:Button ID="btnAgregarColor" runat="server" Text="Agregar Color" CssClass="AgregarColor btn btn-success" />
+                    <asp:Button ID="btnAgregarColor" runat="server" Text="Agregar Color" CssClass="AgregarColor btn btn-success" data-toggle="modal" data-target="#exampleModalCentered" />
                 </div>
             </aside>
         </section>
@@ -170,6 +170,62 @@
                 </div>
             </div>
         </section>
+
+
+        <div class="modal" id="exampleModalCentered" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-center" id="exampleModalCenteredLabel">Registrar nuevo Color</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <div class="form-group">
+                            <asp:Label ID="Label16" runat="server" Text="Nombre"></asp:Label>
+                            <asp:TextBox ID="txtNombreColor" Width="200px" CssClass="InputsColores" runat="server"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" ControlToValidate="txtNombreColor" runat="server" ForeColor="Red" ValidationGroup="vgAltaColor" ErrorMessage="El nombre es Obligatorio"></asp:RequiredFieldValidator>
+                        </div>
+                        <div class="form-group">
+                            <asp:Label ID="Label17" runat="server" Text="Codigo"></asp:Label>
+                            <asp:TextBox ID="txtCodigoColor" Width="200px" Height="30px" CssClass="InputsColores" runat="server" TextMode="Color"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator6" ControlToValidate="txtCodigoColor" runat="server" ForeColor="Red" ValidationGroup="vgAltaColor" ErrorMessage="El codigo es Obligatorio"></asp:RequiredFieldValidator>
+                        </div>
+                        <div class="form-group">
+                            <usrMensaje:AsignarMensaje ID="lblMensajeColor" runat="server" />
+                            <br />
+                            <asp:Button ID="btnAltaColor" ValidationGroup="vgAltaColor" OnClick="btnAltaColor_Click" runat="server" CssClass="btn btn-success" Text="Agregar" />
+                        </div>
+                        <hr />
+                        <div class="form-group">
+                            <asp:Label ID="Label18" runat="server" Text="Lista de Colores"></asp:Label>
+                            <asp:GridView ID="gvListaColores" HorizontalAlign="Center" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None">
+                                <AlternatingRowStyle BackColor="White" />
+                                <Columns>
+                                    <asp:BoundField DataField="Id" HeaderText="Id" />
+                                    <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
+                                    <asp:BoundField DataField="Codigo" HeaderText="Codigo" />
+                                </Columns>
+                                <EditRowStyle BackColor="#7C6F57" />
+                                <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+                                <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+                                <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
+                                <RowStyle BackColor="#E3EAEB" />
+                                <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
+                                <SortedAscendingCellStyle BackColor="#F8FAFA" />
+                                <SortedAscendingHeaderStyle BackColor="#246B61" />
+                                <SortedDescendingCellStyle BackColor="#D4DFE1" />
+                                <SortedDescendingHeaderStyle BackColor="#15524A" />
+                            </asp:GridView>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 </asp:Content>
