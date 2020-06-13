@@ -276,6 +276,8 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
                     this.lblMensaje.MensajeActivo(1, "El instrumento se agrego con exito");
                     this.LimpiarCampos();
                     this.ListarInstrumentos();
+                    this.ListarFotosAdicionales();
+                    this.ListarColoresSeleccionados();
                 }
                 else
                 {
