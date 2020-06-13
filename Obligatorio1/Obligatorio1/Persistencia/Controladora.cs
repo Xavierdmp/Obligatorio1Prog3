@@ -20,6 +20,43 @@ namespace Obligatorio1.Persistencia
             }
         }
 
+        #region "Colores" 
+
+        public bool ComprobarExistenciaColor(string pNombre)
+        {
+            return pColor.Instancia.ComprobarExistencia(pNombre);
+        }
+        public bool AltaColor(Color pColores)
+        {
+            return pColor.Instancia.Alta(pColores);
+        }
+        public List<Color> ListaColores()
+        {
+            return pColor.Instancia.ListarColores();
+        }
+
+        #endregion
+
+        #region Instrumentos
+        public bool ComprobarExistenciaInstrumentos(string pNombre)
+        {
+            return pInstrumento.Instancia.ComprobarExistencia(pNombre);
+        }
+
+        public bool AltaInstrumento(Instrumento pInstrumentos)
+        {
+            return pInstrumento.Instancia.Alta(pInstrumentos);
+
+        }
+        public Instrumento BuscarInstrumento(int pId)
+        {
+            return pInstrumento.Instancia.Buscar(pId);
+        }
+        public List<Instrumento> ListarInstrumentos()
+        {
+            return pInstrumento.Instancia.ListarInstrumentos();
+        }
+        #endregion 
 
         #region "Fabricante"
 
