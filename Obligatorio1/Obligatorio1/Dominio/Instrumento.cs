@@ -13,6 +13,7 @@ namespace Obligatorio1.Dominio
         private List<Color> _listaColores;
         private bool _destacado = false;
         private SubTipo _subtipo;
+        
 
         public DateTime FechaFabricacion
         {
@@ -43,6 +44,12 @@ namespace Obligatorio1.Dominio
         {
             get { return _subtipo; }
             set { _subtipo = value; }
+        }
+
+        public int IdSubTipo // Para mostrar en la grilla el id- 
+
+        {
+            get { return this.SubTipo.Id; }
         }
         public Instrumento(string pNombre, string pDescripcion, Fabricante pFabricante,
                         string pFotoPrincipal, List<FotosAdicionales> pFotosAdicionales,

@@ -235,6 +235,5 @@ C:\Repos\ObligatorioProgramacion3\Obligatorio1\Obligatorio1\Obligatorio1\bin\es\
 C:\Repos\ObligatorioProgramacion3\Obligatorio1\Obligatorio1\Obligatorio1\bin\es\Microsoft.Owin.Security.Google.resources.dll
 C:\Repos\ObligatorioProgramacion3\Obligatorio1\Obligatorio1\Obligatorio1\bin\es\Microsoft.Owin.Security.Twitter.resources.dll
 C:\Repos\ObligatorioProgramacion3\Obligatorio1\Obligatorio1\Obligatorio1\bin\es\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
-C:\Repos\ObligatorioProgramacion3\Obligatorio1\Obligatorio1\Obligatorio1\obj\Debug\Obligatorio1.csprojResolveAssemblyReference.cache
 C:\Repos\ObligatorioProgramacion3\Obligatorio1\Obligatorio1\Obligatorio1\obj\Debug\Obligatorio1.dll
 C:\Repos\ObligatorioProgramacion3\Obligatorio1\Obligatorio1\Obligatorio1\obj\Debug\Obligatorio1.pdb

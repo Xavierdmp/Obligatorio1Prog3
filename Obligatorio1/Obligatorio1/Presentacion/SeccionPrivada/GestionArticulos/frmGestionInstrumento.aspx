@@ -90,7 +90,7 @@
             <article class="col-md-3">
                 <div class="form-group">
                     <asp:Label ID="Label11" runat="server" Text="Fecha Fabricacion" Font-Bold="True"></asp:Label>
-                    <asp:TextBox ID="txtFechaFabricacion" runat="server" placeholder="Ingrese Fecha" class="form-control" Width="281px"></asp:TextBox>
+                    <asp:TextBox ID="txtFechaFabricacion" runat="server" placeholder="Ingrese Fecha" class="form-control" Width="281px" TextMode="Date"></asp:TextBox>
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label13" runat="server" Text="Url Video" Font-Bold="True"></asp:Label>
@@ -138,7 +138,7 @@
             <div class="col-md-12">
                 <usrMensaje:AsignarMensaje ID="lblMensaje" runat="server" />
                 <br />
-                <asp:Button ID="btnAlta" runat="server" Text="Registar" class="btn btn-success" ValidationGroup="vgGestion" />
+                <asp:Button ID="btnAlta" runat="server" Text="Registar" class="btn btn-success" ValidationGroup="vgGestion" OnClick="btnAlta_Click" />
                 <asp:Button ID="btnBaja" runat="server" Text="Eliminar" class="btn btn-danger" ValidationGroup="vgGestion" />
                 <asp:Button ID="btnModificar" runat="server" Text="Modificar" class="btn btn-primary" ValidationGroup="vgGestion" />
             </div>
@@ -148,13 +148,14 @@
                 <asp:Label ID="Label9" runat="server" Text="Lista de Instrumentos" Font-Bold="True"></asp:Label>
                 <br />
                 <div class="table-responsive">
-                    <asp:GridView ID="gvListarAccesorios" runat="server" HorizontalAlign="Center" CssClass="table" BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="3px" CellPadding="4" GridLines="None" Width="846px" EmptyDataText="No hay accesorios registrados" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False">
+                    <asp:GridView ID="gvListarInstrumentos" runat="server" HorizontalAlign="Center" CssClass="table" BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="3px" CellPadding="4" GridLines="None" Width="846px" EmptyDataText="No hay accesorios registrados" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False">
                         <Columns>
+                            <asp:BoundField AccessibleHeaderText="Id" DataField="Id" HeaderText="Id" />
+                            <asp:BoundField AccessibleHeaderText="Nombre" DataField="Nombre" HeaderText="Nombre" />
+                            <asp:BoundField DataField="FechaFabricacion" HeaderText="Fecha Fabricacion" />
                             <asp:CommandField ShowSelectButton="True" AccessibleHeaderText="Editar-Modificar" HeaderText="Editar-Modificar" SelectText="&lt;i class=&quot;far fa-edit&quot;&gt;&lt;/i&gt;">
                                 <ItemStyle HorizontalAlign="Center" />
                             </asp:CommandField>
-                            <asp:BoundField AccessibleHeaderText="Id" DataField="Id" HeaderText="Id" />
-                            <asp:BoundField AccessibleHeaderText="Nombre" DataField="Nombre" HeaderText="Nombre" />
                             <asp:BoundField AccessibleHeaderText="Descripcion" DataField="Descripcion" HeaderText="Descripcion" />
                             <asp:BoundField AccessibleHeaderText="IdFabricante" DataField="IdFabricante" HeaderText="IdFabricante" />
                             <asp:BoundField AccessibleHeaderText="Precio" DataField="Precio" HeaderText="Precio" />
@@ -163,6 +164,9 @@
                             <asp:ImageField AccessibleHeaderText="FotoPrincipal" DataImageUrlField="FotoPrincipal" HeaderText="FotoPrincipal">
                                 <ControlStyle Height="30px" Width="90px" />
                             </asp:ImageField>
+                            <asp:BoundField DataField="Descuento" HeaderText="Descuento" />
+                            <asp:BoundField DataField="Destacado" HeaderText="Destacado" />
+                            <asp:BoundField DataField="VideoYoutube" HeaderText="Url Video" />
                         </Columns>
                         <FooterStyle BackColor="White" ForeColor="#333333" />
                         <HeaderStyle BackColor="#336666" Font-Bold="True" ForeColor="White" />

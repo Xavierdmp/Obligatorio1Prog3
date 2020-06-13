@@ -13,7 +13,8 @@ namespace Obligatorio1.Persistencia
         private static pInstrumento _instancia;
 
         const string UltimaId = "Declare @UltimaId int; Set @UltimaId = @@Identity";//INserta en instrumento
-        const string UltimaIdInstrumento = "Declare @UltimaIdInst int; Set @UltimaIdIns = ident_current('Instrumentos')";  //Instrumento tiene colores
+        const string UltimaIdInstrumento = "Declare @UltimaIdInst int; Set @UltimaIdIns = ident_current('Articulos')";  //Captura ultima id y permite ingresarla en otras tablas. 
+
 
         private List<string> transaccion = new List<string>();
 
@@ -26,13 +27,13 @@ namespace Obligatorio1.Persistencia
                     _instancia = new pInstrumento(); // Retorna la instancia del instrumento
 
                 }
-                return Instancia;
+                return _instancia;
             }
         }
 
         public bool ComprobarExistencia(string pNombre)
         {
-            string Consulta = "Select a.* from Articulos a, Instrumentos i" + " " + "where a.Id_Instrumentos = i.Id_Articulo and a.Nombre_Articulo=" + "'" + pNombre + "';";
+            string Consulta = "Select a.* from Articulos a, Instrumentos i" + " " + "where a.Id_Articulo = i.Id_Instrumento and a.Nombre_Articulo=" + "'" + pNombre + "';";
             DataSet datos = Conexion.Instancia.InicializarSeleccion(Consulta);
 
             if (datos.Tables[0].Rows.Count > 0)
@@ -100,7 +101,7 @@ namespace Obligatorio1.Persistencia
 
             foreach (Color unColor in pInstrumento.ListaDeColores)
             {
-                transaccion.Add(UltimaIdInstrumento + "Exec AltaInstrumentosTienenColores " + "@UltimaIdIns" + "," + unColor.Id + "," + unColor.Cantidad);
+                transaccion.Add(UltimaIdInstrumento + "Insert into Instrumentos_tienen_Colores values( " + "@UltimaIdIns" + "," + unColor.Id + "," + unColor.Cantidad + ")");
             }
             if (pInstrumento.ListaFotosAdicionales != null)
             {
