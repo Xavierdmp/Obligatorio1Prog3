@@ -22,6 +22,10 @@ namespace Obligatorio1.Persistencia
 
         #region "Colores" 
 
+        public Color BuscarColor(int pId)
+        {
+            return pColor.Instancia.Buscar(pId);
+        }
         public bool ComprobarExistenciaColor(string pNombre)
         {
             return pColor.Instancia.ComprobarExistencia(pNombre);

@@ -54,7 +54,16 @@ namespace Obligatorio1.Dominio
         }
         public override string ToString()
         {
-            return "Id: " + this.Id + "" + "Nombre: " + this.Nombre;// es lo que se va a ver en el drop down list.
+            return "Id: " + this.Id + " " + "Nombre: " + this.Nombre;// es lo que se va a ver en el drop down list.
+        }
+
+        public override bool Equals(object obj) /*compara objeto con otro*/
+        {
+            Color unColor = obj as Color;
+            return unColor.Id == this.Id ? true : false; // SI un color.id == a this.id devuelve true sino false.
+
+            
+
         }
     }
 }

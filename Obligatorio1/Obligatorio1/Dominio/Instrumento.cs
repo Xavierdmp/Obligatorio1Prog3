@@ -77,7 +77,7 @@ namespace Obligatorio1.Dominio
         }
         public Instrumento(string pNombre, string pDescripcion, Fabricante pFabricante,
                         string pFotoPrincipal, List<FotosAdicionales> pFotosAdicionales,
-                        int pPrecio, SubTipo pSubtipo, int pStock, DateTime pFecha, string pUrlVideo,
+                        int pPrecio, SubTipo pSubtipo, int pStock, DateTime pFecha, string pUrlVideo
                         , List<Color> pListaColores, bool pDestacado)
             : base(pNombre, pDescripcion, pFabricante, pFotoPrincipal, pFotosAdicionales, pPrecio, pStock)
         {

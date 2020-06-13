@@ -24,7 +24,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
 
             }
         }
-    
+
         private void ListarColores()
         {
             Dominio.Controladoras.ControladoraColor unaControladora = new Dominio.Controladoras.ControladoraColor();
@@ -60,7 +60,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
             this.dplListarSubtipo.DataBind();
         }
 
-        
+
         private void LimpiarCampos()
         {
             this.txtNombre.Text = "";
@@ -90,13 +90,13 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
         {
             get { return Session["ListaColores"] as List<Color>; }
             set { Session["ListaColores"] = value; }
-         }
-       
+        }
+
         private void ListarColoresSeleccionados()
         {
-            this.gvListaColores.DataSource = null;
-            this.gvListaColores.DataSource = ListaColores;
-            this.gvListaColores.DataBind();
+            this.gvListarColoresSeleccionados.DataSource = null;
+            this.gvListarColoresSeleccionados.DataSource = ListaColores;
+            this.gvListarColoresSeleccionados.DataBind();
         }
 
 
@@ -132,7 +132,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
             set { Session["ListaFotosAd"] = value; }
 
         }
-      
+
         private List<Color> AsignarColoresParaAlta()
         {
             List<Color> ListasColores = new List<Color>();
@@ -143,13 +143,14 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
             }
             return ListasColores;
         }
-        
+
         private void ListarFotosAdicionales()
         {
             this.gvListarImagenesAdicionales.DataSource = null;
             this.gvListarImagenesAdicionales.DataSource = ListaFotosAdicionales; //mismo nombre que el metodo accesor.
             this.gvListarImagenesAdicionales.DataBind();
         }
+
         private List<Dominio.FotosAdicionales> AsignarFotosParaAlta()
         {
             List<Dominio.FotosAdicionales> lista = new List<Dominio.FotosAdicionales>();
@@ -163,15 +164,117 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
 
         }
 
+
+
+
+
+
         protected void dplListarColores_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.dplListarColores.SelectedIndex > 0)
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#ModalColores').modal();", true); /*Abre Modal*/
 
+                string fila = this.dplListarColores.SelectedItem.ToString();
+                string[] partes = fila.Split(' ');
+                int IdColor = int.Parse(partes[1]);
 
+                Dominio.Controladoras.ControladoraColor unaControladora = new Dominio.Controladoras.ControladoraColor();
+                Dominio.Color unColor = unaControladora.Buscar(IdColor); /*Instancia y buscas el id el color*/
+                Session["ColorSeleccionado"] = unColor;
             }
         }
-    }
-}
+
+        private bool SeEncuentraColorEnLaLista(Color pColor)
+        {
+            foreach (Color unColor in ListaColores)
+            {
+                if (unColor.Id == pColor.Id)
+                {
+                    return true;
+
+                }
+
+            }
+            return false;
+        }
+
+        protected void btnAgregarCantidad_Click(object sender, EventArgs e)
+
+        {
+            int cantidad = int.Parse(this.txtCantidad.Text);
+            Dominio.Color unColor = Session["ColorSeleccionado"] as Color;
+            unColor.Cantidad = cantidad;
+            if (ListaColores == null) //Si la lista del accesor esta vacia le asigno una nueva lista con un nuevo color.
+            {
+                List<Color> lista = new List<Color>();
+                lista.Add(unColor);
+                ListaColores = lista;
+            }
+            else
+            {
+                if (!this.SeEncuentraColorEnLaLista(unColor))
+                {
+                    ListaColores.Add(unColor);
+                }
+            }
+            this.ListarColoresSeleccionados();
+        }
+
+        protected void gvListarColoresSeleccionados_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GridViewRow fila = this.gvListarColoresSeleccionados.SelectedRow;
+
+            int id = int.Parse(fila.Cells[1].Text);
+
+            Dominio.Controladoras.ControladoraColor unaControladora = new Dominio.Controladoras.ControladoraColor();
+            Dominio.Color unColor = unaControladora.Buscar(id);
+
+            ListaColores.Remove(unColor);
+            this.ListarColoresSeleccionados();
+
+
+
+        }
+
+        protected void btnAgregarImagenAdicional_Click(object sender, EventArgs e)
+        {
+            if (this.fuFotosAdicionales.HasFile)
+            {
+
+                string UrlFotos = "~/Imagenes/FotosAdicionales/" + this.fuFotosAdicionales.FileName;
+                this.fuFotosAdicionales.SaveAs(Server.MapPath(UrlFotos));//Imagenes sean guardadas en un servidor con funcion MapPath y Url que se pasa.
+
+
+                Dominio.FotosAdicionales unaFotoAdicional = new Dominio.FotosAdicionales(UrlFotos);
+
+                if (ListaFotosAdicionales == null)
+                {
+                    List<FotosAdicionales> Listafotos = new List<FotosAdicionales>();
+                    Listafotos.Add(unaFotoAdicional);
+
+                    ListaFotosAdicionales = Listafotos;  // Asigno foto a lista.
+
+
+                }
+                else
+
+                {
+                    ListaFotosAdicionales.Add(unaFotoAdicional);
+                }
+            }
+            this.ListarFotosAdicionales();                       
+                        
+                   } 
+
+
+
+
+            }
+
+        }
+
+
+
+
          
