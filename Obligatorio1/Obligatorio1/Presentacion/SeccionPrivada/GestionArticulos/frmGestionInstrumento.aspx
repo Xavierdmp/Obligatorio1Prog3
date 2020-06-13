@@ -107,9 +107,9 @@
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label14" runat="server" Text="Destacado" Font-Bold="True"></asp:Label>
-                    <asp:DropDownList ID="dplDestacado" runat="server" AppendDataBoundItems="True" class="form-control" Width="281px" AutoPostBack="True">
-                        <asp:ListItem Value="Seleccione si es destacado"></asp:ListItem>
-                    </asp:DropDownList>
+                    <br />
+                    <asp:CheckBox ID="btnEsDestacado" runat="server" AutoPostBack="True" Text="  Destacado" />
+                    <asp:CheckBox ID="btnNoEsDestacado" runat="server" AutoPostBack="True" Text="  No Destacado" />
                 </div>
             </article>
             <aside class="col-md-6">
@@ -119,7 +119,7 @@
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label15" runat="server" Text="Colores: " Font-Bold="True"></asp:Label>
-                    <asp:DropDownList ID="dplListarColores" runat="server" class="form-control" Width="281px" AppendDataBoundItems="True" AutoPostBack="True">
+                    <asp:DropDownList ID="dplListarColores" runat="server" class="form-control" Width="281px" AppendDataBoundItems="True" AutoPostBack="True" OnSelectedIndexChanged="dplListarColores_SelectedIndexChanged">
                         <asp:ListItem>Seleccionar un Color</asp:ListItem>
                     </asp:DropDownList>
                     <asp:Button ID="btnAgregarColor" runat="server" Text="Agregar Color" CssClass="AgregarColor btn btn-success" data-toggle="modal" data-target="#exampleModalCentered" />
@@ -197,9 +197,7 @@
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator6" ControlToValidate="txtCodigoColor" runat="server" ForeColor="Red" ValidationGroup="vgAltaColor" ErrorMessage="EL codigo es obligatorio"></asp:RequiredFieldValidator>
 
                         </div>
-
-                        <div class="form-group">
-
+                           <div class="form-group">
                             <usrMensaje:AsignarMensaje ID="lblMensajeColor" runat="server" />
                             <asp:Button ID="btnAltaColor" ValidationGroup="vgAltaColor" OnClick="btnAltaColor_Click" runat="server" Text="Agregar" CssClass=" btn btn-success" />
 
@@ -223,10 +221,7 @@
                                 <SortedDescendingHeaderStyle BackColor="#275353" />
                             </asp:GridView>
                         </div>
-
-
                     </div>
-
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 
@@ -235,6 +230,29 @@
             </div>
         </div>
 
+        <!-- Small modal -->
+        <div class="modal" id="ModalColores" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalCenteredLabel2">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <asp:Label ID="Label19" runat="server" Text="Cantidad"></asp:Label>
+                            <asp:TextBox ID="txtCantidad" TextMode="Number" runat="server"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator7" ValidationGroup="vgCantidad" runat="server" ControlToValidate="txtCantidad" ErrorMessage="Ingrese Cantidad"></asp:RequiredFieldValidator>
+                            <br />
+                            <asp:Button ID="btnAgregarCantidad" runat="server" Text="Agregar" ValidationGroup="vgCantidad" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
 
     </div>
 </asp:Content>
