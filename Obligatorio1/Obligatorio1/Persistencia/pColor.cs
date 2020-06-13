@@ -24,7 +24,22 @@ namespace Obligatorio1.Persistencia
 
         public Color Buscar(int pId)
         {
-            throw new NotImplementedException();
+            string consulta = "Select * from Colores where Id_Color=" + pId;
+            DataSet datos = Conexion.Instancia.InicializarSeleccion(consulta);
+            if (datos.Tables[0].Rows.Count > 0)
+            {
+                DataRowCollection tabla = datos.Tables[0].Rows;
+                Dominio.Color unColor = new Dominio.Color();
+                foreach (DataRow fila in tabla)
+                {
+                    object[] elementos = fila.ItemArray;
+                    unColor.Id = int.Parse(elementos[0].ToString());
+                    unColor.Nombre = elementos[1].ToString();
+                    unColor.Codigo = elementos[2].ToString();
+                }
+                return unColor;
+            }
+            return null;
         }
 
         public bool ComprobarExistencia(string pNombre)

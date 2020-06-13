@@ -233,6 +233,10 @@ namespace Obligatorio1.Persistencia
         {
             return pColor.Instancia.ListarColores();
         }
+        public Color BuscarColor(int pId)
+        {
+            return pColor.Instancia.Buscar(pId);
+        }
         #endregion
 
         #region "Instrumentos"

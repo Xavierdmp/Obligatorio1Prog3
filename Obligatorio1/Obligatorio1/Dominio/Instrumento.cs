@@ -71,6 +71,32 @@ namespace Obligatorio1.Dominio
             this.Destacado = pDestacado;
             this.SubTipo = pSubtipo;
         }
+        public Instrumento(string pNombre, string pDescripcion, Fabricante pFabricante,
+                        string pFotoPrincipal, List<FotosAdicionales> pFotosAdicionales,
+                        int pPrecio, SubTipo pSubtipo, int pStock, DateTime pFecha, string pUrlVideo,List<Color> pListaColores, bool pDestacado)
+            : base(pNombre, pDescripcion, pFabricante, pFotoPrincipal, pFotosAdicionales, pPrecio, pStock)
+        {
+            this.FechaFabricacion = pFecha;
+            this.VideoYoutube = pUrlVideo;
+            this.Descuento = 0;
+            this.ListaDeColores = pListaColores;
+            this.Destacado = pDestacado;
+            this.SubTipo = pSubtipo;
+        }
+
+        public Instrumento(string pNombre, string pDescripcion, Fabricante pFabricante,
+                        string pFotoPrincipal,
+                        int pPrecio, SubTipo pSubtipo, int pStock, DateTime pFecha, string pUrlVideo,
+                        List<Color> pListaColores, bool pDestacado)
+            : base(pNombre, pDescripcion, pFabricante, pFotoPrincipal, pPrecio, pStock)
+        {
+            this.FechaFabricacion = pFecha;
+            this.VideoYoutube = pUrlVideo;
+            this.Descuento = 0;
+            this.ListaDeColores = pListaColores;
+            this.Destacado = pDestacado;
+            this.SubTipo = pSubtipo;
+        }
         public Instrumento()
         {
 

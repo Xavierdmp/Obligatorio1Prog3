@@ -57,5 +57,11 @@ namespace Obligatorio1.Dominio
         {
             return "Id: " + this.Id + " " + "Nombre: " + this.Nombre;
         }
+
+        public override bool Equals(object obj)
+        {
+            Color unColor = obj as Color;
+            return unColor.Id == this.Id ? true : false;
+        }
     }
 }

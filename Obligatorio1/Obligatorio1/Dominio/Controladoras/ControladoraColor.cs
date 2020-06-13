@@ -24,7 +24,7 @@ namespace Obligatorio1.Dominio.Controladoras
 
         public Color Buscar(int pId)
         {
-            throw new NotImplementedException();
+            return Controladora.Instancia.BuscarColor(pId);
         }
 
         public bool ComprobarExistencia(string pNombre)

@@ -57,7 +57,7 @@
                         <asp:FileUpload ID="fuFotosAdicionales" runat="server" class="form-control cargarFotosAdicionales" />
                     </div>
                     <div class="form-group">
-                        <asp:Button ID="btnAgregarImagenAdicional" runat="server" class="btn btn-success" Text="Agregar foto adicional" />
+                        <asp:Button ID="btnAgregarImagenAdicional" runat="server" class="btn btn-success" Text="Agregar foto adicional" OnClick="btnAgregarImagenAdicional_Click" />
                     </div>
                     <div class="form-group table-responsive">
                         <asp:GridView ID="gvListarImagenesAdicionales" runat="server" EmptyDataText="No hay imagenes adicionales" ShowHeaderWhenEmpty="True" Height="16px" Width="57px" CellPadding="4" ForeColor="#333333" GridLines="None" HorizontalAlign="Center" AutoGenerateColumns="False">
@@ -107,9 +107,9 @@
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label14" runat="server" Text="Destacado" Font-Bold="True"></asp:Label>
-                    <asp:DropDownList ID="dplDestacado" runat="server" AppendDataBoundItems="True" class="form-control" Width="281px" AutoPostBack="True">
-                        <asp:ListItem Value="Seleccione si es destacado"></asp:ListItem>
-                    </asp:DropDownList>
+                    <br />
+                    <asp:CheckBox ID="btnEsDestacado" runat="server" AutoPostBack="True" Text="   Destacado" />
+                    &nbsp;<asp:CheckBox ID="btnNoDestacado" runat="server" AutoPostBack="True" Text="  No destacado" />
                 </div>
             </article>
             <aside class="col-md-6">
@@ -119,10 +119,17 @@
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label15" runat="server" Text="Colores: " Font-Bold="True"></asp:Label>
-                    <asp:DropDownList ID="dplListarColores" runat="server" class="form-control" Width="281px" AppendDataBoundItems="True" AutoPostBack="True">
+                    <asp:DropDownList ID="dplListarColores" runat="server" class="form-control" Width="281px" AppendDataBoundItems="True" AutoPostBack="True" OnSelectedIndexChanged="dplListarColores_SelectedIndexChanged">
                         <asp:ListItem>Seleccionar un Color</asp:ListItem>
                     </asp:DropDownList>
                     <asp:Button ID="btnAgregarColor" runat="server" Text="Agregar Color" CssClass="AgregarColor btn btn-success" data-toggle="modal" data-target="#exampleModalCentered" />
+                </div>
+                <div class="form-group">
+                    <asp:GridView ID="gvListarColoresSeleccionados" runat="server" OnSelectedIndexChanged="gvListarColoresSeleccionados_SelectedIndexChanged">
+                        <Columns>
+                            <asp:CommandField ShowSelectButton="True" />
+                        </Columns>
+                    </asp:GridView>
                 </div>
             </aside>
         </section>
@@ -138,7 +145,7 @@
         </section>
         <section class="row text-center">
             <div class="col-md-12">
-                <asp:Label ID="Label9" runat="server" Text="Lista de accesorios" Font-Bold="True"></asp:Label>
+                <asp:Label ID="Label9" runat="server" Text="Lista de instrumentos" Font-Bold="True"></asp:Label>
                 <br />
                 <div class="table-responsive">
                     <asp:GridView ID="gvListarAccesorios" runat="server" HorizontalAlign="Center" CssClass="table" BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="3px" CellPadding="4" GridLines="None" Width="846px" EmptyDataText="No hay accesorios registrados" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False">
@@ -227,5 +234,29 @@
             </div>
         </div>
 
+        <div class="modal" id="ModalColores" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenteredLabel2">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <asp:Label ID="Label19" runat="server" Text="Cantidad"></asp:Label>
+                        <asp:TextBox ID="txtCantidad" TextMode="Number" CssClass="form-control" runat="server"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator7" ValidationGroup="vgCantidad" runat="server" ControlToValidate="txtCantidad" ErrorMessage="Ingrese Cantidad"></asp:RequiredFieldValidator>
+                        <br />
+                        <asp:Button ID="btnAgregarCantidad" OnClick="btnAgregarCantidad_Click" CssClass="btn btn-success" runat="server" Text="Agregar" ValidationGroup="vgCantidad" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
     </div>
 </asp:Content>
