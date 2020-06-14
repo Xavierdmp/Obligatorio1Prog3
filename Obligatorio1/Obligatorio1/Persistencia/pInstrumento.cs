@@ -43,7 +43,7 @@ namespace Obligatorio1.Persistencia
 
         public Instrumento Buscar(int pId)
         {
-            string consulta = "Select * from Instrumentos i, Articulos a where i.Id_Instrumento = a.Id_Articulo and I.Id_Articulo =" + pId;
+            string consulta = "Select * from Instrumentos i, Articulos a where i.Id_Instrumento = a.Id_Articulo and I.Id_Instrumento=" + pId;
             DataSet datos = Conexion.Instancia.InicializarSeleccion(consulta);
             if(datos.Tables[0].Rows.Count > 0)
             {
@@ -133,15 +133,102 @@ namespace Obligatorio1.Persistencia
             return listaDeInstrumentos;
         }
 
+        public List<Color> TraerColoresParaInstrumentos(int pId)
+        {
+            string consulta = "Select * from Instrumentos_Tienen_Colores ic, Colores c where ic.Id_Color = c.Id_Color";
+            DataSet datos = Conexion.Instancia.InicializarSeleccion(consulta);
+            List<Color> lista = new List<Color>();
+
+            if (datos.Tables[0].Rows.Count > 0)
+            {
+                DataRowCollection table = datos.Tables[0].Rows;
+                foreach (DataRow row in table)
+                {
+                    object[] element = row.ItemArray;
+                    Dominio.Color unColor = new Color();
+                    unColor.Id = int.Parse(element[1].ToString());
+                    unColor.Nombre = element[3].ToString();
+                    unColor.Cantidad = int.Parse(element[2].ToString());
+                    unColor.Codigo = element[5].ToString();
+                }
+                return lista;
+                    
+                     
+                }
+            return lista;
+            }
+
+
+        
+
+
+    public List<FotosAdicionales> TraerFotosAdicionalesParaInstrumentos(int pId)
+    {
+        string consulta = "Select * from Articulos_tienen_Fotos_Adicionales where Id_Articulo=" + pId;
+
+        DataSet date = Conexion.Instancia.InicializarSeleccion(consulta);
+        List<FotosAdicionales> listaFotosAd = new List<FotosAdicionales>();
+        if (date.Tables[0].Rows.Count > 0)
+        {
+            DataRowCollection table = date.Tables[0].Rows;
+            foreach (DataRow row in table)
+            {
+                object[] element = row.ItemArray;
+                Dominio.FotosAdicionales unaFoto = new Dominio.FotosAdicionales();
+                unaFoto.Url = element[2].ToString();
+                listaFotosAd.Add(unaFoto); 
+            }
+            return listaFotosAd;
+
+        }
+
+        return listaFotosAd;
+    } 
+
+
 
         public bool Baja(int pId)
         {
-            throw new NotImplementedException();
+            this.transaccion.Clear();
+            string EliminarFotosAD = "Delete from Articulos_tienen_Fotos_Adicionales where Id_Articulo=" + pId;
+            string EliminarColores = "Delete from Instrumentos_tienen_Colores where Id_Instrumento=" + pId;
+            string EliminarArticulo = "Delete from Instrumentos where id_Instrumento=" + pId;
+            string EliminarInstrumento = "Delete from Articulos where Id_Articulo=" + pId;
+
+            transaccion.Add(EliminarFotosAD);
+            transaccion.Add(EliminarColores);
+            transaccion.Add(EliminarArticulo);
+            transaccion.Add(EliminarInstrumento);
+
+            return Conexion.Instancia.EjecutarTransaccionSql(transaccion);
+                
+            }
+        public bool Modificar(Instrumento pInstrumento)
+        {
+            this.transaccion.Clear();
+            string EliminarFotosAD = "Delete from Articulos_tienen_Fotos_Adicionales where Id_Articulo =" + pInstrumento.Id;
+            string EliminarColores = "Delete from Instrumentos_tienen_Colores where Id_Instrumento=" + pInstrumento.Id;
+            transaccion.Add(EliminarColores);
+            foreach (Color unColor in pInstrumento.ListaDeColores)
+            {
+                transaccion.Add("insert into Instrumentos_tienen_Colores values( " + pInstrumento.Id + "," + unColor.Id + "," + unColor.Cantidad + ");");
+            }
+            if (pInstrumento.ListaFotosAdicionales != null)
+            {
+                transaccion.Add(EliminarFotosAD);
+                foreach (FotosAdicionales unaFoto in pInstrumento.ListaFotosAdicionales)
+                {
+                    transaccion.Add("Insert into Articulos_tienen_Fotos_Adicionales values(" + pInstrumento.Id + ",'" + unaFoto.Url + "')");
+                }
+            }
+            transaccion.Add("Exec ModificarInstrumento " + pInstrumento.Id + ",'" + pInstrumento.FechaFabricacion + "'," +
+                            pInstrumento.Descuento + "," + pInstrumento.Destacado + ",'" + pInstrumento.VideoYoutube + "'," +
+                            pInstrumento.SubTipo.Id + ";");
+            transaccion.Add("Exec ModificarArticulos " + pInstrumento.Id + ",'" + pInstrumento.Nombre + "','" + pInstrumento.Descripcion + "'," +
+                             pInstrumento.Fabricante.Id + ",'" + pInstrumento.FotoPrincipal + "'," + pInstrumento.Precio + "," + pInstrumento.Stock);
+            return Conexion.Instancia.EjecutarTransaccionSql(transaccion);
         }
 
-        public bool Modificar(Instrumento pT)
-        {
-            throw new NotImplementedException();
-        }
+
     }
-}
+    }

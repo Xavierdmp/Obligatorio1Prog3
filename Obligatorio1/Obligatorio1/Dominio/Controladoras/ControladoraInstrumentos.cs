@@ -18,7 +18,7 @@ namespace Obligatorio1.Dominio.Controladoras
 
         public bool Baja(int pId)
         {
-            throw new NotImplementedException();
+            return Persistencia.Controladora.Instancia.BajaInstrumento(pId);
         }
 
         public Instrumento Buscar(int pId)
@@ -36,9 +36,19 @@ namespace Obligatorio1.Dominio.Controladoras
             return Persistencia.Controladora.Instancia.ListarInstrumentos();
         }
 
-        public bool Modificar(Instrumento pT)
+        public bool Modificar(Instrumento pInstrumento)
         {
-            throw new NotImplementedException();
+            return Persistencia.Controladora.Instancia.ModificarInstrumento(pInstrumento);
+        }
+
+        public List<Color> ListarColoresparaInstrumentos(int pId)
+        {
+            return Persistencia.Controladora.Instancia.ColoresDadoInstrumento(pId);
+        }
+
+        public List<FotosAdicionales> ListarFotosAdicionalesparaInstrumento(int pId)
+        {
+            return Persistencia.Controladora.Instancia.ListarFotosAdicionalesAccesorio(pId);
         }
     }
 }

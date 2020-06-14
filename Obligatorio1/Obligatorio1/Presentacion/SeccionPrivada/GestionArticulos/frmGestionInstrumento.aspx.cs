@@ -289,5 +289,138 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
                 this.lblMensaje.MensajeActivo(2, "Seleccione una imagen principal");
             }
         }
+
+        protected void gvListarInstrumentos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+             GridViewRow fila = this.gvListarInstrumentos.SelectedRow;
+            int idInstrumento = int.Parse(fila.Cells[1].Text);
+            Dominio.Controladoras.ControladoraInstrumentos unaControladora = new Dominio.Controladoras.ControladoraInstrumentos();
+            Dominio.Instrumento unInstrumento = unaControladora.Buscar(idInstrumento);
+
+
+            this.txtNombre.Text = unInstrumento.Nombre;
+             this.txtDescripcion.Text = unInstrumento.Descripcion;
+             this.txtPrecio.Text = unInstrumento.Precio.ToString();
+             this.txtStock.Text = unInstrumento.Stock.ToString();
+             this.txtVideoYoutube.Text  = unInstrumento.VideoYoutube;
+             this.txtFechaFabricacion.Text = String.Format("{0:yy-MM-dd}", unInstrumento.FechaFabricacion);
+
+            List<Color> listacolores = unaControladora.ListarColoresparaInstrumentos(idInstrumento );
+            List<FotosAdicionales> listafotosAdicionales = unaControladora.ListarFotosAdicionalesparaInstrumento(idInstrumento);
+
+            ListaColores = listacolores;
+
+
+            if (ListaFotosAdicionales!= null)
+            {
+                listafotosAdicionales=ListaFotosAdicionales;
+                this.ListarFotosAdicionales();
+
+            }
+            this.ListarColoresSeleccionados();
+
+
+        }
+
+        protected void btnBaja_Click(object sender, EventArgs e)
+        {
+            GridViewRow fila = this.gvListarInstrumentos.SelectedRow;
+            int idInstrumento = int.Parse(fila.Cells[1].Text);
+            Dominio.Controladoras.ControladoraInstrumentos unaControladora = new Dominio.Controladoras.ControladoraInstrumentos();
+
+            if (unaControladora.Baja(idInstrumento))
+            {
+                this.lblMensaje.MensajeActivo(1, " Ha sido dado de baja");
+                this.LimpiarCampos();
+                this.ListarColoresSeleccionados();
+                this.ListarFotosAdicionales();
+                this.ListarInstrumentos();
+            }
+            else
+            {
+                this.lblMensaje.MensajeActivo(2, " No se ha podido dar de baja");
+            }
+
+        }
+
+        protected void btnModificar_Click(object sender, EventArgs e)
+        {
+            GridViewRow fila = this.gvListarInstrumentos.SelectedRow; //Captura la id del instrumento
+            int idInstrumento = int.Parse(fila.Cells[1].Text);
+
+
+            string nombre = this.txtNombre.Text;
+            string descripcion = this.txtDescripcion.Text;
+
+            string ObjetoFabricante = this.dplListaFabricante.SelectedItem.ToString();
+            string[] partesFabricante = ObjetoFabricante.Split(' ');
+            int idFabricante = int.Parse(partesFabricante[1]);
+            Dominio.Controladoras.ControladoraFabricante unaControladoraFabricante = new Dominio.Controladoras.ControladoraFabricante();
+            Dominio.Fabricante unFabricante = unaControladoraFabricante.Buscar(idFabricante);
+            int precio = int.Parse(this.txtPrecio.Text);
+            int stock = int.Parse(this.txtStock.Text);
+            string urlVideo = this.txtVideoYoutube.Text;
+            DateTime fechaFabricacion = Convert.ToDateTime(this.txtFechaFabricacion.Text);
+            bool destacado = this.btnEsDestacado.Checked ? true : false;
+
+            string ObjetoSubtipo = this.dplListarSubtipo.SelectedItem.ToString();
+            string[] partesSubtipo = ObjetoSubtipo.Split(' ');
+            int idSubtipo = int.Parse(partesSubtipo[1]);
+            Dominio.Controladoras.ControladoraSubTipos unaControladoraSubtipo = new Dominio.Controladoras.ControladoraSubTipos();
+            Dominio.SubTipo unSubtipo = unaControladoraSubtipo.Buscar(idSubtipo);
+
+            List<Color> listaColores = this.AsignarColoresParaAlta();
+            Dominio.Controladoras.ControladoraInstrumentos unaControladoraInstrumento = new Dominio.Controladoras.ControladoraInstrumentos();
+            if (this.fuImagenPrincipal.HasFile)
+            {
+                string urlFotoPrincipal = "~/Imagenes/ImgPrincipalInstrumento/" + this.fuImagenPrincipal.FileName;
+                this.fuImagenPrincipal.SaveAs(Server.MapPath(urlFotoPrincipal));
+                Dominio.Instrumento unInstrumento = unaControladoraInstrumento.Buscar(idInstrumento);
+
+                unInstrumento.Nombre = nombre;
+                unInstrumento.Descripcion = descripcion;
+                unInstrumento.Precio = precio;
+                unInstrumento.Stock = stock;
+                unInstrumento.SubTipo = unSubtipo;
+                unInstrumento.FechaFabricacion = fechaFabricacion;
+                unInstrumento.FotoPrincipal = urlFotoPrincipal;
+                unInstrumento.Fabricante = unFabricante;
+                unInstrumento.Destacado = destacado;
+
+                if (this.dplListaDescuentos.SelectedIndex > 0)
+                {
+                    int descuento = int.Parse(this.dplListaDescuentos.SelectedValue);
+                    unInstrumento.Descuento = descuento;
+                }
+                if (ListaFotosAdicionales != null)
+                {
+                    List<FotosAdicionales> listaFotosAd = this.AsignarFotosParaAlta();
+                    unInstrumento.ListaFotosAdicionales = listaFotosAd;
+                }
+
+                unInstrumento.ListaDeColores = listaColores;
+
+
+                if (unaControladoraInstrumento.Modificar(unInstrumento))
+                {
+                    this.lblMensaje.MensajeActivo(1, "El instrumento se modifico con exito");
+                    this.LimpiarCampos();
+                    this.ListarInstrumentos();
+                    this.ListarFotosAdicionales();
+                    this.ListarColoresSeleccionados();
+                }
+                else
+                {
+                    this.lblMensaje.MensajeActivo(2, "El instrumento no se se modifico");
+                }
+            }
+            else
+            {
+                this.lblMensaje.MensajeActivo(2, "Seleccione una imagen que desee modificar");
+            }
+
+
+        }
     }
 }

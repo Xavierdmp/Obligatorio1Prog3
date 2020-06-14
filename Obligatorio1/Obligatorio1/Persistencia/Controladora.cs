@@ -259,6 +259,26 @@ namespace Obligatorio1.Persistencia
         {
             return pInstrumento.Instancia.ListarInstrumentos();
         }
+        public List<Color> ColoresDadoInstrumento(int pId)
+        {
+            return pInstrumento.Instancia.TraerColoresParaInstrumentos(pId);
+        }
+
+        public List<FotosAdicionales> FotosAdicionales(int pId)
+        {
+            return pInstrumento.Instancia.TraerFotosAdicionalesParaInstrumentos(pId);
+        }
+
+        public bool BajaInstrumento(int pId)
+        {
+            return pInstrumento.Instancia.Baja(pId);
+        }
+        public bool ModificarInstrumento(Instrumento pIns)
+        {
+            return pInstrumento.Instancia.Modificar(pIns);
+        }
+
+
         #endregion
     }
 }
