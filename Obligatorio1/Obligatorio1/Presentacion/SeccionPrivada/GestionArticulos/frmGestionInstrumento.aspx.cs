@@ -334,5 +334,77 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
                 this.lblMensaje.MensajeActivo(2, "El Instrumento no se pudo eliminar");
             }
         }
+
+        protected void btnModificar_Click(object sender, EventArgs e)
+        {
+            GridViewRow fila = this.gvListarInstrumentos.SelectedRow;
+            int idInstrumento = int.Parse(fila.Cells[1].Text);
+
+            string nombre = this.txtNombre.Text;
+            string descripcion = this.txtDescripcion.Text;
+
+            string ObjetoFabricante = this.dplListaFabricante.SelectedItem.ToString();
+            string[] partesFabricante = ObjetoFabricante.Split(' ');
+            int idFabricante = int.Parse(partesFabricante[1]);
+            Dominio.Controladoras.ControladoraFabricante unaControladoraFabricante = new Dominio.Controladoras.ControladoraFabricante();
+            Dominio.Fabricante unFabricante = unaControladoraFabricante.Buscar(idFabricante);
+            int precio = int.Parse(this.txtPrecio.Text);
+            int stock = int.Parse(this.txtStock.Text);
+            string urlVideo = this.txtVideoYoutube.Text;
+            DateTime fechaFabricacion = Convert.ToDateTime(this.txtFechaFabricacion.Text);
+            bool destacado = this.btnEsDestacado.Checked ? true : false;
+
+            string ObjetoSubtipo = this.dplListarSubtipo.SelectedItem.ToString();
+            string[] partesSubtipo = ObjetoSubtipo.Split(' ');
+            int idSubtipo = int.Parse(partesSubtipo[1]);
+            Dominio.Controladoras.ControladoraSubTipos unaControladoraSubtipo = new Dominio.Controladoras.ControladoraSubTipos();
+            Dominio.SubTipo unSubtipo = unaControladoraSubtipo.Buscar(idSubtipo);
+
+            List<Color> listaColores = this.AsignarColoresParaAlta();
+            Dominio.Controladoras.ControladoraInstrumentos unaControladoraInstrumento = new Dominio.Controladoras.ControladoraInstrumentos();
+            if (this.fuImagenPrincipal.HasFile)
+            {
+                string urlFotoPrincipal = "~/Imagenes/ImgPrincipalInstrumento/" + this.fuImagenPrincipal.FileName;
+                this.fuImagenPrincipal.SaveAs(Server.MapPath(urlFotoPrincipal));
+                Dominio.Instrumento unInstrumento = unaControladoraInstrumento.Buscar(idInstrumento);
+                unInstrumento.Nombre = nombre;
+                unInstrumento.Descripcion = descripcion;
+                unInstrumento.Precio = precio;
+                unInstrumento.Stock = stock;
+                unInstrumento.SubTipo = unSubtipo;
+                unInstrumento.Fabricante = unFabricante;
+                unInstrumento.FechaFabricacion = fechaFabricacion;
+                unInstrumento.FotoPrincipal = urlFotoPrincipal;
+                unInstrumento.Destacado = destacado;
+
+                if (this.dplListaDescuentos.SelectedIndex > 0)
+                {
+                    int descuento = int.Parse(this.dplListaDescuentos.SelectedValue);
+                    unInstrumento.Descuento = descuento;
+                }
+                if (ListaFotosAdicionales != null)
+                {
+                    List<FotosAdicionales> listaFotosAd = this.AsignarFotosParaAlta();
+                    unInstrumento.ListaFotosAdicionales = listaFotosAd;
+                }
+                unInstrumento.ListaDeColores = listaColores;
+                if (unaControladoraInstrumento.Modificar(unInstrumento))
+                {
+                    this.lblMensaje.MensajeActivo(1, "El instrumento se modifico con exito");
+                    this.LimpiarCampos();
+                    this.ListarInstrumentos();
+                    this.ListarFotosAdicionales();
+                    this.ListarColoresSeleccionados();
+                }
+                else
+                {
+                    this.lblMensaje.MensajeActivo(2, "El instrumento no se se puedo modificar");
+                }
+            }
+            else
+            {
+                this.lblMensaje.MensajeActivo(2, "Seleccione una imagen principal");
+            }
+        }
     }
 }

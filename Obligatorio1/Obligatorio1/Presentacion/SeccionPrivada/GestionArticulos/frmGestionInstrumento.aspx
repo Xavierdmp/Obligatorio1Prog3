@@ -151,7 +151,7 @@
                 <br />
                 <asp:Button ID="btnAlta" runat="server" Text="Registar" class="btn btn-success" ValidationGroup="vgGestion" OnClick="btnAlta_Click" />
                 <asp:Button ID="btnBaja" runat="server" Text="Eliminar" class="btn btn-danger" ValidationGroup="vgGestion" OnClick="btnBaja_Click" />
-                <asp:Button ID="btnModificar" runat="server" Text="Modificar" class="btn btn-primary" ValidationGroup="vgGestion" />
+                <asp:Button ID="btnModificar" runat="server" Text="Modificar" class="btn btn-primary" ValidationGroup="vgGestion" OnClick="btnModificar_Click" />
             </div>
         </section>
         <section class="row text-center">

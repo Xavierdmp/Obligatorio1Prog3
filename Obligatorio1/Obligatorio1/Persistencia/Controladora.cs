@@ -271,6 +271,10 @@ namespace Obligatorio1.Persistencia
         {
             return pInstrumento.Instancia.Baja(pId);
         }
+        public bool ModificarInstrumento(Instrumento pIns)
+        {
+            return pInstrumento.Instancia.Modificar(pIns);
+        }
         #endregion
     }
 }

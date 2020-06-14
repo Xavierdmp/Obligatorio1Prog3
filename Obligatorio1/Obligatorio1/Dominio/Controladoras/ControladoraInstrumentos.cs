@@ -38,7 +38,7 @@ namespace Obligatorio1.Dominio.Controladoras
 
         public bool Modificar(Instrumento pT)
         {
-            throw new NotImplementedException();
+            return Persistencia.Controladora.Instancia.ModificarInstrumento(pT);
         }
 
         public List<FotosAdicionales> ListarFotosAdicionalesParaInstrumento(int pId)

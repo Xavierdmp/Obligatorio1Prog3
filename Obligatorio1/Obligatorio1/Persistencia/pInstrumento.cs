@@ -189,9 +189,30 @@ namespace Obligatorio1.Persistencia
             return Conexion.Instancia.EjecutarTransaccionSql(transaccion);
         }
 
-        public bool Modificar(Instrumento pT)
+        public bool Modificar(Instrumento pInstrumento)
         {
-            throw new NotImplementedException();
+            this.transaccion.Clear();
+            string EliminarFotosAD = "Delete from Articulos_tienen_Fotos_Adicionales where Id_Articulo =" + pInstrumento.Id;
+            string EliminarColores = "Delete from Instrumentos_tienen_Colores where Id_Instrumento=" + pInstrumento.Id;
+            transaccion.Add(EliminarColores);
+            foreach(Color unColor in pInstrumento.ListaDeColores)
+            {
+                transaccion.Add("insert into Instrumentos_tienen_Colores values( " + pInstrumento.Id + "," + unColor.Id + "," + unColor.Cantidad + ");");
+            }
+            if (pInstrumento.ListaFotosAdicionales != null)
+            {
+                transaccion.Add(EliminarFotosAD);
+                foreach (FotosAdicionales unaFoto in pInstrumento.ListaFotosAdicionales)
+                {
+                    transaccion.Add("Insert into Articulos_tienen_Fotos_Adicionales values(" + pInstrumento.Id + ",'" + unaFoto.Url + "')");
+                }
+            }
+            transaccion.Add("Exec ModificarInstrumento " + pInstrumento.Id + ",'" + pInstrumento.FechaFabricacion + "'," +
+                            pInstrumento.Descuento + "," + pInstrumento.Destacado + ",'" + pInstrumento.VideoYoutube + "'," +
+                            pInstrumento.SubTipo.Id + ";");
+            transaccion.Add("Exec ModificarArticulos " + pInstrumento.Id + ",'" + pInstrumento.Nombre + "','" + pInstrumento.Descripcion + "'," +
+                             pInstrumento.Fabricante.Id + ",'" + pInstrumento.FotoPrincipal + "'," + pInstrumento.Precio + "," + pInstrumento.Stock);
+            return Conexion.Instancia.EjecutarTransaccionSql(transaccion);
         }
     }
 }
