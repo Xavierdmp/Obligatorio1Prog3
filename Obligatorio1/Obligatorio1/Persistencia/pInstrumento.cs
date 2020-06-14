@@ -43,7 +43,7 @@ namespace Obligatorio1.Persistencia
 
         public Instrumento Buscar(int pId)
         {
-            string consulta = "Select * from Instrumentos i, Articulos a where i.Id_Instrumento = a.Id_Articulo and I.Id_Articulo =" + pId;
+            string consulta = "Select * from Instrumentos i, Articulos a where i.Id_Instrumento = a.Id_Articulo and I.Id_Instrumento =" + pId;
             DataSet datos = Conexion.Instancia.InicializarSeleccion(consulta);
             if(datos.Tables[0].Rows.Count > 0)
             {
@@ -133,10 +133,60 @@ namespace Obligatorio1.Persistencia
             return listaDeInstrumentos;
         }
 
+        public List<Color> TraerColoresParaInstrumento(int pId)
+        {
+            string consulta = "Select * from Instrumentos_tienen_Colores ic, Colores c where ic.Id_Color = c.Id_Color and ic.Id_Instrumento=" + pId;
+            DataSet datos = Conexion.Instancia.InicializarSeleccion(consulta);
+            List<Color> lista = new List<Color>();
+            if(datos.Tables[0].Rows.Count > 0)
+            {
+                DataRowCollection table = datos.Tables[0].Rows;
+                foreach(DataRow row in table)
+                {
+                    object[] element = row.ItemArray;
+                    Dominio.Color unColor = new Color();
+                    unColor.Id = int.Parse(element[1].ToString());
+                    unColor.Nombre = element[3].ToString();
+                    unColor.Cantidad = int.Parse(element[2].ToString());
+                    unColor.Codigo = element[5].ToString();
+                    lista.Add(unColor);
+                }
+                return lista;
+            }
+            return lista;
+        }
 
+        public List<FotosAdicionales> TraerFotosAdicionalesParaInstrumento(int pId)
+        {
+            string consulta = "Select * from Articulos_tienen_Fotos_Adicionales where Id_Articulo=" + pId;
+            DataSet date = Conexion.Instancia.InicializarSeleccion(consulta);
+            List<FotosAdicionales> listaFotosAd = new List<FotosAdicionales>();
+            if(date.Tables[0].Rows.Count > 0)
+            {
+                DataRowCollection table = date.Tables[0].Rows;
+                foreach(DataRow row in table)
+                {
+                    object[] element = row.ItemArray;
+                    Dominio.FotosAdicionales unaFoto = new Dominio.FotosAdicionales();
+                    unaFoto.Url = element[2].ToString();
+                    listaFotosAd.Add(unaFoto);
+                }
+                return listaFotosAd;
+            }
+            return listaFotosAd;
+        }
         public bool Baja(int pId)
         {
-            throw new NotImplementedException();
+            this.transaccion.Clear();
+            string EliminarFotosAD = "Delete from Articulos_tienen_Fotos_Adicionales where Id_Articulo =" + pId;
+            string EliminarColores = "Delete from Instrumentos_tienen_Colores where Id_Instrumento=" + pId;
+            string EliminarInstrumento = "Delete from Instrumentos where Id_Instrumento=" + pId;
+            string EliminarArticulo = "Delete from Articulos where Id_Articulo=" + pId;
+            transaccion.Add(EliminarFotosAD);
+            transaccion.Add(EliminarColores);
+            transaccion.Add(EliminarInstrumento);
+            transaccion.Add(EliminarArticulo);
+            return Conexion.Instancia.EjecutarTransaccionSql(transaccion);
         }
 
         public bool Modificar(Instrumento pT)

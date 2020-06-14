@@ -289,5 +289,50 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
                 this.lblMensaje.MensajeActivo(2, "Seleccione una imagen principal");
             }
         }
+
+        protected void gvListarInstrumentos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GridViewRow fila = this.gvListarInstrumentos.SelectedRow;
+            int idInstrumento = int.Parse(fila.Cells[1].Text);
+            Dominio.Controladoras.ControladoraInstrumentos unaControladora = new Dominio.Controladoras.ControladoraInstrumentos();
+            Dominio.Instrumento unInstrumento = unaControladora.Buscar(idInstrumento);
+
+            this.txtNombre.Text = unInstrumento.Nombre;
+            this.txtDescripcion.Text = unInstrumento.Descripcion;
+            this.txtPrecio.Text = unInstrumento.Precio.ToString();
+            this.txtStock.Text = unInstrumento.Stock.ToString();
+            this.txtVideoYoutube.Text = unInstrumento.VideoYoutube;
+            this.txtFechaFabricacion.Text = String.Format("{0:yyyy-MM-dd}", unInstrumento.FechaFabricacion);
+            List<Color> listColores = unaControladora.ListarColoresParaInstrumento(idInstrumento);
+            List<FotosAdicionales> listaFotosAd = unaControladora.ListarFotosAdicionalesParaInstrumento(idInstrumento);
+            if(listaFotosAd != null)
+            {
+                ListaFotosAdicionales = listaFotosAd;
+                this.ListarFotosAdicionales();
+            }
+            ListaColores = listColores;
+            this.ListarColoresSeleccionados();
+
+
+        }
+
+        protected void btnBaja_Click(object sender, EventArgs e)
+        {
+            GridViewRow fila = this.gvListarInstrumentos.SelectedRow;
+            int idInstrumento = int.Parse(fila.Cells[1].Text);
+            Dominio.Controladoras.ControladoraInstrumentos unaControladora = new Dominio.Controladoras.ControladoraInstrumentos();
+            if (unaControladora.Baja(idInstrumento))
+            {
+                this.lblMensaje.MensajeActivo(1, "Instrumento eliminado con exito");
+                this.LimpiarCampos();
+                this.ListarInstrumentos();
+                this.ListarFotosAdicionales();
+                this.ListarColoresSeleccionados();
+            }
+            else
+            {
+                this.lblMensaje.MensajeActivo(2, "El Instrumento no se pudo eliminar");
+            }
+        }
     }
 }
