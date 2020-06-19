@@ -37,7 +37,6 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
             this.txtDescripcion.Text = "";
             this.txtFechaFabricacion.Text = "";
             this.txtPrecio.Text = "";
-            this.txtStock.Text = "";
             this.txtVideoYoutube.Text = "";
             this.txtNombre.Focus();
             if (ListaFotosAdicionales != null)
@@ -236,14 +235,12 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
         {
             string nombre = this.txtNombre.Text;
             string descripcion = this.txtDescripcion.Text;
-
             string ObjetoFabricante = this.dplListaFabricante.SelectedItem.ToString();
             string[] partesFabricante = ObjetoFabricante.Split(' ');
             int idFabricante = int.Parse(partesFabricante[1]);
             Dominio.Controladoras.ControladoraFabricante unaControladoraFabricante = new Dominio.Controladoras.ControladoraFabricante();
             Dominio.Fabricante unFabricante = unaControladoraFabricante.Buscar(idFabricante);
             int precio = int.Parse(this.txtPrecio.Text);
-            int stock = int.Parse(this.txtStock.Text);
             string urlVideo = this.txtVideoYoutube.Text;
             DateTime fechaFabricacion = Convert.ToDateTime(this.txtFechaFabricacion.Text);
             bool destacado = this.btnEsDestacado.Checked ? true : false;
@@ -253,20 +250,21 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
             int idSubtipo = int.Parse(partesSubtipo[1]);
             Dominio.Controladoras.ControladoraSubTipos unaControladoraSubtipo = new Dominio.Controladoras.ControladoraSubTipos();
             Dominio.SubTipo unSubtipo = unaControladoraSubtipo.Buscar(idSubtipo);
-
+            int stock = 0;
             List<Color> listaColores = this.AsignarColoresParaAlta();
             Dominio.Controladoras.ControladoraInstrumentos unaControladoraInstrumento = new Dominio.Controladoras.ControladoraInstrumentos();
             if (this.fuImagenPrincipal.HasFile)
             {
                 string urlFotoPrincipal = "~/Imagenes/ImgPrincipalInstrumento/" + this.fuImagenPrincipal.FileName;
                 this.fuImagenPrincipal.SaveAs(Server.MapPath(urlFotoPrincipal));
-                Dominio.Instrumento unInstrumento = new Dominio.Instrumento(nombre,descripcion,unFabricante,urlFotoPrincipal,precio,unSubtipo,stock,fechaFabricacion,urlVideo,listaColores,destacado);
+                Dominio.Instrumento unInstrumento = new Dominio.Instrumento(nombre, descripcion, unFabricante, urlFotoPrincipal, precio, unSubtipo, stock, fechaFabricacion, urlVideo, listaColores, destacado);
+                unInstrumento.CalcularStock();
                 if (this.dplListaDescuentos.SelectedIndex > 0)
                 {
                     int descuento = int.Parse(this.dplListaDescuentos.SelectedValue);
                     unInstrumento.Descuento = descuento;
                 }
-                if(ListaFotosAdicionales != null)
+                if (ListaFotosAdicionales != null)
                 {
                     List<FotosAdicionales> listaFotosAd = this.AsignarFotosParaAlta();
                     unInstrumento.ListaFotosAdicionales = listaFotosAd;
@@ -290,7 +288,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
             }
         }
 
-        protected void gvListarInstrumentos_SelectedIndexChanged(object sender, EventArgs e)
+protected void gvListarInstrumentos_SelectedIndexChanged(object sender, EventArgs e)
         {
 
              GridViewRow fila = this.gvListarInstrumentos.SelectedRow;
@@ -302,8 +300,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
             this.txtNombre.Text = unInstrumento.Nombre;
              this.txtDescripcion.Text = unInstrumento.Descripcion;
              this.txtPrecio.Text = unInstrumento.Precio.ToString();
-             this.txtStock.Text = unInstrumento.Stock.ToString();
-             this.txtVideoYoutube.Text  = unInstrumento.VideoYoutube;
+              this.txtVideoYoutube.Text  = unInstrumento.VideoYoutube;
              this.txtFechaFabricacion.Text = String.Format("{0:yy-MM-dd}", unInstrumento.FechaFabricacion);
 
             List<Color> listacolores = unaControladora.ListarColoresparaInstrumentos(idInstrumento );
@@ -359,7 +356,6 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
             Dominio.Controladoras.ControladoraFabricante unaControladoraFabricante = new Dominio.Controladoras.ControladoraFabricante();
             Dominio.Fabricante unFabricante = unaControladoraFabricante.Buscar(idFabricante);
             int precio = int.Parse(this.txtPrecio.Text);
-            int stock = int.Parse(this.txtStock.Text);
             string urlVideo = this.txtVideoYoutube.Text;
             DateTime fechaFabricacion = Convert.ToDateTime(this.txtFechaFabricacion.Text);
             bool destacado = this.btnEsDestacado.Checked ? true : false;
@@ -381,7 +377,6 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
                 unInstrumento.Nombre = nombre;
                 unInstrumento.Descripcion = descripcion;
                 unInstrumento.Precio = precio;
-                unInstrumento.Stock = stock;
                 unInstrumento.SubTipo = unSubtipo;
                 unInstrumento.FechaFabricacion = fechaFabricacion;
                 unInstrumento.FotoPrincipal = urlFotoPrincipal;

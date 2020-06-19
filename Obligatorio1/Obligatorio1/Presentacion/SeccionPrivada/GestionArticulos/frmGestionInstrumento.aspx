@@ -34,9 +34,7 @@
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtPrecio" ErrorMessage="El precio es obligatorio" ForeColor="#CC3300" ValidationGroup="vgGestion"></asp:RequiredFieldValidator>
                 </div>
                 <div class="form-group">
-                    <asp:Label ID="Label7" runat="server" Text="Stock" Font-Bold="True"></asp:Label>
-                    <asp:TextBox ID="txtStock" runat="server" placeholder="Ingrese stock" class="form-control" Width="281px"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtStock" ErrorMessage="El stock es obligatorio" ForeColor="#CC3300" ValidationGroup="vgGestion"></asp:RequiredFieldValidator>
+                     <!-- stock -->
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label6" runat="server" Text="Subtipo" Font-Bold="True"></asp:Label>
@@ -275,4 +273,7 @@
 
         </div>
     </div>
+
+
+
 </asp:Content>
