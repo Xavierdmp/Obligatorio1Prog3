@@ -243,8 +243,8 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
             int precio = int.Parse(this.txtPrecio.Text);
             string urlVideo = this.txtVideoYoutube.Text;
             DateTime fechaFabricacion = Convert.ToDateTime(this.txtFechaFabricacion.Text);
-            bool destacado = this.btnEsDestacado.Checked ? true : false;
-
+             bool destacado = this.btnEsDestacado.Checked ? true : false;
+            fechaFabricacion.ToString("MMM-dd-yyyy");
             string ObjetoSubtipo = this.dplListarSubtipo.SelectedItem.ToString();
             string[] partesSubtipo = ObjetoSubtipo.Split(' ');
             int idSubtipo = int.Parse(partesSubtipo[1]);

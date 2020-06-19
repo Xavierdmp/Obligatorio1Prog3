@@ -39,10 +39,19 @@ namespace Obligatorio1.Dominio.Controladoras
 
 
                     }
+                    else
+                    {
+                        break;
+                    }
 
                 }
             }
             return ListadoPaginado;
+        }
+        public bool CantidadFilas(int pIndex)
+        {
+            int cantidadFilas = Persistencia.Controladora.Instancia.CantidadArticulos();
+            return pIndex <= cantidadFilas - CantidadElementoaMostrar;
         }
     }
 }

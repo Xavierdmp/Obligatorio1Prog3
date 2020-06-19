@@ -288,9 +288,12 @@ namespace Obligatorio1.Persistencia
         {
             return pListadoArticulos.Instancia.ListadoArticulo();
         }
-        
-        
-        #endregion 
+        public int CantidadArticulos()
+        {
+            return pListadoArticulos.Instancia.CantidadArticulos();
+        }
+
+        #endregion
 
 
     }

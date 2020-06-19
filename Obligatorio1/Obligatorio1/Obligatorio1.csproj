@@ -190,6 +190,7 @@
     <Content Include="Presentacion\SeccionPrivada\GestionAdministradores\frmModificarAdministrador.aspx" />
     <Content Include="Presentacion\SeccionPrivada\GestionTipos\frmTiposInstrumentos.aspx" />
     <Content Include="Presentacion\SeccionPrivada\SiteMasterPrivate\frmPrivate.Master" />
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Imagenes\SiteMasters\icono.ico" />
     <Content Include="Imagenes\SiteMasters\Logo.png" />

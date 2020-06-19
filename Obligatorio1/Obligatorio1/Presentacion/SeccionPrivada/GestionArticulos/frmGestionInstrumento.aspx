@@ -88,7 +88,7 @@
             <article class="col-md-3">
                 <div class="form-group">
                     <asp:Label ID="Label11" runat="server" Text="Fecha Fabricacion" Font-Bold="True"></asp:Label>
-                    <asp:TextBox ID="txtFechaFabricacion" runat="server" placeholder="Ingrese Fecha" class="form-control" Width="281px" TextMode="Date"></asp:TextBox>
+                    <asp:TextBox ID="txtFechaFabricacion"  CssClass="InputsColores" runat="server" TextMode="Date"></asp:TextBox>
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label13" runat="server" Text="Url Video" Font-Bold="True"></asp:Label>
@@ -273,7 +273,5 @@
 
         </div>
     </div>
-
-
-
+     
 </asp:Content>

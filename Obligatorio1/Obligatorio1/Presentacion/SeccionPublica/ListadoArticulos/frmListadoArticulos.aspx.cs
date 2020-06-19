@@ -133,20 +133,37 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
             }
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+    
+
+        protected void btnSiguiente_Click1(object sender, EventArgs e)
         {
+            Dominio.Controladoras.ControladoraListado listados = new Dominio.Controladoras.ControladoraListado();
             if (Session["IndiceSiguiente"] == null)
             {
                 Session["IndiceSiguiente"] = 5;
             }
             int IndiceAnterior = int.Parse(Session["IndiceSiguiente"].ToString());
-            Session["IndiceSiguiente"] = IndiceAnterior + IndiceAnterior;
-            this.ListadoPaginado(IndiceAnterior); 
+            if (listados.CantidadFilas(IndiceAnterior))
+            {
+                Session["IndiceSiguiente"] = IndiceAnterior + IndiceAnterior;
+                this.ListadoPaginado(IndiceAnterior);
+            }
+            else
+            {
+                this.btnSiguiente.Enabled = false;
+            }
 
-        
 
 
         }
+        
+        public bool CantidadFilas(int pIndex)
+        {
+            int cantidadFilas = Persistencia.Controladora.Instancia.CantidadArticulos();
+
+            return pIndex <= cantidadFilas - cantidadElementosaMostrar + 1;
+        }
+        
     }
 }
  

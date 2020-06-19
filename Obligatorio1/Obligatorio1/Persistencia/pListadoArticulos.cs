@@ -80,6 +80,22 @@ namespace Obligatorio1.Persistencia
             }
             return ListarArticulos; 
         }
+        public int CantidadArticulos()
+        {
+            string consulta = "select count(*) from Articulos;";
+            DataSet datos = Conexion.Instancia.InicializarSeleccion(consulta);
+            int cantidad = 0;
+            if (datos.Tables[0].Rows.Count > 0)
+            {
+                DataRowCollection tabla = datos.Tables[0].Rows;
+                foreach (DataRow row in tabla)
+                {
+                    object[] elementos = row.ItemArray;
+                    cantidad = int.Parse(elementos[0].ToString());
+                }
+            }
+            return cantidad;
+        }
 
     }
 }

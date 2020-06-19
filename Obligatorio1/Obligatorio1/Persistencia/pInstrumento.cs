@@ -80,7 +80,7 @@ namespace Obligatorio1.Persistencia
                           + pInstrumento.Fabricante.Id + " ,'" + pInstrumento.FotoPrincipal + "',"
                           + pInstrumento.Precio + "," + pInstrumento.Stock + ";";
 
-            string procedureInstrumento = UltimaId + "Exec AltaInstrumento " + "@UltimaId" + ",'" + pInstrumento.FechaFabricacion + "'," +
+            string procedureInstrumento = UltimaId + "Exec AltaInstrumento " + "@UltimaId" + ",'" + String.Format("{0:MM-dd-yyyy}",pInstrumento.FechaFabricacion) + "'," +
                                                       pInstrumento.Descuento + "," + pInstrumento.Destacado + ",'" + pInstrumento.VideoYoutube + 
                                                       "'," + pInstrumento.SubTipo.Id + ";";
             transaccion.Add(procedure);
