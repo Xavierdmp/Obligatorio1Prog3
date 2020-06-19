@@ -280,5 +280,19 @@ namespace Obligatorio1.Persistencia
 
 
         #endregion
+
+
+        #region "Listar Articulos para Seccion Publica"
+
+        public List<Articulo> ListadoArticulos()
+        {
+            return pListadoArticulos.Instancia.ListadoArticulo();
+        }
+        
+        
+        #endregion 
+
+
     }
+
 }
