@@ -241,3 +241,37 @@ margin-top:10px;
     background-color:#4495ee;
     width:7rem;
 }
+/*Listado de Articulos*/
+
+.ImagenPrincipal{
+     width: 224px;
+     height: 224px;
+}
+.ContenedorTexto{
+    border-top: 1px solid rgba(51,51,51,.1);
+    padding: 24px 24px 14px;
+}
+.Precio{
+    color: #333;
+    font-size: 20px;
+    line-height: 1.2;
+
+}
+.Nombre{
+    opacity: 1;
+   display: block;   
+   font-size:11px;
+}
+
+.ContenedorArticulos{
+     border-radius: 4px;
+            box-shadow: 0 7px 16px 0 rgba(0,0,0,.2), 0 1px 3px 0 rgba(0,0,0,.1);
+            -webkit-transition: opacity .18s ease-out;
+            transition: opacity .18s ease-out;
+            will-change: opacity;
+            /*z-index: -1;*/
+            width: 224px;
+            height: 314px;
+            background-color: white;
+            margin: 10px;
+}

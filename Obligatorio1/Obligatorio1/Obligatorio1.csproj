@@ -196,6 +196,7 @@
     <Content Include="Presentacion\Autenticación\frmIniciarSesion.aspx" />
     <Content Include="Presentacion\Controles\lblMensaje.ascx" />
     <Content Include="Presentacion\SeccionPublica\GestionCliente\frmRegistrarCliente.aspx" />
+    <Content Include="Presentacion\SeccionPublica\ListadoArticulos\frmListadoArticulos.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -507,6 +508,13 @@
     </Compile>
     <Compile Include="Presentacion\SeccionPublica\GestionCliente\frmRegistrarCliente.aspx.designer.cs">
       <DependentUpon>frmRegistrarCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\SeccionPublica\ListadoArticulos\frmListadoArticulos.aspx.cs">
+      <DependentUpon>frmListadoArticulos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\SeccionPublica\ListadoArticulos\frmListadoArticulos.aspx.designer.cs">
+      <DependentUpon>frmListadoArticulos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
