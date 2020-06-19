@@ -14,6 +14,8 @@ namespace Obligatorio1.Dominio
         private int _precio;
         private Color _color;
 
+        //APLICAR POLIMORFISMO UTILIZANDO ARTICULOS EN VEZ DE INSTRUMENTO Y ACCESORIOS
+
         public int Id
         {
             get { return _id; }

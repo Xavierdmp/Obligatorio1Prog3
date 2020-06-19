@@ -238,6 +238,15 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos {
         protected global::System.Web.UI.WebControls.TextBox txtVideoYoutube;
         
         /// <summary>
+        /// Control RequiredFieldValidator8.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator8;
+        
+        /// <summary>
         /// Control Label12.
         /// </summary>
         /// <remarks>
@@ -271,7 +280,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox btnEsDestacado;
+        protected global::System.Web.UI.WebControls.RadioButton btnEsDestacado;
         
         /// <summary>
         /// Control btnNoDestacado.
@@ -280,7 +289,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox btnNoDestacado;
+        protected global::System.Web.UI.WebControls.RadioButton btnNoDestacado;
         
         /// <summary>
         /// Control Label4.
