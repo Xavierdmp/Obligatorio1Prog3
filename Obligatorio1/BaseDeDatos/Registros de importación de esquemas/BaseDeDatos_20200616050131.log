@@ -1,0 +1,71 @@
+16/6/2020 14:01:31	Este registro contiene información acerca de la operación de importación de esquema en el proyecto 'BaseDeDatos' del equipo 'DESKTOP-K7AAAHT' por el usuario 'PERSONAL'.
+16/6/2020 14:01:31	Se inició la importación del esquema de la base de datos.
+16/6/2020 14:01:37	Recopilando opciones de base de datos
+16/6/2020 14:01:37	Recopilando usuarios
+16/6/2020 14:01:37	Recopilando roles
+16/6/2020 14:01:37	Recopilando roles de aplicación
+16/6/2020 14:01:37	Recopilando pertenencias a roles
+16/6/2020 14:01:37	Recopilando grupos de archivos
+16/6/2020 14:01:37	Recopilando catálogos de texto completo
+16/6/2020 14:01:37	Recopilando ensamblados
+16/6/2020 14:01:37	Recopilando certificados
+16/6/2020 14:01:37	Recopilando claves asimétricas
+16/6/2020 14:01:37	Recopilando claves simétricas
+16/6/2020 14:01:37	Recopilando claves simétricas cifradas
+16/6/2020 14:01:37	Recopilando esquemas
+16/6/2020 14:01:37	Recopilando colecciones de esquemas XML
+16/6/2020 14:01:37	Recopilando tipos de datos definidos por el usuario
+16/6/2020 14:01:37	Recopilando tipos definidos por el usuario
+16/6/2020 14:01:37	Recopilando tipos de tabla
+16/6/2020 14:01:37	Recopilando claves únicas para tipos de tabla
+16/6/2020 14:01:37	Recopilando claves principales para tipos de tabla
+16/6/2020 14:01:37	Recopilando restricciones CHECK para tipos de tabla
+16/6/2020 14:01:37	Recopilando restricciones DEFAULT para tipos de tabla
+16/6/2020 14:01:37	Recopilando funciones de partición
+16/6/2020 14:01:37	Recopilando esquemas de partición
+16/6/2020 14:01:37	Recopilando funciones
+16/6/2020 14:01:37	Recopilando funciones cifradas
+16/6/2020 14:01:37	Recopilando agregados
+16/6/2020 14:01:37	Recopilando procedimientos
+16/6/2020 14:01:38	Recopilando procedimientos cifrados
+16/6/2020 14:01:38	Recopilando tablas
+16/6/2020 14:01:38	Recopilando claves principales
+16/6/2020 14:01:38	Recopilando restricciones UNIQUE
+16/6/2020 14:01:38	Recopilando claves externas
+16/6/2020 14:01:38	Recopilando restricciones DEFAULT
+16/6/2020 14:01:38	Recopilando restricciones CHECK
+16/6/2020 14:01:38	Recopilando vistas
+16/6/2020 14:01:38	Recopilando vistas cifradas
+16/6/2020 14:01:38	Recopilando índices
+16/6/2020 14:01:38	Recopilando estadísticas
+16/6/2020 14:01:38	Recopilando listas de palabras irrelevantes de índices de texto completo
+16/6/2020 14:01:38	Recopilando índices de texto completo
+16/6/2020 14:01:38	Recopilando índices espaciales
+16/6/2020 14:01:38	Recopilando índices XML
+16/6/2020 14:01:38	Recopilando desencadenadores cifrados
+16/6/2020 14:01:38	Recopilando desencadenadores
+16/6/2020 14:01:38	Recopilando DDL triggers cifrados y de CLR
+16/6/2020 14:01:38	Recopilando DDL triggers
+16/6/2020 14:01:38	Recopilando sinónimos
+16/6/2020 14:01:38	Recopilando valores predeterminados
+16/6/2020 14:01:38	Recopilando enlaces UDDT de restricción de datos
+16/6/2020 14:01:38	Recopilando reglas
+16/6/2020 14:01:38	Recopilando enlaces UDDT de restricción de datos
+16/6/2020 14:01:38	Recopilando tipos de mensaje
+16/6/2020 14:01:38	Recopilando colas
+16/6/2020 14:01:38	Recopilando contratos
+16/6/2020 14:01:38	Recopilando servicios
+16/6/2020 14:01:38	Recopilando notificaciones de eventos
+16/6/2020 14:01:38	Recopilando enlaces de servicio remoto
+16/6/2020 14:01:38	Recopilando prioridades de Broker
+16/6/2020 14:01:38	Recopilando firmas
+16/6/2020 14:01:38	Recopilando opciones de compresión de datos
+16/6/2020 14:01:38	Recopilando propiedades extendidas
+16/6/2020 14:01:38	Recopilando credenciales
+16/6/2020 14:01:38	Recopilando inicios de sesión
+16/6/2020 14:01:38	Recopilando auditorías de servidor
+16/6/2020 14:01:39	Buscando elementos duplicados en el proyecto
+16/6/2020 14:01:39	Ha finalizado el procesamiento de los elementos duplicados
+16/6/2020 14:01:39	Finalizó la importación de la base de datos.
+16/6/2020 14:01:39	Se guardó un resumen de la importación en la siguiente ubicación: C:\Repositorios\Programacion 3\Obligatorio 1\Obligatorio1\BaseDeDatos\Registros de importación de esquemas\BaseDeDatos_20200616050131.log
+16/6/2020 14:01:39	Haga clic en Finalizar para continuar...

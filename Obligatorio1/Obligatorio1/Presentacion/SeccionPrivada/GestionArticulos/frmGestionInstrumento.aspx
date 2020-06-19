@@ -95,22 +95,23 @@
                 <div class="form-group">
                     <asp:Label ID="Label13" runat="server" Text="Url Video" Font-Bold="True"></asp:Label>
                     <asp:TextBox ID="txtVideoYoutube" runat="server" placeholder="Ingrese una url" class="form-control" Width="281px" TextMode="Url"></asp:TextBox>
+                     <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="txtVideoYoutube" ErrorMessage="Url obligatoria" ForeColor="#CC3300" ValidationGroup="vgGestion"></asp:RequiredFieldValidator>
                 </div>
             </article>
 
             <article class="col-md-3">
                 <div class="form-group">
-                    <asp:Label ID="Label12" runat="server" Text="Descuento" Font-Bold="True"></asp:Label>
-                    <asp:DropDownList ID="dplListaDescuentos" runat="server" AppendDataBoundItems="True" class="form-control" Width="281px" AutoPostBack="True">
+                    <asp:Label ID="Label12" runat="server" Text="Descuento" Font-Bold="True"></asp:Label> <span class="badge badge-info" >Opcional</span>
+                    &nbsp;<asp:DropDownList ID="dplListaDescuentos" runat="server" AppendDataBoundItems="True" class="form-control" Width="281px" AutoPostBack="True">
                         <asp:ListItem>Seleccione un descuento</asp:ListItem>
                     </asp:DropDownList>
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label14" runat="server" Text="Destacado" Font-Bold="True"></asp:Label>
                     <br />
-                    <asp:CheckBox ID="btnEsDestacado" runat="server" AutoPostBack="True" Text="   Destacado" />
-                    &nbsp;<asp:CheckBox ID="btnNoDestacado" runat="server" AutoPostBack="True" Text="  No destacado" />
-                </div>
+                    <asp:RadioButton ID="btnEsDestacado" runat="server" GroupName="gnDestacado" Text=" Si" />
+                    &nbsp;<asp:RadioButton ID="btnNoDestacado" runat="server" GroupName="gnDestacado" Text="No" />
+                &nbsp;</div>
             </article>
             <aside class="col-md-6">
                 <div class="form-group">
@@ -122,7 +123,7 @@
                     <asp:DropDownList ID="dplListarColores" runat="server" class="form-control" Width="281px" AppendDataBoundItems="True" AutoPostBack="True" OnSelectedIndexChanged="dplListarColores_SelectedIndexChanged">
                         <asp:ListItem>Seleccionar un Color</asp:ListItem>
                     </asp:DropDownList>
-                    <asp:Button ID="btnAgregarColor" runat="server" Text="Agregar Color" CssClass="AgregarColor btn btn-success" data-toggle="modal" data-target="#exampleModalCentered" />
+                    <asp:Button ID="btnAgregarColor" runat="server" Text="Agregar nuevo Color" CssClass="AgregarColor btn btn-success" data-toggle="modal" data-target="#exampleModalCentered" />
                 </div>
                 <div class="form-group">
                     <asp:GridView ID="gvListarColoresSeleccionados" runat="server" OnSelectedIndexChanged="gvListarColoresSeleccionados_SelectedIndexChanged" CellPadding="4" ForeColor="#333333" GridLines="None">
@@ -159,7 +160,7 @@
                 <asp:Label ID="Label9" runat="server" Text="Lista de instrumentos" Font-Bold="True"></asp:Label>
                 <br />
                 <div class="table-responsive">
-                    <asp:GridView ID="gvListarInstrumentos" runat="server" HorizontalAlign="Center" CssClass="table" BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="3px" CellPadding="4" GridLines="None" Width="846px" EmptyDataText="No hay accesorios registrados" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" OnSelectedIndexChanged="gvListarInstrumentos_SelectedIndexChanged">
+                    <asp:GridView ID="gvListarInstrumentos" runat="server" HorizontalAlign="Center" CssClass="table" BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="3px" CellPadding="4" GridLines="None" Width="846px" EmptyDataText="No hay instrumentos registrados" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" OnSelectedIndexChanged="gvListarInstrumentos_SelectedIndexChanged">
                         <Columns>
                             <asp:CommandField ShowSelectButton="True" AccessibleHeaderText="Editar-Modificar" HeaderText="Editar-Modificar" SelectText="&lt;i class=&quot;far fa-edit&quot;&gt;&lt;/i&gt;">
                                 <ItemStyle HorizontalAlign="Center" />
@@ -253,7 +254,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalCenteredLabel2">Modal title</h5>
+                        <h5 class="modal-title" id="exampleModalCenteredLabel2">Agregar cantidad disponible para el color seleccionado</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
