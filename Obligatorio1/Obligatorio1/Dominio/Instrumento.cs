@@ -48,6 +48,17 @@ namespace Obligatorio1.Dominio
         {
             get { return this.SubTipo.Id; }
         }
+
+        public void CalcularStock()
+        {
+            int sumaTotal = 0;
+            foreach(Color unColor in _listaColores)
+            {
+                sumaTotal += unColor.Cantidad;
+            }
+            this.Stock = sumaTotal;
+        }
+
         public Instrumento(string pNombre, string pDescripcion, Fabricante pFabricante,
                         string pFotoPrincipal, List<FotosAdicionales> pFotosAdicionales,
                         int pPrecio, SubTipo pSubtipo, int pStock, DateTime pFecha, string pUrlVideo,
