@@ -276,5 +276,17 @@ namespace Obligatorio1.Persistencia
             return pInstrumento.Instancia.Modificar(pIns);
         }
         #endregion
+
+        #region "Listar Articulos Para Seccion Publica"
+
+        public List<Articulo> ListadoArticulos()
+        {
+            return pListadoArticulos.Instancia.ListadoDeArticulos();
+        }
+        public int CantidadArticulos()
+        {
+            return pListadoArticulos.Instancia.CantidadArticulos();
+        }
+        #endregion
     }
 }
