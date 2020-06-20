@@ -1,5 +1,4 @@
-﻿body {
-}
+﻿
 /*frm Login*/
 
 .fa-user{
@@ -18,7 +17,7 @@
     margin-top:100px;
     border-radius: 10px;
     box-shadow: 0px 0px  10px 0px #000;
-    width:40%;
+    width:50%;
     margin-left:auto; 
     margin-right:auto;
     padding:10px;
@@ -275,9 +274,87 @@ margin-top:10px;
             background-color: white;
             margin: 10px;
 }
-.ContenedorPrincipalListado {
+.ContenedorPrincipalListado{
     margin-left:6rem;
     margin-top:6rem;
+}
+.OfertaInstrumento{
+    color:green;
+}
+.InstrumentoDestacado{
+    background-color:#d9851f;
+    border-color: #01bcf3;
+            font-size: 10px;
+            font-weight: 700;
+            line-height: 16px;
+            width: 8rem;
+            text-align: center;
+            text-transform: uppercase;
+            color: #fff;
+            display: inline-block;
+            height: 16px;
+            border-radius: 8px;
+            opacity: .9;
+            transition: all .2s;
 
-   
+            position: absolute;
+            top:1em;
+            right:1em;
+}
+/* Detalle accesiorios*/
+.ImagenesAdicionales{
+    position: relative;
+}
+.ImagenesOpcionales{
+      width: 76px;
+            height: 76px;
+            border: 1px solid #ddd;
+            border-left-width: 0;
+            border-top-width: 0;
+            background-color: #fff;
+            cursor: pointer;
+            display: block;
+            padding: 2px;
+            position: relative;
+            z-index: 10;
+            margin-top: 10px;
+            display: block;
+}
+.ImagenPrincipalDetalle {
+            width: 500px;
+            height: 350px;
+}
+.ArticuloPrincipal{
+    position: relative;
+     right: 190px;
+}
+.SeccionPrincipal{
+    margin-top:50px;
+    background-color:#fff;
+}
+body{
+    background-color: #f5f5f5 !important;
+}
+.SeccionInformacion{
+
+position: relative;
+right: 100px;
+top:2em;
+}
+.TituloDetalle{
+    font-size:2.5rem;
+}
+.AyudantesTitulo{
+    font-weight:bold;
+}
+.PrecioDetalle{
+    font-size:3rem;
+    position:relative;
+
+}
+.AgregarCarrito{
+    width:30em;
+   position:relative;
+   top:80px;
+   left:2rem;
 }

@@ -7,7 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> Inicio</title>
+    <title>Inicio</title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -52,13 +52,14 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a runat="server" href="~/"><i class="fas fa-home"></i> Inicio</a></li>
-                          <li><a runat="server" href="~/Presentacion/SeccionPublica/ListadoArticulos/frmListadoArticulos.aspx"><i class="fas fa-home"></i> Listado</a></li>
+                        <li><a runat="server" href="~/"><i class="fas fa-home"></i>Inicio</a></li>
+                        <li><a runat="server" href="~/Presentacion/SeccionPublica/ListadoArticulos/frmListadoArticulos.aspx"><i class="fas fa-home"></i>Listado</a></li>
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a runat="server" href="~/Presentacion/SeccionPublica/GestionCliente/frmRegistrarCliente.aspx" Id="OcultarRegister">Registrarse</a></li>
-                        <li><a runat="server" href="~/Presentacion/Autenticación/frmIniciarSesion.aspx" Id="SeInicioSesion"><i class="fas fa-key"></i> Iniciar sesión</a></li>
+                        <li><a id="CarritoDeCompras" runat="server" href="~/Presentacion/SeccionPublica/Ventas/frmCarritoDeCompras.aspx"><i class="fas fa-cart-plus"></i></a></li>
+                        <li><a runat="server" href="~/Presentacion/SeccionPublica/GestionCliente/frmRegistrarCliente.aspx" id="OcultarRegister">Registrarse</a></li>
+                        <li><a runat="server" href="~/Presentacion/Autenticación/frmIniciarSesion.aspx" id="SeInicioSesion"><i class="fas fa-key"></i>Iniciar sesión</a></li>
                     </ul>
 
                 </div>

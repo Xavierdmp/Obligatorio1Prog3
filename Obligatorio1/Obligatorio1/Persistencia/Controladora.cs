@@ -296,6 +296,28 @@ namespace Obligatorio1.Persistencia
         #endregion
 
 
+        #region Carrito de Compras
+
+        public bool AltaCarrito(Item pItem,int pIdCliente)
+        {
+            return pCarrito.Instancia.AltaCarrito(pItem, pIdCliente);
+
+        }
+        public bool BajaCarrito(int pIdCliente)
+        {
+            return pCarrito.Instancia.EliminarCarrito(pIdCliente);
+        }
+        public List<Item> ListadeItemsCarrito(int pIdCliente)
+        {
+            return pCarrito.Instancia.ListaCarrito(pIdCliente);
+        }
+
+            #endregion 
+
+
+
+
+
     }
 
 }

@@ -71,11 +71,13 @@ namespace Obligatorio1
         {
             if(Session["ClienteLogueado"] != null)
             {
+                this.CarritoDeCompras.Visible = true; 
                 this.SeInicioSesion.Visible = false;
                 this.OcultarRegister.Visible = false;
             }
             else
             {
+                this.CarritoDeCompras.Visible = false; 
                 this.SeInicioSesion.Visible = true;
                 this.OcultarRegister.Visible = true;
             }
