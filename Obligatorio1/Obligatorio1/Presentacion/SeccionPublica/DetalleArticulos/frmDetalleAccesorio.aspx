@@ -1,0 +1,71 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmDetalleAccesorio.aspx.cs" Inherits="Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos.frmDetalleAccesorio" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <section class="container-fluid SeccionPrincipal">
+        <article class="row">
+            <aside class="col-md-3 ImagenesAdicionales">
+                <asp:Panel ID="ImagenesOpcionales" runat="server"></asp:Panel>
+            </aside>
+            <article class="col-md-5 ArticuloPrincipal">
+                <asp:ImageButton ID="ImagenPrincipal" CssClass="ImagenPrincipalDetalle" runat="server" />
+            </article>
+            <article class="col-md-4 SeccionInformacion">
+                <asp:Label ID="lblNombre" CssClass="TituloDetalle" runat="server" Text="Label"></asp:Label>
+                <br />
+                <asp:Label ID="Label1" CssClass="AyudantesTitulo" runat="server" Text="Descripcion: "></asp:Label>
+                <asp:Label ID="lblDescripcion" CssClass="DescripcionDetalle" runat="server" Text="Label"></asp:Label>
+                <br />
+                <asp:Label ID="Label2" CssClass="AyudantesTitulo" runat="server" Text="Fabricante: "></asp:Label>
+                <asp:Label ID="lblFabricante" CssClass="FabricanteDetalle" runat="server" Text="Label"></asp:Label>
+                <br />
+                <asp:Label ID="lblPrecio" runat="server" CssClass="PrecioDetalle" Text="Label"></asp:Label>
+                <br /> 
+                <asp:Label ID="lblStock" runat="server" Text="Cantidad:"></asp:Label>
+                <asp:DropDownList ID="dplSeleccioneStock" runat="server" AppendDataBoundItems="True" AutoPostBack="True" OnSelectedIndexChanged="dplSeleccioneStock_SelectedIndexChanged">
+                    <asp:ListItem>1 Unidad</asp:ListItem>
+                    <asp:ListItem>2 Unidades</asp:ListItem>
+                    <asp:ListItem>3 Unidades</asp:ListItem>
+                    <asp:ListItem>4 Unidades</asp:ListItem>
+                    <asp:ListItem>5 Unidades</asp:ListItem>
+                    <asp:ListItem>6 Unidades</asp:ListItem>
+                    <asp:ListItem>7 Unidades</asp:ListItem>
+                    <asp:ListItem>8 Unidades</asp:ListItem>
+                    <asp:ListItem>9 Unidades</asp:ListItem>
+                    <asp:ListItem >10 Unidades</asp:ListItem>
+                    <asp:ListItem>+ 10 Unidades</asp:ListItem>
+                </asp:DropDownList>
+                <br />
+                 <usrMensaje:AsignarMensaje ID="lblMensaje" runat="server"></usrMensaje:AsignarMensaje>
+                <br />
+                <asp:Button ID="btnAgregarAlCarrito" CssClass="AgregarCarrito btn btn-primary" runat="server" Text="Agregar al Carrito" OnClick="btnAgregarAlCarrito_Click" />
+            </article>
+        </article>
+    </section>
+    <div class="modal" id="CantidadStock" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenteredLabel">Seleccione una cantidad para comprar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <asp:Label ID="Label3" runat="server" Text="Cantidad"></asp:Label>
+                    <br />
+                    <asp:TextBox ID="txtNuevaCantidad" CssClass="form-control" runat="server"></asp:TextBox>
+                </div>
+                <div class="modal-footer">
+                    <asp:Button ID="btnConfirmarCantidadStock" OnClick="btnConfirmarCantidadStock_Click" runat="server"  class="btn btn-success" Text="Confirmar" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function changeImage(sndr) {
+            var changeImage = document.getElementById('<%=ImagenPrincipal.ClientID%>');
+            changeImage.src = sndr.src;
+        }
+    </script>
+</asp:Content>

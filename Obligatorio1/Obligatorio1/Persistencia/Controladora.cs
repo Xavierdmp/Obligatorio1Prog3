@@ -288,5 +288,20 @@ namespace Obligatorio1.Persistencia
             return pListadoArticulos.Instancia.CantidadArticulos();
         }
         #endregion
+
+        #region "Carrito de Compras"
+        public bool AltaCarrito(Item pItem,int pIdCliente)
+        {
+            return pCarrito.Instancia.AltaCarrito(pItem, pIdCliente);
+        }
+        public bool BajaCarrito(int pIdCliente)
+        {
+            return pCarrito.Instancia.EliminarCarrito(pIdCliente);
+        }
+        public List<Item> ListaItemsCarrito(int pIdCliente)
+        {
+            return pCarrito.Instancia.ListaCarrito(pIdCliente);
+        }
+        #endregion
     }
 }

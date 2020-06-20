@@ -195,8 +195,10 @@
     <Content Include="Imagenes\SiteMasters\Logo.png" />
     <Content Include="Presentacion\Autenticación\frmIniciarSesion.aspx" />
     <Content Include="Presentacion\Controles\lblMensaje.ascx" />
+    <Content Include="Presentacion\SeccionPublica\DetalleArticulos\frmDetalleAccesorio.aspx" />
     <Content Include="Presentacion\SeccionPublica\GestionCliente\frmRegistrarCliente.aspx" />
     <Content Include="Presentacion\SeccionPublica\ListadoArticulos\frmListadoArticulos.aspx" />
+    <Content Include="Presentacion\SeccionPublica\Ventas\frmCarritoDeCompras.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -392,6 +394,7 @@
     <Compile Include="Dominio\Controladoras\ControladoraLogin.cs" />
     <Compile Include="Dominio\Controladoras\ControladoraSubTipos.cs" />
     <Compile Include="Dominio\Controladoras\ControladoraTipo.cs" />
+    <Compile Include="Dominio\Controladoras\ControladoraVentas.cs" />
     <Compile Include="Dominio\Encryptar.cs" />
     <Compile Include="Dominio\Fabricante.cs" />
     <Compile Include="Dominio\FotosAdicionales.cs" />
@@ -412,6 +415,7 @@
     <Compile Include="Persistencia\Interfaces\IBuscar.cs" />
     <Compile Include="Persistencia\pAccesorio.cs" />
     <Compile Include="Persistencia\pAdministrador.cs" />
+    <Compile Include="Persistencia\pCarrito.cs" />
     <Compile Include="Persistencia\pCliente.cs" />
     <Compile Include="Persistencia\pColor.cs" />
     <Compile Include="Persistencia\pFabricante.cs" />
@@ -504,6 +508,13 @@
     <Compile Include="Presentacion\SeccionPrivada\SiteMasterPrivate\frmPrivate.Master.designer.cs">
       <DependentUpon>frmPrivate.Master</DependentUpon>
     </Compile>
+    <Compile Include="Presentacion\SeccionPublica\DetalleArticulos\frmDetalleAccesorio.aspx.cs">
+      <DependentUpon>frmDetalleAccesorio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\SeccionPublica\DetalleArticulos\frmDetalleAccesorio.aspx.designer.cs">
+      <DependentUpon>frmDetalleAccesorio.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Presentacion\SeccionPublica\GestionCliente\frmRegistrarCliente.aspx.cs">
       <DependentUpon>frmRegistrarCliente.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -517,6 +528,13 @@
     </Compile>
     <Compile Include="Presentacion\SeccionPublica\ListadoArticulos\frmListadoArticulos.aspx.designer.cs">
       <DependentUpon>frmListadoArticulos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\SeccionPublica\Ventas\frmCarritoDeCompras.aspx.cs">
+      <DependentUpon>frmCarritoDeCompras.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\SeccionPublica\Ventas\frmCarritoDeCompras.aspx.designer.cs">
+      <DependentUpon>frmCarritoDeCompras.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">

@@ -11,7 +11,6 @@ namespace Obligatorio1.Dominio.Controladoras
 
         public List<Articulo> Paginado(int pPaginaInicio)
         {
-
                 List<Articulo> ListadoArticulos = new List<Articulo>();
                 ListadoArticulos = Persistencia.Controladora.Instancia.ListadoArticulos();
                 int ContadorIndice = pPaginaInicio;
@@ -31,7 +30,12 @@ namespace Obligatorio1.Dominio.Controladoras
                             ContadorElementos++;
                             ListaPaginada.Add(unArticulo);
                         }
+                        else
+                        {
+                        break;
+                        }
                     }
+
                 }
                 return ListaPaginada;
         }
@@ -39,7 +43,7 @@ namespace Obligatorio1.Dominio.Controladoras
         public bool CantidadFilas(int pIndex)
         {
             int cantidadFilas = Persistencia.Controladora.Instancia.CantidadArticulos();
-            return pIndex <= cantidadFilas;
+            return pIndex <= cantidadFilas - CantidadElementosAMostrar + 1;
         }
 
     }

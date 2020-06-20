@@ -73,11 +73,13 @@ namespace Obligatorio1
             {
                 this.SeInicioSesion.Visible = false;
                 this.OcultarRegister.Visible = false;
+                this.CarritoCompras.Visible = true;
             }
             else
             {
                 this.SeInicioSesion.Visible = true;
                 this.OcultarRegister.Visible = true;
+                this.CarritoCompras.Visible = false;
             }
         }
 

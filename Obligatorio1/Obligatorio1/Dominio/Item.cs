@@ -8,13 +8,11 @@ namespace Obligatorio1.Dominio
     public class Item
     {
         private int _id;
-        private Instrumento _instrumento;
-        private Accesorio _accesorio;
+        private Articulo _articulo;
         private int _cantidad;
         private int _precio;
         private Color _color;
 
-        //APLICAR POLIMORFISMO UTILIZANDO ARTICULOS EN VEZ DE INSTRUMENTO Y ACCESORIOS
 
         public int Id
         {
@@ -22,16 +20,11 @@ namespace Obligatorio1.Dominio
             set { _id = value; }
         }
 
-        public Instrumento Instrumento
-        {
-            get { return _instrumento; }
-            set { _instrumento = value; }
-        }
 
-        public Accesorio Acessorio
+        public Articulo Articulo
         {
-            get { return _accesorio; }
-            set { _accesorio = value; }
+            get { return _articulo; }
+            set { _articulo = value; }
         }
 
         public int Cantidad
@@ -46,19 +39,6 @@ namespace Obligatorio1.Dominio
             set { _precio = value; }
         }
 
-        public int RetornarIdArticulo
-        {
-            get { if (this.Acessorio != null)
-                {
-                    return _accesorio.Id;
-                }
-                else
-                {
-                    return _instrumento.Id;
-                }
-            }
-        }
-
         public Color Color
         {
             get { return _color; }
@@ -67,32 +47,23 @@ namespace Obligatorio1.Dominio
 
         private int CalcularPrecioTotal(int pCantidad)
         {
-            int total = 0;
-            if (this.Acessorio != null)
-            {
-                total = this.Acessorio.Precio * pCantidad;
-            }
-            else
-            {
-                total = this.Instrumento.Precio * pCantidad;
-            }
+            int total = this.Articulo.Precio * pCantidad;
             return total;
         }
 
-        public Item(Instrumento pInstrumento, int pCantidad, Color pColor)
+        public Item(Articulo pArticulo, int pCantidad, Color pColor)
         {
-            this.Instrumento = pInstrumento;
+            this.Articulo = pArticulo;
             this.Cantidad = pCantidad;
             this.Precio = this.CalcularPrecioTotal(pCantidad);
             this.Color = pColor;
         }
 
-        public Item(Accesorio pAccesorio, int pCantidad, Color pColor)
+        public Item(Articulo pArticulo, int pCantidad)
         {
-            this.Acessorio = pAccesorio;
+            this.Articulo = pArticulo;
             this.Cantidad = pCantidad;
             this.Precio = this.CalcularPrecioTotal(pCantidad);
-            this.Color = pColor;
         }
 
         public Item()

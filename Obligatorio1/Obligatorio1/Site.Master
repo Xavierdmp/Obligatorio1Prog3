@@ -57,6 +57,7 @@
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
+                        <li><a runat="server" id="CarritoCompras" href="Presentacion/SeccionPublica/Ventas/frmCarritoDeCompras.aspx"><i class="fas fa-cart-plus"></i></a></li>
                         <li><a runat="server" href="~/Presentacion/SeccionPublica/GestionCliente/frmRegistrarCliente.aspx" Id="OcultarRegister">Registrarse</a></li>
                         <li><a runat="server" href="~/Presentacion/Autenticación/frmIniciarSesion.aspx" Id="SeInicioSesion"><i class="fas fa-key"></i> Iniciar sesión</a></li>
                     </ul>
