@@ -11,26 +11,19 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.ListadoAccesorios();
-            //if (Session["InicioPaginado"] == null)
-            //{
-            //    Session["InicioPaginado"] = 0;
-            //    //Session["IndiceSiguiente"] = 0;
-            //    this.ListadoPaginado(0);
-            //}
-            //if (this.IsPostBack)
-            //{
-            //    if (Session["IndiceSiguiente"] != null)
-            //    {
-            //        this.ListadoPaginado(int.Parse(Session["IndiceSiguiente"].ToString()));
-            //    }
-            //}
-
+            //// this.ListadoAccesorios();
+            // if (Session["InicioPaginado"] == null)
+            // {
+            //     Session["InicioPaginado"] = 0;
+            //     this.ListadoPaginado(0);
+            // }
+            //this.ListadoAccesorios();
         }
+
         private void ListadoAccesorios()
         {
-            Dominio.Controladoras.ControladoraAccesorio listados = new Dominio.Controladoras.ControladoraAccesorio();
-            foreach (Dominio.Articulo unArticulo in listados.Listar())
+            Persistencia.Controladora unaControladora = new Persistencia.Controladora();
+            foreach (Dominio.Articulo unArticulo in unaControladora.ListadoArticulos())
             {
                 Panel ContenedorImagen = new Panel();
                 ImageButton ImagenPrincipal = new ImageButton();
@@ -92,12 +85,12 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
 
                 this.ContenedorPrincipal.Controls.Add(ContenedorArticulos);
             }
-
         }
+       
 
         private void ListadoPaginado(int pIndice)
         {
-                Dominio.Controladoras.ControladoraListado listados = new Dominio.Controladoras.ControladoraListado();
+            Dominio.Controladoras.ControladoraListado listados = new Dominio.Controladoras.ControladoraListado();
             foreach (Dominio.Articulo unArticulo in listados.Paginado(pIndice))
             {
                 Panel ContenedorImagen = new Panel();
@@ -197,6 +190,7 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
             else if(unaControladoraInstrumento.Buscar(IdArticulo)!= null)
             {
                 Session["InstrumentoDetalle"] = IdArticulo;
+                Response.Redirect("~/Presentacion/SeccionPublica/DetalleArticulos/frmDetalleInstrumentos.aspx");
             }
 
         }

@@ -196,6 +196,7 @@
     <Content Include="Presentacion\Autenticación\frmIniciarSesion.aspx" />
     <Content Include="Presentacion\Controles\lblMensaje.ascx" />
     <Content Include="Presentacion\SeccionPublica\DetalleArticulos\frmDetalleAccesorio.aspx" />
+    <Content Include="Presentacion\SeccionPublica\DetalleArticulos\frmDetalleInstrumentos.aspx" />
     <Content Include="Presentacion\SeccionPublica\GestionCliente\frmRegistrarCliente.aspx" />
     <Content Include="Presentacion\SeccionPublica\ListadoArticulos\frmListadoArticulos.aspx" />
     <Content Include="Presentacion\SeccionPublica\Ventas\frmCarritoDeCompras.aspx" />
@@ -514,6 +515,13 @@
     </Compile>
     <Compile Include="Presentacion\SeccionPublica\DetalleArticulos\frmDetalleAccesorio.aspx.designer.cs">
       <DependentUpon>frmDetalleAccesorio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\SeccionPublica\DetalleArticulos\frmDetalleInstrumentos.aspx.cs">
+      <DependentUpon>frmDetalleInstrumentos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\SeccionPublica\DetalleArticulos\frmDetalleInstrumentos.aspx.designer.cs">
+      <DependentUpon>frmDetalleInstrumentos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\SeccionPublica\GestionCliente\frmRegistrarCliente.aspx.cs">
       <DependentUpon>frmRegistrarCliente.aspx</DependentUpon>

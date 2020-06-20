@@ -26,7 +26,18 @@ namespace Obligatorio1.Persistencia
 
         public bool AltaCarrito(Item pItem, int pIdCliente)
         {
-            return Conexion.Instancia.InicializarConsulta("Insert into CarritoCompras(Id_Cliente,Id_Articulo,Cantidad) values(" + pIdCliente + "," + pItem.Articulo.Id + "," + pItem.Cantidad + ");");
+            Dominio.Instrumento unInstrumento = pItem.Articulo as Instrumento;
+            Dominio.Accesorio unAccesorio = pItem.Articulo as Accesorio;
+            if (unAccesorio != null)
+            {
+                return Conexion.Instancia.InicializarConsulta("Insert into CarritoCompras(Id_Cliente,Id_Articulo,Cantidad) values(" + pIdCliente + "," + pItem.Articulo.Id + "," + pItem.Cantidad + ");");
+            }
+            else
+            {
+                return Conexion.Instancia.InicializarConsulta("Insert into CarritoCompras(Id_Cliente,Id_Articulo,Cantidad,Id_Color) values(" + pIdCliente + "," + pItem.Articulo.Id + "," + pItem.Cantidad + "," + pItem.Color.Id + ");");
+            }
+                
+            
         }
 
         public List<Item> ListaCarrito(int pIdCliente)

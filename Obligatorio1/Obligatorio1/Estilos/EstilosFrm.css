@@ -358,3 +358,15 @@ top:2em;
    top:80px;
    left:2rem;
 }
+.ColoresDetalle{
+    border-radius:50%;
+    width:4em;
+    height:3em;
+    border: 1px solid #ddd;
+    border-left-width: 0;
+    border-top-width: 0;
+    margin:5px;
+}
+.AgregarCarritoInstrumento{
+    width:30em;
+}
