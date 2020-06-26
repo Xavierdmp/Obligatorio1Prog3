@@ -343,9 +343,11 @@ top:2em;
 }
 .TituloDetalle{
     font-size:2.5rem;
+
 }
 .AyudantesTitulo{
     font-weight:bold;
+   
 }
 .PrecioDetalle{
     font-size:3rem;
@@ -355,8 +357,9 @@ top:2em;
 .AgregarCarrito{
     width:30em;
    position:relative;
-   top:80px;
-   left:2rem;
+   top:3em;
+
+
 }
 .ColoresDetalle{
     border-radius:50%;
@@ -370,3 +373,38 @@ top:2em;
 .AgregarCarritoInstrumento{
     width:30em;
 }
+
+        .ImagenPrueba {
+            width: 180px;
+            height: 180px;
+        }
+
+        .contanedorCarrito {
+            box-shadow: 0 7px 16px 0 rgba(0,0,0,.2), 0 1px 3px 0 rgba(0,0,0,.1);
+            margin: 0 auto;
+            margin-top: 1em;
+            max-width: 540px;
+            background-color:white;
+        }
+
+        .Cerrar {
+            background-color: white;
+            border: none;
+        }
+
+.BordeTxt {
+ border: none;
+ outline: none;
+ border-bottom: 0.5px solid #ccc;
+ text-align:justify;
+  color: #555555;
+  border-radius: 2px;
+   text-indent: 20%;
+ }
+
+.StockDisponible{
+    margin-left: 8px;
+    color: #acacac;
+    font-size: 14px;
+    font-weight: 400;
+}   

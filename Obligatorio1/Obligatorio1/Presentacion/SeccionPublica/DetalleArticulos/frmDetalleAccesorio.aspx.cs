@@ -11,7 +11,9 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
             this.MostrarDatos();
+
         }
 
         private void MostrarDatos()
@@ -20,7 +22,7 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
             Dominio.Controladoras.ControladoraAccesorio unaControladora = new Dominio.Controladoras.ControladoraAccesorio();
             Dominio.Accesorio unAccesorio = unaControladora.Buscar(IdAccesorio);
             List<Dominio.FotosAdicionales> listaFotosAd = unaControladora.ListarFotosAdicionalesAccesorio(IdAccesorio);
-            
+            this.lblDisponibilidadStock.Text = "|" + unAccesorio.Stock + " disponibles|";
             if(listaFotosAd.Count > 0)
             {
                 foreach(Dominio.FotosAdicionales unaFoto in listaFotosAd)
@@ -41,7 +43,6 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
             this.ImagenPrincipal.ImageUrl = unAccesorio.FotoPrincipal;
 
         }
-        // ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#exampleModal').modal();", true);
 
         protected void btnConfirmarCantidadStock_Click(object sender, EventArgs e)
         {
@@ -52,13 +53,16 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
 
         protected void dplSeleccioneStock_SelectedIndexChanged(object sender, EventArgs e)
         {
-        
-            if (this.dplSeleccioneStock.SelectedIndex != 10)
+
+            if (this.dplSeleccioneStock.SelectedIndex != 11)
             {
-                string Item = this.dplSeleccioneStock.SelectedValue;
-                string[] partesItem = Item.Split(' ');
-                int Cantidad = int.Parse(partesItem[0]);
-                Session["CantidadStockSeleccionada"] = Cantidad;
+                if (this.dplSeleccioneStock.SelectedIndex != 0)
+                {
+                    string Item = this.dplSeleccioneStock.SelectedValue;
+                    string[] partesItem = Item.Split(' ');
+                    int Cantidad = int.Parse(partesItem[0]);
+                    Session["CantidadStockSeleccionada"] = Cantidad;
+                }
             }
             else
             {
@@ -78,7 +82,7 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
                 Dominio.Item unItem = new Dominio.Item(unAccesorio, cantidad);
                 int IdClienteConectado = int.Parse(Session["ClienteLogueado"].ToString());
                 Dominio.Controladoras.ControladoraVentas unaControladoraVentas = new Dominio.Controladoras.ControladoraVentas();
-                if (cantidad <= unAccesorio.Stock)
+                if (cantidad <= unAccesorio.Stock && cantidad > 0)
                 {
                     if (unaControladoraVentas.AltaCarrito(unItem, IdClienteConectado))
                     {
@@ -87,7 +91,7 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
                 }
                 else
                 {
-                    this.lblMensaje.MensajeActivo(2, "No hay stock disponible");
+                    this.lblMensaje.MensajeActivo(2, "No hay stock disponible, el disponible es: " + unAccesorio.Stock);
                 }
             }
             else
@@ -97,5 +101,6 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
 
 
         }
+
     }
 }

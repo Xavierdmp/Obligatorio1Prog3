@@ -20,5 +20,10 @@ namespace Obligatorio1.Dominio.Controladoras
         {
             return Persistencia.Controladora.Instancia.ListaItemsCarrito(pIdCliente);
         }
+
+        public bool BajaArticuloCarrito(int pIdArticulo,int pIdCliente)
+        {
+            return Persistencia.Controladora.Instancia.BajaArticuloCarrito(pIdArticulo, pIdCliente);
+        }
     }
 }

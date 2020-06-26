@@ -302,6 +302,11 @@ namespace Obligatorio1.Persistencia
         {
             return pCarrito.Instancia.ListaCarrito(pIdCliente);
         }
+
+        public bool BajaArticuloCarrito(int pIdArticulo, int pIdCliente)
+        {
+            return pCarrito.Instancia.EliminarArticuloDeCarrito(pIdArticulo, pIdCliente);
+        }
         #endregion
     }
 }

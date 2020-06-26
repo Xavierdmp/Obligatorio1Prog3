@@ -53,12 +53,12 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/"><i class="fas fa-home"></i> Inicio</a></li>
-                          <li><a runat="server" href="~/Presentacion/SeccionPublica/ListadoArticulos/frmListadoArticulos.aspx"><i class="fas fa-home"></i> Listado</a></li>
+                          <li><a runat="server" href="~/Presentacion/SeccionPublica/ListadoArticulos/frmListadoArticulos.aspx"><i class="fas fa-list"></i> Listado</a></li>
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
                         <li><a runat="server" id="CarritoCompras" href="Presentacion/SeccionPublica/Ventas/frmCarritoDeCompras.aspx"><i class="fas fa-cart-plus"></i></a></li>
-                        <li><a runat="server" href="~/Presentacion/SeccionPublica/GestionCliente/frmRegistrarCliente.aspx" Id="OcultarRegister">Registrarse</a></li>
+                        <li><a runat="server" href="~/Presentacion/SeccionPublica/GestionCliente/frmRegistrarCliente.aspx" Id="OcultarRegister"><i class="fas fa-address-card"></i> Registrarse</a></li>
                         <li><a runat="server" href="~/Presentacion/Autenticación/frmIniciarSesion.aspx" Id="SeInicioSesion"><i class="fas fa-key"></i> Iniciar sesión</a></li>
                     </ul>
 

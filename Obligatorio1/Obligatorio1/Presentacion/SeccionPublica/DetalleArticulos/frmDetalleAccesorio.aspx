@@ -12,16 +12,21 @@
             <article class="col-md-4 SeccionInformacion">
                 <asp:Label ID="lblNombre" CssClass="TituloDetalle" runat="server" Text="Label"></asp:Label>
                 <br />
+                 <br />
                 <asp:Label ID="Label1" CssClass="AyudantesTitulo" runat="server" Text="Descripcion: "></asp:Label>
                 <asp:Label ID="lblDescripcion" CssClass="DescripcionDetalle" runat="server" Text="Label"></asp:Label>
                 <br />
+                 <br />
                 <asp:Label ID="Label2" CssClass="AyudantesTitulo" runat="server" Text="Fabricante: "></asp:Label>
                 <asp:Label ID="lblFabricante" CssClass="FabricanteDetalle" runat="server" Text="Label"></asp:Label>
                 <br />
+                 <br />
                 <asp:Label ID="lblPrecio" runat="server" CssClass="PrecioDetalle" Text="Label"></asp:Label>
                 <br /> 
+                 <br />
                 <asp:Label ID="lblStock" runat="server" Text="Cantidad:"></asp:Label>
-                <asp:DropDownList ID="dplSeleccioneStock" runat="server" AppendDataBoundItems="True" AutoPostBack="True" OnSelectedIndexChanged="dplSeleccioneStock_SelectedIndexChanged">
+                <asp:DropDownList ID="dplSeleccioneStock" runat="server" CssClass="BordeTxt" AppendDataBoundItems="True" AutoPostBack="True" OnSelectedIndexChanged="dplSeleccioneStock_SelectedIndexChanged">
+                    <asp:ListItem>Unidades</asp:ListItem>
                     <asp:ListItem>1 Unidad</asp:ListItem>
                     <asp:ListItem>2 Unidades</asp:ListItem>
                     <asp:ListItem>3 Unidades</asp:ListItem>
@@ -32,8 +37,9 @@
                     <asp:ListItem>8 Unidades</asp:ListItem>
                     <asp:ListItem>9 Unidades</asp:ListItem>
                     <asp:ListItem >10 Unidades</asp:ListItem>
-                    <asp:ListItem>+ 10 Unidades</asp:ListItem>
+                    <asp:ListItem>más Unidades</asp:ListItem>
                 </asp:DropDownList>
+                <asp:Label ID="lblDisponibilidadStock" runat="server" Text="" CssClass="StockDisponible"></asp:Label>
                 <br />
                  <usrMensaje:AsignarMensaje ID="lblMensaje" runat="server"></usrMensaje:AsignarMensaje>
                 <br />

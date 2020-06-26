@@ -11,96 +11,47 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //// this.ListadoAccesorios();
-            // if (Session["InicioPaginado"] == null)
-            // {
-            //     Session["InicioPaginado"] = 0;
-            //     this.ListadoPaginado(0);
-            // }
-            //this.ListadoAccesorios();
-        }
-
-        private void ListadoAccesorios()
-        {
-            Persistencia.Controladora unaControladora = new Persistencia.Controladora();
-            foreach (Dominio.Articulo unArticulo in unaControladora.ListadoArticulos())
+            if (!this.IsPostBack)
             {
-                Panel ContenedorImagen = new Panel();
-                ImageButton ImagenPrincipal = new ImageButton();
-                ImagenPrincipal.Click += btnVerDetalle_Click;
-                ImagenPrincipal.ImageUrl = unArticulo.FotoPrincipal;
-                ImagenPrincipal.CssClass = "ImagenPrincipal";
-                ImagenPrincipal.ID = unArticulo.Id.ToString();
-                ContenedorImagen.Controls.Add(ImagenPrincipal);
+                IndicePaginado = 0;
+            }
 
-                Panel ContenedorTexto = new Panel();
-                ContenedorTexto.CssClass = "ContenedorTexto";
-                Label Precio = new Label();
-                Precio.Text = "$ " + unArticulo.Precio.ToString() + " ";
-                Precio.CssClass = "Precio";
-                Label Nombre = new Label();
-                Nombre.Text = unArticulo.Nombre;
-                Nombre.CssClass = "Nombre";
+            this.ListadoPaginado(IndicePaginado);
+        }
+        private int IndicePaginado
+        {
 
-                Dominio.Instrumento unInstrumento = unArticulo as Dominio.Instrumento;
-                if (unInstrumento != null)
+            get {
+                int result = 0;
+                if (Session["InicioPaginado"] != null)
                 {
-                    Label Oferta = new Label();
-                    if (unInstrumento.Descuento != 0)
-                    {
-                        Oferta.Text = "%" + unInstrumento.Descuento.ToString();
-                        Oferta.CssClass = "OfertaInstrumento";
-                        ContenedorTexto.Controls.Add(Precio);
-                        ContenedorTexto.Controls.Add(Oferta);
-                        ContenedorTexto.Controls.Add(Nombre);
-                    }
-                    else
-                    {
-                        ContenedorTexto.Controls.Add(Precio);
-                        ContenedorTexto.Controls.Add(Nombre);
-                    }
-                    if (unInstrumento.Destacado)
-                    {
-                        Label Destacado = new Label();
-                        Destacado.CssClass = "InstrumentoDestacado";
-                        Destacado.Text = "Destacado";
-                        ContenedorTexto.Controls.Add(Destacado);
-                    }
-
+                    
+                     int.TryParse(Session["InicioPaginado"].ToString(),out result);
                 }
-
-                else
-                {
-
-                    ContenedorTexto.Controls.Add(Precio);
-                    ContenedorTexto.Controls.Add(Nombre);
-                }
-
-                Panel ContenedorArticulos = new Panel();
-                ContenedorArticulos.CssClass = "ContenedorArticulos col-md-9 text-center";
-                ContenedorArticulos.Attributes.Add("Style", "outline: none; width: 240px;");
-
-                ContenedorArticulos.Controls.Add(ContenedorImagen);
-                ContenedorArticulos.Controls.Add(ContenedorTexto);
-
-                this.ContenedorPrincipal.Controls.Add(ContenedorArticulos);
+                return result;
+            }
+            set
+            {
+                Session["InicioPaginado"] = value;
             }
         }
-       
 
         private void ListadoPaginado(int pIndice)
         {
+            this.ContenedorPrincipal.Controls.Clear();
             Dominio.Controladoras.ControladoraListado listados = new Dominio.Controladoras.ControladoraListado();
-            foreach (Dominio.Articulo unArticulo in listados.Paginado(pIndice))
+            List<Dominio.Articulo> listaPaginada = listados.Paginado(pIndice);
+            foreach (Dominio.Articulo unArticulo in listaPaginada)
             {
                 Panel ContenedorImagen = new Panel();
                 ImageButton ImagenPrincipal = new ImageButton();
                 ImagenPrincipal.Click += btnVerDetalle_Click;
+                
                 ImagenPrincipal.ImageUrl = unArticulo.FotoPrincipal;
                 ImagenPrincipal.CssClass = "ImagenPrincipal";
                 ImagenPrincipal.ID = unArticulo.Id.ToString();
                 ContenedorImagen.Controls.Add(ImagenPrincipal);
-
+                
                 Panel ContenedorTexto = new Panel();
                 ContenedorTexto.CssClass = "ContenedorTexto";
                 Label Precio = new Label();
@@ -153,24 +104,26 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
 
                     this.ContenedorPrincipal.Controls.Add(ContenedorArticulos);
                 }
+            this.ContenedorPrincipal.DataBind();
         }
 
         protected void btnSiguiente_Click1(object sender, EventArgs e)
         {
             Dominio.Controladoras.ControladoraListado listados = new Dominio.Controladoras.ControladoraListado();
-            if (Session["IndiceSiguiente"] == null)
+            if (IndicePaginado == 0)
             {
-                Session["IndiceSiguiente"] = 5;
+                IndicePaginado = 5;
             }
-            int IndiceAnterior = int.Parse(Session["IndiceSiguiente"].ToString());
-            Session["IndiceSiguiente"] = IndiceAnterior + IndiceAnterior;
-            if (listados.CantidadFilas(IndiceAnterior))
+            int indiceAnterior = IndicePaginado;
+            IndicePaginado = indiceAnterior + indiceAnterior;
+            if (listados.CantidadFilas(indiceAnterior))
             {
-                this.ListadoPaginado(IndiceAnterior);
+    
+                this.ListadoPaginado(indiceAnterior);
             }
             else
             {
-                this.ListadoPaginado(IndiceAnterior);
+                this.ListadoPaginado(indiceAnterior);
                 this.btnSiguiente.Enabled = false;
             }
         }

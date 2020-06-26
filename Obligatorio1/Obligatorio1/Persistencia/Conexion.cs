@@ -10,7 +10,7 @@ namespace Obligatorio1.Persistencia
     public class Conexion
     {
         private static string _cadenaConexion;
-        private static Conexion _instancia;
+        private static Conexion _instancia = null;
 
         public Conexion()
         {
@@ -46,10 +46,10 @@ namespace Obligatorio1.Persistencia
         public bool InicializarConsulta(string pConsulta)
         {
             bool SeAplicaronCambios = false;
-
+            SqlConnection conexion = null;
             try
             {
-                SqlConnection conexion = Conectar();
+                conexion = Conectar();
                 SqlCommand comandos = new SqlCommand();
 
                 comandos.CommandText = pConsulta;
@@ -60,8 +60,15 @@ namespace Obligatorio1.Persistencia
             }
             catch (Exception)
             {
-
                 throw;
+            }
+            finally
+            {
+                if(conexion != null && conexion.State == ConnectionState.Open)
+                {
+                    conexion.Close();
+                    conexion.Dispose();
+                }
             }
             return SeAplicaronCambios;
 
@@ -71,6 +78,7 @@ namespace Obligatorio1.Persistencia
         {
             DataSet datos = null;
             SqlCommand comandoSql = null;
+            SqlConnection conexion = null;
             try
             {
                 comandoSql = new SqlCommand();
@@ -80,7 +88,7 @@ namespace Obligatorio1.Persistencia
                 datos = new DataSet();
 
                 SqlDataAdapter adaptador = new SqlDataAdapter(comandoSql);
-                SqlConnection conexion = Conectar();
+                 conexion = Conectar();
                 comandoSql.Connection = conexion;
                 adaptador.Fill(datos);
             }
@@ -88,6 +96,14 @@ namespace Obligatorio1.Persistencia
             {
 
                 throw;
+            }
+            finally
+            {
+                if (conexion != null && conexion.State == ConnectionState.Open)
+                {
+                    conexion.Close();
+                    conexion.Dispose();
+                }
             }
             return datos;
         }
