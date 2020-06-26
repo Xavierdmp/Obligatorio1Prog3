@@ -7,7 +7,7 @@ namespace Obligatorio1.Dominio.Controladoras
 {
     public class ControladoraListado
     {
-        private const int CantidadElementoaMostrar = 10;
+        private const int CantidadElementoaMostrar = 4;
 
         public List<Articulo> Paginado(int pPaginaInicio)
         {
@@ -31,7 +31,7 @@ namespace Obligatorio1.Dominio.Controladoras
                 if (indiceInicio == ContadorIndice)
                 {
 
-                    if (ContadorIndice < CantidadElementoaMostrar)
+                    if (ContadorElementos < CantidadElementoaMostrar)
 
                     {
                         ContadorElementos++;

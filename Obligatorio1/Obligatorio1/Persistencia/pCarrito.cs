@@ -47,7 +47,7 @@ namespace Obligatorio1.Persistencia
                     Dominio.Item unItem = new Item();
                     object[] elementos = row.ItemArray;
 
-                    int idArticulo = int.Parse(elementos[1].ToString());
+                    int idArticulo = int.Parse(elementos[2].ToString());
                     Dominio.Instrumento unInstrumento = Controladora.Instancia.BuscarInstrumento(idArticulo);
                     Dominio.Accesorio unAccesorio = Controladora.Instancia.BuscarAccesorio(idArticulo);
 
@@ -71,6 +71,12 @@ namespace Obligatorio1.Persistencia
         public bool EliminarCarrito(int pIdCliente)
         {
             return Conexion.Instancia.InicializarConsulta("delete from CarritoCompras where Id_Cliente=" + pIdCliente);
+        }
+
+        public bool EliminarArticuloCarrito(int pIdArticulo , int pIdCliente)
+        {
+
+            return Conexion.Instancia.InicializarConsulta("delete from CarritoCompras where Id_Articulo=" + pIdArticulo + " and Id_Cliente=" + pIdCliente);
         }
 
        }

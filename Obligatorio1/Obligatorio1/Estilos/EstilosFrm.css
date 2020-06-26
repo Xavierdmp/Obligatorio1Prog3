@@ -358,3 +358,20 @@ top:2em;
    top:80px;
    left:2rem;
 }
+       .ImagenPrueba {
+            width: 180px;
+            height: 180px;
+        }
+
+        .contanedorCarrito {
+            box-shadow: 0 7px 16px 0 rgba(0,0,0,.2), 0 1px 3px 0 rgba(0,0,0,.1);
+            margin: 0 auto;
+            margin-top: 1em;
+            max-width: 540px;
+            background-color:white;
+        }
+
+        .Cerrar {
+            background-color: white;
+            border: none;
+        }

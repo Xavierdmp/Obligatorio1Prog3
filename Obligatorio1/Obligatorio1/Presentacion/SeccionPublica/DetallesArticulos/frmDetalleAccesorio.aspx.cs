@@ -54,7 +54,7 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetallesArticulos
 
         protected void dplSeleccioneStock_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.dplSeleccioneStock.SelectedIndex != 10)
+            if (this.dplSeleccioneStock.SelectedIndex != 11 && this.dplSeleccioneStock.SelectedIndex > 0)
             {
                 string item = this.dplSeleccioneStock.SelectedValue;
                 string[] PartesItem = item.Split(' ');

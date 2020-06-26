@@ -22,6 +22,7 @@
                 <br />
                 <asp:Label ID="lblStock" runat="server" Text="Label"></asp:Label>
                 <asp:DropDownList ID="dplSeleccioneStock" OnSelectedIndexChanged="dplSeleccioneStock_SelectedIndexChanged" runat="server" AppendDataBoundItems="True" AutoPostBack="True">
+                    <asp:ListItem>Unidades</asp:ListItem>
                     <asp:ListItem>1 Unidad</asp:ListItem>
                     <asp:ListItem>2 Unidades</asp:ListItem>
                     <asp:ListItem>3 Unidades</asp:ListItem>
