@@ -319,6 +319,10 @@ namespace Obligatorio1.Persistencia
         }
 
 
+        public bool ComprobarExistenciaCarrito(int pIdArticulo)
+        {
+            return pCarrito.Instancia.ComprobarExistenciaArticulo(pIdArticulo);
+        }
 
         #endregion
 

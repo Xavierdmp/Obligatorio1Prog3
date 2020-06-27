@@ -66,20 +66,36 @@ namespace Obligatorio1
                 }
             }
         }
+        
+        protected void btnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            Session["ClienteLogueado"] = null;
+            Response.Redirect("~/Default.aspx");
+        }
+        private void ClienteConectado()
+        {
+            int IdCliente = int.Parse(Session["ClienteLogueado"].ToString());
+            Dominio.Controladoras.ControladoraCliente unaControladoraCliente = new Dominio.Controladoras.ControladoraCliente();
+            Dominio.Cliente unCliente = unaControladoraCliente.Buscar(IdCliente);
+            this.lblClienteConectado.Text = unCliente.CorreoElectronico;
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(Session["ClienteLogueado"] != null)
+            if (Session["ClienteLogueado"] != null)
             {
-                this.CarritoDeCompras.Visible = true; 
                 this.SeInicioSesion.Visible = false;
                 this.OcultarRegister.Visible = false;
+                this.CarritoDeCompras.Visible = true;
+                this.ClienteConectado();
+                this.PerfilCliente.Visible = true;
             }
             else
             {
-                this.CarritoDeCompras.Visible = false; 
                 this.SeInicioSesion.Visible = true;
                 this.OcultarRegister.Visible = true;
+                this.CarritoDeCompras.Visible = false;
+                this.PerfilCliente.Visible = false;
             }
         }
 

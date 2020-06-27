@@ -35,7 +35,11 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetallesArticulos
                     imagenOpcional.Attributes.Add("onmouseover", "changeImage(this)");
 
                 }
-
+                ImageButton imagenOpcionalPrincipal = new ImageButton();
+                imagenOpcionalPrincipal.ImageUrl = unAccesorio.FotoPrincipal;
+                imagenOpcionalPrincipal.CssClass = "ImagenesOpcionales";
+                this.ImagenesOpcionales.Controls.Add(imagenOpcionalPrincipal);
+                imagenOpcionalPrincipal.Attributes.Add("onmouseover", "changeImage(this)");
             }
             this.lblNombre.Text = unAccesorio.Nombre;
             this.lblDescripcion.Text = unAccesorio.Descripcion;
@@ -54,17 +58,24 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetallesArticulos
 
         protected void dplSeleccioneStock_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.dplSeleccioneStock.SelectedIndex != 11 && this.dplSeleccioneStock.SelectedIndex > 0)
+            
+            if (this.dplSeleccioneStock.SelectedIndex != 11)
             {
-                string item = this.dplSeleccioneStock.SelectedValue;
-                string[] PartesItem = item.Split(' ');
-                int cantidad = int.Parse(PartesItem[0]);
+                if (this.dplSeleccioneStock.SelectedIndex != 0)
+                {
+                    string item = this.dplSeleccioneStock.SelectedValue;
+                    string[] PartesItem = item.Split(' ');
+                    int cantidad = int.Parse(PartesItem[0]);
 
-                Session["CantidadStockSeleccionada"] = cantidad;
+                    Session["CantidadStockSeleccionada"] = cantidad;
+
+                }
             }
+           
 
             else
             {
+                 
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#CantidadStock').modal();", true);
 
             }
@@ -109,5 +120,26 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetallesArticulos
             }
         }
 
+        protected void ValidarStock_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+
+            int idAccesorio = int.Parse(Session["AccesorioDetalle"].ToString());
+            Dominio.Controladoras.ControladoraAccesorio unaControladora = new Dominio.Controladoras.ControladoraAccesorio();
+            Dominio.Accesorio unAccesorio = unaControladora.Buscar(idAccesorio);
+            
+            try
+            {
+                int cantidad = int.Parse(Session["CantidadStockSeleccionada"].ToString());
+                args.IsValid = cantidad <= unAccesorio.Stock;
+            }
+
+            catch
+            {
+                args.IsValid = false;
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#CantidadStock').modal();", true);
+            }
+
+
+        }
     }
 }

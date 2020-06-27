@@ -17,7 +17,9 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
                 this.ListarFabricantes();
                 this.ListarSubtiposDeInstrumentos();
                 this.ListaFotosAdicionales();
+
             }
+            CargarImagenPrincipal();
         }
 
         private void LimpiarCampos()
@@ -73,7 +75,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
         private List<Dominio.SubTipo> ListarSubtiposParaDarDeAlta(List<Dominio.SubTipo> pListaSubtipos)
         {
             List<Dominio.SubTipo> lista = new List<Dominio.SubTipo>();
-            foreach(Dominio.SubTipo unSubtipo in pListaSubtipos)
+            foreach (Dominio.SubTipo unSubtipo in pListaSubtipos)
             {
                 lista.Add(unSubtipo);
             }
@@ -83,7 +85,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
         private List<Dominio.FotosAdicionales> ListaConFotosAdicionalesParaAlta(List<Dominio.FotosAdicionales> pLista)
         {
             List<Dominio.FotosAdicionales> lista = new List<Dominio.FotosAdicionales>();
-            foreach(Dominio.FotosAdicionales unaUrl in pLista)
+            foreach (Dominio.FotosAdicionales unaUrl in pLista)
             {
                 lista.Add(unaUrl);
             }
@@ -92,7 +94,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            if (this.dplListaFabricante.SelectedIndex > 0 && this.dplListarSubtipo.SelectedIndex >0)
+            if (this.dplListaFabricante.SelectedIndex > 0 && this.dplListarSubtipo.SelectedIndex > 0 && this.UrlFotoPrincipal != "" )
             {
                 Dominio.Controladoras.ControladoraFabricante unaControladoraFabricante = new Dominio.Controladoras.ControladoraFabricante();
                 Dominio.Controladoras.ControladoraAccesorio unaControladoraAccesorio = new Dominio.Controladoras.ControladoraAccesorio();
@@ -106,61 +108,62 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
                 int idFabricante = int.Parse(arrayFabricante[1]);
                 Dominio.Fabricante unFabricante = unaControladoraFabricante.Buscar(idFabricante);
 
-                string UrlFotoPrincipal = "";
                 List<Dominio.SubTipo> listaSubtipos = this.ListarSubtiposParaDarDeAlta(ListaSubtiposSeleccionados);
 
-                if (this.fuImagenPrincipal.HasFile)
+                
+                if (ListarFotosAdicionales == null)
                 {
-                    this.fuImagenPrincipal.SaveAs(Server.MapPath("~/Imagenes/ImgPrincipalAcessorios/" + this.fuImagenPrincipal.FileName));
-                    UrlFotoPrincipal = "~/Imagenes/ImgPrincipalAcessorios/" + this.fuImagenPrincipal.FileName;
-                    if (ListarFotosAdicionales == null)
+                    Dominio.Accesorio unAccesorio = new Dominio.Accesorio(nombre, descripcion, unFabricante, UrlFotoPrincipal, precio, stock, listaSubtipos);
+                    if (unaControladoraAccesorio.Alta(unAccesorio))
                     {
-                        Dominio.Accesorio unAccesorio = new Dominio.Accesorio(nombre, descripcion, unFabricante, UrlFotoPrincipal, precio, stock,listaSubtipos);
-                        if (unaControladoraAccesorio.Alta(unAccesorio))
-                        {
-                            this.lblMensaje.MensajeActivo(1, "El accesorio se registro con exito");
-                            this.LimpiarCampos();
-                            this.ListarAccesorios();
-                            ListaSubtiposSeleccionados.Clear();
-                            this.ListarSubtiposSeleccionados();
-                        }
-                        else
-                        {
-                            this.lblMensaje.MensajeActivo(2, "El accesorio no se pudo registrar");
-                            this.LimpiarCampos();
-                        }
+                        this.lblMensaje.MensajeActivo(1, "El accesorio se registro con exito");
+                        this.LimpiarCampos();
+                        this.UrlFotoPrincipal = "";
+                        this.MostrarFotoPrincipal.ImageUrl = null;
+                        this.ListarAccesorios();
+                        ListaSubtiposSeleccionados.Clear();
+                        this.ListarSubtiposSeleccionados();
                     }
                     else
                     {
-                        List<Dominio.FotosAdicionales> listaFotosAdicionales = this.ListaConFotosAdicionalesParaAlta(ListarFotosAdicionales);
-                        Dominio.Accesorio unAccesorio = new Dominio.Accesorio(nombre, descripcion, unFabricante, UrlFotoPrincipal, listaFotosAdicionales, precio, stock, listaSubtipos);
-                        if (unaControladoraAccesorio.Alta(unAccesorio))
-                        {
-                            this.lblMensaje.MensajeActivo(1, "El accesorio se registro con exito");
-                            this.LimpiarCampos();
-                            this.ListarAccesorios();
-                            ListaSubtiposSeleccionados.Clear();
-                            this.ListarSubtiposSeleccionados();
-                            ListarFotosAdicionales.Clear();
-                            this.ListaFotosAdicionales();
-                        }
-                        else
-                        {
-                            this.lblMensaje.MensajeActivo(2, "El accesorio no se pudo registrar");
-                            this.LimpiarCampos();
-                        }
+                        this.lblMensaje.MensajeActivo(2, "El accesorio no se pudo registrar");
+                        this.LimpiarCampos();
+                        this.UrlFotoPrincipal = "";
+                        this.MostrarFotoPrincipal.ImageUrl = null;
                     }
                 }
                 else
                 {
-                    this.lblMensaje.MensajeActivo(2, "Seleccione una imagen principal");
+                    List<Dominio.FotosAdicionales> listaFotosAdicionales = this.ListaConFotosAdicionalesParaAlta(ListarFotosAdicionales);
+                    Dominio.Accesorio unAccesorio = new Dominio.Accesorio(nombre, descripcion, unFabricante, UrlFotoPrincipal, listaFotosAdicionales, precio, stock, listaSubtipos);
+                    if (unaControladoraAccesorio.Alta(unAccesorio))
+                    {
+                        this.lblMensaje.MensajeActivo(1, "El accesorio se registro con exito");
+                        this.LimpiarCampos();
+                        this.ListarAccesorios();
+                        ListaSubtiposSeleccionados.Clear();
+                        this.ListarSubtiposSeleccionados();
+                        ListarFotosAdicionales.Clear();
+                        this.ListaFotosAdicionales();
+                        this.UrlFotoPrincipal = "";
+                        this.MostrarFotoPrincipal.ImageUrl = null;
+                    }
+                    else
+                    {
+                        this.lblMensaje.MensajeActivo(2, "El accesorio no se pudo registrar");
+                        this.LimpiarCampos();
+                        this.UrlFotoPrincipal = "";
+                        this.MostrarFotoPrincipal.ImageUrl = null;
+                    }
                 }
             }
             else
             {
-                this.lblMensaje.MensajeActivo(2, "Seleccione un fabricante u un subtipo");
+                this.lblMensaje.MensajeActivo(2, "Seleccione una Fabricante o un subtipo");
             }
         }
+
+
         protected void btnAgregarImagenAdicional_Click(object sender, EventArgs e)
         {
             if (this.fuFotosAdicionales.HasFile)
@@ -204,17 +207,19 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
             Dominio.Controladoras.ControladoraAccesorio unaControladoraAccesorio = new Dominio.Controladoras.ControladoraAccesorio();
             if (unaControladoraAccesorio.Baja(id))
             {
-                this.lblMensaje.MensajeActivo(1,"Accesorio eliminado con exito");
+                this.lblMensaje.MensajeActivo(1, "Accesorio eliminado con exito");
                 this.ListarAccesorios();
                 this.LimpiarCampos();
                 this.ListaSubtiposSeleccionados.Clear();
                 this.ListarSubtiposSeleccionados();
+                this.UrlFotoPrincipal = "";
+                this.MostrarFotoPrincipal.ImageUrl = null;
             }
             else
             {
                 this.lblMensaje.MensajeActivo(2, "El accesorio no se pudo dar de baja");
             }
-            if(ListarFotosAdicionales != null)
+            if (ListarFotosAdicionales != null)
             {
                 this.ListarFotosAdicionales.Clear();
                 this.ListaFotosAdicionales();
@@ -223,7 +228,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
 
         protected void btnModificar_Click(object sender, EventArgs e)
         {
-            if (this.dplListaFabricante.SelectedIndex > 0 && this.dplListarSubtipo.SelectedIndex > 0)
+            if (this.dplListaFabricante.SelectedIndex > 0 && this.dplListarSubtipo.SelectedIndex > 0 && this.Session["ImagenPrincipal"] != null)
             {
                 Dominio.Controladoras.ControladoraFabricante unaControladoraFabricante = new Dominio.Controladoras.ControladoraFabricante();
                 Dominio.Controladoras.ControladoraSubTipos unaControladoraSubtipo = new Dominio.Controladoras.ControladoraSubTipos();
@@ -245,17 +250,12 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
                 string[] partesSubtipo = ObjetoSubtipo.Split(' ');
                 int idSubtipo = int.Parse(partesSubtipo[1]);
                 Dominio.SubTipo unSubtipo = unaControladoraSubtipo.Buscar(idSubtipo);
-                string UrlFotoPrincipal = "";
                 unAccesorio.Nombre = nombre;
                 unAccesorio.Descripcion = descripcion;
                 unAccesorio.Precio = precio;
                 unAccesorio.Stock = stock;
                 unAccesorio.ListarSubtipos = ListaSubtiposSeleccionados;
                 unAccesorio.Fabricante = unFabricante;
-                if (this.fuImagenPrincipal.HasFile)
-                {
-                    this.fuImagenPrincipal.SaveAs(Server.MapPath("~/Imagenes/ImgPrincipalAcessorios/" + this.fuImagenPrincipal.FileName));
-                    UrlFotoPrincipal = "~/Imagenes/ImgPrincipalAcessorios/" + this.fuImagenPrincipal.FileName;
                     if (ListarFotosAdicionales == null)
                     {
                         unAccesorio.FotoPrincipal = UrlFotoPrincipal;
@@ -263,17 +263,21 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
                         {
                             this.lblMensaje.MensajeActivo(1, "El accesorio se registro con exito");
                             this.LimpiarCampos();
+                             this.UrlFotoPrincipal = "";
                             this.ListarAccesorios();
                             ListarFotosAdicionales.Clear();
                             ListaSubtiposSeleccionados.Clear();
                             this.ListarSubtiposSeleccionados();
                             this.ListaFotosAdicionales();
+                            this.MostrarFotoPrincipal.ImageUrl = null;
                         }
                         else
                         {
                             this.lblMensaje.MensajeActivo(2, "El accesorio no se pudo registrar");
                             this.LimpiarCampos();
-                        }
+                            this.MostrarFotoPrincipal.ImageUrl = null;
+                            this.Session["ImagenPrincipal"] = null;
+                    }
                     }
                     else
                     {
@@ -288,6 +292,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
                             ListaSubtiposSeleccionados.Clear();
                             this.ListarSubtiposSeleccionados();
                             this.ListaFotosAdicionales();
+                            this.Session["ImagenPrincipal"] = null;
                         }
                         else
                         {
@@ -295,15 +300,13 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
                             this.LimpiarCampos();
                         }
                     }
-                }
-                else
-                {
-                    this.lblMensaje.MensajeActivo(2, "Seleccione una imagen principal");
-                }
+                
+
+               
             }
             else
             {
-                this.lblMensaje.MensajeActivo(2, "Seleccione un fabricante u un subtipo");
+                this.lblMensaje.MensajeActivo(2, "Seleccione un fabricante o un subtipo");
             }
         }
 
@@ -321,6 +324,8 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
             this.ListaFotosAdicionales();
             ListaSubtiposSeleccionados = unaControladoraAccesorio.ListarSubTiposParaAccesorio(id);
             this.ListarSubtiposSeleccionados();
+            this.MostrarFotoPrincipal.ImageUrl = unAccesorio.FotoPrincipal; // se muestra al momento de seleccionarla.  
+
         }
 
         protected void dplListarSubtipo_SelectedIndexChanged(object sender, EventArgs e)
@@ -352,9 +357,9 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
 
         private bool ComprobarSiSeEncuentra(int pId)
         {
-            foreach(Dominio.SubTipo unSubtipo in ListaSubtiposSeleccionados)
+            foreach (Dominio.SubTipo unSubtipo in ListaSubtiposSeleccionados)
             {
-                if(unSubtipo.Id == pId)
+                if (unSubtipo.Id == pId)
                 {
                     return true;
                 }
@@ -373,5 +378,48 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
                 this.ListarSubtiposSeleccionados();
             }
         }
+
+        private const int maximotamañoImagen = 3145784;
+        
+    
+        private void CargarImagenPrincipal()
+        {
+
+
+            if (this.fuImagenPrincipal.HasFile)
+            {
+                string Extension = System.IO.Path.GetExtension(fuImagenPrincipal.PostedFile.FileName);
+
+                if (Extension == ".png")
+                {
+                    if (this.fuImagenPrincipal.FileName.Length < 248 && this.fuImagenPrincipal.PostedFile.ContentLength <= maximotamañoImagen)
+                    {
+
+                        this.fuImagenPrincipal.SaveAs(Server.MapPath("~/Imagenes/ImgPrincipalAcessorios/" + this.fuImagenPrincipal.FileName));
+                        UrlFotoPrincipal = "~/Imagenes/ImgPrincipalAcessorios/" + this.fuImagenPrincipal.FileName;
+
+                        this.MostrarFotoPrincipal.ImageUrl = UrlFotoPrincipal;
+
+                    }
+                    else
+                    {
+                        this.lblMensaje.MensajeActivo(2, "Ingrese foto menos extension");
+                    }
+                }
+                else
+                {
+                    this.lblMensaje.MensajeActivo(2, "El Formato de imagen no es valido ");
+                }
+            }
+          
+        }
+
+        private string UrlFotoPrincipal
+        {
+            get{ return Session["ImagenPrincipal"] as string; }
+            set { Session["ImagenPrincipal"] = value; }
+        }
+
+
     }
 }

@@ -42,7 +42,11 @@
                         <asp:ListItem>Seleccione un subtipo de instrumento</asp:ListItem>
                     </asp:DropDownList>
                 </div>
-            </article>
+                <div class="form-group">
+                    
+                    <asp:Image ID="MostrarFotoPrincipal" Width="130px" Height="130px" runat="server"></asp:Image>
+                     </div>
+                    </article>
             <aside class="col-md-6 text-center">
                 <br />
                 <div class="DivFotosAdicionales">

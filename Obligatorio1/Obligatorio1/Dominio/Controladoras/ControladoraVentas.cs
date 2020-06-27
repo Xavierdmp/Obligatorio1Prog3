@@ -9,8 +9,14 @@ namespace Obligatorio1.Dominio.Controladoras
     {
         public bool AltaCarrito(Item pItem, int pIdCliente)
         {
-            return Persistencia.Controladora.Instancia.AltaCarrito(pItem, pIdCliente);
 
+            if (!this.ComprobarExistenciaCarrito(pItem.Articulo.Id)) // Evitas que se repita el articulo
+            {
+
+                return Persistencia.Controladora.Instancia.AltaCarrito(pItem, pIdCliente);
+            }
+
+            return false;
         }
         public bool BajaCarrito(int pIdCliente)
         {
@@ -28,7 +34,11 @@ namespace Obligatorio1.Dominio.Controladoras
         }
 
 
+        public bool ComprobarExistenciaCarrito(int pIdArticulo)
+        {
+            return Persistencia.Controladora.Instancia.ComprobarExistenciaCarrito(pIdArticulo);
 
+        }
 
     }
 }

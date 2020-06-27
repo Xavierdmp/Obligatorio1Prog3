@@ -79,5 +79,23 @@ namespace Obligatorio1.Persistencia
             return Conexion.Instancia.InicializarConsulta("delete from CarritoCompras where Id_Articulo=" + pIdArticulo + " and Id_Cliente=" + pIdCliente);
         }
 
-       }
-    }    
+        public bool ComprobarExistenciaArticulo(int pId)
+        {
+            string consulta = "select * from CarritoCompras where Id_Articulo=" + pId;
+
+            DataSet datos = Conexion.Instancia.InicializarSeleccion(consulta);
+
+            if (datos.Tables[0].Rows.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+            }
+        }
+
+}
+    

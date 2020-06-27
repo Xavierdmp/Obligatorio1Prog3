@@ -59,9 +59,11 @@
                 <div class="modal-body">
                     <asp:Label ID="Label3" runat="server" Text="Cantidad"></asp:Label>
                     <asp:TextBox ID="txtCantidad" runat="server"></asp:TextBox>
+               
                 </div>
                 <div class="modal-footer">
-                    <asp:Button ID="btnConfirmarCantidadStock" runat="server" Text="Confirmar" OnClick="btnConfirmarCantidadStock_Click" />
+
+                    <asp:Button ID="btnConfirmarCantidadStock" ValidationGroup="vgValidarStock" runat="server" Text="Confirmar" OnClick="btnConfirmarCantidadStock_Click" />
 
                 </div>
             </div>
