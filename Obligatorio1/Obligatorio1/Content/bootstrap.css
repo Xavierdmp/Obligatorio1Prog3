@@ -183,7 +183,6 @@ input[type="reset"],
 input[type="submit"] {
   cursor: pointer;
   -webkit-appearance: button;
-    margin-left: 0;
 }
 
 button[disabled],
@@ -1752,7 +1751,6 @@ textarea.form-control {
 
 .form-group {
   margin-bottom: 15px;
-    margin-left: 40px;
 }
 
 .radio,

@@ -11,17 +11,25 @@ namespace Obligatorio1.Presentacion.SeccionPublica.Ventas
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            this.CargarCarrito();
+            if (!this.IsPostBack)
+            {
+                this.CargarCarrito();
+            }
+            else
+            {
+                this.CargarCarrito();
+            }
         }
+ 
+
         private void CargarCarrito()
         {
             int IdClienteConectado = int.Parse(Session["ClienteLogueado"].ToString());
             Dominio.Controladoras.ControladoraVentas unaControladora = new Dominio.Controladoras.ControladoraVentas();
 
-            List<Dominio.Item> listaCarrito = unaControladora.ListarCarritoParaCliente(IdClienteConectado);
+            List<Dominio.Item> listaCarrito = unaControladora.ListaCarritoParaCliente(IdClienteConectado);
 
-            foreach (Dominio.Item unItem in listaCarrito)
+            foreach(Dominio.Item unItem in listaCarrito)
             {
                 Panel contenedorCarrito = new Panel();
                 contenedorCarrito.CssClass = "contanedorCarrito";
@@ -75,35 +83,18 @@ namespace Obligatorio1.Presentacion.SeccionPublica.Ventas
 
         }
 
-
-
-
-    
-    protected void Eliminar_Producto_Click(object sender, EventArgs e)
+        protected void Eliminar_Producto_Click(object sender, EventArgs e)
         {
-            Button clickeado = (Button)sender; //Captura la id del buton que s ehizo click
+            Button clickeado = (Button)sender;
             int IdArticulo = int.Parse(clickeado.ID);
-
-            int IdClienteConectado = int.Parse(Session["ClienteLogueado"].ToString());//Obtenes la id del cliente conectado por parametro
-
+            int IdClienteConectado = int.Parse(Session["ClienteLogueado"].ToString());
             Dominio.Controladoras.ControladoraVentas unaControladora = new Dominio.Controladoras.ControladoraVentas();
-
             if (unaControladora.BajaArticuloCarrito(IdArticulo, IdClienteConectado))
             {
-
                 this.ContenedorProductos.Controls.Clear();
-                this.CargarCarrito(); // Carga los datos
-
-
+                this.CargarCarrito();
             }
-              
-
-
-
-
         }
-
-
 
     }
 }

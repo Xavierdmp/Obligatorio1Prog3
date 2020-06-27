@@ -9,7 +9,7 @@ namespace Obligatorio1.Persistencia
 {
     public class pColor:IABM<Color>,IBuscar<Color>
     {
-        private static pColor _instancia;
+        private static pColor _instancia = null;
 
         public static pColor Instancia
         {
@@ -21,6 +21,8 @@ namespace Obligatorio1.Persistencia
                 return _instancia;
             }
         }
+
+        private pColor() { }
 
         public Color Buscar(int pId)
         {

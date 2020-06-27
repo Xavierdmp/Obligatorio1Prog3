@@ -8,12 +8,11 @@ namespace Obligatorio1.Dominio
     public class Item
     {
         private int _id;
+        private Articulo _articulo;
         private int _cantidad;
         private int _precio;
         private Color _color;
-        private Articulo _articulo;
 
-        //APLICAR POLIMORFISMO UTILIZANDO ARTICULOS EN VEZ DE INSTRUMENTO Y ACCESORIOS
 
         public int Id
         {
@@ -21,7 +20,14 @@ namespace Obligatorio1.Dominio
             set { _id = value; }
         }
 
-         public int Cantidad
+
+        public Articulo Articulo
+        {
+            get { return _articulo; }
+            set { _articulo = value; }
+        }
+
+        public int Cantidad
         {
             get { return _cantidad; }
             set { _cantidad = value; }
@@ -33,43 +39,31 @@ namespace Obligatorio1.Dominio
             set { _precio = value; }
         }
 
-       
-
         public Color Color
         {
             get { return _color; }
             set { _color = value; }
         }
 
-        public Articulo Articulo
-        {
-            get { return _articulo; }
-            set { _articulo = value; }
-        }
-
-
-
         private int CalcularPrecioTotal(int pCantidad)
         {
             int total = this.Articulo.Precio * pCantidad;
-
             return total;
         }
 
-        public Item( Articulo pArticulo,int pCantidad, Color pColor)
+        public Item(Articulo pArticulo, int pCantidad, Color pColor)
         {
             this.Articulo = pArticulo;
             this.Cantidad = pCantidad;
             this.Precio = this.CalcularPrecioTotal(pCantidad);
             this.Color = pColor;
         }
-        
+
         public Item(Articulo pArticulo, int pCantidad)
         {
             this.Articulo = pArticulo;
             this.Cantidad = pCantidad;
             this.Precio = this.CalcularPrecioTotal(pCantidad);
-            
         }
 
         public Item()

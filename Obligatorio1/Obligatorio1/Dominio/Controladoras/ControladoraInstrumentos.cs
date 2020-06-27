@@ -36,19 +36,19 @@ namespace Obligatorio1.Dominio.Controladoras
             return Persistencia.Controladora.Instancia.ListarInstrumentos();
         }
 
-        public bool Modificar(Instrumento pInstrumento)
+        public bool Modificar(Instrumento pT)
         {
-            return Persistencia.Controladora.Instancia.ModificarInstrumento(pInstrumento);
+            return Persistencia.Controladora.Instancia.ModificarInstrumento(pT);
         }
 
-        public List<Color> ListarColoresparaInstrumentos(int pId)
+        public List<FotosAdicionales> ListarFotosAdicionalesParaInstrumento(int pId)
+        {
+            return Persistencia.Controladora.Instancia.FotosAdicionalesDadoInstrumento(pId);
+        }
+
+        public List<Color> ListarColoresParaInstrumento(int pId)
         {
             return Persistencia.Controladora.Instancia.ColoresDadoInstrumento(pId);
-        }
-
-        public List<FotosAdicionales> ListarFotosAdicionalesparaInstrumento(int pId)
-        {
-            return Persistencia.Controladora.Instancia.ListarFotosAdicionalesAccesorio(pId);
         }
     }
 }

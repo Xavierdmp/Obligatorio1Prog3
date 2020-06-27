@@ -9,7 +9,7 @@ namespace Obligatorio1.Persistencia
 {
     public class pListadoArticulos
     {
-        private static pListadoArticulos _instancia;
+        private static pListadoArticulos _instancia = null;
 
         public static pListadoArticulos Instancia
         {
@@ -18,19 +18,34 @@ namespace Obligatorio1.Persistencia
                 if (_instancia == null)
                 {
                     _instancia = new pListadoArticulos();
-
                 }
                 return _instancia;
             }
         }
-        public List<Articulo> ListadoArticulo()
+
+        private pListadoArticulos() { }
+
+        public int CantidadArticulos()
+        {
+            string consulta = "select count(*) from Articulos;";
+            DataSet datos = Conexion.Instancia.InicializarSeleccion(consulta);
+            int cantidad = 0;
+            if (datos.Tables[0].Rows.Count > 0)
+            {
+                DataRowCollection tabla = datos.Tables[0].Rows;
+                foreach (DataRow row in tabla)
+                {
+                    object[] elementos = row.ItemArray;
+                    cantidad = int.Parse(elementos[0].ToString());
+                }
+            }
+            return cantidad;
+        }
+        public List<Articulo> ListadoDeArticulos()
         {
             string consulta = "Select a.* from Articulos a, Accesorios acc where" + " a.Id_Articulo = acc.Id_Accesorio";
-
             DataSet datos = Conexion.Instancia.InicializarSeleccion(consulta);
-
-            List<Articulo> ListarArticulos = new List<Articulo>();
-
+            List<Articulo> listaArticulos = new List<Articulo>();
             if (datos.Tables[0].Rows.Count > 0)
             {
                 DataRowCollection tabla = datos.Tables[0].Rows;
@@ -46,11 +61,9 @@ namespace Obligatorio1.Persistencia
                     unAccesorio.FotoPrincipal = elementos[4].ToString();
                     unAccesorio.Precio = int.Parse(elementos[5].ToString());
                     unAccesorio.Stock = int.Parse(elementos[6].ToString());
-                    ListarArticulos.Add(unAccesorio);
+                    listaArticulos.Add(unAccesorio);
                 }
-      
             }
-
             string consultaInstrumento = "Select * from Instrumentos i, Articulos a where i.Id_Instrumento = a.Id_Articulo;";
             DataSet datosInstrumento = Conexion.Instancia.InicializarSeleccion(consultaInstrumento);
             if (datosInstrumento.Tables[0].Rows.Count > 0)
@@ -74,32 +87,13 @@ namespace Obligatorio1.Persistencia
                     unInstrumento.FotoPrincipal = element[10].ToString();
                     unInstrumento.Precio = int.Parse(element[11].ToString());
                     unInstrumento.Stock = int.Parse(element[12].ToString());
-                    ListarArticulos.Add(unInstrumento);
+                    listaArticulos.Add(unInstrumento);
                 }
-         
+
             }
-            return ListarArticulos; 
-        }
-        public int CantidadArticulos()
-        {
-            string consulta = "select count(*) from Articulos;";
-            DataSet datos = Conexion.Instancia.InicializarSeleccion(consulta);
-            int cantidad = 0;
-            if (datos.Tables[0].Rows.Count > 0)
-            {
-                DataRowCollection tabla = datos.Tables[0].Rows;
-                foreach (DataRow row in tabla)
-                {
-                    object[] elementos = row.ItemArray;
-                    cantidad = int.Parse(elementos[0].ToString());
-                }
-            }
-            return cantidad;
+
+            return listaArticulos;
         }
 
     }
 }
-        
-
-        
-           

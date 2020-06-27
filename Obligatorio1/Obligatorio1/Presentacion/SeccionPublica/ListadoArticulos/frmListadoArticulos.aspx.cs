@@ -9,41 +9,74 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
 {
     public partial class frmListadoArticulos : System.Web.UI.Page
     {
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!this.IsPostBack)
             {
-                IndicePaginado = 0; // Comienza el paginado.
-
-
+                IndicePaginado = 0;
+                IndiceAnterior = 0;
             }
-            this.ListadoPaginado(IndicePaginado);
+             this.ListadoPaginado(IndiceAnterior);
 
+            
         }
-        private int IndicePaginado        {            get
-            {                int result = 0;                if (Session["InicioPaginado"] != null)                {
+        private int IndicePaginado
+        {
 
-                    int.TryParse(Session["InicioPaginado"].ToString(), out result);                }                return result;            }            set            {                Session["InicioPaginado"] = value;            }        }
+            get {
+                int result = 0;
+                if (Session["InicioPaginado"] != null)
+                {
+                    
+                     int.TryParse(Session["InicioPaginado"].ToString(),out result);
+                }
+                return result;
+            }
+            set
+            {
+                Session["InicioPaginado"] = value;
+            }
+        }
+        private int IndiceAnterior
+        {
+
+            get
+            {
+                int result = 0;
+                if (Session["IndiceAnterior"] != null)
+                {
+
+                    int.TryParse(Session["IndiceAnterior"].ToString(), out result);
+                }
+                return result;
+            }
+            set
+            {
+                Session["IndiceAnterior"] = value;
+            }
+        }
+
+
         private void ListadoPaginado(int pIndice)
         {
-            
+            this.ContenedorPrincipal.Controls.Clear();
             Dominio.Controladoras.ControladoraListado listados = new Dominio.Controladoras.ControladoraListado();
             List<Dominio.Articulo> listaPaginada = listados.Paginado(pIndice);
             foreach (Dominio.Articulo unArticulo in listaPaginada)
             {
                 Panel ContenedorImagen = new Panel();
                 ImageButton ImagenPrincipal = new ImageButton();
-                ImagenPrincipal.Click += btnVerDetalleClick;
-
+                ImagenPrincipal.Click += btnVerDetalle_Click;
+                
                 ImagenPrincipal.ImageUrl = unArticulo.FotoPrincipal;
                 ImagenPrincipal.CssClass = "ImagenPrincipal";
                 ImagenPrincipal.ID = unArticulo.Id.ToString();
                 ContenedorImagen.Controls.Add(ImagenPrincipal);
-
                 Panel ContenedorTexto = new Panel();
                 ContenedorTexto.CssClass = "ContenedorTexto";
                 Label Precio = new Label();
-                Precio.Text = "$ " + unArticulo.Precio.ToString() + " ";
+                Precio.Text = "$ " + unArticulo.Precio.ToString() +" " ;
                 Precio.CssClass = "Precio";
                 Label Nombre = new Label();
                 Nombre.Text = unArticulo.Nombre;
@@ -83,15 +116,15 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
                     ContenedorTexto.Controls.Add(Nombre);
                 }
 
-                Panel ContenedorArticulos = new Panel();
-                ContenedorArticulos.CssClass = "ContenedorArticulos col-md-9 text-center";
-                ContenedorArticulos.Attributes.Add("Style", "outline: none; width: 240px;");
+                    Panel ContenedorArticulos = new Panel();
+                    ContenedorArticulos.CssClass = "ContenedorArticulos col-md-9 text-center";
+                    ContenedorArticulos.Attributes.Add("Style", "outline: none; width: 240px;");
 
-                ContenedorArticulos.Controls.Add(ContenedorImagen);
-                ContenedorArticulos.Controls.Add(ContenedorTexto);
+                    ContenedorArticulos.Controls.Add(ContenedorImagen);
+                    ContenedorArticulos.Controls.Add(ContenedorTexto);
 
-                this.ContenedorPrincipal.Controls.Add(ContenedorArticulos);
-            }
+                    this.ContenedorPrincipal.Controls.Add(ContenedorArticulos);
+                }
             this.ContenedorPrincipal.DataBind();
         }
 
@@ -102,45 +135,40 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
             {
                 IndicePaginado = 5;
             }
-                int indiceAnterior = IndicePaginado;
-                IndicePaginado = indiceAnterior + indiceAnterior;
-                if (listados.CantidadFilas(indiceAnterior))
-                {
-                    this.ListadoPaginado(indiceAnterior);
-                }
-                else
-                {
-                    this.ListadoPaginado(indiceAnterior);
-                    this.btnSiguiente.Enabled = false;
-                }
-
+            //int indiceAnterior = IndicePaginado;
+            //IndicePaginado = indiceAnterior + indiceAnterior;
+            IndiceAnterior = IndicePaginado;
+            IndicePaginado += IndiceAnterior;
+            if (listados.CantidadFilas(IndiceAnterior))
+            {
+    
+                this.ListadoPaginado(IndiceAnterior);
             }
-        
-        protected void btnVerDetalleClick(object sender, ImageClickEventArgs e)
+            else
+            {
+                this.ListadoPaginado(IndiceAnterior);
+                this.btnSiguiente.Enabled = false;
+            }
+        }
+
+        protected void btnVerDetalle_Click(object sender, ImageClickEventArgs e)
         {
-            ImageButton ImagenSeleccionada = (ImageButton) sender;   //captura que imagen se hizo clic, para saber si es intrumento o articulo
-
-            int idArticulo = int.Parse(ImagenSeleccionada.ID);
-            Dominio.Controladoras.ControladoraAccesorio unacontroladoraAccesorio = new Dominio.Controladoras.ControladoraAccesorio(); // Instanciamos para saber si es articulo accesorio
+            ImageButton imagenSeleccionada = (ImageButton)sender;
+            int IdArticulo = int.Parse(imagenSeleccionada.ID);
+            Dominio.Controladoras.ControladoraAccesorio unaControladoraAccesiorio = new Dominio.Controladoras.ControladoraAccesorio();
             Dominio.Controladoras.ControladoraInstrumentos unaControladoraInstrumento = new Dominio.Controladoras.ControladoraInstrumentos();
-
-            if (unaControladoraInstrumento.Buscar(idArticulo) != null)
+            
+            if(unaControladoraAccesiorio.Buscar(IdArticulo) != null)
             {
-                Session["InstrumentoDetalle"] = idArticulo;
-
+                Session["AccesorioDetalle"] = IdArticulo;
+                Response.Redirect("~/Presentacion/SeccionPublica/DetalleArticulos/frmDetalleAccesorio.aspx");
             }
-            else if (unacontroladoraAccesorio.Buscar(idArticulo) != null)
+            else if(unaControladoraInstrumento.Buscar(IdArticulo)!= null)
             {
-                Session["AccesorioDetalle"] = idArticulo;
-                Response.Redirect("~/Presentacion/SeccionPublica/DetallesArticulos/frmDetalleAccesorio.aspx"); //Al presionar un articulo lo lleva a esa imagen.
-
+                Session["InstrumentoDetalle"] = IdArticulo;
+                Response.Redirect("~/Presentacion/SeccionPublica/DetalleArticulos/frmDetalleInstrumentos.aspx");
             }
-
 
         }
-        
-     
-        
     }
 }
- 

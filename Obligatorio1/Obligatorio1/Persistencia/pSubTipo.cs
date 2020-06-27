@@ -10,7 +10,7 @@ namespace Obligatorio1.Persistencia
 {
     public class pSubTipo : IABM<SubTipo>, IBuscar<SubTipo>
     {
-        private static pSubTipo _instancia;
+        private static pSubTipo _instancia = null;
 
         public static pSubTipo Instancia
         {
@@ -21,6 +21,11 @@ namespace Obligatorio1.Persistencia
                 }
                 return _instancia;
             }
+        }
+
+        private pSubTipo()
+        {
+
         }
 
         public bool ComprobarExistencia(string pNombre)

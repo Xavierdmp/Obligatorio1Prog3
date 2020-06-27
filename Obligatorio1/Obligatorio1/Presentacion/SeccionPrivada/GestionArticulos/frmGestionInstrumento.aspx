@@ -34,19 +34,17 @@
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtPrecio" ErrorMessage="El precio es obligatorio" ForeColor="#CC3300" ValidationGroup="vgGestion"></asp:RequiredFieldValidator>
                 </div>
                 <div class="form-group">
-                     <!-- stock -->
+                    <asp:Label ID="Label4" runat="server" Text="Imagen principal" Font-Bold="True"></asp:Label>
+                    <asp:FileUpload ID="fuImagenPrincipal" runat="server" class="form-control" Width="281px" ToolTip="Seleccione imagen" />
                 </div>
+                <br />
                 <div class="form-group">
                     <asp:Label ID="Label6" runat="server" Text="Subtipo" Font-Bold="True"></asp:Label>
                     <asp:DropDownList ID="dplListarSubtipo" runat="server" class="form-control" Width="280px" AutoPostBack="True" AppendDataBoundItems="True">
                         <asp:ListItem>Seleccione un subtipo de instrumento</asp:ListItem>
                     </asp:DropDownList>
                 </div>
-                <div class="form-group">
-                    
-                    <asp:Image ID="MostrarFotoPrincipal" Width="130px" Height="130px" runat="server"></asp:Image>
-                     </div>
-                    </article>
+            </article>
             <aside class="col-md-6 text-center">
                 <br />
                 <div class="DivFotosAdicionales">
@@ -92,7 +90,7 @@
             <article class="col-md-3">
                 <div class="form-group">
                     <asp:Label ID="Label11" runat="server" Text="Fecha Fabricacion" Font-Bold="True"></asp:Label>
-                    <asp:TextBox ID="txtFechaFabricacion"  CssClass="InputsColores" runat="server" TextMode="Date"></asp:TextBox>
+                    <asp:TextBox ID="txtFechaFabricacion" runat="server" placeholder="Ingrese Fecha" class="form-control" Width="281px" TextMode="Date"></asp:TextBox>
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label13" runat="server" Text="Url Video" Font-Bold="True"></asp:Label>
@@ -116,9 +114,10 @@
                 &nbsp;</div>
             </article>
             <aside class="col-md-6">
-                <div class="form-group">
-                    <asp:Label ID="Label4" runat="server" Text="Imagen principal" Font-Bold="True"></asp:Label>
-                    <asp:FileUpload ID="fuImagenPrincipal" runat="server" class="form-control" Width="281px" ToolTip="Seleccione una imagen principal" />
+                <div class="form-group text-center">
+                    <span>Imagen principal seleccionada</span>
+                    <br />
+                 <asp:Image ID="MostrarFotoPrincipal" runat="server" Height="130px" Width="130px" />
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label15" runat="server" Text="Colores: " Font-Bold="True"></asp:Label>
@@ -277,5 +276,4 @@
 
         </div>
     </div>
-     
 </asp:Content>

@@ -17,7 +17,16 @@
     margin-top:100px;
     border-radius: 10px;
     box-shadow: 0px 0px  10px 0px #000;
-    width:50%;
+    width:30em;
+    margin-left:auto; 
+    margin-right:auto;
+    padding:10px;
+}
+.DivPrincipalRegister{
+    margin-top:100px;
+    border-radius: 10px;
+    box-shadow: 0px 0px  10px 0px #000;
+    width:33em;
     margin-left:auto; 
     margin-right:auto;
     padding:10px;
@@ -315,7 +324,6 @@ margin-top:10px;
             cursor: pointer;
             display: block;
             padding: 2px;
-            position: relative;
             z-index: 10;
             margin-top: 10px;
             display: block;
@@ -343,9 +351,11 @@ top:2em;
 }
 .TituloDetalle{
     font-size:2.5rem;
+
 }
 .AyudantesTitulo{
     font-weight:bold;
+   
 }
 .PrecioDetalle{
     font-size:3rem;
@@ -355,10 +365,24 @@ top:2em;
 .AgregarCarrito{
     width:30em;
    position:relative;
-   top:80px;
-   left:2rem;
+   top:3em;
+
+
 }
-       .ImagenPrueba {
+.ColoresDetalle{
+    border-radius:50%;
+    width:4em;
+    height:3em;
+    border: 1px solid #ddd;
+    border-left-width: 0;
+    border-top-width: 0;
+    margin:5px;
+}
+.AgregarCarritoInstrumento{
+    width:30em;
+}
+
+        .ImagenPrueba {
             width: 180px;
             height: 180px;
         }
@@ -374,4 +398,27 @@ top:2em;
         .Cerrar {
             background-color: white;
             border: none;
+            color:#ff0000;
         }
+
+
+.BordeTxt {
+ border: none;
+ outline: none;
+ border-bottom: 0.5px solid #ccc;
+ text-align:justify;
+  color: #555555;
+  border-radius: 2px;
+   text-indent: 20%;
+ }
+
+.StockDisponible{
+    margin-left: 8px;
+    color: #acacac;
+    font-size: 14px;
+    font-weight: 400;
+}   
+.Titulo{
+    color:#4495ee;
+    margin-left:8em;
+}

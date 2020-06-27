@@ -13,7 +13,6 @@ namespace Obligatorio1.Dominio
         private List<Color> _listaColores;
         private bool _destacado = false;
         private SubTipo _subtipo;
-        
 
         public DateTime FechaFabricacion
         {
@@ -49,6 +48,17 @@ namespace Obligatorio1.Dominio
         {
             get { return this.SubTipo.Id; }
         }
+
+        public void CalcularStock()
+        {
+            int sumaTotal = 0;
+            foreach(Color unColor in _listaColores)
+            {
+                sumaTotal += unColor.Cantidad;
+            }
+            this.Stock = sumaTotal;
+        }
+
         public Instrumento(string pNombre, string pDescripcion, Fabricante pFabricante,
                         string pFotoPrincipal, List<FotosAdicionales> pFotosAdicionales,
                         int pPrecio, SubTipo pSubtipo, int pStock, DateTime pFecha, string pUrlVideo,
@@ -62,17 +72,6 @@ namespace Obligatorio1.Dominio
             this.Destacado = pDestacado;
             this.SubTipo = pSubtipo;
         }
-
-        public void CalcularStock()
-        {
-            int sumaTotal = 0;
-            foreach (Color unColor in _listaColores)
-            {
-                sumaTotal += unColor.Cantidad;
-            }
-            this.Stock = sumaTotal;
-        }
-
 
         public Instrumento(string pNombre, string pDescripcion, Fabricante pFabricante,
                         string pFotoPrincipal,

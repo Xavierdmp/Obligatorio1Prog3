@@ -10,7 +10,7 @@ namespace Obligatorio1.Persistencia
 {
     public class pTipo : IABM<Tipo>, IBuscar<Tipo>
     {
-        private static pTipo _instancia;
+        private static pTipo _instancia = null;
 
         public static pTipo Instancia
         {
@@ -24,6 +24,8 @@ namespace Obligatorio1.Persistencia
                 return _instancia;
             }
         }
+
+        private pTipo() { }
 
         public bool ComprobarExistencia(string pNombre)
         {

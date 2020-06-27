@@ -12,7 +12,7 @@ namespace Obligatorio1.Persistencia
         private static string _cadenaConexion;
         private static Conexion _instancia = null;
 
-        public Conexion()
+        private Conexion()
         {
             _cadenaConexion = WebConfigurationManager.ConnectionStrings["ConexionAplicacion"].ConnectionString;
         }
@@ -49,7 +49,7 @@ namespace Obligatorio1.Persistencia
             SqlConnection conexion = null;
             try
             {
-                 conexion = Conectar();
+                conexion = Conectar();
                 SqlCommand comandos = new SqlCommand();
 
                 comandos.CommandText = pConsulta;
@@ -60,14 +60,11 @@ namespace Obligatorio1.Persistencia
             }
             catch (Exception)
             {
-
                 throw;
-
             }
-
             finally
             {
-                if (conexion != null && conexion.State == ConnectionState.Open)
+                if(conexion != null && conexion.State == ConnectionState.Open)
                 {
                     conexion.Close();
                     conexion.Dispose();
@@ -99,7 +96,6 @@ namespace Obligatorio1.Persistencia
             {
 
                 throw;
-
             }
             finally
             {

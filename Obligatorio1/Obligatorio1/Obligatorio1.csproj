@@ -190,13 +190,13 @@
     <Content Include="Presentacion\SeccionPrivada\GestionAdministradores\frmModificarAdministrador.aspx" />
     <Content Include="Presentacion\SeccionPrivada\GestionTipos\frmTiposInstrumentos.aspx" />
     <Content Include="Presentacion\SeccionPrivada\SiteMasterPrivate\frmPrivate.Master" />
-    <Content Include="ClassDiagram1.cd" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Imagenes\SiteMasters\icono.ico" />
     <Content Include="Imagenes\SiteMasters\Logo.png" />
     <Content Include="Presentacion\Autenticación\frmIniciarSesion.aspx" />
     <Content Include="Presentacion\Controles\lblMensaje.ascx" />
-    <Content Include="Presentacion\SeccionPublica\DetallesArticulos\frmDetalleAccesorio.aspx" />
+    <Content Include="Presentacion\SeccionPublica\DetalleArticulos\frmDetalleAccesorio.aspx" />
+    <Content Include="Presentacion\SeccionPublica\DetalleArticulos\frmDetalleInstrumentos.aspx" />
     <Content Include="Presentacion\SeccionPublica\GestionCliente\frmRegistrarCliente.aspx" />
     <Content Include="Presentacion\SeccionPublica\ListadoArticulos\frmListadoArticulos.aspx" />
     <Content Include="Presentacion\SeccionPublica\Ventas\frmCarritoDeCompras.aspx" />
@@ -509,12 +509,19 @@
     <Compile Include="Presentacion\SeccionPrivada\SiteMasterPrivate\frmPrivate.Master.designer.cs">
       <DependentUpon>frmPrivate.Master</DependentUpon>
     </Compile>
-    <Compile Include="Presentacion\SeccionPublica\DetallesArticulos\frmDetalleAccesorio.aspx.cs">
+    <Compile Include="Presentacion\SeccionPublica\DetalleArticulos\frmDetalleAccesorio.aspx.cs">
       <DependentUpon>frmDetalleAccesorio.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Presentacion\SeccionPublica\DetallesArticulos\frmDetalleAccesorio.aspx.designer.cs">
+    <Compile Include="Presentacion\SeccionPublica\DetalleArticulos\frmDetalleAccesorio.aspx.designer.cs">
       <DependentUpon>frmDetalleAccesorio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\SeccionPublica\DetalleArticulos\frmDetalleInstrumentos.aspx.cs">
+      <DependentUpon>frmDetalleInstrumentos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\SeccionPublica\DetalleArticulos\frmDetalleInstrumentos.aspx.designer.cs">
+      <DependentUpon>frmDetalleInstrumentos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\SeccionPublica\GestionCliente\frmRegistrarCliente.aspx.cs">
       <DependentUpon>frmRegistrarCliente.aspx</DependentUpon>
@@ -571,7 +578,6 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
-  <PropertyGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />

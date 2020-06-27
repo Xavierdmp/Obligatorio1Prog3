@@ -11,7 +11,7 @@ namespace Obligatorio1.Persistencia
 {
     public class pFabricante : IABM<Fabricante>, IBuscar<Fabricante>
     {
-        private static pFabricante _instancia;
+        private static pFabricante _instancia = null;
 
         public static pFabricante Instancia
         {
@@ -24,6 +24,7 @@ namespace Obligatorio1.Persistencia
                 return _instancia;
             }
         }
+        private pFabricante() { }
 
         public bool ComprobarExistencia(string pNombre)
         {

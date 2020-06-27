@@ -10,7 +10,7 @@ namespace Obligatorio1.Persistencia
 {
     public class pAdministrador : IABM<Administrador>, IBuscar<Administrador>
     {
-        private static pAdministrador _instancia;
+        private static pAdministrador _instancia = null;
 
         public static pAdministrador Instancia
         {
@@ -23,6 +23,8 @@ namespace Obligatorio1.Persistencia
                 return _instancia;
             }
         }
+        private pAdministrador() { }
+
         const string UltimaId = "Declare @UltimaId int; Set @UltimaId = @@Identity;";
 
         public bool ComprobarExistencia(string pCorreoElectronico)

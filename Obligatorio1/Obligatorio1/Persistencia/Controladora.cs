@@ -7,7 +7,7 @@ namespace Obligatorio1.Persistencia
 {
     public class Controladora
     {
-        private static Controladora _instancia;
+        private static Controladora _instancia = null;
 
         public static Controladora Instancia
         {
@@ -18,6 +18,10 @@ namespace Obligatorio1.Persistencia
                 }
                 return _instancia;
             }
+        }
+        private Controladora()
+        {
+
         }
 
 
@@ -261,14 +265,12 @@ namespace Obligatorio1.Persistencia
         }
         public List<Color> ColoresDadoInstrumento(int pId)
         {
-            return pInstrumento.Instancia.TraerColoresParaInstrumentos(pId);
+            return pInstrumento.Instancia.TraerColoresParaInstrumento(pId);
         }
-
-        public List<FotosAdicionales> FotosAdicionales(int pId)
+        public List<FotosAdicionales> FotosAdicionalesDadoInstrumento(int pId)
         {
-            return pInstrumento.Instancia.TraerFotosAdicionalesParaInstrumentos(pId);
+            return pInstrumento.Instancia.TraerFotosAdicionalesParaInstrumento(pId);
         }
-
         public bool BajaInstrumento(int pId)
         {
             return pInstrumento.Instancia.Baja(pId);
@@ -277,59 +279,42 @@ namespace Obligatorio1.Persistencia
         {
             return pInstrumento.Instancia.Modificar(pIns);
         }
-
-
         #endregion
 
-
-        #region "Listar Articulos para Seccion Publica"
+        #region "Listar Articulos Para Seccion Publica"
 
         public List<Articulo> ListadoArticulos()
         {
-            return pListadoArticulos.Instancia.ListadoArticulo();
+            return pListadoArticulos.Instancia.ListadoDeArticulos();
         }
         public int CantidadArticulos()
         {
             return pListadoArticulos.Instancia.CantidadArticulos();
         }
-
         #endregion
 
-
-        #region Carrito de Compras
-
+        #region "Carrito de Compras"
         public bool AltaCarrito(Item pItem,int pIdCliente)
         {
             return pCarrito.Instancia.AltaCarrito(pItem, pIdCliente);
-
         }
         public bool BajaCarrito(int pIdCliente)
         {
             return pCarrito.Instancia.EliminarCarrito(pIdCliente);
         }
-        public List<Item> ListadeItemsCarrito(int pIdCliente)
+        public List<Item> ListaItemsCarrito(int pIdCliente)
         {
             return pCarrito.Instancia.ListaCarrito(pIdCliente);
         }
 
-
-        public bool BajaArticuloCarrito(int pidArticulo, int pIdCliente)
+        public bool BajaArticuloCarrito(int pIdArticulo, int pIdCliente)
         {
-            return pCarrito.Instancia.EliminarArticuloCarrito(pidArticulo, pIdCliente);
+            return pCarrito.Instancia.EliminarArticuloDeCarrito(pIdArticulo, pIdCliente);
         }
-
-
         public bool ComprobarExistenciaCarrito(int pIdArticulo)
         {
             return pCarrito.Instancia.ComprobarExistenciaArticulo(pIdArticulo);
         }
-
         #endregion
-
-
-
-
-
     }
-
 }
