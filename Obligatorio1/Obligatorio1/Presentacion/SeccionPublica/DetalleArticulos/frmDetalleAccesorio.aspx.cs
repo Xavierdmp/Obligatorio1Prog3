@@ -30,10 +30,14 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
                     ImageButton imagenOpcional = new ImageButton();
                     imagenOpcional.ImageUrl = unaFoto.Url;
                     imagenOpcional.CssClass = "ImagenesOpcionales";
-                    this.ImagenesOpcionales.Controls.Add(imagenOpcional);
                     imagenOpcional.Attributes.Add("onmouseover", "changeImage(this)");
-                   
+                    this.ImagenesOpcionales.Controls.Add(imagenOpcional);
                 }
+                ImageButton imagenOpcionaFotoPrincipal = new ImageButton();
+                imagenOpcionaFotoPrincipal.ImageUrl = unAccesorio.FotoPrincipal;
+                imagenOpcionaFotoPrincipal.CssClass = "ImagenesOpcionales";
+                imagenOpcionaFotoPrincipal.Attributes.Add("onmouseover", "changeImage(this)");
+                this.ImagenesOpcionales.Controls.Add(imagenOpcionaFotoPrincipal);
             }
             this.lblNombre.Text = unAccesorio.Nombre;
             this.lblDescripcion.Text = unAccesorio.Descripcion;

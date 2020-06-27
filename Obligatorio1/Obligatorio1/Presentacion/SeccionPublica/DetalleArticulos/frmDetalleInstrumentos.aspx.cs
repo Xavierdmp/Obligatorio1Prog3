@@ -33,6 +33,11 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
                     imagenOpcional.Attributes.Add("onmouseover", "changeImage(this)");
 
                 }
+                ImageButton imagenOpcionaFotoPrincipal = new ImageButton();
+                imagenOpcionaFotoPrincipal.ImageUrl = unInstrumento.FotoPrincipal;
+                imagenOpcionaFotoPrincipal.CssClass = "ImagenesOpcionales";
+                imagenOpcionaFotoPrincipal.Attributes.Add("onmouseover", "changeImage(this)");
+                this.ImagenesOpcionales.Controls.Add(imagenOpcionaFotoPrincipal);
             }
             List<Dominio.Color> listaColores = unaControladora.ListarColoresParaInstrumento(IdAccesorio);
 

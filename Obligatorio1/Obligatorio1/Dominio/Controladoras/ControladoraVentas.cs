@@ -9,7 +9,11 @@ namespace Obligatorio1.Dominio.Controladoras
     {
         public bool AltaCarrito(Item pItem, int pIdCliente)
         {
-            return Persistencia.Controladora.Instancia.AltaCarrito(pItem, pIdCliente);
+            if (!this.comprobarExistenciaCarrito(pItem.Articulo.Id))
+            {
+                return Persistencia.Controladora.Instancia.AltaCarrito(pItem, pIdCliente);
+            }
+            return false;
         }
 
         public bool BajaCarrito(int pIdCliente)
@@ -24,6 +28,11 @@ namespace Obligatorio1.Dominio.Controladoras
         public bool BajaArticuloCarrito(int pIdArticulo,int pIdCliente)
         {
             return Persistencia.Controladora.Instancia.BajaArticuloCarrito(pIdArticulo, pIdCliente);
+        }
+
+        public bool comprobarExistenciaCarrito(int pIdArticulo)
+        {
+            return Persistencia.Controladora.Instancia.ComprobarExistenciaCarrito(pIdArticulo);
         }
     }
 }
