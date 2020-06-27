@@ -2,13 +2,13 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container-fluid">
         <div class="row text-center">
-            <div class="col-md-12">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <h1>Modificar contraseña</h1>
                 <hr />
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="form-group">
                     <asp:Label ID="Label1" runat="server" Text="Correo Electronico: "></asp:Label>
                     <br>
@@ -33,7 +33,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <asp:Button ID="btnModificarAdministrador" runat="server" Text="Confirmar Modificacion" CssClass="btn btn-success" OnClick="btnModificarAdministrador_Click" ValidationGroup="vgGestion" />
             </div>
         </div>

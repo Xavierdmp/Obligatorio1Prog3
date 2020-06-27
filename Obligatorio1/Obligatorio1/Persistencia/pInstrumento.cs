@@ -10,10 +10,11 @@ namespace Obligatorio1.Persistencia
 {
     public class pInstrumento: IABM<Instrumento>, IBuscar<Instrumento>
     {
-        private static pInstrumento _instancia;
+        private static pInstrumento _instancia = null;
         const string UltimaId = "Declare @UltimaId int; Set @UltimaId = @@Identity;";
         const string UltimaIdInstrumento = "Declare @UltimaIdIns int; Set @UltimaIdIns = ident_current('Articulos');";
         private List<string> transaccion = new List<string>();
+
         public static pInstrumento Instancia
         {
             get
@@ -25,6 +26,8 @@ namespace Obligatorio1.Persistencia
                 return _instancia;
             }
         }
+
+        private pInstrumento() { }
 
         public bool ComprobarExistencia(string pNombre)
         {

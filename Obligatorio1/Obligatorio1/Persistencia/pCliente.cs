@@ -10,7 +10,7 @@ namespace Obligatorio1.Persistencia
 {
     public class pCliente
     {
-        private static pCliente _instancia;
+        private static pCliente _instancia = null;
 
         public static pCliente Instancia
         {
@@ -23,6 +23,11 @@ namespace Obligatorio1.Persistencia
                 return _instancia;
 
             }
+        }
+
+        private pCliente()
+        {
+
         }
         const string UltimaId = "Declare @UltimaId int;Set @UltimaId = @@Identity;";
 

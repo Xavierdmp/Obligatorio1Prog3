@@ -15,7 +15,10 @@ namespace Obligatorio1.Presentacion.SeccionPublica.Ventas
             {
                 this.CargarCarrito();
             }
-
+            else
+            {
+                this.CargarCarrito();
+            }
         }
  
 

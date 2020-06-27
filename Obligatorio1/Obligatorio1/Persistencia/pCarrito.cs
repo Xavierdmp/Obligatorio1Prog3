@@ -8,7 +8,7 @@ namespace Obligatorio1.Persistencia
 {
     public class pCarrito
     {
-        private static pCarrito _instancia;
+        private static pCarrito _instancia = null;
 
         public static pCarrito Instancia
         {
@@ -22,7 +22,7 @@ namespace Obligatorio1.Persistencia
             }
 
         }
-
+        private pCarrito() { }
 
         public bool AltaCarrito(Item pItem, int pIdCliente)
         {

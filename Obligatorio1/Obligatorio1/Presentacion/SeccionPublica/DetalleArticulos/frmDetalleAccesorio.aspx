@@ -3,13 +3,13 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <section class="container-fluid SeccionPrincipal">
         <article class="row">
-            <aside class="col-md-3 ImagenesAdicionales">
+            <aside class="col-xs-3 col-sm-3 col-md-3 col-lg-3 ImagenesAdicionales">
                 <asp:Panel ID="ImagenesOpcionales" runat="server"></asp:Panel>
             </aside>
-            <article class="col-md-5 ArticuloPrincipal">
+            <article class="col-xs-5 col-sm-5 col-md-5 col-lg-5 ArticuloPrincipal">
                 <asp:ImageButton ID="ImagenPrincipal" CssClass="ImagenPrincipalDetalle" runat="server" />
             </article>
-            <article class="col-md-4 SeccionInformacion">
+            <article class="col-xs-4 col-sm-4 col-md-4 col-lg-4 SeccionInformacion">
                 <asp:Label ID="lblNombre" CssClass="TituloDetalle" runat="server" Text="Label"></asp:Label>
                 <br />
                  <br />

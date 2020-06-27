@@ -42,6 +42,9 @@
                     <asp:Label ID="Label4" runat="server" Text="Imagen principal" Font-Bold="True"></asp:Label>
                     <asp:FileUpload ID="fuImagenPrincipal" runat="server" class="form-control" Width="281px" ToolTip="Seleccione una imagen principal" />
                 </div>
+                <div class="form-group">
+                    <asp:Image ID="MostrarFotoPrincipal" runat="server" Height="130px" Width="130px" />
+                </div>
             </article>
             <aside class="col-md-6 text-center">
                 <br />

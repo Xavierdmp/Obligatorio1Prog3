@@ -10,7 +10,7 @@ namespace Obligatorio1.Persistencia
 {
     public class pAccesorio:IABM<Accesorio>, IBuscar<Accesorio>
     {
-        private static pAccesorio _instancia;
+        private static pAccesorio _instancia = null;
 
         public static pAccesorio Instancia
         {
@@ -21,6 +21,10 @@ namespace Obligatorio1.Persistencia
                 }
                 return _instancia;
             }
+        }
+        private pAccesorio()
+        {
+
         }
         const string UltimaId = "Declare @UltimaId int; Set @UltimaId = @@Identity;";
 

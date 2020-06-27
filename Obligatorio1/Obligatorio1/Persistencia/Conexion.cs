@@ -12,7 +12,7 @@ namespace Obligatorio1.Persistencia
         private static string _cadenaConexion;
         private static Conexion _instancia = null;
 
-        public Conexion()
+        private Conexion()
         {
             _cadenaConexion = WebConfigurationManager.ConnectionStrings["ConexionAplicacion"].ConnectionString;
         }

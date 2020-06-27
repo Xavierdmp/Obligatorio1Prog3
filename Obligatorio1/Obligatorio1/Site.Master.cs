@@ -74,18 +74,34 @@ namespace Obligatorio1
                 this.SeInicioSesion.Visible = false;
                 this.OcultarRegister.Visible = false;
                 this.CarritoCompras.Visible = true;
+                this.ClienteConectado();
+                this.PerfilCliente.Visible = true;
             }
             else
             {
                 this.SeInicioSesion.Visible = true;
                 this.OcultarRegister.Visible = true;
                 this.CarritoCompras.Visible = false;
+                this.PerfilCliente.Visible = false;
             }
+        }
+        private void ClienteConectado()
+        {
+         int IdCliente = int.Parse(Session["ClienteLogueado"].ToString());
+         Dominio.Controladoras.ControladoraCliente unaControladoraCliente = new Dominio.Controladoras.ControladoraCliente();
+         Dominio.Cliente unCliente = unaControladoraCliente.Buscar(IdCliente);
+         this.lblClienteConectado.Text = unCliente.CorreoElectronico;
         }
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
         {
             Context.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+        }
+
+        protected void btnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            Session["ClienteLogueado"] = null;
+            Response.Redirect("~/Default.aspx");
         }
     }
 

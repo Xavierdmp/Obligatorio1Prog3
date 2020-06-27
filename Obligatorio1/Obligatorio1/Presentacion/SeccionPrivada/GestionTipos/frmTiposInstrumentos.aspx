@@ -31,7 +31,6 @@
                 <asp:Button ID="btnAltaTipo" runat="server" CssClass="btn btn-success" Text="Ingresar" OnClick="btnAltaTipo_Click" ValidationGroup="vgGestion" />
                 <asp:Button ID="btnEliminarTipo" runat="server" CssClass="btn btn-danger" Text=" Eliminar" OnClick="btnEliminarTipo_Click" ValidationGroup="vgGestion" />
                 <asp:Button ID="btnModficar" runat="server" CssClass="btn btn-success" Text=" Modificar" OnClick="btnModficar_Click" ValidationGroup="vgGestion" />
-
             </div>
         </div>
         <br />
@@ -39,10 +38,11 @@
 
         <div class="row">
             <div class="col-md-12">
-               <asp:GridView ID="GvListarTipos" runat="server" CssClass="table" BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="3px" CellPadding="4" GridLines="None" HorizontalAlign="Center" EmptyDataText="La lista se encuentra vacia" ShowHeaderWhenEmpty="True" Width="846px" AllowPaging="True" OnSelectedIndexChanged="GvListarTipos_SelectedIndexChanged" UseAccessibleHeader="False">
+                <div class="table-responsive">
+                    <asp:GridView ID="GvListarTipos" runat="server" CssClass="table" BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="3px" CellPadding="4" GridLines="None" HorizontalAlign="Center" EmptyDataText="La lista se encuentra vacia" ShowHeaderWhenEmpty="True" Width="846px" AllowPaging="True" OnSelectedIndexChanged="GvListarTipos_SelectedIndexChanged" UseAccessibleHeader="False">
                         <Columns>
-                            <asp:CommandField ShowSelectButton="True" AccessibleHeaderText="Editar-Modificar" HeaderText="Editar-Modificar" SelectText="&lt;i class=&quot;far fa-edit&quot;&gt;&lt;/i&gt;" >
-                            <ItemStyle HorizontalAlign="Center" />
+                            <asp:CommandField ShowSelectButton="True" AccessibleHeaderText="Editar-Modificar" HeaderText="Editar-Modificar" SelectText="&lt;i class=&quot;far fa-edit&quot;&gt;&lt;/i&gt;">
+                                <ItemStyle HorizontalAlign="Center" />
                             </asp:CommandField>
                         </Columns>
                         <FooterStyle BackColor="White" ForeColor="#333333" />
@@ -55,7 +55,7 @@
                         <SortedDescendingCellStyle BackColor="#E5E5E5" />
                         <SortedDescendingHeaderStyle BackColor="#275353" />
                     </asp:GridView>
-
+                </div>
             </div>
         </div>
 

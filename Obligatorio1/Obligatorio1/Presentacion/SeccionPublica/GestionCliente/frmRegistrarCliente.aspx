@@ -2,16 +2,16 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container-fluid">
-        <section class="DivPrincipal">
+        <section class="DivPrincipalRegister">
             <div class="row text-center">
-                <div class="col-md-12">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="fas fa-user"></div>
                     <span class="TituloLogin">Registrarse</span>
                     <hr />
                 </div>
             </div>
             <div class="row">
-                <article class="col-md-6">
+                <article class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                     <div class="form-group">
                         <asp:Label ID="Label1" runat="server" Text="Nombre" Font-Bold="False"></asp:Label>
                         <asp:TextBox ID="txtNombre" runat="server" CssClass=" form-control"></asp:TextBox>
@@ -33,7 +33,7 @@
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="Debe Ingresar una Direccion" ForeColor="Red" ValidationGroup="vgRegistrar" ControlToValidate="txtDireccion"></asp:RequiredFieldValidator>
                     </div>
                 </article>
-                <aside class="col-md-6">
+                <aside class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                     <div class="form-group">
                         <asp:Label ID="Label5" runat="server" Text="Apellido"></asp:Label>
                         <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control"></asp:TextBox>
@@ -57,7 +57,7 @@
                 </aside>
             </div>
             <div class="row">
-                <div class="col-md-12 text-center">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
                     <usrMensaje:AsignarMensaje ID="lblMensaje" runat="server" />
                     <asp:Button ID="btnAlta" runat="server" Text="Alta" Width="366px" CssClass="btn btn-primary" OnClick="btnAlta_Click" ValidationGroup="vgRegistrar" />
                 </div>

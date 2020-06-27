@@ -7,7 +7,7 @@ namespace Obligatorio1.Persistencia
 {
     public class Controladora
     {
-        private static Controladora _instancia;
+        private static Controladora _instancia = null;
 
         public static Controladora Instancia
         {
@@ -18,6 +18,10 @@ namespace Obligatorio1.Persistencia
                 }
                 return _instancia;
             }
+        }
+        private Controladora()
+        {
+
         }
 
 

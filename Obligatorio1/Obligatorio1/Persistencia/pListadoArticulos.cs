@@ -9,7 +9,7 @@ namespace Obligatorio1.Persistencia
 {
     public class pListadoArticulos
     {
-        private static pListadoArticulos _instancia;
+        private static pListadoArticulos _instancia = null;
 
         public static pListadoArticulos Instancia
         {
@@ -22,6 +22,9 @@ namespace Obligatorio1.Persistencia
                 return _instancia;
             }
         }
+
+        private pListadoArticulos() { }
+
         public int CantidadArticulos()
         {
             string consulta = "select count(*) from Articulos;";

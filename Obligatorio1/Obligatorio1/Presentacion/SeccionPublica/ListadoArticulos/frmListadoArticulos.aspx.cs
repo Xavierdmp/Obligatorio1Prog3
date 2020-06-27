@@ -9,14 +9,17 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
 {
     public partial class frmListadoArticulos : System.Web.UI.Page
     {
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!this.IsPostBack)
             {
                 IndicePaginado = 0;
+                IndiceAnterior = 0;
             }
+             this.ListadoPaginado(IndiceAnterior);
 
-            this.ListadoPaginado(IndicePaginado);
+            
         }
         private int IndicePaginado
         {
@@ -35,6 +38,25 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
                 Session["InicioPaginado"] = value;
             }
         }
+        private int IndiceAnterior
+        {
+
+            get
+            {
+                int result = 0;
+                if (Session["IndiceAnterior"] != null)
+                {
+
+                    int.TryParse(Session["IndiceAnterior"].ToString(), out result);
+                }
+                return result;
+            }
+            set
+            {
+                Session["IndiceAnterior"] = value;
+            }
+        }
+
 
         private void ListadoPaginado(int pIndice)
         {
@@ -51,7 +73,6 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
                 ImagenPrincipal.CssClass = "ImagenPrincipal";
                 ImagenPrincipal.ID = unArticulo.Id.ToString();
                 ContenedorImagen.Controls.Add(ImagenPrincipal);
-                
                 Panel ContenedorTexto = new Panel();
                 ContenedorTexto.CssClass = "ContenedorTexto";
                 Label Precio = new Label();
@@ -114,16 +135,18 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
             {
                 IndicePaginado = 5;
             }
-            int indiceAnterior = IndicePaginado;
-            IndicePaginado = indiceAnterior + indiceAnterior;
-            if (listados.CantidadFilas(indiceAnterior))
+            //int indiceAnterior = IndicePaginado;
+            //IndicePaginado = indiceAnterior + indiceAnterior;
+            IndiceAnterior = IndicePaginado;
+            IndicePaginado += IndiceAnterior;
+            if (listados.CantidadFilas(IndiceAnterior))
             {
     
-                this.ListadoPaginado(indiceAnterior);
+                this.ListadoPaginado(IndiceAnterior);
             }
             else
             {
-                this.ListadoPaginado(indiceAnterior);
+                this.ListadoPaginado(IndiceAnterior);
                 this.btnSiguiente.Enabled = false;
             }
         }

@@ -8,7 +8,7 @@ namespace Obligatorio1.Persistencia
 {
     public class pLogin
     {
-        private static pLogin _instancia;
+        private static pLogin _instancia = null;
 
         public static pLogin Instancia
         {
@@ -20,6 +20,10 @@ namespace Obligatorio1.Persistencia
                 }
                 return _instancia;
             }
+        }
+        private pLogin()
+        {
+
         }
 
         public int IdUsuarioConectado(string pCorreo, string pContraseña)
