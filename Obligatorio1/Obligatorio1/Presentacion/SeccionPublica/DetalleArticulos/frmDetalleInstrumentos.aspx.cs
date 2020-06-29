@@ -12,7 +12,7 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
         protected void Page_Load(object sender, EventArgs e)
         {
 
-                this.GenerarInformacion();
+               this.GenerarInformacion();
         }
 
         private void GenerarInformacion()
@@ -28,7 +28,7 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
                 {
                     ImageButton imagenOpcional = new ImageButton();
                     imagenOpcional.ImageUrl = unaFoto.Url;
-                    imagenOpcional.CssClass = "ImagenesOpcionales";
+                    imagenOpcional.CssClass = "ImagenesOpcionales img-fluid";
                     this.ImagenesOpcionales.Controls.Add(imagenOpcional);
                     imagenOpcional.Attributes.Add("onmouseover", "changeImage(this)");
 
@@ -41,7 +41,7 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
             }
             List<Dominio.Color> listaColores = unaControladora.ListarColoresParaInstrumento(IdAccesorio);
 
-            foreach(Dominio.Color unColor in listaColores)
+            foreach (Dominio.Color unColor in listaColores)
             {
                 Button Color = new Button();
                 Color.ID = unColor.Id.ToString();
@@ -58,8 +58,13 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
             this.lblPrecio.Text = "$" + unInstrumento.Precio;
             this.ImagenPrincipal.ImageUrl = unInstrumento.FotoPrincipal;
             this.MostrarVideo(unInstrumento.VideoYoutube);
-            this.GenerarListaAccesorios(unInstrumento.Id); 
+            this.lblTituloListadoAccesorio.Text = "Accesorios para: " + unInstrumento.Nombre;
+             this.GenerarListadoAccesorios(unInstrumento.Id);
+            this.lblNombreTipo.Text = unInstrumento.SubTipo.TipoInstrumento.Nombre;
+            this.lblSubtipoNombre.Text = unInstrumento.SubTipo.Nombre;
+            this.lblFechaFabricacion.Text = unInstrumento.FechaFabricacion.ToShortDateString();
         }
+
 
         protected void btnConfirmarCantidadStock_Click(object sender, EventArgs e)
         {
@@ -77,7 +82,6 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
             Session["ColorSeleccionado"] = IdColor;
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#CantidadStock').modal();", true);
         }
-
 
         protected void btnAgregarAlCarrito_Click(object sender, EventArgs e)
         {
@@ -103,16 +107,12 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
                 this.lblMensaje.MensajeActivo(2, "Inicie sesion para agregar al carrito");
             }
         }
-
         private void MostrarVideo(string pUrl)
-
         {
-            var posicionCapturar = 0;
-
             string urlVideo = "";
+            int posicionCapturar = 0;
             foreach (Char unCaracter in pUrl)
             {
-
                 if (posicionCapturar == 1)
                 {
                     urlVideo += unCaracter;
@@ -123,53 +123,52 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
                 }
 
             }
+
             this.VideoPresentacion.Attributes.Add("src", "https://www.youtube.com/embed/" + urlVideo);
-
-
         }
 
-
-        private void GenerarListaAccesorios(int pIdInstrumento)
+        private void GenerarListadoAccesorios(int pIdInstrumento)
         {
             Dominio.Controladoras.ControladoraInstrumentos unaControladora = new Dominio.Controladoras.ControladoraInstrumentos();
 
-
-            List<Dominio.Accesorio> listaAccesorios = unaControladora.ListarAccesorioParaDetalleInstrumento(pIdInstrumento);
-
+            List<Dominio.Accesorio> listaAccesorios = unaControladora.ListarAccesoriosParaDetalleInstrumento(pIdInstrumento);
+            if(listaAccesorios.Count > 0)
+            {
+                this.lblTituloListadoAccesorio.Visible = true;
+            }
+            else
+            {
+                this.lblTituloListadoAccesorio.Visible = false;
+            }
             foreach (Dominio.Accesorio unAccesorio in listaAccesorios)
             {
                 Panel swiperSlide = new Panel();
                 swiperSlide.CssClass = "swiper-slide";
-
                 Panel contenedorImagen = new Panel();
-                ImageButton Imagen = new ImageButton();
-                Imagen.ImageUrl = unAccesorio.FotoPrincipal;
-                Imagen.CssClass = " text-center ImagenSlider";
-                contenedorImagen.Controls.Add(Imagen);
+                ImageButton imagen = new ImageButton();
+                imagen.CssClass = "text-center ImagenSlider img-fluid";
+                imagen.ImageUrl = unAccesorio.FotoPrincipal;
+                contenedorImagen.Controls.Add(imagen);
 
-                Panel contenedortexto = new Panel();
-                contenedortexto.CssClass = "text-center TextoSlider";
+                Panel contenedorTexto = new Panel();
+                contenedorTexto.CssClass = "text-center TextoSlider";
 
                 Label precio = new Label();
                 precio.Text = "$" + unAccesorio.Precio;
                 precio.CssClass = "PrecioSlider";
-                contenedortexto.Controls.Add(precio);
+
+                contenedorTexto.Controls.Add(precio);
 
                 Label nombre = new Label();
                 nombre.CssClass = "TituloSlider";
                 nombre.Text = unAccesorio.Nombre;
 
-
-                contenedortexto.Controls.Add(nombre);
+                contenedorTexto.Controls.Add(nombre);
                 swiperSlide.Controls.Add(contenedorImagen);
-                swiperSlide.Controls.Add(contenedortexto);
-                this.ContenedorAccesorios.Controls.Add(swiperSlide);
+                swiperSlide.Controls.Add(contenedorTexto);
+               this.ContenedorAccesorios.Controls.Add(swiperSlide);
             }
-
             this.ContenedorAccesorios.DataBind();
-
-            }
-      
         }
-
     }
+}

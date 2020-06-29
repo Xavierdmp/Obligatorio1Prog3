@@ -180,7 +180,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Account\Web.config" />
-    <Content Include="Jquery\jquery-3.4.1.min.js" />
     <Content Include="Presentacion\SeccionPrivada\Gestion Clientes\frmEliminarCliente.aspx" />
     <Content Include="Presentacion\SeccionPrivada\GestionArticulos\frmGestionAccesorio.aspx" />
     <Content Include="Presentacion\SeccionPrivada\GestionArticulos\frmGestionInstrumento.aspx" />

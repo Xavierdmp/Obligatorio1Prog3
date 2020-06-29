@@ -280,15 +280,11 @@ namespace Obligatorio1.Persistencia
             return pInstrumento.Instancia.Modificar(pIns);
         }
 
-        public List<Accesorio> ListarAccesorioParaDetalleInstrumento(int pIdInstrumento)
+        public List<Accesorio> ListarAccesoriosParaDetalleInstrumento(int pIdInstrumento)
         {
-            return pInstrumento.Instancia.ListaAccesoriosDadoUnInstrumento(pIdInstrumento);
+            return pInstrumento.Instancia.ListaDeAccesoriosDadoUnInstrumento(pIdInstrumento);
         }
-
-
-
         #endregion
-
 
         #region "Listar Articulos Para Seccion Publica"
 
@@ -324,9 +320,18 @@ namespace Obligatorio1.Persistencia
         {
             return pCarrito.Instancia.ComprobarExistenciaArticulo(pIdArticulo);
         }
+        public int CantidadColorDisponibleParaCambiar(int pIdArticulo,int pIdCliente)
+        {
+            return pCarrito.Instancia.CantidadColor(pIdArticulo, pIdCliente);
+        }
+        public int IdArticuloSegunSuNombre(string pNombreArticulo)
+        {
+            return pCarrito.Instancia.BuscarIdArticuloSegunSuNombre(pNombreArticulo);
+        }
+        public bool ModificarCantidadCarrito(int pIdArticulo, int pIdCliente, int pCantidad, int pPrecio)
+        {
+            return pCarrito.Instancia.Modificar(pIdArticulo, pIdCliente, pCantidad, pPrecio);
+        }
         #endregion
-
-
-
     }
 }

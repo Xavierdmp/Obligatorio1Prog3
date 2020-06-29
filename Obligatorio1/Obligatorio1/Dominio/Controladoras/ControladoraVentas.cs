@@ -34,5 +34,17 @@ namespace Obligatorio1.Dominio.Controladoras
         {
             return Persistencia.Controladora.Instancia.ComprobarExistenciaCarrito(pIdArticulo);
         }
+        public int CantidadColorDisponibleParaCambiar(int pIdArticulo, int pIdCliente)
+        {
+            return Persistencia.Controladora.Instancia.CantidadColorDisponibleParaCambiar(pIdArticulo, pIdCliente);
+        }
+        public int IdArticuloSegunSuNombre(string pNombreArticulo)
+        {
+            return Persistencia.Controladora.Instancia.IdArticuloSegunSuNombre(pNombreArticulo);
+        }
+        public bool ModificarCantidadCarrito(int pIdArticulo, int pIdCliente, int pCantidad, int pPrecio)
+        {
+            return Persistencia.Controladora.Instancia.ModificarCantidadCarrito(pIdArticulo, pIdCliente, pCantidad, pPrecio);
+        }
     }
 }

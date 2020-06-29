@@ -8,7 +8,7 @@ using System.Data;
 
 namespace Obligatorio1.Persistencia
 {
-    public class pInstrumento : IABM<Instrumento>, IBuscar<Instrumento>
+    public class pInstrumento: IABM<Instrumento>, IBuscar<Instrumento>
     {
         private static pInstrumento _instancia = null;
         const string UltimaId = "Declare @UltimaId int; Set @UltimaId = @@Identity;";
@@ -19,7 +19,7 @@ namespace Obligatorio1.Persistencia
         {
             get
             {
-                if (_instancia == null)
+                if(_instancia == null)
                 {
                     _instancia = new pInstrumento();
                 }
@@ -31,10 +31,10 @@ namespace Obligatorio1.Persistencia
 
         public bool ComprobarExistencia(string pNombre)
         {
-            string consulta = "Select a.* from Articulos a, Instrumentos i" + " " +
+            string consulta = "Select a.* from Articulos a, Instrumentos i"  + " " +
                 "where a.Id_Articulo = i.Id_Instrumento and a.Nombre_Articulo=" + "'" + pNombre + "';";
             DataSet datos = Conexion.Instancia.InicializarSeleccion(consulta);
-            if (datos.Tables[0].Rows.Count > 0)
+            if(datos.Tables[0].Rows.Count > 0)
             {
                 return true;
             }
@@ -48,11 +48,11 @@ namespace Obligatorio1.Persistencia
         {
             string consulta = "Select * from Instrumentos i, Articulos a where i.Id_Instrumento = a.Id_Articulo and I.Id_Instrumento =" + pId;
             DataSet datos = Conexion.Instancia.InicializarSeleccion(consulta);
-            if (datos.Tables[0].Rows.Count > 0)
+            if(datos.Tables[0].Rows.Count > 0)
             {
                 DataRowCollection Tabla = datos.Tables[0].Rows;
                 Dominio.Instrumento unInstrumento = new Dominio.Instrumento();
-                foreach (DataRow fila in Tabla)
+                foreach(DataRow fila in Tabla)
                 {
                     object[] element = fila.ItemArray;
                     unInstrumento.Id = int.Parse(element[0].ToString());
@@ -84,14 +84,14 @@ namespace Obligatorio1.Persistencia
                           + pInstrumento.Precio + "," + pInstrumento.Stock + ";";
 
             string procedureInstrumento = UltimaId + "Exec AltaInstrumento " + "@UltimaId" + ",'" + String.Format("{0:MM-dd-yyyy}", pInstrumento.FechaFabricacion) + "'," +
-                                                      pInstrumento.Descuento + "," + pInstrumento.Destacado + ",'" + pInstrumento.VideoYoutube +
+                                                      pInstrumento.Descuento + "," + pInstrumento.Destacado + ",'" + pInstrumento.VideoYoutube + 
                                                       "'," + pInstrumento.SubTipo.Id + ";";
             transaccion.Add(procedure);
             transaccion.Add(procedureInstrumento);
 
-            foreach (Color unColor in pInstrumento.ListaDeColores)
+            foreach(Color unColor in pInstrumento.ListaDeColores)
             {
-                transaccion.Add(UltimaIdInstrumento + "insert into Instrumentos_tienen_Colores values( " + "@UltimaIdIns" + "," + unColor.Id + "," + unColor.Cantidad + ");");
+                transaccion.Add(UltimaIdInstrumento + "insert into Instrumentos_tienen_Colores values( " + "@UltimaIdIns" + "," + unColor.Id + "," + unColor.Cantidad +");");
             }
             if (pInstrumento.ListaFotosAdicionales != null)
             {
@@ -141,10 +141,10 @@ namespace Obligatorio1.Persistencia
             string consulta = "Select * from Instrumentos_tienen_Colores ic, Colores c where ic.Id_Color = c.Id_Color and ic.Id_Instrumento=" + pId;
             DataSet datos = Conexion.Instancia.InicializarSeleccion(consulta);
             List<Color> lista = new List<Color>();
-            if (datos.Tables[0].Rows.Count > 0)
+            if(datos.Tables[0].Rows.Count > 0)
             {
                 DataRowCollection table = datos.Tables[0].Rows;
-                foreach (DataRow row in table)
+                foreach(DataRow row in table)
                 {
                     object[] element = row.ItemArray;
                     Dominio.Color unColor = new Color();
@@ -164,10 +164,10 @@ namespace Obligatorio1.Persistencia
             string consulta = "Select * from Articulos_tienen_Fotos_Adicionales where Id_Articulo=" + pId;
             DataSet date = Conexion.Instancia.InicializarSeleccion(consulta);
             List<FotosAdicionales> listaFotosAd = new List<FotosAdicionales>();
-            if (date.Tables[0].Rows.Count > 0)
+            if(date.Tables[0].Rows.Count > 0)
             {
                 DataRowCollection table = date.Tables[0].Rows;
-                foreach (DataRow row in table)
+                foreach(DataRow row in table)
                 {
                     object[] element = row.ItemArray;
                     Dominio.FotosAdicionales unaFoto = new Dominio.FotosAdicionales();
@@ -198,7 +198,7 @@ namespace Obligatorio1.Persistencia
             string EliminarFotosAD = "Delete from Articulos_tienen_Fotos_Adicionales where Id_Articulo =" + pInstrumento.Id;
             string EliminarColores = "Delete from Instrumentos_tienen_Colores where Id_Instrumento=" + pInstrumento.Id;
             transaccion.Add(EliminarColores);
-            foreach (Color unColor in pInstrumento.ListaDeColores)
+            foreach(Color unColor in pInstrumento.ListaDeColores)
             {
                 transaccion.Add("insert into Instrumentos_tienen_Colores values( " + pInstrumento.Id + "," + unColor.Id + "," + unColor.Cantidad + ");");
             }
@@ -218,12 +218,12 @@ namespace Obligatorio1.Persistencia
             return Conexion.Instancia.EjecutarTransaccionSql(transaccion);
         }
 
-        public List<Accesorio> ListaAccesoriosDadoUnInstrumento(int pIdInstrumento)
+        public List<Accesorio> ListaDeAccesoriosDadoUnInstrumento(int pIdInstrumento)
         {
             string consulta = "select a.* from Articulos a,Accesorios acc,Instrumentos i, Accesorio_tiene_Subtipos accts " +
-                              "where acc.Id_Accesorio = a.Id_Articulo and acc.Id_Accesorio = accts.Id_Accesorio " +
-                              "and accts.Id_Subtipo = i.Id_Subtipo and i.Id_Instrumento = " + pIdInstrumento + ";";
-          DataSet datos = Conexion.Instancia.InicializarSeleccion(consulta);
+                            "where acc.Id_Accesorio = a.Id_Articulo and acc.Id_Accesorio = accts.Id_Accesorio " +
+                            "and accts.Id_Subtipo = i.Id_Subtipo and i.Id_Instrumento =" + pIdInstrumento + ";";
+            DataSet datos = Conexion.Instancia.InicializarSeleccion(consulta);
             List<Accesorio> listaDeAccesorios = new List<Accesorio>();
             if (datos.Tables[0].Rows.Count > 0)
             {
@@ -247,7 +247,8 @@ namespace Obligatorio1.Persistencia
             else
             {
                 return listaDeAccesorios;
-            }            
+            }
+
         }
     }
 }
