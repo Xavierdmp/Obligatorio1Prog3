@@ -17,9 +17,7 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
                 IndicePaginado = 0;
                 IndiceAnterior = 0;
             }
-             this.ListadoPaginado(IndiceAnterior);
-
-            
+            this.ListadoPaginado(IndiceAnterior);
         }
         private int IndicePaginado
         {
@@ -133,7 +131,7 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
             Dominio.Controladoras.ControladoraListado listados = new Dominio.Controladoras.ControladoraListado();
             if (IndicePaginado == 0)
             {
-                IndicePaginado = 5;
+                IndicePaginado = 13;
             }
             //int indiceAnterior = IndicePaginado;
             //IndicePaginado = indiceAnterior + indiceAnterior;
@@ -168,6 +166,28 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
                 Session["InstrumentoDetalle"] = IdArticulo;
                 Response.Redirect("~/Presentacion/SeccionPublica/DetalleArticulos/frmDetalleInstrumentos.aspx");
             }
+
+        }
+
+        protected void btnIncio_Click(object sender, EventArgs e)
+        {
+            IndiceAnterior = 0;
+            this.btnSiguiente.Enabled = true;
+            IndicePaginado = 0;
+            this.ListadoPaginado(IndiceAnterior);
+        }
+
+        protected void btnFinal_Click(object sender, EventArgs e)
+        {
+            Dominio.Controladoras.ControladoraListado listados = new Dominio.Controladoras.ControladoraListado();
+            int cantidadAMostrar = 12;
+            int CantidadElementosTotales = listados.CantidadTotalesArticulos();
+            int mostrar  = CantidadElementosTotales  - cantidadAMostrar - 1;
+            IndicePaginado = CantidadElementosTotales- mostrar;
+            IndiceAnterior = IndicePaginado;
+            this.btnSiguiente.Enabled = false;
+            this.ListadoPaginado(IndiceAnterior);
+            //
 
         }
     }
