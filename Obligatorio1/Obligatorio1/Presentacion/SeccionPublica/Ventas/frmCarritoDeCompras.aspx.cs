@@ -34,9 +34,9 @@ namespace Obligatorio1.Presentacion.SeccionPublica.Ventas
         private void CargarCarrito()
         {
             int IdClienteConectado = int.Parse(Session["ClienteLogueado"].ToString());
-            Dominio.Controladoras.ControladoraVentas unaControladora = new Dominio.Controladoras.ControladoraVentas();
+            Dominio.Controladoras.ControladoraCarrito unaControladoraCarrito = new Dominio.Controladoras.ControladoraCarrito();
 
-            List<Dominio.Item> listaCarrito = unaControladora.ListaCarritoParaCliente(IdClienteConectado);
+            List<Dominio.Item> listaCarrito = unaControladoraCarrito.ListaCarritoParaCliente(IdClienteConectado);
             int precioTotal = 0;
             foreach(Dominio.Item unItem in listaCarrito)
             {
@@ -88,7 +88,7 @@ namespace Obligatorio1.Presentacion.SeccionPublica.Ventas
                     if(unInstrumento.Descuento > 0)
                     {
                         Label descuento = new Label();
-                        descuento.CssClass = "CarritoDescuento";
+                        descuento.CssClass = "OfertaInstrumento";
                         descuento.Text = "off %" + unInstrumento.Descuento.ToString();
                         info.Controls.Add(descuento);
                     }
@@ -121,8 +121,8 @@ namespace Obligatorio1.Presentacion.SeccionPublica.Ventas
             Button clickeado = (Button)sender;
             int IdArticulo = int.Parse(clickeado.ID);
             int IdClienteConectado = int.Parse(Session["ClienteLogueado"].ToString());
-            Dominio.Controladoras.ControladoraVentas unaControladora = new Dominio.Controladoras.ControladoraVentas();
-            if (unaControladora.BajaArticuloCarrito(IdArticulo, IdClienteConectado))
+            Dominio.Controladoras.ControladoraCarrito unaControladoraCarrito = new Dominio.Controladoras.ControladoraCarrito();
+            if (unaControladoraCarrito.BajaArticuloCarrito(IdArticulo, IdClienteConectado))
             {
                 this.ContenedorProductos.Controls.Clear();
                 this.CargarCarrito();
@@ -134,15 +134,15 @@ namespace Obligatorio1.Presentacion.SeccionPublica.Ventas
             LinkButton clickeado = (LinkButton)sender;
             Dominio.Controladoras.ControladoraInstrumentos controladoraInstrumento = new Dominio.Controladoras.ControladoraInstrumentos();
             Dominio.Controladoras.ControladoraAccesorio unaControladoraAccesorio = new Dominio.Controladoras.ControladoraAccesorio();
-            Dominio.Controladoras.ControladoraVentas unaControladoraVentas = new Dominio.Controladoras.ControladoraVentas();
-            int IdArticulo = unaControladoraVentas.IdArticuloSegunSuNombre(clickeado.ID);
+            Dominio.Controladoras.ControladoraCarrito unaControladoraCarrito = new Dominio.Controladoras.ControladoraCarrito();
+            int IdArticulo = unaControladoraCarrito.IdArticuloSegunSuNombre(clickeado.ID);
             Dominio.Instrumento unInstrumento = controladoraInstrumento.Buscar(IdArticulo);
             Dominio.Accesorio unAccesorio = unaControladoraAccesorio.Buscar(IdArticulo);
             if (unInstrumento != null)
             {
                 IdArticuloSeleccionado = IdArticulo;
                 int IdClienteConectado = int.Parse(Session["ClienteLogueado"].ToString());
-                int stockDisponible = unaControladoraVentas.CantidadColorDisponibleParaCambiar(IdArticulo, IdClienteConectado);
+                int stockDisponible = unaControladoraCarrito.CantidadColorDisponibleParaCambiar(IdArticulo, IdClienteConectado);
                 this.lblStockDisponibleInstrumento.Text = "| stock disponible: "  + stockDisponible + "|";
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#ModalInstrumentos').modal();", true);
             }
@@ -159,12 +159,12 @@ namespace Obligatorio1.Presentacion.SeccionPublica.Ventas
             Dominio.Controladoras.ControladoraAccesorio unaControladoraAccesorio = new Dominio.Controladoras.ControladoraAccesorio();
             Dominio.Accesorio unAccesorio = unaControladoraAccesorio.Buscar(IdArticuloSeleccionado);
             int IdClienteConectado = int.Parse(Session["ClienteLogueado"].ToString());
-            Dominio.Controladoras.ControladoraVentas unaControladoraVentas = new Dominio.Controladoras.ControladoraVentas();
+            Dominio.Controladoras.ControladoraCarrito unaControladoraCarrito = new Dominio.Controladoras.ControladoraCarrito();
             int cantidadNueva = int.Parse(this.txtCantidadAccesorio.Text);
             int precioNuevo = unAccesorio.Precio * cantidadNueva;
             if (cantidadNueva <= unAccesorio.Stock)
             {
-                if (unaControladoraVentas.ModificarCantidadCarrito(IdArticuloSeleccionado, IdClienteConectado, cantidadNueva, precioNuevo))
+                if (unaControladoraCarrito.ModificarCantidadCarrito(IdArticuloSeleccionado, IdClienteConectado, cantidadNueva, precioNuevo))
                 {
                     this.ContenedorProductos.Controls.Clear();
                     this.CargarCarrito();
@@ -182,11 +182,11 @@ namespace Obligatorio1.Presentacion.SeccionPublica.Ventas
             int IdClienteConectado = int.Parse(Session["ClienteLogueado"].ToString());
             Dominio.Controladoras.ControladoraInstrumentos unaControladoraInstrumento = new Dominio.Controladoras.ControladoraInstrumentos();
             Dominio.Instrumento unInstrumento = unaControladoraInstrumento.Buscar(IdArticuloSeleccionado);
-            Dominio.Controladoras.ControladoraVentas unaControladoraCarrito = new Dominio.Controladoras.ControladoraVentas();
+            Dominio.Controladoras.ControladoraCarrito unaControladoraCarrito = new Dominio.Controladoras.ControladoraCarrito();
             int cantidadNueva = int.Parse(this.txtNuevaCantidadINstrumento.Text);
             int precio = unInstrumento.Precio * cantidadNueva;
             int StockDisponibleDadoElColor = unaControladoraCarrito.CantidadColorDisponibleParaCambiar(IdArticuloSeleccionado, IdClienteConectado);
-            if(cantidadNueva < StockDisponibleDadoElColor)
+            if(cantidadNueva <= StockDisponibleDadoElColor)
             {
                 if (unaControladoraCarrito.ModificarCantidadCarrito(IdArticuloSeleccionado, IdClienteConectado, cantidadNueva, precio))
                 {
@@ -196,7 +196,7 @@ namespace Obligatorio1.Presentacion.SeccionPublica.Ventas
             } 
             else
             {
-                this.lblMensaje.MensajeActivo(2, "No hay stock disponible para la cantidad seleccionada: " + cantidadNueva + "para: el Instrumento " + unInstrumento.Nombre);
+                this.lblMensaje.MensajeActivo(2, "No hay stock disponible para la cantidad seleccionada:  " + cantidadNueva + " para: el Instrumento " + unInstrumento.Nombre);
             }
         }
     }

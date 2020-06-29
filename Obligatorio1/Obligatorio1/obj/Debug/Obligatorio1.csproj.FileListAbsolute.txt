@@ -157,4 +157,3 @@ C:\Repositorios\Programacion 3\Obligatorio 1\Obligatorio1\Obligatorio1\bin\es\Mi
 C:\Repositorios\Programacion 3\Obligatorio 1\Obligatorio1\Obligatorio1\bin\es\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
 C:\Repositorios\Programacion 3\Obligatorio 1\Obligatorio1\Obligatorio1\obj\Debug\Obligatorio1.dll
 C:\Repositorios\Programacion 3\Obligatorio 1\Obligatorio1\Obligatorio1\obj\Debug\Obligatorio1.pdb
-C:\Repositorios\Programacion 3\Obligatorio 1\Obligatorio1\Obligatorio1\obj\Debug\Obligatorio1.csprojResolveAssemblyReference.cache

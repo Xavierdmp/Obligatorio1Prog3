@@ -21,7 +21,6 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
         }
         private int IndicePaginado
         {
-
             get {
                 int result = 0;
                 if (Session["InicioPaginado"] != null)
@@ -38,7 +37,6 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
         }
         private int IndiceAnterior
         {
-
             get
             {
                 int result = 0;
@@ -104,16 +102,13 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
                         Destacado.Text = "Destacado";
                         ContenedorTexto.Controls.Add(Destacado);
                     }
-
                 }
 
                 else
                 {
-
                     ContenedorTexto.Controls.Add(Precio);
                     ContenedorTexto.Controls.Add(Nombre);
                 }
-
                     Panel ContenedorArticulos = new Panel();
                     ContenedorArticulos.CssClass = "ContenedorArticulos col-md-9 text-center";
                     ContenedorArticulos.Attributes.Add("Style", "outline: none; width: 260px;");
@@ -133,8 +128,6 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
             {
                 IndicePaginado = 13;
             }
-            //int indiceAnterior = IndicePaginado;
-            //IndicePaginado = indiceAnterior + indiceAnterior;
             IndiceAnterior = IndicePaginado;
             IndicePaginado += IndiceAnterior;
             if (listados.CantidadFilas(IndiceAnterior))
@@ -187,8 +180,6 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
             IndiceAnterior = IndicePaginado;
             this.btnSiguiente.Enabled = false;
             this.ListadoPaginado(IndiceAnterior);
-            //
-
         }
     }
 }

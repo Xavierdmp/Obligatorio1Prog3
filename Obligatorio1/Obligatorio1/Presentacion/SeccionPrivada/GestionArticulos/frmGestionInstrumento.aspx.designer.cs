@@ -238,6 +238,15 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator8;
         
         /// <summary>
+        /// Control ValidarLink.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator ValidarLink;
+        
+        /// <summary>
         /// Control Label12.
         /// </summary>
         /// <remarks>

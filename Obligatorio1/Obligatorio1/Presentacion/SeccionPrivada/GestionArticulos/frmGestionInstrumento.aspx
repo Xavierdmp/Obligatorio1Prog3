@@ -96,6 +96,8 @@
                     <asp:Label ID="Label13" runat="server" Text="Url Video" Font-Bold="True"></asp:Label>
                     <asp:TextBox ID="txtVideoYoutube" runat="server" placeholder="Ingrese una url" class="form-control" Width="281px" TextMode="Url"></asp:TextBox>
                      <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="txtVideoYoutube" ErrorMessage="Url obligatoria" ForeColor="#CC3300" ValidationGroup="vgGestion"></asp:RequiredFieldValidator>
+                    <br />
+                    <asp:RegularExpressionValidator ID="ValidarLink" runat="server" ErrorMessage="El link no esta permitido" ControlToValidate="txtVideoYoutube" ForeColor="Maroon" ValidationExpression="^https://www.youtube.com/embed/" ValidationGroup="vgGestion"></asp:RegularExpressionValidator>
                 </div>
             </article>
 
@@ -106,7 +108,9 @@
                         <asp:ListItem>Seleccione un descuento</asp:ListItem>
                     </asp:DropDownList>
                 </div>
+
                 <div class="form-group">
+                    <br />
                     <asp:Label ID="Label14" runat="server" Text="Destacado" Font-Bold="True"></asp:Label>
                     <br />
                     <asp:RadioButton ID="btnEsDestacado" runat="server" GroupName="gnDestacado" Text=" Si" />

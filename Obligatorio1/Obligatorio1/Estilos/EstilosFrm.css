@@ -461,3 +461,20 @@ body{
 .VideoYoutube{
     width:80%;
 }
+.CambiarCantidadCarrito{
+    display:block;
+    list-style:none;
+    text-decoration: none;
+}
+.CambiarCantidadCarrito:hover{
+    color:green;
+}
+.fa-cart-plus {
+    font-size: 3rem;
+}
+.CarritoTotalCompras{
+        margin-right:2em;
+}
+.CantidadItemsCarrito{
+    font-size: 2rem;
+}

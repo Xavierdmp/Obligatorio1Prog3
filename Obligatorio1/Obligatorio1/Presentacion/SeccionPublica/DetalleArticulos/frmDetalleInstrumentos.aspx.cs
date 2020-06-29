@@ -94,12 +94,19 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
                 Dominio.Controladoras.ControladoraColor unaControladoraColor = new Dominio.Controladoras.ControladoraColor();
                 Dominio.Color unColor = unaControladoraColor.Buscar(IdColor);
                 int IdClienteLogueado = int.Parse(Session["ClienteLogueado"].ToString());
-                Dominio.Controladoras.ControladoraVentas unaControladoraVentas = new Dominio.Controladoras.ControladoraVentas();
+                Dominio.Controladoras.ControladoraCarrito unaControladoraCarrito = new Dominio.Controladoras.ControladoraCarrito();
                 int cantidad = int.Parse(Session["CantidadSeleccionada"].ToString());
                 Dominio.Item unItem = new Dominio.Item(unInstrumento, cantidad, unColor);
-                if (unaControladoraVentas.AltaCarrito(unItem, IdClienteLogueado))
+                if (cantidad <= unInstrumento.Stock)
                 {
-                    this.lblMensaje.MensajeActivo(1, "Se agrego con exito al carrito");
+                    if (unaControladoraCarrito.AltaCarrito(unItem, IdClienteLogueado))
+                    {
+                        this.lblMensaje.MensajeActivo(1, "Se agrego con exito al carrito");
+                    }
+                }
+                else
+                {
+                    this.lblMensaje.MensajeActivo(2, "No hay stock disponbile para: " + cantidad);
                 }
             }
             else

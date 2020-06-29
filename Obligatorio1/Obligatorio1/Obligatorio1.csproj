@@ -389,6 +389,7 @@
     <Compile Include="Dominio\Color.cs" />
     <Compile Include="Dominio\Controladoras\ControladoraAccesorio.cs" />
     <Compile Include="Dominio\Controladoras\ControladoraAdministrador.cs" />
+    <Compile Include="Dominio\Controladoras\ControladoraCarrito.cs" />
     <Compile Include="Dominio\Controladoras\ControladoraCliente.cs" />
     <Compile Include="Dominio\Controladoras\ControladoraColor.cs" />
     <Compile Include="Dominio\Controladoras\ControladoraFabricante.cs" />
