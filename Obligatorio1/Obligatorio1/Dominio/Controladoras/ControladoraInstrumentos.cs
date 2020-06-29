@@ -50,5 +50,10 @@ namespace Obligatorio1.Dominio.Controladoras
         {
             return Persistencia.Controladora.Instancia.ColoresDadoInstrumento(pId);
         }
+
+        public List<Accesorio> ListarAccesoriosParaDetalleInstrumento(int pIdInstrumento)
+        {
+            return Persistencia.Controladora.Instancia.ListarAccesoriosParaDetalleInstrumento(pIdInstrumento);
+        }
     }
 }

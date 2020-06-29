@@ -16,9 +16,12 @@
     <link href="Imagenes/SiteMasters/icono.ico" rel="shortcut icon" type="image/x-icon" />
     <script src="https://kit.fontawesome.com/28247c8281.js" crossorigin="anonymous"></script>
     <link href="Estilos/EstilosFrm.css" rel="stylesheet" type="text/css" />
+    <script src="../../../swiper.min.js"></script>
+    <link rel="stylesheet" href="Slider/swiper.min.css" />
 </head>
 <body>
     <form runat="server">
+
         <asp:ScriptManager runat="server">
             <Scripts>
                 <%--Para obtener más información sobre cómo agrupar scripts en ScriptManager, consulte http://go.microsoft.com/fwlink/?LinkID=301884 --%>
@@ -38,6 +41,7 @@
                 <asp:ScriptReference Name="WebFormsBundle" />
                 <%--Scripts del sitio--%>
             </Scripts>
+
         </asp:ScriptManager>
 
         <div class="navbar navbar-inverse navbar-fixed-top">
@@ -78,13 +82,15 @@
                         <li><a runat="server" href="~/Presentacion/SeccionPublica/GestionCliente/frmRegistrarCliente.aspx" id="OcultarRegister"><i class="fas fa-address-card"></i> Registrarse</a></li>
                         <li><a runat="server" href="~/Presentacion/Autenticación/frmIniciarSesion.aspx" id="SeInicioSesion"><i class="fas fa-key"></i> Iniciar sesión</a></li>
                     </ul>
-                    
+
                 </div>
             </div>
         </div>
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
+
             </asp:ContentPlaceHolder>
+
             <hr />
             <footer>
                 <p>&copy; <%: DateTime.Now.Year %> - Mi aplicación ASP.NET</p>

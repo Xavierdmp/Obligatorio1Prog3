@@ -115,9 +115,9 @@
             </article>
             <aside class="col-md-6">
                 <div class="form-group text-center">
-                    <span>Imagen principal seleccionada</span>
+                   <span>Imagen seleccionada</span>
                     <br />
-                 <asp:Image ID="MostrarFotoPrincipal" runat="server" Height="130px" Width="130px" />
+                    <asp:Image ID="MostrarFotoPrincipal" class="img-fluid img-thumbnail" runat="server" Height="130px" Width="281px" />
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label15" runat="server" Text="Colores: " Font-Bold="True"></asp:Label>

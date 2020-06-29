@@ -30,11 +30,11 @@ namespace Obligatorio1.Persistencia
             Dominio.Accesorio unAccesorio = pItem.Articulo as Accesorio;
             if (unAccesorio != null)
             {
-                return Conexion.Instancia.InicializarConsulta("Insert into CarritoCompras(Id_Cliente,Id_Articulo,Cantidad) values(" + pIdCliente + "," + pItem.Articulo.Id + "," + pItem.Cantidad + ");");
+                return Conexion.Instancia.InicializarConsulta("Insert into CarritoCompras(Id_Cliente,Id_Articulo,Cantidad,Precio_Total) values(" + pIdCliente + "," + pItem.Articulo.Id + "," + pItem.Cantidad + "," + pItem.Precio + ");");
             }
             else
             {
-                return Conexion.Instancia.InicializarConsulta("Insert into CarritoCompras(Id_Cliente,Id_Articulo,Cantidad,Id_Color) values(" + pIdCliente + "," + pItem.Articulo.Id + "," + pItem.Cantidad + "," + pItem.Color.Id + ");");
+                return Conexion.Instancia.InicializarConsulta("Insert into CarritoCompras(Id_Cliente,Id_Articulo,Cantidad,Id_Color,Precio_Total) values(" + pIdCliente + "," + pItem.Articulo.Id + "," + pItem.Cantidad + "," + pItem.Color.Id + "," + pItem.Precio + ");");
             }
                 
             
@@ -65,14 +65,17 @@ namespace Obligatorio1.Persistencia
                     else
                     {
                         unItem.Articulo = unInstrumento;
+                        unItem.Color = Controladora.Instancia.BuscarColor(int.Parse(elementos[4].ToString()));
                     }
                     unItem.Cantidad = int.Parse(elementos[3].ToString());
+                    unItem.Precio = int.Parse(elementos[5].ToString());
                     ListadoDeItems.Add(unItem);
                 }
                 return ListadoDeItems;
             }
             return ListadoDeItems;
         }
+
         public bool EliminarCarrito(int pIdCliente)
         {
             return Conexion.Instancia.InicializarConsulta("delete from CarritoCompras where Id_Cliente=" + pIdCliente);
@@ -95,6 +98,48 @@ namespace Obligatorio1.Persistencia
             {
                 return false;
             }
+        }
+
+        public int CantidadColor(int pIdArticulo, int pIdCliente)
+        {
+            string orden = "select itc.Cantidad_Color from Instrumentos_tienen_Colores itc, CarritoCompras cc " +
+            "where itc.Id_Instrumento = cc.Id_Articulo and itc.Id_Color = cc.Id_Color and cc.Id_Cliente =" + pIdCliente + " and cc.Id_Articulo =" + pIdArticulo +";";
+            DataSet datos = Conexion.Instancia.InicializarSeleccion(orden);
+            if(datos.Tables[0].Rows.Count > 0)
+            {
+                int cantidad = 0;
+                DataRowCollection table = datos.Tables[0].Rows;
+                foreach(DataRow row in table)
+                {
+                    object[] element = row.ItemArray;
+                    cantidad = int.Parse(element[0].ToString());
+                }
+                return cantidad;
+            }
+            return -1;
+        }
+        public int BuscarIdArticuloSegunSuNombre(string pNombre)
+        {
+            string orden = "Select Id_Articulo from Articulos where Nombre_Articulo=" + "'" + pNombre + "'";
+            DataSet datos = Conexion.Instancia.InicializarSeleccion(orden);
+            if (datos.Tables[0].Rows.Count > 0)
+            {
+                int cantidad = 0;
+                DataRowCollection table = datos.Tables[0].Rows;
+                foreach (DataRow row in table)
+                {
+                    object[] element = row.ItemArray;
+                    cantidad = int.Parse(element[0].ToString());
+                }
+                return cantidad;
+            }
+            return -1;
+        }
+
+        public bool Modificar(int pIdArticulo, int pIdCliente, int pCantidad, int pPrecio)
+        {
+            string consulta = "update CarritoCompras set Cantidad=" + pCantidad + ", set Precio_Total=" + pPrecio + " Where Id_Articulo=" + pIdArticulo + "and Id_Cliente=" + pIdCliente;
+            return Conexion.Instancia.InicializarConsulta(consulta);
         }
 
     }

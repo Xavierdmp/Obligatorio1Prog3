@@ -217,5 +217,38 @@ namespace Obligatorio1.Persistencia
                              pInstrumento.Fabricante.Id + ",'" + pInstrumento.FotoPrincipal + "'," + pInstrumento.Precio + "," + pInstrumento.Stock);
             return Conexion.Instancia.EjecutarTransaccionSql(transaccion);
         }
+
+        public List<Accesorio> ListaDeAccesoriosDadoUnInstrumento(int pIdInstrumento)
+        {
+            string consulta = "select a.* from Articulos a,Accesorios acc,Instrumentos i, Accesorio_tiene_Subtipos accts " +
+                            "where acc.Id_Accesorio = a.Id_Articulo and acc.Id_Accesorio = accts.Id_Accesorio " +
+                            "and accts.Id_Subtipo = i.Id_Subtipo and i.Id_Instrumento =" + pIdInstrumento + ";";
+            DataSet datos = Conexion.Instancia.InicializarSeleccion(consulta);
+            List<Accesorio> listaDeAccesorios = new List<Accesorio>();
+            if (datos.Tables[0].Rows.Count > 0)
+            {
+                DataRowCollection tabla = datos.Tables[0].Rows;
+                foreach (DataRow row in tabla)
+                {
+                    Dominio.Accesorio unAccesorio = new Dominio.Accesorio();
+                    object[] elementos = row.ItemArray;
+                    unAccesorio.Id = int.Parse(elementos[0].ToString());
+                    unAccesorio.Nombre = elementos[1].ToString();
+                    unAccesorio.Descripcion = elementos[2].ToString();
+                    int idFabricante = int.Parse(elementos[3].ToString());
+                    unAccesorio.Fabricante = Controladora.Instancia.BuscarFabricante(idFabricante);
+                    unAccesorio.FotoPrincipal = elementos[4].ToString();
+                    unAccesorio.Precio = int.Parse(elementos[5].ToString());
+                    unAccesorio.Stock = int.Parse(elementos[6].ToString());
+                    listaDeAccesorios.Add(unAccesorio);
+                }
+                return listaDeAccesorios;
+            }
+            else
+            {
+                return listaDeAccesorios;
+            }
+
+        }
     }
 }
