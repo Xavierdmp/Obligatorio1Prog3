@@ -29,7 +29,9 @@ namespace Obligatorio1.Presentacion.SeccionPublica.Ventas
 
             List<Dominio.Item> listaCarrito = unaControladora.ListaCarritoParaCliente(IdClienteConectado);
 
-            foreach(Dominio.Item unItem in listaCarrito)
+            int PrecioTotal = 0;
+
+            foreach (Dominio.Item unItem in listaCarrito)
             {
                 Panel contenedorCarrito = new Panel();
                 contenedorCarrito.CssClass = "contanedorCarrito";
@@ -78,8 +80,12 @@ namespace Obligatorio1.Presentacion.SeccionPublica.Ventas
                 ItemCarrito.Controls.Add(columnaImg);
                 ItemCarrito.Controls.Add(columnaInfo);
                 contenedorCarrito.Controls.Add(ItemCarrito);
+
                 this.ContenedorProductos.Controls.Add(contenedorCarrito);
+                PrecioTotal += unItem.Precio;
+
             }
+            this.LblPrecioTotal.Text = PrecioTotal.ToString();
 
         }
 

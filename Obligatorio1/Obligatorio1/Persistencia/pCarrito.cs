@@ -28,13 +28,14 @@ namespace Obligatorio1.Persistencia
         {
             Dominio.Instrumento unInstrumento = pItem.Articulo as Instrumento;
             Dominio.Accesorio unAccesorio = pItem.Articulo as Accesorio;
+
             if (unAccesorio != null)
             {
-                return Conexion.Instancia.InicializarConsulta("Insert into CarritoCompras(Id_Cliente,Id_Articulo,Cantidad) values(" + pIdCliente + "," + pItem.Articulo.Id + "," + pItem.Cantidad + ");");
+                return Conexion.Instancia.InicializarConsulta("Insert into CarritoCompras(Id_Cliente,Id_Articulo,Cantidad,Precio_Total) values(" + pIdCliente + "," + pItem.Articulo.Id + "," + pItem.Cantidad + "," + pItem.Precio + ");");
             }
             else
             {
-                return Conexion.Instancia.InicializarConsulta("Insert into CarritoCompras(Id_Cliente,Id_Articulo,Cantidad,Id_Color) values(" + pIdCliente + "," + pItem.Articulo.Id + "," + pItem.Cantidad + "," + pItem.Color.Id + ");");
+                return Conexion.Instancia.InicializarConsulta("Insert into CarritoCompras(Id_Cliente,Id_Articulo,Cantidad,Id_Color,Precio_Total) values(" + pIdCliente + "," + pItem.Articulo.Id + "," + pItem.Cantidad + "," + pItem.Color.Id + "," + pItem.Precio + ");");
             }
                 
             
@@ -67,6 +68,7 @@ namespace Obligatorio1.Persistencia
                         unItem.Articulo = unInstrumento;
                     }
                     unItem.Cantidad = int.Parse(elementos[3].ToString());
+                    unItem.Precio = int.Parse(elementos[5].ToString());
                     ListadoDeItems.Add(unItem);
                 }
                 return ListadoDeItems;

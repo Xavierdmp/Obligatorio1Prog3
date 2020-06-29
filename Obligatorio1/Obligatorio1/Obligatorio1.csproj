@@ -180,6 +180,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Account\Web.config" />
+    <Content Include="Jquery\jquery-3.4.1.min.js" />
     <Content Include="Presentacion\SeccionPrivada\Gestion Clientes\frmEliminarCliente.aspx" />
     <Content Include="Presentacion\SeccionPrivada\GestionArticulos\frmGestionAccesorio.aspx" />
     <Content Include="Presentacion\SeccionPrivada\GestionArticulos\frmGestionInstrumento.aspx" />
@@ -233,6 +234,8 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Site.Master" />
+    <Content Include="Slider\swiper.min.css" />
+    <Content Include="swiper.min.js" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

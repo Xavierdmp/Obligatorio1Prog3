@@ -121,6 +121,24 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos {
         protected global::System.Web.UI.WebControls.Button btnAgregarAlCarrito;
         
         /// <summary>
+        /// Control VideoPresentacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlIframe VideoPresentacion;
+        
+        /// <summary>
+        /// Control ContenedorAccesorios.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel ContenedorAccesorios;
+        
+        /// <summary>
         /// Control Label3.
         /// </summary>
         /// <remarks>

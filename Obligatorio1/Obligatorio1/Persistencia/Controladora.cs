@@ -279,7 +279,16 @@ namespace Obligatorio1.Persistencia
         {
             return pInstrumento.Instancia.Modificar(pIns);
         }
+
+        public List<Accesorio> ListarAccesorioParaDetalleInstrumento(int pIdInstrumento)
+        {
+            return pInstrumento.Instancia.ListaAccesoriosDadoUnInstrumento(pIdInstrumento);
+        }
+
+
+
         #endregion
+
 
         #region "Listar Articulos Para Seccion Publica"
 
@@ -316,5 +325,8 @@ namespace Obligatorio1.Persistencia
             return pCarrito.Instancia.ComprobarExistenciaArticulo(pIdArticulo);
         }
         #endregion
+
+
+
     }
 }

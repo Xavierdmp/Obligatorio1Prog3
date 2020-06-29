@@ -57,6 +57,8 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
             this.lblFabricante.Text = unInstrumento.Fabricante.Nombre;
             this.lblPrecio.Text = "$" + unInstrumento.Precio;
             this.ImagenPrincipal.ImageUrl = unInstrumento.FotoPrincipal;
+            this.MostrarVideo(unInstrumento.VideoYoutube);
+            this.GenerarListaAccesorios(unInstrumento.Id); 
         }
 
         protected void btnConfirmarCantidadStock_Click(object sender, EventArgs e)
@@ -101,5 +103,73 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
                 this.lblMensaje.MensajeActivo(2, "Inicie sesion para agregar al carrito");
             }
         }
+
+        private void MostrarVideo(string pUrl)
+
+        {
+            var posicionCapturar = 0;
+
+            string urlVideo = "";
+            foreach (Char unCaracter in pUrl)
+            {
+
+                if (posicionCapturar == 1)
+                {
+                    urlVideo += unCaracter;
+                }
+                if (unCaracter == '=')
+                {
+                    posicionCapturar = 1;
+                }
+
+            }
+            this.VideoPresentacion.Attributes.Add("src", "https://www.youtube.com/embed/" + urlVideo);
+
+
+        }
+
+
+        private void GenerarListaAccesorios(int pIdInstrumento)
+        {
+            Dominio.Controladoras.ControladoraInstrumentos unaControladora = new Dominio.Controladoras.ControladoraInstrumentos();
+
+
+            List<Dominio.Accesorio> listaAccesorios = unaControladora.ListarAccesorioParaDetalleInstrumento(pIdInstrumento);
+
+            foreach (Dominio.Accesorio unAccesorio in listaAccesorios)
+            {
+                Panel swiperSlide = new Panel();
+                swiperSlide.CssClass = "swiper-slide";
+
+                Panel contenedorImagen = new Panel();
+                ImageButton Imagen = new ImageButton();
+                Imagen.ImageUrl = unAccesorio.FotoPrincipal;
+                Imagen.CssClass = " text-center ImagenSlider";
+                contenedorImagen.Controls.Add(Imagen);
+
+                Panel contenedortexto = new Panel();
+                contenedortexto.CssClass = "text-center TextoSlider";
+
+                Label precio = new Label();
+                precio.Text = "$" + unAccesorio.Precio;
+                precio.CssClass = "PrecioSlider";
+                contenedortexto.Controls.Add(precio);
+
+                Label nombre = new Label();
+                nombre.CssClass = "TituloSlider";
+                nombre.Text = unAccesorio.Nombre;
+
+
+                contenedortexto.Controls.Add(nombre);
+                swiperSlide.Controls.Add(contenedorImagen);
+                swiperSlide.Controls.Add(contenedortexto);
+                this.ContenedorAccesorios.Controls.Add(swiperSlide);
+            }
+
+            this.ContenedorAccesorios.DataBind();
+
+            }
+      
+        }
+
     }
-}
