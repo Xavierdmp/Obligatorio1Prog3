@@ -34,6 +34,17 @@ namespace Obligatorio1.Persistencia
             }
             else
             {
+                if(unInstrumento.Descuento > 0)
+                {
+                    switch (unInstrumento.Descuento)
+                    {
+                        case 15:
+                            //unInstrumento.Precio =   unInstrumento.Precio - 1.15;
+                        break;
+                            
+
+                    }
+                }
                 return Conexion.Instancia.InicializarConsulta("Insert into CarritoCompras(Id_Cliente,Id_Articulo,Cantidad,Id_Color,Precio_Total) values(" + pIdCliente + "," + pItem.Articulo.Id + "," + pItem.Cantidad + "," + pItem.Color.Id + "," + pItem.Precio + ");");
             }
                 
@@ -138,7 +149,7 @@ namespace Obligatorio1.Persistencia
 
         public bool Modificar(int pIdArticulo, int pIdCliente, int pCantidad, int pPrecio)
         {
-            string consulta = "update CarritoCompras set Cantidad=" + pCantidad + ", set Precio_Total=" + pPrecio + " Where Id_Articulo=" + pIdArticulo + "and Id_Cliente=" + pIdCliente;
+            string consulta = "update CarritoCompras set Cantidad=" + pCantidad + ", Precio_Total=" + pPrecio + " Where Id_Articulo=" + pIdArticulo + " and Id_Cliente=" + pIdCliente;
             return Conexion.Instancia.InicializarConsulta(consulta);
         }
 

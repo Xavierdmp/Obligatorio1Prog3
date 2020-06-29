@@ -162,19 +162,42 @@ namespace Obligatorio1.Presentacion.SeccionPublica.Ventas
             Dominio.Controladoras.ControladoraVentas unaControladoraVentas = new Dominio.Controladoras.ControladoraVentas();
             int cantidadNueva = int.Parse(this.txtCantidadAccesorio.Text);
             int precioNuevo = unAccesorio.Precio * cantidadNueva;
-            if(unaControladoraVentas.ModificarCantidadCarrito(IdArticuloSeleccionado,IdClienteConectado,cantidadNueva, precioNuevo))
+            if (cantidadNueva <= unAccesorio.Stock)
             {
+                if (unaControladoraVentas.ModificarCantidadCarrito(IdArticuloSeleccionado, IdClienteConectado, cantidadNueva, precioNuevo))
+                {
+                    this.ContenedorProductos.Controls.Clear();
+                    this.CargarCarrito();
+                }
 
             }
             else
             {
-
+                this.lblMensaje.MensajeActivo(2, "No hay stock disponible para la cantidad seleccionada: " + cantidadNueva + "para: el accesorio " + unAccesorio.Nombre);
             }
         }
 
         protected void btnConfrimarNuevaCantidadInstrumento_Click(object sender, EventArgs e)
         {
-
+            int IdClienteConectado = int.Parse(Session["ClienteLogueado"].ToString());
+            Dominio.Controladoras.ControladoraInstrumentos unaControladoraInstrumento = new Dominio.Controladoras.ControladoraInstrumentos();
+            Dominio.Instrumento unInstrumento = unaControladoraInstrumento.Buscar(IdArticuloSeleccionado);
+            Dominio.Controladoras.ControladoraVentas unaControladoraCarrito = new Dominio.Controladoras.ControladoraVentas();
+            int cantidadNueva = int.Parse(this.txtNuevaCantidadINstrumento.Text);
+            int precio = unInstrumento.Precio * cantidadNueva;
+            int StockDisponibleDadoElColor = unaControladoraCarrito.CantidadColorDisponibleParaCambiar(IdArticuloSeleccionado, IdClienteConectado);
+            if(cantidadNueva < StockDisponibleDadoElColor)
+            {
+                if (unaControladoraCarrito.ModificarCantidadCarrito(IdArticuloSeleccionado, IdClienteConectado, cantidadNueva, precio))
+                {
+                    this.ContenedorProductos.Controls.Clear();
+                    this.CargarCarrito();
+                }
+            } 
+            else
+            {
+                this.lblMensaje.MensajeActivo(2, "No hay stock disponible para la cantidad seleccionada: " + cantidadNueva + "para: el Instrumento " + unInstrumento.Nombre);
+            }
         }
     }
 }
