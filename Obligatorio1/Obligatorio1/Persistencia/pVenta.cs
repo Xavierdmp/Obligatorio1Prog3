@@ -47,7 +47,7 @@ namespace Obligatorio1.Persistencia
 
         public bool Baja(int pId)
         {
-            throw new NotImplementedException();
+            return Conexion.Instancia.InicializarConsulta("Update Ventas set Estado_Venta =0 where Id_Venta =" + pId);
         }
 
         public Venta Buscar(int pId)

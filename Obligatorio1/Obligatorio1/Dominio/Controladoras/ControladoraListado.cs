@@ -39,10 +39,12 @@ namespace Obligatorio1.Dominio.Controladoras
                 }
                 return ListaPaginada;
         }
+
         public int CantidadTotalesArticulos()
         {
             return Persistencia.Controladora.Instancia.CantidadArticulos();
         }
+
         public bool CantidadFilas(int pIndex)
         {
             int cantidadFilas = Persistencia.Controladora.Instancia.CantidadArticulos();

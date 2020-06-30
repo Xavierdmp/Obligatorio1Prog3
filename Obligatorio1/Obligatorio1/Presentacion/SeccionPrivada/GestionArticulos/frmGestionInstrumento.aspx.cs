@@ -16,6 +16,10 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
                 this.ListarColores();
                 this.ListarColoresModal();
                 this.ListarFabricantes();
+                if (ListaFotosAdicionales != null)
+                {
+                    this.ListaFotosAdicionales.Clear();
+                }
                 this.ListarFotosAdicionales();
                 this.ListarColoresSeleccionados();
                 this.ListarSubtipos();
@@ -92,7 +96,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
             if (this.fuImagenPrincipal.HasFile)
             {
                 string Extension = System.IO.Path.GetExtension(fuImagenPrincipal.PostedFile.FileName);
-                if (Extension == ".PNG" || Extension == ".png")
+                if (Extension == ".PNG" || Extension == ".png" || Extension == ".JPG" || Extension ==".jpg")
                 {
                     if (this.fuImagenPrincipal.FileName.Length < 150 && this.fuImagenPrincipal.PostedFile.ContentLength <= maximoTamañoImagen)
                     {
@@ -467,6 +471,16 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
                 args.IsValid = false;
             }
 
+        }
+
+        protected void gvListarImagenesAdicionales_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GridViewRow row = this.gvListarImagenesAdicionales.SelectedRow;
+            string url = row.Cells[2].Text;
+            Dominio.FotosAdicionales unaFotoAdicional = new Dominio.FotosAdicionales(url);
+            
+            ListaFotosAdicionales.Remove(unaFotoAdicional);
+            this.ListarFotosAdicionales();
         }
     }
 }

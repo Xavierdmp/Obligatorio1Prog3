@@ -66,7 +66,7 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
                 ImagenPrincipal.Click += btnVerDetalle_Click;
                 
                 ImagenPrincipal.ImageUrl = unArticulo.FotoPrincipal;
-                ImagenPrincipal.CssClass = "ImagenPrincipal";
+                ImagenPrincipal.CssClass = "img-fluid ImagenPrincipal";
                 ImagenPrincipal.ID = unArticulo.Id.ToString();
                 ContenedorImagen.Controls.Add(ImagenPrincipal);
                 Panel ContenedorTexto = new Panel();
@@ -110,9 +110,8 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
                     ContenedorTexto.Controls.Add(Nombre);
                 }
                     Panel ContenedorArticulos = new Panel();
-                    ContenedorArticulos.CssClass = "ContenedorArticulos col-md-9 text-center";
-                    //ContenedorArticulos.CssClass = "ContenedorArticulos text-center";
-                    ContenedorArticulos.Attributes.Add("Style", "outline: none; width: 260px;");
+
+                    ContenedorArticulos.CssClass = "ContenedorArticulos text-center";
 
                     ContenedorArticulos.Controls.Add(ContenedorImagen);
                     ContenedorArticulos.Controls.Add(ContenedorTexto);

@@ -275,21 +275,21 @@ input:focus, input.form-control:focus {
     transition: opacity .18s ease-out;
     will-change: opacity;
     /*z-index: -1;*/
-    width: 224px;
+    width: 264px;
     height: 314px;
     background-color: white;
     margin: 10px;
-    /*display:inline-block;*/
+    display:inline-block;
+    outline:none;
 }
 .ContenedorPrincipalListado {
-    margin-left: 6rem;
     margin-top: 6rem;
 }
 .OfertaInstrumento {
     color: green;
 }
 .InstrumentoDestacado {
-    background-color: #d9851f;
+   background-color: #d9851f;
     border-color: #01bcf3;
     font-size: 10px;
     font-weight: 700;
@@ -298,14 +298,13 @@ input:focus, input.form-control:focus {
     text-align: center;
     text-transform: uppercase;
     color: #fff;
-    display: inline-block;
+    display:block;
     height: 16px;
     border-radius: 8px;
     opacity: .9;
     transition: all .2s;
-    position: absolute;
-    top: 1em;
-    right: 1em;
+    margin-left:15.5em;
+    position:absolute;
 }
 /* Detalle accesiorios*/
 .ImagenesAdicionales {
@@ -497,5 +496,4 @@ body{
 }
 .FiltrosListado{
     margin-top:2em;
-    margin-left:4em;
 }

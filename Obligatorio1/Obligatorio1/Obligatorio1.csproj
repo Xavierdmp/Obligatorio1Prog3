@@ -200,6 +200,7 @@
     <Content Include="Presentacion\SeccionPublica\GestionCliente\frmRegistrarCliente.aspx" />
     <Content Include="Presentacion\SeccionPublica\ListadoArticulos\frmListadoArticulos.aspx" />
     <Content Include="Presentacion\SeccionPublica\Ventas\frmCarritoDeCompras.aspx" />
+    <Content Include="Presentacion\SeccionPublica\Ventas\frmVentas.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -548,6 +549,13 @@
     </Compile>
     <Compile Include="Presentacion\SeccionPublica\Ventas\frmCarritoDeCompras.aspx.designer.cs">
       <DependentUpon>frmCarritoDeCompras.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\SeccionPublica\Ventas\frmVentas.aspx.cs">
+      <DependentUpon>frmVentas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\SeccionPublica\Ventas\frmVentas.aspx.designer.cs">
+      <DependentUpon>frmVentas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">

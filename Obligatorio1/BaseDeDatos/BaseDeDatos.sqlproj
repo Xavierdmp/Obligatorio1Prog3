@@ -59,10 +59,13 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="Insert" />
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
     <Folder Include="dbo\Stored Procedures\" />
-    <Folder Include="Insert" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Insert\Datos.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Articulos_tienen_Fotos_Adicionales.sql" />
@@ -73,6 +76,9 @@
     <Build Include="dbo\Tables\Fabricantes.sql" />
     <Build Include="dbo\Tables\Accesorio_tiene_Subtipos.sql" />
     <Build Include="dbo\Tables\Instrumentos_tienen_Colores.sql" />
+    <Build Include="dbo\Tables\CarritoCompras.sql" />
+    <Build Include="dbo\Tables\Pais.sql" />
+    <Build Include="dbo\Tables\Ciudad.sql" />
     <Build Include="dbo\Tables\Personas.sql" />
     <Build Include="dbo\Tables\Administradores.sql" />
     <Build Include="dbo\Tables\Clientes.sql" />
@@ -94,8 +100,5 @@
     <Build Include="dbo\Stored Procedures\ModificarVentaTieneArticulos.sql" />
     <Build Include="dbo\Stored Procedures\AltaInstrumentosTienenColores.sql" />
     <Build Include="dbo\Stored Procedures\ModificarInstrumentos_Tienen_Colores.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Insert\Datos.sql" />
   </ItemGroup>
 </Project>

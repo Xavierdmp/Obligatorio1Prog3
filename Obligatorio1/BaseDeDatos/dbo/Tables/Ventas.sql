@@ -6,6 +6,7 @@
     [Tarjeta_Venta]    VARCHAR (30) NOT NULL,
     [Pais_Venta]       VARCHAR (30) NOT NULL,
     [Estado_Venta]     BIT          NOT NULL,
+    [Ciudad_Venta]     VARCHAR (30) NOT NULL,
     PRIMARY KEY CLUSTERED ([Id_Venta] ASC),
     FOREIGN KEY ([Id_Cliente]) REFERENCES [dbo].[Clientes] ([Id_Cliente])
 );

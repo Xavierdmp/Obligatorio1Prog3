@@ -348,5 +348,27 @@ namespace Obligatorio1.Persistencia
             return pPais.Instancia.ListarCiudadesDadoPais(pNombrePais);
         }
         #endregion
+
+        #region "Ventas"
+        public bool AltaVenta(Venta pVentas)
+        {
+            return pVenta.Instancia.Alta(pVentas);
+        }
+
+        public bool BajaVenta(int pIdVenta)
+        {
+            return pVenta.Instancia.Baja(pIdVenta);
+        }
+
+        public Venta BuscarVenta(int pId)
+        {
+            return pVenta.Instancia.Buscar(pId);
+        }
+
+        public List<Venta> ListadoDeVentas()
+        {
+            return pVenta.Instancia.ListarVentas();
+        }
+        #endregion
     }
 }

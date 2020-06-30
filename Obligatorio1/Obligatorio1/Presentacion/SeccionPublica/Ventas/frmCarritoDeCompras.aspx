@@ -19,6 +19,11 @@
             </div>
         </article>
 
+        <section class="row text-center">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <asp:Button ID="btnComprar" CssClass="btn btn-success btn-lg" runat="server" Text="Proceder a la compra" OnClick="btnComprar_Click" />
+            </article>
+        </section>
 
         <div class="modal fade" id="ModalAccesorios" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
