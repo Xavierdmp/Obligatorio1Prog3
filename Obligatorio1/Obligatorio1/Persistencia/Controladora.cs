@@ -337,5 +337,16 @@ namespace Obligatorio1.Persistencia
             return pCarrito.Instancia.CantidadItemsEnElCarritoDadoCliente(pIdCliente);
         }
         #endregion
+
+        #region "Manejo de Paises"
+        public List<string> ListarPaises()
+        {
+            return pPais.Instancia.ListarPaises();
+        }
+        public List<string> ListarCiudades(string pNombrePais)
+        {
+            return pPais.Instancia.ListarCiudadesDadoPais(pNombrePais);
+        }
+        #endregion
     }
 }
