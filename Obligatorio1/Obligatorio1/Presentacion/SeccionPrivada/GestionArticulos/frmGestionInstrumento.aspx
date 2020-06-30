@@ -91,13 +91,14 @@
                 <div class="form-group">
                     <asp:Label ID="Label11" runat="server" Text="Fecha Fabricacion" Font-Bold="True"></asp:Label>
                     <asp:TextBox ID="txtFechaFabricacion" runat="server" placeholder="Ingrese Fecha" class="form-control" Width="281px" TextMode="Date"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtFechaFabricacion" ValidationGroup="vgGestion" ForeColor="Red" ErrorMessage="Fecha obligatoria"></asp:RequiredFieldValidator>
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label13" runat="server" Text="Url Video" Font-Bold="True"></asp:Label>
                     <asp:TextBox ID="txtVideoYoutube" runat="server" placeholder="Ingrese una url" class="form-control" Width="281px" TextMode="Url"></asp:TextBox>
                      <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="txtVideoYoutube" ErrorMessage="Url obligatoria" ForeColor="#CC3300" ValidationGroup="vgGestion"></asp:RequiredFieldValidator>
                     <br />
-                    <asp:RegularExpressionValidator ID="ValidarLink" runat="server" ErrorMessage="El link no esta permitido" ControlToValidate="txtVideoYoutube" ForeColor="Maroon" ValidationExpression="^https://www.youtube.com/embed/" ValidationGroup="vgGestion"></asp:RegularExpressionValidator>
+                    <asp:CustomValidator OnServerValidate="cvValidarLink_ServerValidate" ID="cvValidarLink" runat="server" ControlToValidate="txtVideoYoutube" ForeColor="Red" ValidationGroup="vgGestion" ErrorMessage="El link no esta permitido"></asp:CustomValidator>
                 </div>
             </article>
 

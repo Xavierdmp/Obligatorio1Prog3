@@ -439,5 +439,34 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
                 this.lblMensaje.MensajeActivo(2, "seleccione un fabricante,subtipo y imagen principal");
             }
         }
+
+        protected void cvValidarLink_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            try
+            {
+                string formatoCorrecto = "https://www.youtube.com/watch?v";
+                string formatoIngresado = this.txtVideoYoutube.Text;
+
+                string esValido = "";
+                foreach (Char unCaracter in formatoIngresado)
+                {
+                    if(unCaracter != 'v')
+                    {
+                        esValido += unCaracter;
+                    }
+                    else
+                    {
+                        esValido += 'v';
+                        break;
+                    }
+                }
+                args.IsValid = esValido == formatoCorrecto ? true : false;
+            }
+            catch (Exception e)
+            {
+                args.IsValid = false;
+            }
+
+        }
     }
 }

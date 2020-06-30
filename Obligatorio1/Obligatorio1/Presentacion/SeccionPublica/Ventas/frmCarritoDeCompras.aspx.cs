@@ -162,7 +162,11 @@ namespace Obligatorio1.Presentacion.SeccionPublica.Ventas
             Dominio.Controladoras.ControladoraVentas unaControladoraVentas = new Dominio.Controladoras.ControladoraVentas();
             int cantidadNueva = int.Parse(this.txtCantidadAccesorio.Text);
             int precioNuevo = unAccesorio.Precio * cantidadNueva;
+<<<<<<< HEAD
             if(unaControladoraVentas.ModificarCantidadCarrito(IdArticuloSeleccionado,IdClienteConectado,cantidadNueva, precioNuevo))
+=======
+            if (cantidadNueva > 0 && cantidadNueva <= unAccesorio.Stock)
+>>>>>>> 36ef8c5... se arreglo el comprobar link de youtube en el frm instrumentos
             {
 
             }
@@ -174,7 +178,29 @@ namespace Obligatorio1.Presentacion.SeccionPublica.Ventas
 
         protected void btnConfrimarNuevaCantidadInstrumento_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
 
+=======
+            int IdClienteConectado = int.Parse(Session["ClienteLogueado"].ToString());
+            Dominio.Controladoras.ControladoraInstrumentos unaControladoraInstrumento = new Dominio.Controladoras.ControladoraInstrumentos();
+            Dominio.Instrumento unInstrumento = unaControladoraInstrumento.Buscar(IdArticuloSeleccionado);
+            Dominio.Controladoras.ControladoraCarrito unaControladoraCarrito = new Dominio.Controladoras.ControladoraCarrito();
+            int cantidadNueva = int.Parse(this.txtNuevaCantidadINstrumento.Text);
+            int precio = unInstrumento.Precio * cantidadNueva;
+            int StockDisponibleDadoElColor = unaControladoraCarrito.CantidadColorDisponibleParaCambiar(IdArticuloSeleccionado, IdClienteConectado);
+            if(cantidadNueva >0 && cantidadNueva <= StockDisponibleDadoElColor)
+            {
+                if (unaControladoraCarrito.ModificarCantidadCarrito(IdArticuloSeleccionado, IdClienteConectado, cantidadNueva, precio))
+                {
+                    this.ContenedorProductos.Controls.Clear();
+                    this.CargarCarrito();
+                }
+            } 
+            else
+            {
+                this.lblMensaje.MensajeActivo(2, "No hay stock disponible para la cantidad seleccionada:  " + cantidadNueva + " para: el Instrumento " + unInstrumento.Nombre);
+            }
+>>>>>>> 36ef8c5... se arreglo el comprobar link de youtube en el frm instrumentos
         }
     }
 }

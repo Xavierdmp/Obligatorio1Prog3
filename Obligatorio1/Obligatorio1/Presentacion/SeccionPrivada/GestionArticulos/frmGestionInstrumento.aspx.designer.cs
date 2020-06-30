@@ -211,6 +211,15 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos {
         protected global::System.Web.UI.WebControls.TextBox txtFechaFabricacion;
         
         /// <summary>
+        /// Control RequiredFieldValidator4.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator4;
+        
+        /// <summary>
         /// Control Label13.
         /// </summary>
         /// <remarks>
@@ -238,13 +247,13 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator8;
         
         /// <summary>
-        /// Control ValidarLink.
+        /// Control cvValidarLink.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator ValidarLink;
+        protected global::System.Web.UI.WebControls.CustomValidator cvValidarLink;
         
         /// <summary>
         /// Control Label12.

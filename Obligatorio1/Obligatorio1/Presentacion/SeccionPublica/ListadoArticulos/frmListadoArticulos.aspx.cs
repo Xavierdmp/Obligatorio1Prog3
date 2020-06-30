@@ -111,7 +111,12 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
                 }
                     Panel ContenedorArticulos = new Panel();
                     ContenedorArticulos.CssClass = "ContenedorArticulos col-md-9 text-center";
+<<<<<<< HEAD
                     ContenedorArticulos.Attributes.Add("Style", "outline: none; width: 240px;");
+=======
+                    //ContenedorArticulos.CssClass = "ContenedorArticulos text-center";
+                    ContenedorArticulos.Attributes.Add("Style", "outline: none; width: 260px;");
+>>>>>>> 36ef8c5... se arreglo el comprobar link de youtube en el frm instrumentos
 
                     ContenedorArticulos.Controls.Add(ContenedorImagen);
                     ContenedorArticulos.Controls.Add(ContenedorTexto);
