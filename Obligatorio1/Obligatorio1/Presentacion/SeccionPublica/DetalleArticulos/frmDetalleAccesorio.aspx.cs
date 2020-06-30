@@ -85,10 +85,11 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
                 int cantidad = int.Parse(Session["CantidadStockSeleccionada"].ToString());
                 Dominio.Item unItem = new Dominio.Item(unAccesorio, cantidad);
                 int IdClienteConectado = int.Parse(Session["ClienteLogueado"].ToString());
-                Dominio.Controladoras.ControladoraVentas unaControladoraVentas = new Dominio.Controladoras.ControladoraVentas();
+                Dominio.Controladoras.ControladoraCarrito unaControladoraCarrito = new Dominio.Controladoras.ControladoraCarrito();
                 if (cantidad <= unAccesorio.Stock && cantidad > 0)
                 {
-                    if (unaControladoraVentas.AltaCarrito(unItem, IdClienteConectado))
+                    //Session["CantidadItemsEnCarrito"] = Session["CantidadItemsEnCarrito"] != null ? int.Parse(Session["CantidadItemsEnCarrito"].ToString()) + cantidad : cantidad;
+                    if (unaControladoraCarrito.AltaCarrito(unItem, IdClienteConectado))
                     {
                         this.lblMensaje.MensajeActivo(1, "Se agrego al carrito");
                     }

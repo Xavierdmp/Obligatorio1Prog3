@@ -76,6 +76,8 @@ namespace Obligatorio1
                 this.CarritoCompras.Visible = true;
                 this.ClienteConectado();
                 this.PerfilCliente.Visible = true;
+                Dominio.Controladoras.ControladoraCarrito unCarrito = new Dominio.Controladoras.ControladoraCarrito();
+                this.lblCantidadCarrito.Text = unCarrito.CantidadItemsEnElCarrito(int.Parse(Session["ClienteLogueado"].ToString())).ToString();
             }
             else
             {
@@ -84,6 +86,7 @@ namespace Obligatorio1
                 this.CarritoCompras.Visible = false;
                 this.PerfilCliente.Visible = false;
             }
+            
         }
         private void ClienteConectado()
         {
@@ -103,6 +106,7 @@ namespace Obligatorio1
             Session["ClienteLogueado"] = null;
             Response.Redirect("~/Default.aspx");
         }
+
     }
 
 }

@@ -157,6 +157,22 @@ namespace Obligatorio1.Persistencia
             string consulta = "update CarritoCompras set Cantidad=" + pCantidad + ", set Precio_Total=" + pPrecio + " Where Id_Articulo=" + pIdArticulo + "and Id_Cliente=" + pIdCliente;
             return Conexion.Instancia.InicializarConsulta(consulta);
         }
-
+        public int CantidadItemsEnElCarritoDadoCliente(int pIdCliente)
+        {
+            string consulta = "select SUM(Cantidad) from CarritoCompras where Id_Cliente =" + pIdCliente + ";";
+            DataSet datos = Conexion.Instancia.InicializarSeleccion(consulta);
+            if (datos.Tables[0].Rows.Count > 0)
+            {
+                int cantidad = 0;
+                DataRowCollection table = datos.Tables[0].Rows;
+                foreach (DataRow row in table)
+                {
+                    object[] element = row.ItemArray;
+                    cantidad = int.Parse(element[0].ToString());
+                }
+                return cantidad;
+            }
+            return -1;
+        }
     }
 }

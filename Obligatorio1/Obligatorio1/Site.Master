@@ -78,7 +78,7 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a runat="server" id="CarritoCompras" href="Presentacion/SeccionPublica/Ventas/frmCarritoDeCompras.aspx"><i class="fas fa-cart-plus"></i></a></li>
+                        <li class="CarritoTotalCompras"><a runat="server" id="CarritoCompras" href="Presentacion/SeccionPublica/Ventas/frmCarritoDeCompras.aspx"><i class="fas fa-cart-plus"></i> <asp:Label ID="lblCantidadCarrito" CssClass="CantidadItemsCarrito" runat="server" Text="0"></asp:Label></a></li>
                         <li><a runat="server" href="~/Presentacion/SeccionPublica/GestionCliente/frmRegistrarCliente.aspx" id="OcultarRegister"><i class="fas fa-address-card"></i> Registrarse</a></li>
                         <li><a runat="server" href="~/Presentacion/Autenticación/frmIniciarSesion.aspx" id="SeInicioSesion"><i class="fas fa-key"></i> Iniciar sesión</a></li>
                     </ul>

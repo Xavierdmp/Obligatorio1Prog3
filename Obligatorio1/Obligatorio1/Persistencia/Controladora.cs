@@ -332,6 +332,10 @@ namespace Obligatorio1.Persistencia
         {
             return pCarrito.Instancia.Modificar(pIdArticulo, pIdCliente, pCantidad, pPrecio);
         }
+        public int TotalItemsEnCarrito(int pIdCliente)
+        {
+            return pCarrito.Instancia.CantidadItemsEnElCarritoDadoCliente(pIdCliente);
+        }
         #endregion
     }
 }
