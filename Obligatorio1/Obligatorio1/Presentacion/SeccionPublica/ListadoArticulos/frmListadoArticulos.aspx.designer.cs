@@ -13,6 +13,69 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos {
     public partial class frmListadoArticulos {
         
         /// <summary>
+        /// Control dplListarSubtipos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList dplListarSubtipos;
+        
+        /// <summary>
+        /// Control dplListarTipos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList dplListarTipos;
+        
+        /// <summary>
+        /// Control dplDestacado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList dplDestacado;
+        
+        /// <summary>
+        /// Control dplOferta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList dplOferta;
+        
+        /// <summary>
+        /// Control dplFabricantes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList dplFabricantes;
+        
+        /// <summary>
+        /// Control dplOrdenar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList dplOrdenar;
+        
+        /// <summary>
+        /// Control btnFiltrarLista.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnFiltrarLista;
+        
+        /// <summary>
         /// Control ContenedorPrincipal.
         /// </summary>
         /// <remarks>
