@@ -7,9 +7,9 @@
         <section class="row text-center">
             <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-primary">Inicio</button>
+                    <asp:Button ID="btnIncio" runat="server" class="btn btn-primary" Text="Inicio" OnClick="btnIncio_Click" />
                     <asp:Button ID="btnSiguiente" runat="server" CssClass="btn btn-primary" Text="Siguiente" OnClick="btnSiguiente_Click1" />
-                    <button type="button" class="btn btn-primary">Final</button>
+                    <asp:Button ID="btnFinal" runat="server" class="btn btn-primary" Text="Final" OnClick="btnFinal_Click" />
                 </div>
             </article>
         </section>

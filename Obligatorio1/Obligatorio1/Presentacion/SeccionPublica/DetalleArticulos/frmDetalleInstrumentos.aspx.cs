@@ -12,7 +12,7 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
         protected void Page_Load(object sender, EventArgs e)
         {
 
-               this.GenerarInformacion();
+            this.GenerarInformacion();
         }
 
         private void GenerarInformacion()
@@ -59,7 +59,7 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
             this.ImagenPrincipal.ImageUrl = unInstrumento.FotoPrincipal;
             this.MostrarVideo(unInstrumento.VideoYoutube);
             this.lblTituloListadoAccesorio.Text = "Accesorios para: " + unInstrumento.Nombre;
-             this.GenerarListadoAccesorios(unInstrumento.Id);
+            this.GenerarListadoAccesorios(unInstrumento.Id);
             this.lblNombreTipo.Text = unInstrumento.SubTipo.TipoInstrumento.Nombre;
             this.lblSubtipoNombre.Text = unInstrumento.SubTipo.Nombre;
             this.lblFechaFabricacion.Text = unInstrumento.FechaFabricacion.ToShortDateString();
@@ -132,7 +132,7 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
             Dominio.Controladoras.ControladoraInstrumentos unaControladora = new Dominio.Controladoras.ControladoraInstrumentos();
 
             List<Dominio.Accesorio> listaAccesorios = unaControladora.ListarAccesoriosParaDetalleInstrumento(pIdInstrumento);
-            if(listaAccesorios.Count > 0)
+            if (listaAccesorios.Count > 0)
             {
                 this.lblTituloListadoAccesorio.Visible = true;
             }
@@ -148,6 +148,8 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
                 ImageButton imagen = new ImageButton();
                 imagen.CssClass = "text-center ImagenSlider img-fluid";
                 imagen.ImageUrl = unAccesorio.FotoPrincipal;
+                imagen.ID = unAccesorio.Id.ToString();
+                imagen.Click += this.btnVerDetalle_Click;
                 contenedorImagen.Controls.Add(imagen);
 
                 Panel contenedorTexto = new Panel();
@@ -166,9 +168,17 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
                 contenedorTexto.Controls.Add(nombre);
                 swiperSlide.Controls.Add(contenedorImagen);
                 swiperSlide.Controls.Add(contenedorTexto);
-               this.ContenedorAccesorios.Controls.Add(swiperSlide);
+                this.ContenedorAccesorios.Controls.Add(swiperSlide);
             }
             this.ContenedorAccesorios.DataBind();
+        }
+
+        protected void btnVerDetalle_Click(object sender, ImageClickEventArgs e)
+        {
+            ImageButton imagenSeleccionada = (ImageButton)sender;
+            int IdArticulo = int.Parse(imagenSeleccionada.ID);
+            Session["AccesorioDetalle"] = IdArticulo;
+            Response.Redirect("~/Presentacion/SeccionPublica/DetalleArticulos/frmDetalleAccesorio.aspx");
         }
     }
 }
