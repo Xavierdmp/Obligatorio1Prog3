@@ -162,7 +162,7 @@ namespace Obligatorio1.Presentacion.SeccionPublica.Ventas
             Dominio.Controladoras.ControladoraCarrito unaControladoraCarrito = new Dominio.Controladoras.ControladoraCarrito();
             int cantidadNueva = int.Parse(this.txtCantidadAccesorio.Text);
             int precioNuevo = unAccesorio.Precio * cantidadNueva;
-            if (cantidadNueva <= unAccesorio.Stock)
+            if (cantidadNueva > 0 && cantidadNueva <= unAccesorio.Stock)
             {
                 if (unaControladoraCarrito.ModificarCantidadCarrito(IdArticuloSeleccionado, IdClienteConectado, cantidadNueva, precioNuevo))
                 {
@@ -186,7 +186,7 @@ namespace Obligatorio1.Presentacion.SeccionPublica.Ventas
             int cantidadNueva = int.Parse(this.txtNuevaCantidadINstrumento.Text);
             int precio = unInstrumento.Precio * cantidadNueva;
             int StockDisponibleDadoElColor = unaControladoraCarrito.CantidadColorDisponibleParaCambiar(IdArticuloSeleccionado, IdClienteConectado);
-            if(cantidadNueva <= StockDisponibleDadoElColor)
+            if(cantidadNueva >0 && cantidadNueva <= StockDisponibleDadoElColor)
             {
                 if (unaControladoraCarrito.ModificarCantidadCarrito(IdArticuloSeleccionado, IdClienteConectado, cantidadNueva, precio))
                 {

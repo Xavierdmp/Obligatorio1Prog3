@@ -22,11 +22,14 @@
                 <asp:DropDownList ID="dplOrdenar" CssClass="form-controlV2" runat="server">
                     <asp:ListItem>filtrar por orden</asp:ListItem>
                 </asp:DropDownList>
-                 <asp:Button ID="btnFiltrarLista" runat="server" class="btn btn-primary buttonFiltrar" Text="Filtrar"/>
+                <asp:Button ID="btnFiltrarLista" runat="server" class="btn btn-primary buttonFiltrar" Text="Filtrar" />
             </article>
         </section>
-        <asp:Panel ID="ContenedorPrincipal" CssClass="row text-center ContenedorPrincipalListado" runat="server"></asp:Panel>
-
+<%--        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">--%>
+                <asp:Panel ID="ContenedorPrincipal" CssClass="row text-center ContenedorPrincipalListado" runat="server"></asp:Panel>
+<%--            </div>
+        </div>--%>
         <section class="row text-center">
             <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">

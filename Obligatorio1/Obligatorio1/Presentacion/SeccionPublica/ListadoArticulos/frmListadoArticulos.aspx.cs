@@ -111,6 +111,7 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
                 }
                     Panel ContenedorArticulos = new Panel();
                     ContenedorArticulos.CssClass = "ContenedorArticulos col-md-9 text-center";
+                    //ContenedorArticulos.CssClass = "ContenedorArticulos text-center";
                     ContenedorArticulos.Attributes.Add("Style", "outline: none; width: 260px;");
 
                     ContenedorArticulos.Controls.Add(ContenedorImagen);

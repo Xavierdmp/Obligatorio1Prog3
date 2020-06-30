@@ -279,6 +279,7 @@ input:focus, input.form-control:focus {
     height: 314px;
     background-color: white;
     margin: 10px;
+    /*display:inline-block;*/
 }
 .ContenedorPrincipalListado {
     margin-left: 6rem;
@@ -390,9 +391,10 @@ body{
 .Cerrar {
     background-color: white;
     border: none;
-    color: #ff0000;
 }
-
+.Cerrar:hover{
+    color:red;
+}
 
 .BordeTxt {
  border: none;
@@ -494,6 +496,6 @@ body{
 
 }
 .FiltrosListado{
-    margin-top:6em;
+    margin-top:2em;
     margin-left:4em;
 }
