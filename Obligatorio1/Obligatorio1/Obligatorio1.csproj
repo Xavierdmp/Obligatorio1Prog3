@@ -429,6 +429,7 @@
     <Compile Include="Persistencia\pPais.cs" />
     <Compile Include="Persistencia\pSubTipo.cs" />
     <Compile Include="Persistencia\pTipo.cs" />
+    <Compile Include="Persistencia\pVenta.cs" />
     <Compile Include="Presentacion\Autenticación\frmIniciarSesion.aspx.cs">
       <DependentUpon>frmIniciarSesion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
