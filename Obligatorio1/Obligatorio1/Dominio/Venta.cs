@@ -14,7 +14,13 @@ namespace Obligatorio1.Dominio
         private int _montoTotal;
         private string _tarjeta; // credito o debito;
         private string _pais;
+        private string _ciudad;
 
+        public string Ciudad
+        {
+            get { return _ciudad;}
+            set { _ciudad = value; }
+        }
 
         public int Id
         {
@@ -73,8 +79,9 @@ namespace Obligatorio1.Dominio
             return total;
         }
         
-        public Venta(DateTime pFecha, List<Item> pListaItems, Cliente pCliente, string pTarjeta, string pPais)
+        public Venta(DateTime pFecha, List<Item> pListaItems, Cliente pCliente, string pTarjeta, string pPais, string pCiudad)
         {
+            this.Ciudad = pCiudad;
             this.Fecha = pFecha;
             this.ListaItems = pListaItems;
             this.Cliente = pCliente;

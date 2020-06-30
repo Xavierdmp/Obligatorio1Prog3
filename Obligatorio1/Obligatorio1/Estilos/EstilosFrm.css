@@ -463,24 +463,20 @@ body{
 .VideoYoutube{
     width:80%;
 }
-@media (min-width:1366px) {  
-       
-.ContenedorArticulos {
-    border-radius: 4px;
-    box-shadow: 0 7px 16px 0 rgba(0,0,0,.2), 0 1px 3px 0 rgba(0,0,0,.1);
-    -webkit-transition: opacity .18s ease-out;
-    transition: opacity .18s ease-out;
-    will-change: opacity;
-   
-    width: 240px;
-    height: 314px;
-    background-color: white;
-    margin: 10px;
+.CambiarCantidadCarrito{
+    display:block;
+    list-style:none;
+    text-decoration: none;
 }
-<<<<<<< HEAD
-
+.CambiarCantidadCarrito:hover{
+    color:green;
 }
-=======
+.fa-cart-plus {
+    font-size: 3rem;
+}
+.CarritoTotalCompras{
+        margin-right:2em;
+}
 .CantidadItemsCarrito{
     font-size: 2rem;
 }
@@ -503,4 +499,3 @@ body{
     margin-top:2em;
     margin-left:4em;
 }
->>>>>>> 30e6ac5... se agrego el diseño de los filtrados

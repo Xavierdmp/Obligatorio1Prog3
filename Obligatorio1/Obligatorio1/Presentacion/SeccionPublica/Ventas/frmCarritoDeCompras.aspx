@@ -12,6 +12,11 @@
                 <span>Sub Total </span>
                 <asp:Label runat="server" ID="lblPrecioTotal"></asp:Label>
             </aside>
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <usrMensaje:AsignarMensaje ID="lblMensaje" runat="server"></usrMensaje:AsignarMensaje>
+                </div>
+            </div>
         </article>
 
 
