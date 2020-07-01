@@ -1,0 +1,71 @@
+1/7/2020 1:12:35	Este registro contiene información acerca de la operación de importación de esquema en el proyecto 'BaseDeDatos' del equipo 'DESKTOP-K7AAAHT' por el usuario 'PERSONAL'.
+1/7/2020 1:12:35	Se inició la importación del esquema de la base de datos.
+1/7/2020 1:12:40	Recopilando opciones de base de datos
+1/7/2020 1:12:40	Recopilando usuarios
+1/7/2020 1:12:40	Recopilando roles
+1/7/2020 1:12:40	Recopilando roles de aplicación
+1/7/2020 1:12:40	Recopilando pertenencias a roles
+1/7/2020 1:12:40	Recopilando grupos de archivos
+1/7/2020 1:12:40	Recopilando catálogos de texto completo
+1/7/2020 1:12:40	Recopilando ensamblados
+1/7/2020 1:12:40	Recopilando certificados
+1/7/2020 1:12:40	Recopilando claves asimétricas
+1/7/2020 1:12:40	Recopilando claves simétricas
+1/7/2020 1:12:40	Recopilando claves simétricas cifradas
+1/7/2020 1:12:40	Recopilando esquemas
+1/7/2020 1:12:40	Recopilando colecciones de esquemas XML
+1/7/2020 1:12:40	Recopilando tipos de datos definidos por el usuario
+1/7/2020 1:12:40	Recopilando tipos definidos por el usuario
+1/7/2020 1:12:40	Recopilando tipos de tabla
+1/7/2020 1:12:40	Recopilando claves únicas para tipos de tabla
+1/7/2020 1:12:40	Recopilando claves principales para tipos de tabla
+1/7/2020 1:12:40	Recopilando restricciones CHECK para tipos de tabla
+1/7/2020 1:12:40	Recopilando restricciones DEFAULT para tipos de tabla
+1/7/2020 1:12:40	Recopilando funciones de partición
+1/7/2020 1:12:40	Recopilando esquemas de partición
+1/7/2020 1:12:40	Recopilando funciones
+1/7/2020 1:12:40	Recopilando funciones cifradas
+1/7/2020 1:12:40	Recopilando agregados
+1/7/2020 1:12:40	Recopilando procedimientos
+1/7/2020 1:12:40	Recopilando procedimientos cifrados
+1/7/2020 1:12:40	Recopilando tablas
+1/7/2020 1:12:40	Recopilando claves principales
+1/7/2020 1:12:40	Recopilando restricciones UNIQUE
+1/7/2020 1:12:40	Recopilando claves externas
+1/7/2020 1:12:40	Recopilando restricciones DEFAULT
+1/7/2020 1:12:40	Recopilando restricciones CHECK
+1/7/2020 1:12:40	Recopilando vistas
+1/7/2020 1:12:40	Recopilando vistas cifradas
+1/7/2020 1:12:40	Recopilando índices
+1/7/2020 1:12:40	Recopilando estadísticas
+1/7/2020 1:12:40	Recopilando listas de palabras irrelevantes de índices de texto completo
+1/7/2020 1:12:40	Recopilando índices de texto completo
+1/7/2020 1:12:40	Recopilando índices espaciales
+1/7/2020 1:12:40	Recopilando índices XML
+1/7/2020 1:12:40	Recopilando desencadenadores cifrados
+1/7/2020 1:12:40	Recopilando desencadenadores
+1/7/2020 1:12:40	Recopilando DDL triggers cifrados y de CLR
+1/7/2020 1:12:40	Recopilando DDL triggers
+1/7/2020 1:12:40	Recopilando sinónimos
+1/7/2020 1:12:40	Recopilando valores predeterminados
+1/7/2020 1:12:40	Recopilando enlaces UDDT de restricción de datos
+1/7/2020 1:12:40	Recopilando reglas
+1/7/2020 1:12:40	Recopilando enlaces UDDT de restricción de datos
+1/7/2020 1:12:40	Recopilando tipos de mensaje
+1/7/2020 1:12:40	Recopilando colas
+1/7/2020 1:12:40	Recopilando contratos
+1/7/2020 1:12:40	Recopilando servicios
+1/7/2020 1:12:40	Recopilando notificaciones de eventos
+1/7/2020 1:12:40	Recopilando enlaces de servicio remoto
+1/7/2020 1:12:40	Recopilando prioridades de Broker
+1/7/2020 1:12:40	Recopilando firmas
+1/7/2020 1:12:40	Recopilando opciones de compresión de datos
+1/7/2020 1:12:40	Recopilando propiedades extendidas
+1/7/2020 1:12:40	Recopilando credenciales
+1/7/2020 1:12:40	Recopilando inicios de sesión
+1/7/2020 1:12:40	Recopilando auditorías de servidor
+1/7/2020 1:12:42	Buscando elementos duplicados en el proyecto
+1/7/2020 1:12:42	Ha finalizado el procesamiento de los elementos duplicados
+1/7/2020 1:12:42	Finalizó la importación de la base de datos.
+1/7/2020 1:12:42	Se guardó un resumen de la importación en la siguiente ubicación: C:\Repositorios\Programacion 3\Obligatorio 1\Obligatorio1\BaseDeDatos\Registros de importación de esquemas\BaseDeDatos_20200701041235.log
+1/7/2020 1:12:42	Haga clic en Finalizar para continuar...

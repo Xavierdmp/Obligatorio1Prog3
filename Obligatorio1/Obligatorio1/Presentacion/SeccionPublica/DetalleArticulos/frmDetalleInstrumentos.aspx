@@ -76,9 +76,11 @@
                     <asp:Label ID="Label3" runat="server" Text="Cantidad"></asp:Label>
                     <br />
                     <asp:TextBox ID="txtNuevaCantidad" CssClass="form-control" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ControlToValidate="txtNuevaCantidad" ValidationGroup="vgValidarCantidad" ID="RequiredFieldValidator1" runat="server" ErrorMessage="Cantidad Obligatoria"></asp:RequiredFieldValidator>
+
                 </div>
                 <div class="modal-footer">
-                    <asp:Button ID="btnConfirmarCantidadStock" OnClick="btnConfirmarCantidadStock_Click" runat="server" class="btn btn-success" Text="Confirmar" />
+                    <asp:Button ID="btnConfirmarCantidadStock"  ValidationGroup="vgValidarCantidad" OnClick="btnConfirmarCantidadStock_Click" runat="server" class="btn btn-success" Text="Confirmar" />
                 </div>
             </div>
         </div>

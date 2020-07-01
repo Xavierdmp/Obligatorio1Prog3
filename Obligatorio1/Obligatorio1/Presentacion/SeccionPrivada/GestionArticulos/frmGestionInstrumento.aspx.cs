@@ -16,20 +16,29 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
                 this.ListarColores();
                 this.ListarColoresModal();
                 this.ListarFabricantes();
-                if (ListaFotosAdicionales != null)
-                {
-                    this.ListaFotosAdicionales.Clear();
-                }
+                this.LimpiarListasParaAlta();
                 this.ListarFotosAdicionales();
                 this.ListarColoresSeleccionados();
                 this.ListarSubtipos();
                 this.ListarDescuentos();
                 this.ListarInstrumentos();
             }
+
             this.CargarImagenPrincipal();
         }
         private const int maximoTamañoImagen = 3145784;
 
+        private void LimpiarListasParaAlta()
+        {
+            if (ListaFotosAdicionales != null)
+            {
+                this.ListaFotosAdicionales.Clear();
+            }
+            if(ListaColores != null)
+            {
+                this.ListaColores.Clear();
+            }
+        }
         private void ListarColores()
         {
             Dominio.Controladoras.ControladoraColor unaControladora = new Dominio.Controladoras.ControladoraColor();
@@ -128,6 +137,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
                 this.lblMensajeColor.MensajeActivo(1, "El color se agrego con exito");
                 this.ListarColoresModal();
                 this.txtNombreColor.Text = "";
+                
             }
             else
             {
@@ -214,6 +224,15 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
             return false;
         }
 
+        private void ResetearControles()
+        {
+            this.dplListarColores.SelectedIndex = 0;
+            this.dplListaDescuentos.SelectedIndex = 0;
+            this.dplListaFabricante.SelectedIndex = 0;
+            this.dplListarSubtipo.SelectedIndex = 0;
+            this.btnEsDestacado.Checked = false;
+            this.btnNoDestacado.Checked = false;
+        }
         protected void btnAgregarCantidad_Click(object sender, EventArgs e)
         {
             int cantidad = int.Parse(this.txtCantidad.Text);
@@ -314,6 +333,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
                     this.ListarColoresSeleccionados();
                     UrlFotoPrincipal = "";
                     this.MostrarFotoPrincipal.ImageUrl = null;
+                    this.ResetearControles();
                 }
                 else
                 {
@@ -366,6 +386,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
                 this.ListarColoresSeleccionados();
                 UrlFotoPrincipal = "";
                 this.MostrarFotoPrincipal.ImageUrl = null;
+                this.ResetearControles();
             }
             else
             {
@@ -432,6 +453,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
                     this.ListarColoresSeleccionados();
                     UrlFotoPrincipal = "";
                     this.MostrarFotoPrincipal.ImageUrl = null;
+                    this.ResetearControles();
                 }
                 else
                 {
@@ -476,9 +498,10 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
         protected void gvListarImagenesAdicionales_SelectedIndexChanged(object sender, EventArgs e)
         {
             GridViewRow row = this.gvListarImagenesAdicionales.SelectedRow;
-            string url = row.Cells[2].Text;
+            Image img = row.Cells[1].Controls[0] as Image;
+            string url = img.ImageUrl;
             Dominio.FotosAdicionales unaFotoAdicional = new Dominio.FotosAdicionales(url);
-            
+
             ListaFotosAdicionales.Remove(unaFotoAdicional);
             this.ListarFotosAdicionales();
         }

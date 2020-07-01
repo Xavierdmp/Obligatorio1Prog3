@@ -21,7 +21,6 @@
 </head>
 <body>
     <form runat="server">
-
         <asp:ScriptManager runat="server">
             <Scripts>
                 <%--Para obtener más información sobre cómo agrupar scripts en ScriptManager, consulte http://go.microsoft.com/fwlink/?LinkID=301884 --%>

@@ -11,7 +11,10 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!this.IsPostBack)
+            {
+               
+            }
             this.MostrarDatos();
 
         }
@@ -93,7 +96,7 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
                     Dominio.Controladoras.ControladoraCarrito unaControladoraCarrito = new Dominio.Controladoras.ControladoraCarrito();
                     if (cantidad <= unAccesorio.Stock && cantidad > 0)
                     {
-                        //Session["CantidadItemsEnCarrito"] = Session["CantidadItemsEnCarrito"] != null ? int.Parse(Session["CantidadItemsEnCarrito"].ToString()) + cantidad : cantidad;
+                       
                         if (unaControladoraCarrito.AltaCarrito(unItem, IdClienteConectado))
                         {
                             this.lblMensaje.MensajeActivo(1, "Se agrego al carrito");
