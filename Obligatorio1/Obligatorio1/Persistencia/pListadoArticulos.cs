@@ -95,5 +95,59 @@ namespace Obligatorio1.Persistencia
             return listaArticulos;
         }
 
+
+        public List<string> ListarNombresSubtipos()
+        {
+            string consulta = "Select nombre_Subtipo from SubTipos;";
+            DataSet datos = Conexion.Instancia.InicializarSeleccion(consulta);
+            List<string> listaDeNombres = new List<string>();
+            if (datos.Tables[0].Rows.Count > 0)
+            {
+                DataRowCollection table = datos.Tables[0].Rows;
+                foreach (DataRow fila in table)
+                {
+                    object[] elementos = fila.ItemArray;
+                    listaDeNombres.Add(elementos[0].ToString());
+                }
+                return listaDeNombres;
+            }
+            return listaDeNombres;
+        }
+
+        public List<string> ListaNombresTiposs()
+        {
+            string consulta = "Select nombre_Tipo from Tipos;";
+            DataSet datos = Conexion.Instancia.InicializarSeleccion(consulta);
+            List<string> listaDeNombres = new List<string>();
+            if (datos.Tables[0].Rows.Count > 0)
+            {
+                DataRowCollection table = datos.Tables[0].Rows;
+                foreach (DataRow fila in table)
+                {
+                    object[] elementos = fila.ItemArray;
+                    listaDeNombres.Add(elementos[0].ToString());
+                }
+                return listaDeNombres;
+            }
+            return listaDeNombres;
+        }
+
+        public List<string> ListaNombresFabricantes()
+        {
+            string consulta = "Select nombre_Fabricante from Fabricantes;";
+            DataSet datos = Conexion.Instancia.InicializarSeleccion(consulta);
+            List<string> listaDeNombres = new List<string>();
+            if (datos.Tables[0].Rows.Count > 0)
+            {
+                DataRowCollection table = datos.Tables[0].Rows;
+                foreach (DataRow fila in table)
+                {
+                    object[] elementos = fila.ItemArray;
+                    listaDeNombres.Add(elementos[0].ToString());
+                }
+                return listaDeNombres;
+            }
+            return listaDeNombres;
+        }
     }
 }

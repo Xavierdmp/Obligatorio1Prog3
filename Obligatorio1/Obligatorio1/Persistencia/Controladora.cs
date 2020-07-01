@@ -370,5 +370,21 @@ namespace Obligatorio1.Persistencia
             return pVenta.Instancia.ListarVentas();
         }
         #endregion
-    }
+
+        #region "Filtrado Lista"
+        public List<string> ListaNombresSubtipos()
+        {
+            return pListadoArticulos.Instancia.ListarNombresSubtipos();
+        }
+        public List<string> ListaNombresTipos()
+        {
+            return pListadoArticulos.Instancia.ListaNombresTiposs();
+        }
+        public List<string> ListaNombresFabricantes()
+        {
+            return pListadoArticulos.Instancia.ListaNombresFabricantes();
+        }
+
+            #endregion
+        }
 }

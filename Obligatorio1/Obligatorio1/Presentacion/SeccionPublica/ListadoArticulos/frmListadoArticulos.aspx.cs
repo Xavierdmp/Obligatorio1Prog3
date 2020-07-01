@@ -16,6 +16,7 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
             {
                 IndicePaginado = 0;
                 IndiceAnterior = 0;
+                this.GenerarListasFiltrado();
             }
             this.ListadoPaginado(IndiceAnterior);
         }
@@ -181,5 +182,46 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
             this.btnSiguiente.Enabled = false;
             this.ListadoPaginado(IndiceAnterior);
         }
+
+
+        private void GenerarListasFiltrado()
+        {
+            Dominio.Controladoras.ControladoraListado unaControladoraFiltrado = new Dominio.Controladoras.ControladoraListado();
+
+
+            this.dplListarSubtipos.DataSource = null;
+            this.dplListarSubtipos.DataSource = unaControladoraFiltrado.ListadoDeNombresSubtipos();
+            this.dplListarSubtipos.DataBind();
+
+            this.dplListarTipos.DataSource = null;
+            this.dplListarTipos.DataSource = unaControladoraFiltrado.ListadoDeNombresTipos();
+            this.dplListarTipos.DataBind();
+
+            this.dplFabricantes.DataSource = null;
+            this.dplFabricantes.DataSource = unaControladoraFiltrado.ListadoDeNombresFabricantes();
+            this.dplFabricantes.DataBind();
+
+            this.dplDestacado.Items.Add("Destacado");
+            this.dplDestacado.Items.Add("No Destacado");
+            this.dplDestacado.DataBind();
+
+            const string decuento15 = "15% OFF";
+            const string decuento25 = "25% OFF";
+            const string decuento50 = "50% OFF";
+
+            this.dplOferta.Items.Add(decuento15);
+            this.dplOferta.Items.Add(decuento25);
+            this.dplOferta.Items.Add(decuento50);
+            this.dplOferta.DataBind();
+
+            this.dplOrdenar.Items.Add("Ordenar por Nombre");
+            this.dplOrdenar.Items.Add("Orden por fecha fabricacion");
+            this.dplOrdenar.DataBind();
+        }
+
+
+
+
+
     }
 }

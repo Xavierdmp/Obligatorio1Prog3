@@ -51,5 +51,20 @@ namespace Obligatorio1.Dominio.Controladoras
             return pIndex <= cantidadFilas - CantidadElementosAMostrar + 1;
         }
 
+        public List<string> ListadoDeNombresSubtipos()
+        {
+            return Persistencia.Controladora.Instancia.ListaNombresSubtipos();
+        }
+
+        public List<string> ListadoDeNombresTipos()
+        {
+            return Persistencia.Controladora.Instancia.ListaNombresTipos();
+        }
+
+        public List<string> ListadoDeNombresFabricantes()
+        {
+            return Persistencia.Controladora.Instancia.ListaNombresFabricantes();
+        }
+
     }
 }
