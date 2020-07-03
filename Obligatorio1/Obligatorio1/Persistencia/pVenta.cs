@@ -11,7 +11,7 @@ namespace Obligatorio1.Persistencia
     public class pVenta : IABM<Venta>, IBuscar<Venta>
     {
         private static pVenta _instancia = null;
-        protected const string UltimaId = "Declare @UltimaId;Set @UltimaId= ident_current('Ventas');";
+        protected const string UltimaId = "Declare @UltimaId int;Set @UltimaId= ident_current('Ventas');";
 
         public static pVenta Instancia
         {
@@ -29,19 +29,20 @@ namespace Obligatorio1.Persistencia
             int estadoActivado = 1;
             List<string> transaccion = new List<string>();
             transaccion.Add("Insert into Ventas values(" + "'" +pVenta.Fecha +"'," + pVenta.Cliente.Id +"," + 
-                                                        pVenta.MontoTotal +",'" + pVenta.Tarjeta +"'," +
-                                                        pVenta.Pais + "'," + estadoActivado +",'" + pVenta.Ciudad +");");
+                                                        pVenta.MontoTotal +",'" + pVenta.Tarjeta +"','" +
+                                                        pVenta.Pais + "'," + estadoActivado +",'" + pVenta.Ciudad +"');");
 
             foreach (Item unItem in pVenta.ListaItems)
             {
                 if (unItem.Color != null) {
-                    transaccion.Add(UltimaId + " Insert into Ventas_tienen_Articulos values(" + "@UltimaId" + "," + unItem.Articulo.Id + "," + unItem.Cantidad + "," + unItem.Precio + "," + unItem.Color.Id + ");");
+                    transaccion.Add(UltimaId + "Insert into Ventas_tienen_Articulos values(" + "@UltimaId" + "," + unItem.Articulo.Id + "," + unItem.Cantidad + "," + unItem.Precio + "," + unItem.Color.Id + ");");
                 }
                 else
                 {
-                    transaccion.Add(UltimaId + " Insert into Ventas_tienen_Articulos values(" + "@UltimaId" + "," + unItem.Articulo.Id + "," + unItem.Cantidad + "," + unItem.Precio +");");
+                    transaccion.Add(UltimaId + "Insert into Ventas_tienen_Articulos(Id_Venta,Id_Articulo,Cantidad_Articulo,Precio_Articulo) values(" + "@UltimaId" + "," + unItem.Articulo.Id + "," + unItem.Cantidad + "," + unItem.Precio +");");
                 }
             }
+            transaccion.Add("delete from CarritoCompras where Id_Cliente =" + pVenta.Cliente.Id);
             return Conexion.Instancia.EjecutarTransaccionSql(transaccion);
         }
 

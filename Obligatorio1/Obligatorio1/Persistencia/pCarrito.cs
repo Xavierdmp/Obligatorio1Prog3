@@ -88,7 +88,7 @@ namespace Obligatorio1.Persistencia
             }
             return ListadoDeItems;
         }
-
+        
         public bool EliminarCarrito(int pIdCliente)
         {
             return Conexion.Instancia.InicializarConsulta("delete from CarritoCompras where Id_Cliente=" + pIdCliente);
@@ -98,6 +98,7 @@ namespace Obligatorio1.Persistencia
         {
             return Conexion.Instancia.InicializarConsulta("delete from CarritoCompras where Id_Articulo=" + pIdArticulo + " and Id_Cliente=" + pIdCliente);
         }
+
         public bool ComprobarExistenciaArticulo(int pIdArticulo)
         {
             string consulta = "Select * from  CarritoCompras where Id_Articulo=" + pIdArticulo;

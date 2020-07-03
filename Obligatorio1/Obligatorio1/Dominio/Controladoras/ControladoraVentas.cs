@@ -7,7 +7,23 @@ namespace Obligatorio1.Dominio.Controladoras
 {
     public class ControladoraVentas:IABMLBC<Venta>
     {
-       
+        private static ControladoraVentas _instancia = null;
+
+        public static ControladoraVentas Instancia
+        {
+            get {
+                if(_instancia == null)
+                {
+                    _instancia = new ControladoraVentas();
+                }
+                return _instancia;
+            }
+        }
+        private ControladoraVentas()
+        {
+
+        }
+
         public List<string> ListarPaises()
         {
             return Persistencia.Controladora.Instancia.ListarPaises();

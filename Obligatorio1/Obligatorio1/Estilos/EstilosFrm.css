@@ -473,7 +473,7 @@ body{
     color:green;
 }
 .fa-cart-plus {
-    font-size: 3rem;
+    font-size: 2rem;
 }
 .CarritoTotalCompras{
         margin-right:2em;
@@ -498,4 +498,61 @@ body{
 }
 .FiltrosListado{
     margin-top:2em;
+}
+
+
+
+.dropdown-submenu{
+       position: relative;
+}
+.dropdown-submenu a::after{
+       transform: rotate(-90deg);
+       position: absolute;
+       right: 3px;
+       top: 40%;
+}
+.dropdown-submenu:hover .dropdown-menu, .dropdown-submenu:focus .dropdown-menu{
+       display: flex;
+       flex-direction: column;
+       position: absolute !important;
+       margin-top: -30px;
+       left: 100%;
+}
+@media (max-width: 992px) {
+       .dropdown-menu{
+           width: 50%;
+       }
+       .dropdown-menu .dropdown-submenu{
+           width: auto;
+       }
+}
+.dropdown-menu > li > a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.428571429;
+    color: white;
+    white-space: nowrap;
+}
+
+.FiltrarPorListado{
+    color:white;
+    margin:0 auto;
+}
+
+
+/*Ventas*/
+.ImagenItemsVentas {
+    width: 48px;
+    height: 48px;
+    overflow-y: hidden;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.ImagenesTarjetasVentas{
+    width: 200px;
+    height: 120px;
+    margin-left: 2em;
 }

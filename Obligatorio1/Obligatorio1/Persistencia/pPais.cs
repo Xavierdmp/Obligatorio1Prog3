@@ -33,7 +33,8 @@ namespace Obligatorio1.Persistencia
                 foreach (DataRow row in table)
                 {
                     object[] element = row.ItemArray;
-                    listaPaises.Add(element[0].ToString());
+                    string nombrePais = element[0].ToString().TrimEnd(' ');
+                    listaPaises.Add(nombrePais);
 
                 }
                 return listaPaises;
@@ -43,7 +44,7 @@ namespace Obligatorio1.Persistencia
 
         public List<string> ListarCiudadesDadoPais(string pNombrePais)
         {
-            string consulta = "Select c.CiudadNombre from Ciudad c,pais p where c.PaisCodigo = p.PaisCodigo and p.PaisNombre=" + pNombrePais;
+            string consulta = "Select c.CiudadNombre from Ciudad c,pais p where c.PaisCodigo = p.PaisCodigo and p.PaisNombre=" + "'" + pNombrePais + "'" ;
             DataSet datos = Conexion.Instancia.InicializarSeleccion(consulta);
             List<string> listaCiudades = new List<string>();
             if (datos.Tables[0].Rows.Count > 0)
@@ -52,7 +53,7 @@ namespace Obligatorio1.Persistencia
                 foreach (DataRow row in table)
                 {
                     object[] element = row.ItemArray;
-                    listaCiudades.Add(element[0].ToString());
+                    listaCiudades.Add(element[0].ToString().TrimEnd(' '));
 
                 }
                 return listaCiudades;

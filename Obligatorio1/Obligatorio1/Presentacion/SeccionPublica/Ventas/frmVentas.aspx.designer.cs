@@ -76,6 +76,33 @@ namespace Obligatorio1.Presentacion.SeccionPublica.Ventas {
         protected global::System.Web.UI.WebControls.TextBox txtCedulaTitularTarjeta;
         
         /// <summary>
+        /// Control ImagenTarjeta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image ImagenTarjeta;
+        
+        /// <summary>
+        /// Control ContenedorArticulos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table ContenedorArticulos;
+        
+        /// <summary>
+        /// Control lblPrecioTotal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPrecioTotal;
+        
+        /// <summary>
         /// Control btnComprar.
         /// </summary>
         /// <remarks>
