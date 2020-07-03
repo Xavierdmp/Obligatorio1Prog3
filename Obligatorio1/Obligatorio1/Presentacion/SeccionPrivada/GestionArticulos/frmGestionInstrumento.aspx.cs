@@ -468,5 +468,16 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
             }
 
         }
+
+        protected void gvListarImagenesAdicionales_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GridViewRow row = this.gvListarImagenesAdicionales.SelectedRow;
+            string url = row.Cells[2].Text;
+            Dominio.FotosAdicionales unaFotoAdicional = new Dominio.FotosAdicionales(url);
+
+            ListaFotosAdicionales.Remove(unaFotoAdicional);
+            this.ListarFotosAdicionales();
+
+        }
     }
 }

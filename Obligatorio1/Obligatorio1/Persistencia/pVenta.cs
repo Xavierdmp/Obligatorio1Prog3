@@ -13,7 +13,7 @@ namespace Obligatorio1.Persistencia
 
         private static pVenta _instancia = null;
 
-        protected const string UltimaId = "Declare @UltimaId; Set @UltimaId= ident_current('Ventas');";
+        protected const string UltimaId = "Declare @UltimaId int ; Set @UltimaId= ident_current('Ventas');";
 
         public static pVenta Instancia
         {
@@ -30,16 +30,32 @@ namespace Obligatorio1.Persistencia
 
 
 
-        public bool Alta(Venta pVenta)        {            int estadoActivado = 1;            List<string> transaccion = new List<string>();            transaccion.Add("Insert into Ventas values(" + "'" + pVenta.Fecha + "'," + pVenta.Cliente.Id + "," +
-                                                        pVenta.MontoTotal + ",'" + pVenta.Tarjeta + "'," +                                                        pVenta.Pais + "'," + estadoActivado + ",'" + pVenta.Ciudad + ");");
+        public bool Alta(Venta pVenta)
+        {
+            int estadoActivado = 1;
+            List<string> transaccion = new List<string>();
+            transaccion.Add("Insert into Ventas values(" + "'" + pVenta.Fecha + "'," + pVenta.Cliente.Id + "," +
+                                                        pVenta.MontoTotal + ",'" + pVenta.Tarjeta + "','" +
+                                                        pVenta.Pais + "'," + estadoActivado + ",'" + pVenta.Ciudad + "');");
 
-
-            foreach (Item unItem in pVenta.ListaItems)            {                if (unItem.Color != null)
-                {                    transaccion.Add(UltimaId + " Insert into Ventas_tienen_Articulos values(" + "@UltimaId" + "," + unItem.Articulo.Id + "," + unItem.Cantidad + "," + unItem.Precio + "," + unItem.Color.Id + ");");                }                else                {                    transaccion.Add(UltimaId + " Insert into Ventas_tienen_Articulos values(" + "@UltimaId" + "," + unItem.Articulo.Id + "," + unItem.Cantidad + "," + unItem.Precio + ");");                }            }            return Conexion.Instancia.EjecutarTransaccionSql(transaccion);        }
+            foreach (Item unItem in pVenta.ListaItems)
+            {
+                if (unItem.Color != null)
+                {
+                    transaccion.Add(UltimaId + "Insert into Ventas_tienen_Articulos values(" + "@UltimaId" + "," + unItem.Articulo.Id + "," + unItem.Cantidad + "," + unItem.Precio + "," + unItem.Color.Id + ");");
+                }
+                else
+                {
+                    transaccion.Add(UltimaId + "Insert into Ventas_tienen_Articulos(Id_Venta,Id_Articulo,Cantidad_Articulo,Precio_Articulo) values(" + "@UltimaId" + "," + unItem.Articulo.Id + "," + unItem.Cantidad + "," + unItem.Precio + ");");
+                }
+            }
+            transaccion.Add("delete from CarritoCompras where Id_Cliente =" + pVenta.Cliente.Id);
+            return Conexion.Instancia.EjecutarTransaccionSql(transaccion);
+        }
 
         public bool Baja(int pId)
         {
-            throw new NotImplementedException();
+            return Conexion.Instancia.InicializarConsulta("updte Ventas set Estado_Venta =0 where Id_Venta =" + pId);
         }
 
         public Venta Buscar(int pId)

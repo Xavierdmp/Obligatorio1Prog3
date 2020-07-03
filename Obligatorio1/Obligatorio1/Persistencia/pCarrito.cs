@@ -165,7 +165,13 @@ namespace Obligatorio1.Persistencia
                 foreach (DataRow row in table)
                 {
                     object[] element = row.ItemArray;
-                    cantidad = int.Parse(element[0].ToString());
+
+                    if (element[0].ToString() != "")
+                    {
+
+                        cantidad = int.Parse(element[0].ToString());
+
+                    }
                 }
                 return cantidad;
             }

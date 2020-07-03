@@ -13,6 +13,42 @@ namespace Obligatorio1 {
     public partial class SiteMaster {
         
         /// <summary>
+        /// Control lbInstrumentoDestacado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbInstrumentoDestacado;
+        
+        /// <summary>
+        /// Control lbInstrumentoPrecioOrdenAsc.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbInstrumentoPrecioOrdenAsc;
+        
+        /// <summary>
+        /// Control lbInstrumentoPrecioOrdenDesc.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbInstrumentoPrecioOrdenDesc;
+        
+        /// <summary>
+        /// Control lbInstrumentoPrecioDescuento.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbInstrumentoPrecioDescuento;
+        
+        /// <summary>
         /// Control PerfilCliente.
         /// </summary>
         /// <remarks>

@@ -21,7 +21,7 @@ namespace Obligatorio1.Persistencia
                 {
                     _instancia = new pPais();
                 }
-                return Instancia;
+                return _instancia;
             }
         }
 
@@ -44,7 +44,7 @@ namespace Obligatorio1.Persistencia
                 {
                     object[] element = row.ItemArray;
 
-                    ListaPais.Add(element[0].ToString());
+                    ListaPais.Add(element[0].ToString().TrimEnd(' ')); 
 
 
                 }
@@ -58,7 +58,7 @@ namespace Obligatorio1.Persistencia
         public List<string> ListarCiudad(string pNombrePais)
         {
 
-            string consulta = "select c.CiudadNombre from Ciudad c , Pais p where p.paiscodigo = c.paiscodigo and p.paisnombre= " + pNombrePais;
+            string consulta = "select c.CiudadNombre from Ciudad c , Pais p where p.paiscodigo = c.paiscodigo and p.paisnombre=" + "'" + pNombrePais + "'" ;
             DataSet data = Conexion.Instancia.InicializarSeleccion(consulta);
 
             List<string> ListaCiudad = new List<string>();
@@ -70,7 +70,8 @@ namespace Obligatorio1.Persistencia
                 {
                     object[] element = row.ItemArray;
 
-                    ListaCiudad.Add(element[0].ToString());
+                    ListaCiudad.Add(element[0].ToString().TrimEnd(' ')); // Quita Espacios Caracteres.
+
 
 
 

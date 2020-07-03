@@ -2,6 +2,8 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <section class="container-fluid">
+
+
         <section class="row text-center FiltrosListado">
             <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <asp:DropDownList ID="dplListarSubtipos" CssClass="form-controlV2" runat="server">
@@ -25,11 +27,11 @@
                 <asp:Button ID="btnFiltrarLista" runat="server" class="btn btn-primary buttonFiltrar" Text="Filtrar" />
             </article>
         </section>
-<%--        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">--%>
-                <asp:Panel ID="ContenedorPrincipal" CssClass="row text-center ContenedorPrincipalListado" runat="server"></asp:Panel>
-<%--            </div>
-        </div>--%>
+       <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <asp:Panel ID="ContenedorPrincipal" CssClass=" text-center ContenedorPrincipalListado" runat="server"></asp:Panel>
+            </div>
+        </div>
         <section class="row text-center">
             <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">

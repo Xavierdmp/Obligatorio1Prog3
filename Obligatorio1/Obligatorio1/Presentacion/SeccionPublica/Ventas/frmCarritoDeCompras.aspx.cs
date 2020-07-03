@@ -199,5 +199,25 @@ namespace Obligatorio1.Presentacion.SeccionPublica.Ventas
                 this.lblMensaje.MensajeActivo(2, "No hay stock disponible para la cantidad seleccionada:  " + cantidadNueva + " para: el Instrumento " + unInstrumento.Nombre);
             }
         }
+
+    
+
+        protected void btnComprar_Click1(object sender, EventArgs e)
+        {
+            int idCLienteConectado = int.Parse(Session["ClienteLogueado"].ToString()); //Para saber la id de cliente en el carrito
+            Dominio.Controladoras.ControladoraCarrito unaControladoraCarrito = new Dominio.Controladoras.ControladoraCarrito();
+            int cantidadArticulosenElCarrito = unaControladoraCarrito.CantidadItemsEnElCarrito(idCLienteConectado);
+
+
+            if (cantidadArticulosenElCarrito > 0)
+            {
+                Response.Redirect("~/Presentacion/SeccionPublica/Ventas/frmVentas.aspx");
+
+            }
+            else
+            {
+                this.lblMensaje.MensajeActivo(2, "No tienes articulos seleccionados");
+            }
+        }
     }
 }

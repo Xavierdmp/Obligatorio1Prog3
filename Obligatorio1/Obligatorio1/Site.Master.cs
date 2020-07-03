@@ -107,6 +107,14 @@ namespace Obligatorio1
             Response.Redirect("~/Default.aspx");
         }
 
+        protected void lbInstrumentoDestacado_Click(object sender, EventArgs e)
+        {
+            Session["FiltrarListaDestacado"] = "Destacado";
+
+
+        }
+
+
     }
 
 }

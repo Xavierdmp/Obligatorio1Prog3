@@ -354,7 +354,35 @@ namespace Obligatorio1.Persistencia
 
         #endregion
 
-        
+        #region Ventas
+
+
+        public Venta BuscarVenta(int pId)
+        {
+            return pVenta.Instancia.Buscar(pId);
+        }
+
+        public bool AltaVenta(Venta pVentas)
+        {
+            return pVenta.Instancia.Alta(pVentas);
+        }
+
+        public bool BajaVenta(int pId)
+        {
+            return pVenta.Instancia.Baja(pId);
+        }
+
+        public List<Venta> ListadodeVentas()
+        {
+            return pVenta.Instancia.ListadeVentas();
+        }
+     
+
+
+
+
+        #endregion 
+
     }
 
 }
