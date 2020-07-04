@@ -8,12 +8,99 @@ namespace Obligatorio1.Dominio.Controladoras
     public class ControladoraListado
     {
         private const int CantidadElementosAMostrar = 12;
+        private static ControladoraListado _instancia = null;
+        public static ControladoraListado Instancia
+        {
 
-        public List<Articulo> Paginado(int pPaginaInicio)
+            get
+            {
+
+                if(_instancia == null)
+                {
+                    _instancia = new ControladoraListado();
+                }
+                return _instancia;
+            }
+        }
+        private ControladoraListado()
+        {
+
+        }
+        public Persistencia.Controladora InstanciaControladora
+        {
+            get
+            {
+                return Persistencia.Controladora.Instancia;
+            }
+        }
+
+        public List<Articulo> Paginado(int pPaginaInicio,List<string> pListaFiltros,string pTipoArticulo)
         {
                 List<Articulo> ListadoArticulos = new List<Articulo>();
-                ListadoArticulos = Persistencia.Controladora.Instancia.ListadoArticulos();
-                int ContadorIndice = pPaginaInicio;
+            if (pListaFiltros != null && pListaFiltros.Count == 1)
+            {
+                string esDestacado = "";
+                string precioAsc = "";
+                string precioDesc = "";
+                string esDescuento = "";
+                foreach (string unString in pListaFiltros)
+                {
+                    string[] tempVector = unString.Split(' ');
+                    int tempIndice = int.Parse(tempVector[0]);
+                    string tempValor = tempVector[1];
+                    switch (tempIndice)
+                    {
+                        case 0:
+                            esDestacado = tempValor;
+                            break;
+                        case 1:
+                            precioAsc = tempValor;
+                            break;
+                        case 2:
+                            precioDesc = tempValor;
+                            break;
+                        case 3:
+                            esDescuento = tempValor;
+                            break;
+                    }
+                }
+                if (esDestacado != "")
+                {
+                    ListadoArticulos = this.ListaDeArticulosFiltradaPorDestacados();
+                }
+                else if (precioAsc != "")
+                {
+                    if (pTipoArticulo == "Instrumento")
+                    {
+                        ListadoArticulos = Persistencia.Controladora.Instancia.ListadoArticulos(precioAsc, pTipoArticulo);
+                    }
+                    else
+                    {
+                        ListadoArticulos = Persistencia.Controladora.Instancia.ListadoArticulos(precioAsc, pTipoArticulo);
+                    }
+                }
+                else if (precioDesc != "")
+                {
+                    if (pTipoArticulo == "Instrumento")
+                    {
+                        ListadoArticulos = Persistencia.Controladora.Instancia.ListadoArticulos(precioDesc, pTipoArticulo);
+                    }
+                    else
+                    {
+                        ListadoArticulos = Persistencia.Controladora.Instancia.ListadoArticulos(precioDesc, pTipoArticulo);
+                    }
+                }
+                else if (esDescuento != "")
+                {
+                    ListadoArticulos = Persistencia.Controladora.Instancia.ListadoArticulos(esDescuento, pTipoArticulo);
+                }
+
+            }
+            else
+            {
+                ListadoArticulos = Persistencia.Controladora.Instancia.ListadoArticulos(null, pTipoArticulo);
+            }
+            int ContadorIndice = pPaginaInicio;
                 int ContadorElementos = 0;
 
                 int indiceInicio = 0;
@@ -39,15 +126,40 @@ namespace Obligatorio1.Dominio.Controladoras
                 }
                 return ListaPaginada;
         }
+
         public int CantidadTotalesArticulos()
         {
             return Persistencia.Controladora.Instancia.CantidadArticulos();
         }
+
         public bool CantidadFilas(int pIndex)
         {
             int cantidadFilas = Persistencia.Controladora.Instancia.CantidadArticulos();
             return pIndex <= cantidadFilas - CantidadElementosAMostrar + 1;
         }
+
+        public List<string> ListadoDeNombresSubtipos()
+        {
+            return Persistencia.Controladora.Instancia.ListaNombresSubtipos();
+        }
+
+        public List<string> ListadoDeNombresTipos()
+        {
+            return Persistencia.Controladora.Instancia.ListaNombresTipos();
+        }
+
+        public List<string> ListadoDeNombresFabricantes()
+        {
+            return Persistencia.Controladora.Instancia.ListaNombresFabricantes();
+        }
+
+        #region Listas filtradas para el menu"
+
+        public List<Articulo> ListaDeArticulosFiltradaPorDestacados()
+        {
+            return Persistencia.Controladora.Instancia.listadoDeArticulosDestacados();
+        }
+        #endregion
 
     }
 }

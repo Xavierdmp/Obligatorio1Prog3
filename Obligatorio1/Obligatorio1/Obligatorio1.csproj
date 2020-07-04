@@ -184,7 +184,7 @@
     <Content Include="Imagenes\ImagenesVentasTarjetas\NombreTarjeta.png" />
     <Content Include="Imagenes\ImagenesVentasTarjetas\NumeroAdelante.png" />
     <Content Include="Imagenes\ImagenesVentasTarjetas\numeroAtrasTarjeta.png" />
-    <Content Include="JavasCript\JavaScript.js" />
+    <Content Include="Javascript\Scripts.js" />
     <Content Include="Presentacion\SeccionPrivada\Gestion Clientes\frmEliminarCliente.aspx" />
     <Content Include="Presentacion\SeccionPrivada\GestionArticulos\frmGestionAccesorio.aspx" />
     <Content Include="Presentacion\SeccionPrivada\GestionArticulos\frmGestionInstrumento.aspx" />

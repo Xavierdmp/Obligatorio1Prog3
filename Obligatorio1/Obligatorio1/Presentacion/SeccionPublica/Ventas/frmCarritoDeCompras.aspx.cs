@@ -200,24 +200,20 @@ namespace Obligatorio1.Presentacion.SeccionPublica.Ventas
             }
         }
 
-    
-
-        protected void btnComprar_Click1(object sender, EventArgs e)
+        protected void btnComprar_Click(object sender, EventArgs e)
         {
-            int idCLienteConectado = int.Parse(Session["ClienteLogueado"].ToString()); //Para saber la id de cliente en el carrito
+            int IdClienteConectado = int.Parse(Session["ClienteLogueado"].ToString());
             Dominio.Controladoras.ControladoraCarrito unaControladoraCarrito = new Dominio.Controladoras.ControladoraCarrito();
-            int cantidadArticulosenElCarrito = unaControladoraCarrito.CantidadItemsEnElCarrito(idCLienteConectado);
-
-
-            if (cantidadArticulosenElCarrito > 0)
+            int cantidadArticulosEnElCarrito = unaControladoraCarrito.CantidadItemsEnElCarrito(IdClienteConectado);
+            if (cantidadArticulosEnElCarrito > 0)
             {
                 Response.Redirect("~/Presentacion/SeccionPublica/Ventas/frmVentas.aspx");
-
             }
             else
             {
                 this.lblMensaje.MensajeActivo(2, "No tienes articulos seleccionados");
             }
+
         }
     }
 }

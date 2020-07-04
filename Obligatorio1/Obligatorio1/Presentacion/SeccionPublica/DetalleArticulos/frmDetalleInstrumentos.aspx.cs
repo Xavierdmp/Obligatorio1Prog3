@@ -68,18 +68,15 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
 
         protected void btnConfirmarCantidadStock_Click(object sender, EventArgs e)
         {
-
-            if (this.txtNuevaCantidad.Text != "")
-            {
-
+            if(this.txtNuevaCantidad.Text != ""){
                 Dominio.Controladoras.ControladoraColor unaControladora = new Dominio.Controladoras.ControladoraColor();
                 int IdColor = int.Parse(Session["ColorSeleccionado"].ToString());
                 Dominio.Color unColor = unaControladora.Buscar(IdColor);
                 int cantidad = int.Parse(this.txtNuevaCantidad.Text);
                 Session["CantidadSeleccionada"] = cantidad;
-
             }
         }
+
         protected void btnSelecinarColor_Click(object sender, EventArgs e)
         {
             Button Seleccionado = (Button)sender;
@@ -92,10 +89,8 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
         {
             if (Session["ClienteLogueado"] != null)
             {
-
-                if (Session["ColorSeleccionado"] != null )
+                if (Session["ColorSeleccionado"] != null && Session["CantidadSeleccionada"] != null )
                 {
-
                     int IdAccesorio = int.Parse(Session["InstrumentoDetalle"].ToString());
                     Dominio.Controladoras.ControladoraInstrumentos unaControladora = new Dominio.Controladoras.ControladoraInstrumentos();
                     Dominio.Instrumento unInstrumento = unaControladora.Buscar(IdAccesorio);
@@ -106,7 +101,7 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
                     Dominio.Controladoras.ControladoraCarrito unaControladoraCarrito = new Dominio.Controladoras.ControladoraCarrito();
                     int cantidad = int.Parse(Session["CantidadSeleccionada"].ToString());
                     Dominio.Item unItem = new Dominio.Item(unInstrumento, cantidad, unColor);
-                    if (cantidad <= unInstrumento.Stock)
+                    if (cantidad <= unInstrumento.Stock && cantidad > 0)
                     {
                         if (unaControladoraCarrito.AltaCarrito(unItem, IdClienteLogueado))
                         {
@@ -118,13 +113,16 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
                         this.lblMensaje.MensajeActivo(2, "No hay stock disponbile para: " + cantidad);
                     }
                 }
+                else
+                {
+                    this.lblMensaje.MensajeActivo(2, "Seleccione el color");
+                }
             }
             else
             {
                 this.lblMensaje.MensajeActivo(2, "Inicie sesion para agregar al carrito");
             }
         }
-         
         private void MostrarVideo(string pUrl)
         {
             string urlVideo = "";

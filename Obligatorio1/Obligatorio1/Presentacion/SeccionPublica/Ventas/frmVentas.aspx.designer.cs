@@ -13,22 +13,22 @@ namespace Obligatorio1.Presentacion.SeccionPublica.Ventas {
     public partial class frmVentas {
         
         /// <summary>
-        /// Control dpListaPais.
+        /// Control dplListaPaises.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dpListaPais;
+        protected global::System.Web.UI.WebControls.DropDownList dplListaPaises;
         
         /// <summary>
-        /// Control dpListaCiudad.
+        /// Control dplListaCiudades.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dpListaCiudad;
+        protected global::System.Web.UI.WebControls.DropDownList dplListaCiudades;
         
         /// <summary>
         /// Control txtNumeroTarjeta.
@@ -47,15 +47,6 @@ namespace Obligatorio1.Presentacion.SeccionPublica.Ventas {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNombreYApellido;
-        
-        /// <summary>
-        /// Control ImagenTarjeta.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image ImagenTarjeta;
         
         /// <summary>
         /// Control txtFechaExpiracion.
@@ -83,6 +74,15 @@ namespace Obligatorio1.Presentacion.SeccionPublica.Ventas {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCedulaTitularTarjeta;
+        
+        /// <summary>
+        /// Control ImagenTarjeta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image ImagenTarjeta;
         
         /// <summary>
         /// Control ContenedorArticulos.

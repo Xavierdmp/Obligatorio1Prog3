@@ -69,7 +69,7 @@ namespace Obligatorio1
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(Session["ClienteLogueado"] != null)
+            if (Session["ClienteLogueado"] != null)
             {
                 this.SeInicioSesion.Visible = false;
                 this.OcultarRegister.Visible = false;
@@ -86,14 +86,14 @@ namespace Obligatorio1
                 this.CarritoCompras.Visible = false;
                 this.PerfilCliente.Visible = false;
             }
-            
+
         }
         private void ClienteConectado()
         {
-         int IdCliente = int.Parse(Session["ClienteLogueado"].ToString());
-         Dominio.Controladoras.ControladoraCliente unaControladoraCliente = new Dominio.Controladoras.ControladoraCliente();
-         Dominio.Cliente unCliente = unaControladoraCliente.Buscar(IdCliente);
-         this.lblClienteConectado.Text = unCliente.CorreoElectronico;
+            int IdCliente = int.Parse(Session["ClienteLogueado"].ToString());
+            Dominio.Controladoras.ControladoraCliente unaControladoraCliente = new Dominio.Controladoras.ControladoraCliente();
+            Dominio.Cliente unCliente = unaControladoraCliente.Buscar(IdCliente);
+            this.lblClienteConectado.Text = unCliente.CorreoElectronico;
         }
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
@@ -109,12 +109,40 @@ namespace Obligatorio1
 
         protected void lbInstrumentoDestacado_Click(object sender, EventArgs e)
         {
-            Session["FiltrarListaDestacado"] = "Destacado";
+            Session["FiltrarListaDestacado"] = "0 Destacado";
+            Response.Redirect("~/Presentacion/SeccionPublica/ListadoArticulos/frmListadoArticulos.aspx");
+        }
 
+        protected void lbInstrumentoPrecioOrdenAsc_Click(object sender, EventArgs e)
+        {
+            Session["FiltrarListaPrecioAsc"] = "1 PrecioAsc";
+            Response.Redirect("~/Presentacion/SeccionPublica/ListadoArticulos/frmListadoArticulos.aspx");
+        }
+
+        protected void lbInstrumentoPrecioOrdenDesc_Click(object sender, EventArgs e)
+        {
+            Session["FiltrarListaPrecioDesc"] = "2 PrecioDesc";
+            Response.Redirect("~/Presentacion/SeccionPublica/ListadoArticulos/frmListadoArticulos.aspx");
+        }
+
+        protected void lbInstrumentoPrecioDescuento_Click(object sender, EventArgs e)
+        {
+            Session["FiltrarListaDescuento"] = "3 Descuento";
+            Response.Redirect("~/Presentacion/SeccionPublica/ListadoArticulos/frmListadoArticulos.aspx");
 
         }
 
+        protected void lbAcccesorioPrecioAsc_Click(object sender, EventArgs e)
+        {
+            Session["FiltrarListaAccesorioPrecioAsc"] = "1 PrecioAsc";
+            Response.Redirect("~/Presentacion/SeccionPublica/ListadoArticulos/frmListadoArticulos.aspx");
 
+        }
+
+        protected void lbAccesorioPrecioDesc_Click(object sender, EventArgs e)
+        {
+            Session["FiltrarListaAccesorioPrecioDesc"] = "2 PrecioDesc";
+
+        }
     }
-
 }

@@ -11,7 +11,10 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.SiteMasterPrivate
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.AdministradorConectado();
+          
+                this.AdministradorConectado();
+           
+
         }
         private void AdministradorConectado()
         {

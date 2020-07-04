@@ -18,11 +18,11 @@
     <link href="Estilos/EstilosFrm.css" rel="stylesheet" type="text/css" />
     <script src="../../../swiper.min.js"></script>
     <link rel="stylesheet" href="Slider/swiper.min.css" />
-    <script src="../../../JavasCript/JavaScript.js"></script>
+    <script src="../../../Javascript/Scripts.js"></script>
 </head>
 <body>
     <form runat="server">
-          <asp:ScriptManager runat="server">
+        <asp:ScriptManager runat="server">
             <Scripts>
                 <%--Para obtener más información sobre cómo agrupar scripts en ScriptManager, consulte http://go.microsoft.com/fwlink/?LinkID=301884 --%>
                 <%--Scripts de marco--%>
@@ -41,6 +41,7 @@
                 <asp:ScriptReference Name="WebFormsBundle" />
                 <%--Scripts del sitio--%>
             </Scripts>
+
         </asp:ScriptManager>
 
         <div class="navbar navbar-inverse navbar-fixed-top">
@@ -56,6 +57,7 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/"><i class="fas fa-home"></i>Inicio</a></li>
+
                         <li class="nav-item dropdown ">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-list"></i>Listas
@@ -66,23 +68,23 @@
                                     <ul class="dropdown-menu MenuInstrumentos">
                                         <span class="dropdown-item FiltrarPorListado">Filtrar por:</span>
                                         <asp:LinkButton ID="lbInstrumentoDestacado" OnClick="lbInstrumentoDestacado_Click" class="dropdown-item" runat="server">Destacados</asp:LinkButton>
-                                        <asp:LinkButton ID="lbInstrumentoPrecioOrdenAsc" class="dropdown-item" runat="server">Precio:Orden ascendente</asp:LinkButton>
-                                        <asp:LinkButton ID="lbInstrumentoPrecioOrdenDesc" class="dropdown-item" runat="server">Precio:Orden descendente</asp:LinkButton>
-                                        <asp:LinkButton ID="lbInstrumentoPrecioDescuento" class="dropdown-item" runat="server">Descuentos</asp:LinkButton>
+                                        <asp:LinkButton ID="lbInstrumentoPrecioOrdenAsc" OnClick="lbInstrumentoPrecioOrdenAsc_Click" class="dropdown-item" runat="server">Precio:Orden ascendente</asp:LinkButton>
+                                        <asp:LinkButton ID="lbInstrumentoPrecioOrdenDesc" OnClick="lbInstrumentoPrecioOrdenDesc_Click" class="dropdown-item" runat="server">Precio:Orden descendente</asp:LinkButton>
+                                        <asp:LinkButton ID="lbInstrumentoPrecioDescuento" OnClick="lbInstrumentoPrecioDescuento_Click" class="dropdown-item" runat="server">Descuentos</asp:LinkButton>
+                                    </ul>
+                                </li>
+                                <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#">Accesorios</a>
+                                    <ul class="dropdown-menu MenuInstrumentos">
+                                        <asp:LinkButton ID="lbAcccesorioPrecioAsc" OnClick="lbAcccesorioPrecioAsc_Click" class="dropdown-item" runat="server"> Precio:Orden Ascendente</asp:LinkButton>
+                                        <asp:LinkButton ID="lbAccesorioPrecioDesc" OnClick="lbAccesorioPrecioDesc_Click" class="dropdown-item" runat="server"> Precio: Orden Descendente</asp:LinkButton>
 
                                     </ul>
-                                    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#">Accesorios</a>
-                                        <ul class="dropdown-menu MenuInstrumentos">
-                                            <a class="dropdown-item" href="#">Subtipo</a>
-                                            <a class="dropdown-item" href="#">Tipo</a>
-                                            <a class="dropdown-item" href="#">Fabricante</a>
-
-                                        </ul>
-                                    </li>
+                                </li>
                             </ul>
                         </li>
-
                     </ul>
+
+                    <%--   <a runat="server" href="~/Presentacion/SeccionPublica/ListadoArticulos/frmListadoArticulos.aspx"><i class="fas fa-list"></i>Listado</a>         --%>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="nav-item dropdown" runat="server" id="PerfilCliente">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -106,7 +108,6 @@
                             <asp:Label ID="lblCantidadCarrito" CssClass="CantidadItemsCarrito" runat="server" Text="0"></asp:Label></a></li>
                         <li><a runat="server" href="~/Presentacion/SeccionPublica/GestionCliente/frmRegistrarCliente.aspx" id="OcultarRegister"><i class="fas fa-address-card"></i>Registrarse</a></li>
                         <li><a runat="server" href="~/Presentacion/Autenticación/frmIniciarSesion.aspx" id="SeInicioSesion"><i class="fas fa-key"></i>Iniciar sesión</a></li>
-
                     </ul>
 
                 </div>

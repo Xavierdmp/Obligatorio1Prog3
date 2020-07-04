@@ -11,19 +11,18 @@
                 </div>
             </div>
             <div class="row SectionLogin">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-122">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="group-form">
                         <asp:TextBox ID="txtCorreo" runat="server" placeholder="Tu email" CssClass="InputsLogin" TextMode="Email" Width="220px"></asp:TextBox>
-                        <br />
-                        <br />
+                            <br />
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="debe completar todos los campos" ForeColor="#990000" ValidationGroup="vgLogin" ControlToValidate="txtCorreo"></asp:RequiredFieldValidator>
                     </div>
                     <div class="group-form">
                         <asp:TextBox ID="txtContraseña" runat="server" placeholder="Contraseña" CssClass="InputsLogin" TextMode="Password" Width="220px"></asp:TextBox>
                         <br />
-                        <br />
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="debe completar todos los campos" ForeColor="#990000" ValidationGroup="vgLogin" ControlToValidate="txtContraseña"></asp:RequiredFieldValidator>
-                        <a href="#">Recuperar Contraseña</a>
+                       <br />
+                         <a href="#" class="Recuperarpass">Recuperar Contraseña</a>
                     </div>
                 </div>
             </div>

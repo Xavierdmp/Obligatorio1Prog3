@@ -288,9 +288,9 @@ namespace Obligatorio1.Persistencia
 
         #region "Listar Articulos Para Seccion Publica"
 
-        public List<Articulo> ListadoArticulos()
+        public List<Articulo> ListadoArticulos(string pFiltro,string pTipoArticulo)
         {
-            return pListadoArticulos.Instancia.ListadoDeArticulos();
+            return pListadoArticulos.Instancia.ListadoDeArticulos(pFiltro, pTipoArticulo);
         }
         public int CantidadArticulos()
         {
@@ -338,51 +338,60 @@ namespace Obligatorio1.Persistencia
         }
         #endregion
 
-        #region Pais
-
-        public List<string> ListaPais()
+        #region "Manejo de Paises"
+        public List<string> ListarPaises()
         {
-            return pPais.Instancia.ListarPais();
-
+            return pPais.Instancia.ListarPaises();
         }
-        
-        public List<string> ListaCiudad(string pNombrePais)
+        public List<string> ListarCiudades(string pNombrePais)
         {
-            return pPais.Instancia.ListarCiudad(pNombrePais);
+            return pPais.Instancia.ListarCiudadesDadoPais(pNombrePais);
         }
-
-
         #endregion
 
-        #region Ventas
+        #region "Ventas"
+        public bool AltaVenta(Venta pVentas)
+        {
+            return pVenta.Instancia.Alta(pVentas);
+        }
 
+        public bool BajaVenta(int pIdVenta)
+        {
+            return pVenta.Instancia.Baja(pIdVenta);
+        }
 
         public Venta BuscarVenta(int pId)
         {
             return pVenta.Instancia.Buscar(pId);
         }
 
-        public bool AltaVenta(Venta pVentas)
+        public List<Venta> ListadoDeVentas()
         {
-            return pVenta.Instancia.Alta(pVentas);
+            return pVenta.Instancia.ListarVentas();
+        }
+        #endregion
+
+        #region "Filtrado Lista"
+        public List<string> ListaNombresSubtipos()
+        {
+            return pListadoArticulos.Instancia.ListarNombresSubtipos();
+        }
+        public List<string> ListaNombresTipos()
+        {
+            return pListadoArticulos.Instancia.ListaNombresTiposs();
+        }
+        public List<string> ListaNombresFabricantes()
+        {
+            return pListadoArticulos.Instancia.ListaNombresFabricantes();
         }
 
-        public bool BajaVenta(int pId)
+        #endregion
+
+        #region "Filtros desde el menu"
+        public List<Articulo> listadoDeArticulosDestacados()
         {
-            return pVenta.Instancia.Baja(pId);
+            return pListadoArticulos.Instancia.ListadoDeArticulosOrdenadoPorDestacados();
         }
-
-        public List<Venta> ListadodeVentas()
-        {
-            return pVenta.Instancia.ListadeVentas();
-        }
-     
-
-
-
-
-        #endregion 
-
+        #endregion
     }
-
 }

@@ -11,7 +11,10 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!this.IsPostBack)
+            {
+               
+            }
             this.MostrarDatos();
 
         }
@@ -50,8 +53,11 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
 
         protected void btnConfirmarCantidadStock_Click(object sender, EventArgs e)
         {
-            int cantidadStock = int.Parse(this.txtNuevaCantidad.Text);
-            Session["CantidadStockSeleccionada"] = cantidadStock;
+            if (this.txtNuevaCantidad.Text != "")
+            {
+                int cantidadStock = int.Parse(this.txtNuevaCantidad.Text);
+                Session["CantidadStockSeleccionada"] = cantidadStock;
+            }
         }
 
 
@@ -79,10 +85,8 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
         {
             if (Session["ClienteLogueado"] != null)
             {
-
                 if (Session["CantidadStockSeleccionada"] != null)
                 {
-
                     int IdAccesorio = int.Parse(Session["AccesorioDetalle"].ToString());
                     Dominio.Controladoras.ControladoraAccesorio unaControladora = new Dominio.Controladoras.ControladoraAccesorio();
                     Dominio.Accesorio unAccesorio = unaControladora.Buscar(IdAccesorio);
@@ -90,9 +94,9 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
                     Dominio.Item unItem = new Dominio.Item(unAccesorio, cantidad);
                     int IdClienteConectado = int.Parse(Session["ClienteLogueado"].ToString());
                     Dominio.Controladoras.ControladoraCarrito unaControladoraCarrito = new Dominio.Controladoras.ControladoraCarrito();
-                    if (cantidad <= unAccesorio.Stock && cantidad > 0 )
+                    if (cantidad <= unAccesorio.Stock && cantidad > 0)
                     {
-                        //Session["CantidadItemsEnCarrito"] = Session["CantidadItemsEnCarrito"] != null ? int.Parse(Session["CantidadItemsEnCarrito"].ToString()) + cantidad : cantidad;
+                       
                         if (unaControladoraCarrito.AltaCarrito(unItem, IdClienteConectado))
                         {
                             this.lblMensaje.MensajeActivo(1, "Se agrego al carrito");
@@ -103,10 +107,10 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
                         this.lblMensaje.MensajeActivo(2, "No hay stock disponible, el disponible es: " + unAccesorio.Stock);
                     }
                 }
-                else
-                {
-                    this.lblMensaje.MensajeActivo(2, "Debes iniciar sesion para agregar productos al carrito");
-                }
+            }
+            else
+            {
+                this.lblMensaje.MensajeActivo(2, "Debes iniciar sesion para agregar productos al carrito");
             }
 
 

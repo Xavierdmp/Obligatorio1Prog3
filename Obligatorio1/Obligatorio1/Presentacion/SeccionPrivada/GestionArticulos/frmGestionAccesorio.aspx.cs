@@ -18,6 +18,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
                 this.ListarAccesorios();
                 this.ListarFabricantes();
                 this.ListarSubtiposDeInstrumentos();
+                this.LimpiarListasParaAlta();
                 this.ListaFotosAdicionales(); 
             }
             this.CargarImagenPrincipal();
@@ -30,6 +31,17 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
             this.txtPrecio.Text = "";
             this.txtStock.Text = "";
             this.txtNombre.Focus();
+        }
+        private void LimpiarListasParaAlta()
+        {
+            if (ListarFotosAdicionales != null)
+            {
+                ListarFotosAdicionales.Clear();
+            }
+            if (ListaSubtiposSeleccionados != null)
+            {
+                this.ListaSubtiposSeleccionados.Clear();
+            }
         }
 
         private void ListarSubtiposDeInstrumentos()
@@ -99,7 +111,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
             if (this.fuImagenPrincipal.HasFile)
             {
                 string Extension = System.IO.Path.GetExtension(fuImagenPrincipal.PostedFile.FileName);
-                if (Extension == ".PNG" || Extension == ".png")
+                if (Extension == ".PNG" || Extension == ".png" || Extension == ".JPG" || Extension == ".jpg")
                 {
                     if (this.fuImagenPrincipal.FileName.Length < 150 && this.fuImagenPrincipal.PostedFile.ContentLength <= maximoTamañoImagen)
                     {
@@ -223,7 +235,8 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
         protected void gvListarImagenesAdicionales_SelectedIndexChanged(object sender, EventArgs e)
         {
             GridViewRow row = this.gvListarImagenesAdicionales.SelectedRow;
-            string url = row.Cells[2].Text;
+            Image img = row.Cells[1].Controls[0] as Image;
+            string url = img.ImageUrl;
             Dominio.FotosAdicionales unaFotoAdicional = new Dominio.FotosAdicionales(url);
             ListarFotosAdicionales.Remove(unaFotoAdicional);
             this.ListaFotosAdicionales();

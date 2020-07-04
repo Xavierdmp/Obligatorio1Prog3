@@ -34,19 +34,19 @@ namespace Obligatorio1.Persistencia
             }
             else
             {
-                if(unInstrumento.Descuento > 0)
-                {
-                    switch (unInstrumento.Descuento)
-                    {
-                        case 15:
-                            //unInstrumento.Precio =   unInstrumento.Precio - 1.15;
-                        break;
-                        case 25:
-                        break;
-                        case 35:
-                       break;
-                    }
-                }
+                //if(unInstrumento.Descuento > 0)
+                //{
+                //    switch (unInstrumento.Descuento)
+                //    {
+                //        case 15:
+                //            //unInstrumento.Precio =   unInstrumento.Precio - 1.15;
+                //        break;
+                //        case 25:
+                //        break;
+                //        case 35:
+                //       break;
+                //    }
+                //}
                 return Conexion.Instancia.InicializarConsulta("Insert into CarritoCompras(Id_Cliente,Id_Articulo,Cantidad,Id_Color,Precio_Total) values(" + pIdCliente + "," + pItem.Articulo.Id + "," + pItem.Cantidad + "," + pItem.Color.Id + "," + pItem.Precio + ");");
             }
                 
@@ -88,7 +88,7 @@ namespace Obligatorio1.Persistencia
             }
             return ListadoDeItems;
         }
-
+        
         public bool EliminarCarrito(int pIdCliente)
         {
             return Conexion.Instancia.InicializarConsulta("delete from CarritoCompras where Id_Cliente=" + pIdCliente);
@@ -98,6 +98,7 @@ namespace Obligatorio1.Persistencia
         {
             return Conexion.Instancia.InicializarConsulta("delete from CarritoCompras where Id_Articulo=" + pIdArticulo + " and Id_Cliente=" + pIdCliente);
         }
+
         public bool ComprobarExistenciaArticulo(int pIdArticulo)
         {
             string consulta = "Select * from  CarritoCompras where Id_Articulo=" + pIdArticulo;
@@ -158,19 +159,16 @@ namespace Obligatorio1.Persistencia
         {
             string consulta = "select SUM(Cantidad) from CarritoCompras where Id_Cliente =" + pIdCliente + ";";
             DataSet datos = Conexion.Instancia.InicializarSeleccion(consulta);
-            if (datos.Tables[0].Rows.Count > 0)
+            if (datos.Tables[0].Rows.Count > 0 )
             {
                 int cantidad = 0;
                 DataRowCollection table = datos.Tables[0].Rows;
                 foreach (DataRow row in table)
                 {
                     object[] element = row.ItemArray;
-
                     if (element[0].ToString() != "")
                     {
-
                         cantidad = int.Parse(element[0].ToString());
-
                     }
                 }
                 return cantidad;

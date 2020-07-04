@@ -52,6 +52,7 @@
                     <div class="form-group">
                         <asp:Label ID="Label9" runat="server" Text="Confirme contraseña"></asp:Label>
                         <asp:TextBox ID="txtContraseña2" runat="server" TextMode="Password" CssClass="form-control"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ErrorMessage="Debe Ingresar contraseña" ForeColor="Red" ValidationGroup="vgRegistrar" ControlToValidate="txtContraseña2"></asp:RequiredFieldValidator>
                         <asp:CompareValidator ID="CompareValidator1" runat="server" ErrorMessage="las Contraseñas deben coincidir" ControlToCompare="txtContraseña1" ControlToValidate="txtContraseña2" ForeColor="Red" ValidationGroup="vgRegistrar"></asp:CompareValidator>
                     </div>
                 </aside>

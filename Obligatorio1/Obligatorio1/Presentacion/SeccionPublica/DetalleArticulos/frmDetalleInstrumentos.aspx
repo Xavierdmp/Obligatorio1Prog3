@@ -31,20 +31,20 @@
         </article>
 
         <article class="row text-center">
-          <hr />
+            <hr />
             <article class="col-md-4 BordeDerechaDetalleInstr">
                 <h2>Detalles sobre el instrumento</h2>
                 <div class="form-group">
-                     <asp:Label ID="Label4" CssClass="DetallesAdicionalesInstrumentos" runat="server" Text="Fecha de fabricacion: "></asp:Label>
-                     <asp:Label ID="lblFechaFabricacion" Font-Bold="true" runat="server" Text=""></asp:Label>
+                    <asp:Label ID="Label4" CssClass="DetallesAdicionalesInstrumentos" runat="server" Text="Fecha de fabricacion: "></asp:Label>
+                    <asp:Label ID="lblFechaFabricacion" Font-Bold="true" runat="server" Text=""></asp:Label>
                 </div>
-                  <div class="form-group">
-                     <asp:Label ID="Label6" CssClass="DetallesAdicionalesInstrumentos" runat="server" Text="Es del subtipo: "></asp:Label>
-                     <asp:Label ID="lblSubtipoNombre" Font-Bold="true" runat="server" Text=" "></asp:Label>
+                <div class="form-group">
+                    <asp:Label ID="Label6" CssClass="DetallesAdicionalesInstrumentos" runat="server" Text="Es del subtipo: "></asp:Label>
+                    <asp:Label ID="lblSubtipoNombre" Font-Bold="true" runat="server" Text=" "></asp:Label>
                 </div>
-                  <div class="form-group">
-                     <asp:Label ID="Label8" CssClass="DetallesAdicionalesInstrumentos" runat="server" Text="Es del Tipo: "></asp:Label>
-                     <asp:Label ID="lblNombreTipo" Font-Bold="true" runat="server" Text=""></asp:Label>
+                <div class="form-group">
+                    <asp:Label ID="Label8" CssClass="DetallesAdicionalesInstrumentos" runat="server" Text="Es del Tipo: "></asp:Label>
+                    <asp:Label ID="lblNombreTipo" Font-Bold="true" runat="server" Text=""></asp:Label>
                 </div>
             </article>
             <article class="col-md-8">
@@ -55,13 +55,14 @@
             </article>
         </article>
         <div class="row text-center">
-            <div class="col-md-12"></div>
-            <hr />
-            <asp:Label ID="lblTituloListadoAccesorio" CssClass="SubTitulosDetalleInstrumento" runat="server" Text="Listado Accesorios" Visible="false"></asp:Label>
-        <div class="swiper-container text-center">
-            <asp:Panel ID="ContenedorAccesorios" CssClass="swiper-wrapper" runat="server"></asp:Panel>
-        </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <hr />
+                <asp:Label ID="lblTituloListadoAccesorio" CssClass="SubTitulosDetalleInstrumento" runat="server" Text="Listado Accesorios" Visible="false"></asp:Label>
+                <div class="swiper-container text-center">
+                    <asp:Panel ID="ContenedorAccesorios" CssClass="swiper-wrapper" runat="server"></asp:Panel>
+                </div>
             </div>
+        </div>
     </section>
     <div class="modal" id="CantidadStock" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -76,16 +77,18 @@
                     <asp:Label ID="Label3" runat="server" Text="Cantidad"></asp:Label>
                     <br />
                     <asp:TextBox ID="txtNuevaCantidad" CssClass="form-control" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ControlToValidate="txtNuevaCantidad" ValidationGroup="vgValidarCantidad" ID="RequiredFieldValidator1" runat="server" ErrorMessage="Cantidad Obligatoria"></asp:RequiredFieldValidator>
+
                 </div>
                 <div class="modal-footer">
-                    <asp:Button ID="btnConfirmarCantidadStock" OnClick="btnConfirmarCantidadStock_Click" runat="server" class="btn btn-success" Text="Confirmar" />
+                    <asp:Button ID="btnConfirmarCantidadStock" ValidationGroup="vgValidarCantidad" OnClick="btnConfirmarCantidadStock_Click" runat="server" class="btn btn-success" Text="Confirmar" />
                 </div>
             </div>
         </div>
     </div>
     <script>
         var swiper = new Swiper('.swiper-container', {
-            slidesPerView: 4,
+            slidesPerView: 3,
             spaceBetween: 20,
             pagination: {
                 el: '.swiper-pagination',
@@ -94,7 +97,7 @@
         });
         function changeImage(sndr) {
             var changeImage = document.getElementById('<%=ImagenPrincipal.ClientID%>');
-                        changeImage.src = sndr.src;
-                    };
+            changeImage.src = sndr.src;
+        };
     </script>
 </asp:Content>

@@ -49,6 +49,24 @@ namespace Obligatorio1 {
         protected global::System.Web.UI.WebControls.LinkButton lbInstrumentoPrecioDescuento;
         
         /// <summary>
+        /// Control lbAcccesorioPrecioAsc.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbAcccesorioPrecioAsc;
+        
+        /// <summary>
+        /// Control lbAccesorioPrecioDesc.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbAccesorioPrecioDesc;
+        
+        /// <summary>
         /// Control PerfilCliente.
         /// </summary>
         /// <remarks>
