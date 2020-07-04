@@ -288,9 +288,9 @@ namespace Obligatorio1.Persistencia
 
         #region "Listar Articulos Para Seccion Publica"
 
-        public List<Articulo> ListadoArticulos()
+        public List<Articulo> ListadoArticulos(string pFiltro,string pTipoArticulo)
         {
-            return pListadoArticulos.Instancia.ListadoDeArticulos();
+            return pListadoArticulos.Instancia.ListadoDeArticulos(pFiltro, pTipoArticulo);
         }
         public int CantidadArticulos()
         {
@@ -385,6 +385,13 @@ namespace Obligatorio1.Persistencia
             return pListadoArticulos.Instancia.ListaNombresFabricantes();
         }
 
-            #endregion
+        #endregion
+
+        #region "Filtros desde el menu"
+        public List<Articulo> listadoDeArticulosDestacados()
+        {
+            return pListadoArticulos.Instancia.ListadoDeArticulosOrdenadoPorDestacados();
         }
+        #endregion
+    }
 }

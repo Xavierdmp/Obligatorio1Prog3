@@ -16,10 +16,100 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
             {
                 IndicePaginado = 0;
                 IndiceAnterior = 0;
-                this.GenerarListasFiltrado();
+                if (Session["FiltrarListaDestacado"] != null)
+                {
+                    List<string> lista = new List<string>();
+                    lista.Add(Session["FiltrarListaDestacado"].ToString());
+                    this.ListadoPaginado(IndiceAnterior, lista, "Instrumento");
+                    Session["FiltrarListaDestacado"] = null;
+                }
+                else if(Session["FiltrarListaPrecioAsc"] != null)
+                {
+                    List<string> lista = new List<string>();
+                    lista.Add(Session["FiltrarListaPrecioAsc"].ToString());
+                    this.ListadoPaginado(IndiceAnterior, lista,"Instrumento");
+                    Session["FiltrarListaPrecioAsc"] = null;
+                }
+                else if (Session["FiltrarListaPrecioDesc"] != null)
+                {
+                    List<string> lista = new List<string>();
+                    lista.Add(Session["FiltrarListaPrecioDesc"].ToString());
+                    this.ListadoPaginado(IndiceAnterior, lista, "Instrumento");
+                    Session["FiltrarListaPrecioDesc"] = null;
+                }
+                else if(Session["FiltrarListaDescuento"] != null)
+                {
+                    List<string> lista = new List<string>();
+                    lista.Add(Session["FiltrarListaDescuento"].ToString());
+                    this.ListadoPaginado(IndiceAnterior, lista, "Instrumento");
+                    Session["FiltrarListaDescuento"] = null;
+                }
+                else if (Session["FiltrarListaAccesorioPrecioAsc"] != null)
+                {
+                    List<string> lista = new List<string>();
+                    lista.Add(Session["FiltrarListaAccesorioPrecioAsc"].ToString());
+                    this.ListadoPaginado(IndiceAnterior, lista, "Accesorio");
+                    Session["FiltrarListaAccesorioPrecioAsc"] = null;
+                }
+                else if(Session["FiltrarListaAccesorioPrecioDesc"] != null)
+                {
+                    List<string> lista = new List<string>();
+                    lista.Add(Session["FiltrarListaAccesorioPrecioDesc"].ToString());
+                    this.ListadoPaginado(IndiceAnterior, lista, "Accesorio");
+                    Session["FiltrarListaAccesorioPrecioDesc"] = null;
+                }
+                else
+                {
+                    this.ListadoPaginado(IndiceAnterior,null,"");
+                }
+                //this.GenerarListasFiltrado();
             }
-            this.ListadoPaginado(IndiceAnterior);
+            else
+            {
+                if (Session["FiltrarListaDestacado"] != null)
+                {
+                    List<string> lista = new List<string>();
+                    lista.Add(Session["FiltrarListaDestacado"].ToString());
+                    this.ListadoPaginado(IndiceAnterior, lista,"Instrumento");
+                }
+                 else if(Session["FiltrarListaPrecioAsc"] != null)
+                {
+                    List<string> lista = new List<string>();
+                    lista.Add(Session["FiltrarListaPrecioAsc"].ToString());
+                    this.ListadoPaginado(IndiceAnterior, lista,"Instrumento");
+                }
+                else if (Session["FiltrarListaPrecioDesc"] != null)
+                {
+                    List<string> lista = new List<string>();
+                    lista.Add(Session["FiltrarListaPrecioDesc"].ToString());
+                    this.ListadoPaginado(IndiceAnterior, lista, "Instrumento");
+                }
+                else if (Session["FiltrarListaDescuento"] != null)
+                {
+                    List<string> lista = new List<string>();
+                    lista.Add(Session["FiltrarListaDescuento"].ToString());
+                    this.ListadoPaginado(IndiceAnterior, lista, "Instrumento");
+                }
+                else if (Session["FiltrarListaAccesorioPrecioAsc"] != null)
+                {
+                    List<string> lista = new List<string>();
+                    lista.Add(Session["FiltrarListaAccesorioPrecioAsc"].ToString());
+                    this.ListadoPaginado(IndiceAnterior, lista, "Accesorio");
+                }
+                else if (Session["FiltrarListaAccesorioPrecioDesc"] != null)
+                {
+                    List<string> lista = new List<string>();
+                    lista.Add(Session["FiltrarListaAccesorioPrecioDesc"].ToString());
+                    this.ListadoPaginado(IndiceAnterior, lista, "Accesorio");
+                }
+                else
+                {
+                    this.ListadoPaginado(IndiceAnterior, null,"");
+                }
+            }
         }
+
+
         private int IndicePaginado
         {
             get {
@@ -36,6 +126,7 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
                 Session["InicioPaginado"] = value;
             }
         }
+
         private int IndiceAnterior
         {
             get
@@ -54,12 +145,18 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
             }
         }
 
-
-        private void ListadoPaginado(int pIndice)
+        private Dominio.Controladoras.ControladoraListado InstanciaControladoraPaginado
         {
+            get
+            {
+                return Dominio.Controladoras.ControladoraListado.Instancia;
+            }
+        }
+        private void ListadoPaginado(int pIndice,List<string> pLista,string pTipoArticulo)
+        {
+            
             this.ContenedorPrincipal.Controls.Clear();
-            Dominio.Controladoras.ControladoraListado listados = new Dominio.Controladoras.ControladoraListado();
-            List<Dominio.Articulo> listaPaginada = listados.Paginado(pIndice);
+            List<Dominio.Articulo> listaPaginada = InstanciaControladoraPaginado.Paginado(pIndice,pLista,pTipoArticulo);
             foreach (Dominio.Articulo unArticulo in listaPaginada)
             {
                 Panel ContenedorImagen = new Panel();
@@ -124,22 +221,22 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
 
         protected void btnSiguiente_Click1(object sender, EventArgs e)
         {
-            Dominio.Controladoras.ControladoraListado listados = new Dominio.Controladoras.ControladoraListado();
+            
             if (IndicePaginado == 0)
             {
                 IndicePaginado = 13;
             }
             IndiceAnterior = IndicePaginado;
             IndicePaginado += IndiceAnterior;
-            if (listados.CantidadFilas(IndiceAnterior))
+            if (InstanciaControladoraPaginado.CantidadFilas(IndiceAnterior))
             {
     
-                this.ListadoPaginado(IndiceAnterior);
+                //this.ListadoPaginado(IndiceAnterior);
             }
             else
             {
-                this.ListadoPaginado(IndiceAnterior);
-                this.btnSiguiente.Enabled = false;
+                //this.ListadoPaginado(IndiceAnterior);
+                //this.btnSiguiente.Enabled = false;
             }
         }
 
@@ -168,37 +265,33 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
             IndiceAnterior = 0;
             this.btnSiguiente.Enabled = true;
             IndicePaginado = 0;
-            this.ListadoPaginado(IndiceAnterior);
+            //this.ListadoPaginado(IndiceAnterior);
         }
 
         protected void btnFinal_Click(object sender, EventArgs e)
         {
-            Dominio.Controladoras.ControladoraListado listados = new Dominio.Controladoras.ControladoraListado();
             int cantidadAMostrar = 12;
-            int CantidadElementosTotales = listados.CantidadTotalesArticulos();
+            int CantidadElementosTotales = InstanciaControladoraPaginado.CantidadTotalesArticulos();
             int mostrar  = CantidadElementosTotales  - cantidadAMostrar - 1;
             IndicePaginado = CantidadElementosTotales- mostrar;
             IndiceAnterior = IndicePaginado;
             this.btnSiguiente.Enabled = false;
-            this.ListadoPaginado(IndiceAnterior);
+            //this.ListadoPaginado(IndiceAnterior);
         }
 
 
         private void GenerarListasFiltrado()
         {
-            Dominio.Controladoras.ControladoraListado unaControladoraFiltrado = new Dominio.Controladoras.ControladoraListado();
-
-
             this.dplListarSubtipos.DataSource = null;
-            this.dplListarSubtipos.DataSource = unaControladoraFiltrado.ListadoDeNombresSubtipos();
+            this.dplListarSubtipos.DataSource = InstanciaControladoraPaginado.ListadoDeNombresSubtipos();
             this.dplListarSubtipos.DataBind();
 
             this.dplListarTipos.DataSource = null;
-            this.dplListarTipos.DataSource = unaControladoraFiltrado.ListadoDeNombresTipos();
+            this.dplListarTipos.DataSource = InstanciaControladoraPaginado.ListadoDeNombresTipos();
             this.dplListarTipos.DataBind();
 
             this.dplFabricantes.DataSource = null;
-            this.dplFabricantes.DataSource = unaControladoraFiltrado.ListadoDeNombresFabricantes();
+            this.dplFabricantes.DataSource = InstanciaControladoraPaginado.ListadoDeNombresFabricantes();
             this.dplFabricantes.DataBind();
 
             this.dplDestacado.Items.Add("Destacado");

@@ -68,16 +68,15 @@
                                     <ul class="dropdown-menu MenuInstrumentos">
                                         <span class="dropdown-item FiltrarPorListado">Filtrar por:</span>
                                         <asp:LinkButton ID="lbInstrumentoDestacado" OnClick="lbInstrumentoDestacado_Click"  class="dropdown-item" runat="server">Destacados</asp:LinkButton>
-                                        <asp:LinkButton ID="lbInstrumentoPrecioOrdenAsc" class="dropdown-item" runat="server">Precio:Orden ascendente</asp:LinkButton>
-                                        <asp:LinkButton ID="lbInstrumentoPrecioOrdenDesc" class="dropdown-item" runat="server">Precio:Orden descendente</asp:LinkButton>
-                                        <asp:LinkButton ID="lbInstrumentoPrecioDescuento" class="dropdown-item" runat="server">Descuentos</asp:LinkButton>
+                                        <asp:LinkButton ID="lbInstrumentoPrecioOrdenAsc" OnClick="lbInstrumentoPrecioOrdenAsc_Click" class="dropdown-item" runat="server">Precio:Orden ascendente</asp:LinkButton>
+                                        <asp:LinkButton ID="lbInstrumentoPrecioOrdenDesc" OnClick="lbInstrumentoPrecioOrdenDesc_Click" class="dropdown-item" runat="server">Precio:Orden descendente</asp:LinkButton>
+                                        <asp:LinkButton ID="lbInstrumentoPrecioDescuento" OnClick="lbInstrumentoPrecioDescuento_Click" class="dropdown-item" runat="server">Descuentos</asp:LinkButton>
                                     </ul>
                                 </li>
                                 <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#">Accesorios</a>
                                     <ul class="dropdown-menu MenuInstrumentos">
-                                        <a class="dropdown-item" href="#">Subtipo</a>
-                                        <a class="dropdown-item" href="#">Tipo</a>
-                                        <a class="dropdown-item" href="#">Fabricante</a>
+                                        <asp:LinkButton ID="lbAccesorioPrecioAsc" OnClick="lbAccesorioPrecioAsc_Click" class="dropdown-item" runat="server">Precio:Orden ascendente</asp:LinkButton>
+                                        <asp:LinkButton ID="lbAccesorioPrecioDesc"  OnClick="lbAccesorioPrecioDesc_Click" class="dropdown-item" runat="server">Precio:Orden descendete</asp:LinkButton>
                                     </ul>
                                 </li>
                             </ul>
