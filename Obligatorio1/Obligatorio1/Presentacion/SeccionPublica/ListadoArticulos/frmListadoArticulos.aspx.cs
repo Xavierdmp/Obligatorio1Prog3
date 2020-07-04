@@ -244,7 +244,7 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
             IndiceAnterior = 0;
             this.btnSiguiente.Enabled = true;
             IndicePaginado = 0;
-            //this.ListadoPaginado(IndiceAnterior);
+            this.ListadoPaginado(IndiceAnterior,listaDeFiltros,FiltroAplicadoDesdeMenu);
         }
 
         protected void btnFinal_Click(object sender, EventArgs e)
@@ -255,7 +255,7 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
             IndicePaginado = CantidadElementosTotales- mostrar;
             IndiceAnterior = IndicePaginado;
             this.btnSiguiente.Enabled = false;
-            //this.ListadoPaginado(IndiceAnterior);
+            this.ListadoPaginado(IndiceAnterior, listaDeFiltros, FiltroAplicadoDesdeMenu);
         }
 
 
@@ -291,9 +291,33 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
             this.dplOrdenar.DataBind();
         }
 
+        protected void dplListarSubtipos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(this.dplListarSubtipos.SelectedIndex > 0)
+            {
+                string subtipo = this.dplListarSubtipos.SelectedValue;
+                //Session["NombreSubtipoFiltro"] = subtipo;
+                listaDeFiltros.Add("0 " + subtipo);
+                this.dplListarSubtipos.SelectedIndex = 0;
+            }
+        }
 
+        protected void btnFiltrarLista_Click(object sender, EventArgs e)
+        {
+            //this.listaDeFiltros.Clear();
+            //listaDeFiltros.Add("0 "+Session["NombreSubtipoFiltro"].ToString());
+            this.ListadoPaginado(IndiceAnterior, listaDeFiltros,null);
+            this.listaDeFiltros.Clear();
+        }
 
-
-
+        protected void dplListarTipos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.dplListarTipos.SelectedIndex > 0)
+            {
+                string subtipo = this.dplListarTipos.SelectedValue;
+                listaDeFiltros.Add("1 " +subtipo);
+                this.dplListarTipos.SelectedIndex = 0;
+            }
+        }
     }
 }

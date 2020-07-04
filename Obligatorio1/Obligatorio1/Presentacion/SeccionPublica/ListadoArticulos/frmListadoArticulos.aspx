@@ -4,10 +4,10 @@
     <section class="container-fluid">
         <section class="row text-center FiltrosListado">
             <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <asp:DropDownList ID="dplListarSubtipos" CssClass="form-controlV2" runat="server" AppendDataBoundItems="True">
+                <asp:DropDownList ID="dplListarSubtipos" CssClass="form-controlV2" runat="server" AppendDataBoundItems="True" OnSelectedIndexChanged="dplListarSubtipos_SelectedIndexChanged">
                     <asp:ListItem Value="Seleccione un subtipo">Filtrar por subtipo</asp:ListItem>
                 </asp:DropDownList>
-                <asp:DropDownList ID="dplListarTipos" CssClass="form-controlV2" runat="server" AppendDataBoundItems="True">
+                <asp:DropDownList ID="dplListarTipos" CssClass="form-controlV2" runat="server" AppendDataBoundItems="True" OnSelectedIndexChanged="dplListarTipos_SelectedIndexChanged">
                     <asp:ListItem Value="Seleccione un tipo">Filtrar por tipo</asp:ListItem>
                 </asp:DropDownList>
                 <asp:DropDownList ID="dplDestacado" CssClass="form-controlV2" runat="server" AppendDataBoundItems="True">
@@ -22,7 +22,7 @@
                 <asp:DropDownList ID="dplOrdenar" CssClass="form-controlV2" runat="server" AppendDataBoundItems="True">
                     <asp:ListItem>filtrar por orden</asp:ListItem>
                 </asp:DropDownList>
-                <asp:Button ID="btnFiltrarLista" runat="server" class="btn btn-primary buttonFiltrar" Text="Filtrar" />
+                <asp:Button ID="btnFiltrarLista" runat="server" class="btn btn-primary buttonFiltrar" Text="Filtrar" OnClick="btnFiltrarLista_Click" />
             </article>
         </section>
         <div class="row text-center">

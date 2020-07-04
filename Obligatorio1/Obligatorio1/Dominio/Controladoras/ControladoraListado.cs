@@ -9,23 +9,25 @@ namespace Obligatorio1.Dominio.Controladoras
     {
         private const int CantidadElementosAMostrar = 12;
         private static ControladoraListado _instancia = null;
+
+
         public static ControladoraListado Instancia
         {
-
             get
             {
-
-                if(_instancia == null)
+                if (_instancia == null)
                 {
                     _instancia = new ControladoraListado();
                 }
                 return _instancia;
             }
         }
+
         private ControladoraListado()
         {
 
         }
+
         public Persistencia.Controladora InstanciaControladora
         {
             get
@@ -34,10 +36,11 @@ namespace Obligatorio1.Dominio.Controladoras
             }
         }
 
-        public List<Articulo> Paginado(int pPaginaInicio,List<string> pListaFiltros,string pTipoArticulo)
+        private List<Articulo> ListadoDeArticulosConFiltros(List<string> pListaFiltros, string pTipoArticulo)
         {
-                List<Articulo> ListadoArticulos = new List<Articulo>();
-            if (pListaFiltros != null && pListaFiltros.Count == 1)
+            List<Articulo> ListadoArticulos = new List<Articulo>();
+            List<string> listaConFiltros = new List<string>();
+            if (pListaFiltros != null && pListaFiltros.Count ==1 && pTipoArticulo != null)
             {
                 string esDestacado = "";
                 string precioAsc = "";
@@ -70,61 +73,82 @@ namespace Obligatorio1.Dominio.Controladoras
                 }
                 else if (precioAsc != "")
                 {
+                    listaConFiltros.Add(precioAsc);
                     if (pTipoArticulo == "Instrumento")
                     {
-                        ListadoArticulos = Persistencia.Controladora.Instancia.ListadoArticulos(precioAsc, pTipoArticulo);
+                        ListadoArticulos = Persistencia.Controladora.Instancia.ListadoArticulos(listaConFiltros, pTipoArticulo);
                     }
                     else
                     {
-                        ListadoArticulos = Persistencia.Controladora.Instancia.ListadoArticulos(precioAsc, pTipoArticulo);
+                        ListadoArticulos = Persistencia.Controladora.Instancia.ListadoArticulos(listaConFiltros, pTipoArticulo);
                     }
                 }
                 else if (precioDesc != "")
                 {
+                    listaConFiltros.Add(precioDesc);
                     if (pTipoArticulo == "Instrumento")
                     {
-                        ListadoArticulos = Persistencia.Controladora.Instancia.ListadoArticulos(precioDesc, pTipoArticulo);
+                        ListadoArticulos = Persistencia.Controladora.Instancia.ListadoArticulos(listaConFiltros, pTipoArticulo);
                     }
                     else
                     {
-                        ListadoArticulos = Persistencia.Controladora.Instancia.ListadoArticulos(precioDesc, pTipoArticulo);
+                        ListadoArticulos = Persistencia.Controladora.Instancia.ListadoArticulos(listaConFiltros, pTipoArticulo);
                     }
                 }
                 else if (esDescuento != "")
                 {
-                    ListadoArticulos = Persistencia.Controladora.Instancia.ListadoArticulos(esDescuento, pTipoArticulo);
+                    listaConFiltros.Add(esDescuento);
+                    ListadoArticulos = Persistencia.Controladora.Instancia.ListadoArticulos(listaConFiltros, pTipoArticulo);
                 }
 
+            }
+            else if(pListaFiltros != null && pListaFiltros.Count >= 1)
+            {
+                ListadoArticulos = Persistencia.Controladora.Instancia.ListadoArticulos(pListaFiltros, pTipoArticulo);
             }
             else
             {
                 ListadoArticulos = Persistencia.Controladora.Instancia.ListadoArticulos(null, pTipoArticulo);
             }
+            return ListadoArticulos;
+        }
+
+        private List<Articulo> ListadoDeArticulosConMuchosFiltros(List<string> pListaFiltros)
+        {
+            List<Articulo> listaArticulos = new List<Articulo>();
+
+
+
+            return listaArticulos;
+        }
+
+        public List<Articulo> Paginado(int pPaginaInicio, List<string> pListaFiltros, string pTipoArticulo)
+        {
+            List<Articulo> ListadoArticulos = this.ListadoDeArticulosConFiltros(pListaFiltros, pTipoArticulo);
+
             int ContadorIndice = pPaginaInicio;
-                int ContadorElementos = 0;
+            int ContadorElementos = 0;
 
-                int indiceInicio = 0;
-                List<Articulo> ListaPaginada = new List<Articulo>();
+            int indiceInicio = 0;
+            List<Articulo> ListaPaginada = new List<Articulo>();
 
-
-                foreach (Articulo unArticulo in ListadoArticulos)
+            foreach (Articulo unArticulo in ListadoArticulos)
+            {
+                indiceInicio += indiceInicio != ContadorIndice ? 1 : 0;
+                if (indiceInicio == ContadorIndice)
                 {
-                    indiceInicio += indiceInicio != ContadorIndice ? 1 : 0;
-                    if (indiceInicio == ContadorIndice)
+                    if (ContadorElementos < CantidadElementosAMostrar)
                     {
-                        if (ContadorElementos < CantidadElementosAMostrar)
-                        {
-                            ContadorElementos++;
-                            ListaPaginada.Add(unArticulo);
-                        }
-                        else
-                        {
-                        break;
-                        }
+                        ContadorElementos++;
+                        ListaPaginada.Add(unArticulo);
                     }
-
+                    else
+                    {
+                        break;
+                    }
                 }
-                return ListaPaginada;
+            }
+            return ListaPaginada;
         }
 
         public int CantidadTotalesArticulos()

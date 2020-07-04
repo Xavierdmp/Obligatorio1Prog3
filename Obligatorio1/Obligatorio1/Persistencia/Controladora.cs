@@ -288,7 +288,7 @@ namespace Obligatorio1.Persistencia
 
         #region "Listar Articulos Para Seccion Publica"
 
-        public List<Articulo> ListadoArticulos(string pFiltro,string pTipoArticulo)
+        public List<Articulo> ListadoArticulos(List<string> pFiltro,string pTipoArticulo)
         {
             return pListadoArticulos.Instancia.ListadoDeArticulos(pFiltro, pTipoArticulo);
         }

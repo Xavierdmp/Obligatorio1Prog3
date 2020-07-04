@@ -43,25 +43,33 @@ namespace Obligatorio1.Persistencia
         }
 
        
-        public List<Articulo> ListadoDeArticulos(string pFiltro,string pTipoArticulo)
+        public List<Articulo> ListadoDeArticulos(List<string> pFiltros,string pTipoArticulo)
         {
             string consulta = "Select a.* from Articulos a, Accesorios acc where" + " a.Id_Articulo = acc.Id_Accesorio";
             string consultaInstrumento = "Select * from Instrumentos i, Articulos a where i.Id_Instrumento = a.Id_Articulo;";
-
-            if (pFiltro != "" && pFiltro != null)
+            if (pFiltros != null && pFiltros.Count == 1 && pTipoArticulo != null)
             {
-                if (pTipoArticulo == "Instrumento")
+                if (pFiltros[0] != "" && pFiltros != null)
                 {
-                    List<string> ConsultasSql = this.ConsultaSql(pFiltro);
-                    consultaInstrumento = ConsultasSql[1];
-                    consulta = "";
+                    if (pTipoArticulo == "Instrumento")
+                    {
+                        List<string> ConsultasSql = this.ConsultaSql(pFiltros,pTipoArticulo);
+                        consultaInstrumento = ConsultasSql[1];
+                        consulta = "";
+                    }
+                    else
+                    {
+                        List<string> ConsultasSql = this.ConsultaSql(pFiltros,pTipoArticulo);
+                        consulta = ConsultasSql[0];
+                        consultaInstrumento = "";
+                    }
                 }
-                else
-                {
-                    List<string> ConsultasSql = this.ConsultaSql(pFiltro);
-                    consulta = ConsultasSql[0];
-                    consultaInstrumento = "";
-                }
+            }
+            else if(pFiltros != null && pFiltros.Count >= 1){
+                List<string> ConsultasSql = this.ConsultaSql(pFiltros, pTipoArticulo);
+
+                consulta = ConsultasSql[0];
+                consultaInstrumento = "";
             }
             List<Articulo> listaArticulos = new List<Articulo>();
             if (consulta != "")
@@ -149,30 +157,123 @@ namespace Obligatorio1.Persistencia
             return listadoArticulos;
         }
 
-        private List<string> ConsultaSql(string pFiltro)
+        private List<string> ConsultaSql(List<string> pListaFiltros,string pTipoArticulo)
         {
             List<string> listaConLasConsultas = new List<string>();
-            if (pFiltro == "PrecioAsc")
+            if (pListaFiltros.Count == 1 && pTipoArticulo != null)
             {
-                string consultaAccesorio = "Select a.* from Articulos a, Accesorios acc where" + " a.Id_Articulo = acc.Id_Accesorio order by (a.Precio_Articulo) desc";
-                string consultaInstrumento = "Select * from Instrumentos i, Articulos a where i.Id_Instrumento = a.Id_Articulo order by (a.Precio_Articulo) desc";
-                listaConLasConsultas.Add(consultaAccesorio);
-                listaConLasConsultas.Add(consultaInstrumento);
+                if (pListaFiltros[0] == "PrecioAsc")
+                {
+                    string consultaAccesorio = "Select a.* from Articulos a, Accesorios acc where" + " a.Id_Articulo = acc.Id_Accesorio order by (a.Precio_Articulo) desc";
+                    string consultaInstrumento = "Select * from Instrumentos i, Articulos a where i.Id_Instrumento = a.Id_Articulo order by (a.Precio_Articulo) desc";
+                    listaConLasConsultas.Add(consultaAccesorio);
+                    listaConLasConsultas.Add(consultaInstrumento);
+                }
+                else if (pListaFiltros[0] == "PrecioDesc")
+                {
+                    string consultaAccesorio = "Select a.* from Articulos a, Accesorios acc where" + " a.Id_Articulo = acc.Id_Accesorio order by (a.Precio_Articulo) asc";
+                    string consultaInstrumento = "Select * from Instrumentos i, Articulos a where i.Id_Instrumento = a.Id_Articulo order by (a.Precio_Articulo) asc";
+                    listaConLasConsultas.Add(consultaAccesorio);
+                    listaConLasConsultas.Add(consultaInstrumento);
+                }
+                else if (pListaFiltros[0] == "Descuento")
+                {
+                    string consultaInstrumento = "Select * from Instrumentos i, Articulos a where i.Id_Instrumento = a.Id_Articulo and  i.Descuento_Instrumento !=0 order by (i.Descuento_Instrumento) desc;";
+                    listaConLasConsultas.Add("vacio");
+                    listaConLasConsultas.Add(consultaInstrumento);
+                }
             }
-            else if (pFiltro == "PrecioDesc")
+            else
             {
-                string consultaAccesorio = "Select a.* from Articulos a, Accesorios acc where" + " a.Id_Articulo = acc.Id_Accesorio order by (a.Precio_Articulo) asc";
-                string consultaInstrumento = "Select * from Instrumentos i, Articulos a where i.Id_Instrumento = a.Id_Articulo order by (a.Precio_Articulo) asc";
-                listaConLasConsultas.Add(consultaAccesorio);
-                listaConLasConsultas.Add(consultaInstrumento);
-            }
-            else if(pFiltro == "Descuento")
-            {
-                string consultaInstrumento = "Select * from Instrumentos i, Articulos a where i.Id_Instrumento = a.Id_Articulo and  i.Descuento_Instrumento !=0 order by (i.Descuento_Instrumento) desc;";
-                listaConLasConsultas.Add("vacio");
-                listaConLasConsultas.Add(consultaInstrumento);
+                return ListaDeFiltros(pListaFiltros);
             }
             return listaConLasConsultas;
+        }
+
+        private List<string> ListaDeFiltros(List<string> pListaFiltros)
+        {
+            List<string> listaConConsultas = new List<string>();
+           // string consultaAccesorio = "Select a.* from Articulos a, Accesorios acc";
+            //string consultaInstrumento = "Select * from Instrumentos i, Articulos a where i.Id_Instrumento = a.Id_Articulo;";
+            string ConsultaAccesorioFrom = "Select a.* from Articulos a, Accesorios acc";
+            string ConsultaAccesoriowhere = "where a.Id_Articulo=acc.Id_Accesorio ";
+            string subtipo = "";
+            string tipo = "";
+            string fabricante = "";
+            string destacado = "";
+            string descuento = "";
+            string oferta = "";
+            string ordenar = "";
+            foreach (string unFiltro in pListaFiltros)
+            {
+                string[] tempContenedor = unFiltro.Split(' ');
+                int tempIndice = int.Parse(tempContenedor[0]);
+                string tempTipo = tempContenedor[1];
+
+                switch (tempIndice)
+                {
+                    // 111111111111111111111111111111 varchar(30)
+                    case 0:
+                        subtipo = tempTipo;
+                        if (tipo == "")
+                        {
+                            ConsultaAccesorioFrom += " ,Accesorio_tiene_Subtipos accts,Subtipos s ";
+
+                            ConsultaAccesoriowhere += "and accts.Id_Accesorio = acc.Id_Accesorio  and accts.Id_Subtipo = s.Id_Subtipo and s.Nombre_Subtipo=" + "'" + subtipo + "'";
+                        }
+                        else
+                        {
+                            ConsultaAccesoriowhere += " and s.Nombre_Subtipo = " + "'" + subtipo + "'";
+                        }
+                        break;
+                    case 1:
+                     
+                        tipo = tempTipo;
+                        if (subtipo != "")
+                        {
+                            ConsultaAccesorioFrom += ",Tipos t ";
+                            ConsultaAccesoriowhere += " and s.Id_Tipo = t.Id_Tipo and t.nombre_Tipo=" + "'" + tipo + "'";
+                        }
+                        else
+                        {
+                            ConsultaAccesorioFrom += " ,Accesorio_tiene_Subtipos accts,Subtipos s,Tipos t ";
+
+                            ConsultaAccesoriowhere += " and accts.Id_Accesorio = acc.Id_Accesorio  and accts.Id_Subtipo = s.Id_Subtipo and s.Id_Tipo = t.Id_Tipo and t.nombre_Tipo=" + "'" + tipo + "'";
+                        }
+                        break;
+                    case 2:
+                      
+                        fabricante = tempTipo;
+                        ConsultaAccesorioFrom +=" ,Fabricantes f";
+
+                        ConsultaAccesoriowhere+=" and a.Id_Fabricante = f.Id_Fabricante and f.Nombre_Fabricante=" + "'" + fabricante + "'";
+                        break;
+                    case 3:
+                      
+                        destacado = tempTipo;
+                        break;
+                    case 4:
+                        descuento = tempTipo;
+                        break;
+                    case 5:
+                        oferta = tempTipo;
+                        break;
+                    case 6:
+                        ordenar = tempTipo;
+                        if(ordenar == "Ordenar por Nombre")
+                        {
+                            ConsultaAccesoriowhere += " order by(a.Nombre_Accesorio) asc";
+                        }
+                        else
+                        {
+                           
+                        }
+                        break;
+                }
+            }
+            string sqlAccesorio = ConsultaAccesorioFrom + ConsultaAccesoriowhere;
+            listaConConsultas.Add(sqlAccesorio);
+            return listaConConsultas;
         }
 
 
