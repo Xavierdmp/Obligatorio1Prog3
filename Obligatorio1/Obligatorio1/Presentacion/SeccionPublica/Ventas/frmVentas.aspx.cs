@@ -73,6 +73,7 @@ namespace Obligatorio1.Presentacion.SeccionPublica.Ventas
                 Session["PaisSeleccionado"] = nombrePais;
                 this.dplListaCiudades.ClearSelection();
                 this.dplListaCiudades.Items.Clear();
+                this.dplListaCiudades.Items.Insert(0, new ListItem("Seleccione una ciudad", "0"));
                 this.ListarCiudades(nombrePais);
 
             }
@@ -89,22 +90,39 @@ namespace Obligatorio1.Presentacion.SeccionPublica.Ventas
 
         protected void btnComprar_Click(object sender, EventArgs e)
         {
-            Dominio.Controladoras.ControladoraCarrito unaControladoraCarrito = new Dominio.Controladoras.ControladoraCarrito();
-            Dominio.Controladoras.ControladoraCliente unaControladoraCliente = new Dominio.Controladoras.ControladoraCliente();
-            int IdClienteConectado = int.Parse(Session["ClienteLogueado"].ToString());
-
-            string numeroTarjeta = this.txtNumeroTarjeta.Text;
-            string pais = Session["PaisSeleccionado"].ToString();
-            string ciudad = Session["CiudadSeleccionada"].ToString();
-            DateTime fecha = DateTime.Now;
-            List<Dominio.Item> listaArticulos = unaControladoraCarrito.ListaCarritoParaCliente(IdClienteConectado);
-            Dominio.Cliente unCliente = unaControladoraCliente.Buscar(IdClienteConectado);
-
-            Dominio.Venta unaVenta = new Dominio.Venta(fecha,listaArticulos,unCliente,numeroTarjeta,pais,ciudad);
-
-            if (this.Instancia().Alta(unaVenta))
+            if (Page.IsValid)
             {
+                Dominio.Controladoras.ControladoraCarrito unaControladoraCarrito = new Dominio.Controladoras.ControladoraCarrito();
+                Dominio.Controladoras.ControladoraCliente unaControladoraCliente = new Dominio.Controladoras.ControladoraCliente();
+                int IdClienteConectado = int.Parse(Session["ClienteLogueado"].ToString());
 
+                string numeroTarjeta = this.txtNumeroTarjeta.Text;
+                string pais = Session["PaisSeleccionado"].ToString();
+                string ciudad = Session["CiudadSeleccionada"].ToString();
+                DateTime fecha = DateTime.Now;
+                List<Dominio.Item> listaArticulos = unaControladoraCarrito.ListaCarritoParaCliente(IdClienteConectado);
+                Dominio.Cliente unCliente = unaControladoraCliente.Buscar(IdClienteConectado);
+
+                Dominio.Venta unaVenta = new Dominio.Venta(fecha, listaArticulos, unCliente, numeroTarjeta, pais, ciudad);
+                this.dplListaCiudades.SelectedIndex = 0;
+                this.dplListaPaises.SelectedIndex = 0;
+                if (this.Instancia().Alta(unaVenta))
+                {
+
+                }
+            }
+        }
+
+        protected void ValidarFechaExpiracion_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            try
+            {
+                DateTime fecha = Convert.ToDateTime(this.txtFechaExpiracion.Text);
+                args.IsValid = fecha < DateTime.Now;
+            }
+            catch
+            {
+                args.IsValid = false;
             }
         }
     }

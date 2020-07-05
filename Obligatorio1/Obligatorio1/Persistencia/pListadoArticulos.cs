@@ -69,7 +69,7 @@ namespace Obligatorio1.Persistencia
                 List<string> ConsultasSql = this.ConsultaSql(pFiltros, pTipoArticulo);
 
                 consulta = ConsultasSql[0];
-                consultaInstrumento = "";
+                consultaInstrumento = ConsultasSql[1];
             }
             List<Articulo> listaArticulos = new List<Articulo>();
             if (consulta != "")
@@ -193,10 +193,12 @@ namespace Obligatorio1.Persistencia
         private List<string> ListaDeFiltros(List<string> pListaFiltros)
         {
             List<string> listaConConsultas = new List<string>();
-           // string consultaAccesorio = "Select a.* from Articulos a, Accesorios acc";
             //string consultaInstrumento = "Select * from Instrumentos i, Articulos a where i.Id_Instrumento = a.Id_Articulo;";
             string ConsultaAccesorioFrom = "Select a.* from Articulos a, Accesorios acc";
-            string ConsultaAccesoriowhere = "where a.Id_Articulo=acc.Id_Accesorio ";
+            string ConsultaAccesoriowhere = " where a.Id_Articulo=acc.Id_Accesorio ";
+
+            string ConsultaInstrumentoFrom = "Select * from Instrumentos i, Articulos a ";
+            string ConsultaInstrumentoWhere = " where i.Id_Instrumento = a.Id_Articulo ";
             string subtipo = "";
             string tipo = "";
             string fabricante = "";
@@ -212,18 +214,25 @@ namespace Obligatorio1.Persistencia
 
                 switch (tempIndice)
                 {
-                    // 111111111111111111111111111111 varchar(30)
                     case 0:
                         subtipo = tempTipo;
                         if (tipo == "")
                         {
-                            ConsultaAccesorioFrom += " ,Accesorio_tiene_Subtipos accts,Subtipos s ";
-
-                            ConsultaAccesoriowhere += "and accts.Id_Accesorio = acc.Id_Accesorio  and accts.Id_Subtipo = s.Id_Subtipo and s.Nombre_Subtipo=" + "'" + subtipo + "'";
+                            if (ConsultaAccesorioFrom != "")
+                            {
+                                ConsultaAccesorioFrom += " ,Accesorio_tiene_Subtipos accts,Subtipos s ";
+                                ConsultaAccesoriowhere += "and accts.Id_Accesorio = acc.Id_Accesorio  and accts.Id_Subtipo = s.Id_Subtipo and s.Nombre_Subtipo=" + "'" + subtipo + "'";
+                            }
+                            ConsultaInstrumentoFrom += " ,Subtipos s ";
+                            ConsultaInstrumentoWhere += " and s.Id_Subtipo = i.Id_Subtipo and s.Nombre_Subtipo=" + "'" + subtipo + "'";
                         }
                         else
                         {
-                            ConsultaAccesoriowhere += " and s.Nombre_Subtipo = " + "'" + subtipo + "'";
+                            if (ConsultaAccesorioFrom != "")
+                            {
+                                ConsultaAccesoriowhere += " and s.Nombre_Subtipo = " + "'" + subtipo + "'";
+                            }
+                            ConsultaInstrumentoWhere+= " and s.Nombre_Subtipo=" + "'" + subtipo + "'";
                         }
                         break;
                     case 1:
@@ -231,48 +240,90 @@ namespace Obligatorio1.Persistencia
                         tipo = tempTipo;
                         if (subtipo != "")
                         {
-                            ConsultaAccesorioFrom += ",Tipos t ";
-                            ConsultaAccesoriowhere += " and s.Id_Tipo = t.Id_Tipo and t.nombre_Tipo=" + "'" + tipo + "'";
+                            if (ConsultaAccesorioFrom != "")
+                            {
+                                ConsultaAccesorioFrom += ",Tipos t ";
+                                ConsultaAccesoriowhere += " and s.Id_Tipo = t.Id_Tipo and t.nombre_Tipo=" + "'" + tipo + "'";
+                            }
+                            ConsultaInstrumentoFrom += ",Tipos t ";
+                            ConsultaInstrumentoWhere+= " and s.Id_Tipo = t.Id_Tipo and t.nombre_Tipo=" + "'" + tipo + "'";
                         }
                         else
                         {
-                            ConsultaAccesorioFrom += " ,Accesorio_tiene_Subtipos accts,Subtipos s,Tipos t ";
+                            if (ConsultaAccesorioFrom != "")
+                            {
+                                ConsultaAccesorioFrom += " ,Accesorio_tiene_Subtipos accts,Subtipos s,Tipos t ";
 
-                            ConsultaAccesoriowhere += " and accts.Id_Accesorio = acc.Id_Accesorio  and accts.Id_Subtipo = s.Id_Subtipo and s.Id_Tipo = t.Id_Tipo and t.nombre_Tipo=" + "'" + tipo + "'";
+                                ConsultaAccesoriowhere += " and accts.Id_Accesorio = acc.Id_Accesorio  and accts.Id_Subtipo = s.Id_Subtipo and s.Id_Tipo = t.Id_Tipo and t.nombre_Tipo=" + "'" + tipo + "'";
+                            }
+                            ConsultaInstrumentoFrom += " ,Subtipos s, Tipos t ";
+                            ConsultaInstrumentoWhere += " and s.Id_Subtipo = i.Id_Subtipo and s.Id_Tipo = t.Id_Tipo and t.nombre_Tipo=" + "'" + tipo + "'";
                         }
                         break;
                     case 2:
-                      
                         fabricante = tempTipo;
-                        ConsultaAccesorioFrom +=" ,Fabricantes f";
-
-                        ConsultaAccesoriowhere+=" and a.Id_Fabricante = f.Id_Fabricante and f.Nombre_Fabricante=" + "'" + fabricante + "'";
+                        if (ConsultaAccesorioFrom != "")
+                        {
+                            ConsultaAccesorioFrom += " ,Fabricantes f ";
+                            ConsultaAccesoriowhere += " and a.Id_Fabricante = f.Id_Fabricante and f.Nombre_Fabricante=" + "'" + fabricante + "'";
+                        }
+                            ConsultaInstrumentoFrom += " ,Fabricantes f";
+                        ConsultaInstrumentoWhere+=" and f.Id_Fabricante = a.Id_Fabricante and  f.nombre_Fabricante=" + "'" + fabricante + "'";
                         break;
                     case 3:
-                      
+                        ConsultaAccesorioFrom = "";
+                        ConsultaAccesoriowhere = "";
                         destacado = tempTipo;
-                        break;
-                    case 4:
-                        descuento = tempTipo;
-                        break;
-                    case 5:
-                        oferta = tempTipo;
-                        break;
-                    case 6:
-                        ordenar = tempTipo;
-                        if(ordenar == "Ordenar por Nombre")
+                        if(destacado == "Destacado")
                         {
-                            ConsultaAccesoriowhere += " order by(a.Nombre_Accesorio) asc";
+
+                            ConsultaInstrumentoWhere += " and i.Destacado_Instrumento=1";
                         }
                         else
                         {
-                           
+                            ConsultaInstrumentoWhere += " and i.Destacado_Instrumento=0";
+                        }
+                        break;
+                    case 4:
+                        descuento = tempTipo;
+                        ConsultaAccesorioFrom = "";
+                        ConsultaAccesoriowhere = "";
+                        if (descuento == "15%")
+                        {
+                            ConsultaInstrumentoWhere += " and i.Descuento_Instrumento =15";
+                        }
+                        else if(descuento == "25%")
+                        {
+                            ConsultaInstrumentoWhere += " and i.Descuento_Instrumento =25";
+                        }
+                        else
+                        {
+                            ConsultaInstrumentoWhere += " and i.Descuento_Instrumento =50";
+                        }
+                        break;
+                    case 5:
+                        ordenar = tempTipo;
+                        if(ordenar == "Ordenar por Nombre")
+                        {
+                            if (ConsultaAccesorioFrom != "")
+                            {
+                                ConsultaAccesoriowhere += " order by(a.Nombre_Articulo) asc";
+                            }
+                            ConsultaInstrumentoWhere+= " order by(a.Nombre_Articulo) asc";
+                        }
+                        else
+                        {
+                            ConsultaAccesorioFrom = "";
+                            ConsultaAccesoriowhere = "";
+                            ConsultaInstrumentoWhere += " order by(i.Fecha_Fabricacion_Instrumento) asc";
                         }
                         break;
                 }
             }
             string sqlAccesorio = ConsultaAccesorioFrom + ConsultaAccesoriowhere;
             listaConConsultas.Add(sqlAccesorio);
+            string sqlInstrumento = ConsultaInstrumentoFrom + ConsultaInstrumentoWhere;
+            listaConConsultas.Add(sqlInstrumento);
             return listaConConsultas;
         }
 

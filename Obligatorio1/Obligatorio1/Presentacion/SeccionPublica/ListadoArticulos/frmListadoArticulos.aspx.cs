@@ -308,16 +308,87 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
             //listaDeFiltros.Add("0 "+Session["NombreSubtipoFiltro"].ToString());
             this.ListadoPaginado(IndiceAnterior, listaDeFiltros,null);
             this.listaDeFiltros.Clear();
+
         }
 
         protected void dplListarTipos_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.dplListarTipos.SelectedIndex > 0)
             {
-                string subtipo = this.dplListarTipos.SelectedValue;
-                listaDeFiltros.Add("1 " +subtipo);
-                this.dplListarTipos.SelectedIndex = 0;
+                string tipos = this.dplListarTipos.SelectedValue;
+                //if (!this.SeEncuentraElFiltroEnLaLista(1)){
+                    listaDeFiltros.Add("1 " + tipos);
+                    this.dplListarTipos.SelectedIndex = 0;
+                //}
             }
+        }
+
+        protected void dplFabricantes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.dplFabricantes.SelectedIndex > 0)
+            {
+                string fabricante = this.dplFabricantes.SelectedValue;
+                //if (!this.SeEncuentraElFiltroEnLaLista(2))
+                //{
+                //    listaDeFiltros.Add("2 " + fabricante);
+                    this.dplFabricantes.SelectedIndex = 0;
+                //}
+            }
+        }
+
+        protected void dplDestacado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.dplDestacado.SelectedIndex > 0)
+            {
+
+                string destacado = this.dplDestacado.SelectedValue;
+                //if (!this.SeEncuentraElFiltroEnLaLista(3))
+                //{
+                    listaDeFiltros.Add("3 " + destacado);
+                    this.dplDestacado.SelectedIndex = 0;
+                //}
+            }
+        }
+
+        protected void dplOferta_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.dplOferta.SelectedIndex > 0)
+            {
+                string oferta = this.dplOferta.SelectedValue;
+                //if (!this.SeEncuentraElFiltroEnLaLista(4))
+                //{
+                    listaDeFiltros.Add("4 " + oferta);
+                    this.dplOferta.SelectedIndex = 0;
+                //}
+            }
+        }
+
+        protected void dplOrdenar_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.dplOrdenar.SelectedIndex > 0)
+            {
+
+                string ordenar = this.dplOrdenar.SelectedValue;
+                //if (!this.SeEncuentraElFiltroEnLaLista(5))
+                //{
+                    listaDeFiltros.Add("5 " + ordenar);
+                    this.dplOrdenar.SelectedIndex = 0;
+
+                //}
+            }
+        }
+
+        private bool SeEncuentraElFiltroEnLaLista(int pIndice)
+        {
+            foreach(string unFiltro in listaDeFiltros)
+            {
+                string[] content = unFiltro.Split(' ');
+                if(int.Parse(content[0])== pIndice)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

@@ -10,16 +10,16 @@
                 <asp:DropDownList ID="dplListarTipos" CssClass="form-controlV2" runat="server" AppendDataBoundItems="True" OnSelectedIndexChanged="dplListarTipos_SelectedIndexChanged">
                     <asp:ListItem Value="Seleccione un tipo">Filtrar por tipo</asp:ListItem>
                 </asp:DropDownList>
-                <asp:DropDownList ID="dplDestacado" CssClass="form-controlV2" runat="server" AppendDataBoundItems="True">
+                <asp:DropDownList ID="dplDestacado" CssClass="form-controlV2" runat="server" AppendDataBoundItems="True" OnSelectedIndexChanged="dplDestacado_SelectedIndexChanged">
                     <asp:ListItem Value="filtrar por destacado">Filtrar por destacado</asp:ListItem>
                 </asp:DropDownList>
-                <asp:DropDownList ID="dplOferta" CssClass="form-controlV2" runat="server" AppendDataBoundItems="True">
+                <asp:DropDownList ID="dplOferta" CssClass="form-controlV2" runat="server" AppendDataBoundItems="True" OnSelectedIndexChanged="dplOferta_SelectedIndexChanged">
                     <asp:ListItem>Filtrar por oferta</asp:ListItem>
                 </asp:DropDownList>
-                <asp:DropDownList ID="dplFabricantes" CssClass="form-controlV2" runat="server" AppendDataBoundItems="True">
+                <asp:DropDownList ID="dplFabricantes" CssClass="form-controlV2" runat="server" AppendDataBoundItems="True" OnSelectedIndexChanged="dplFabricantes_SelectedIndexChanged">
                     <asp:ListItem>Filtrar por fabricante</asp:ListItem>
                 </asp:DropDownList>
-                <asp:DropDownList ID="dplOrdenar" CssClass="form-controlV2" runat="server" AppendDataBoundItems="True">
+                <asp:DropDownList ID="dplOrdenar" CssClass="form-controlV2" runat="server" AppendDataBoundItems="True" OnSelectedIndexChanged="dplOrdenar_SelectedIndexChanged">
                     <asp:ListItem>filtrar por orden</asp:ListItem>
                 </asp:DropDownList>
                 <asp:Button ID="btnFiltrarLista" runat="server" class="btn btn-primary buttonFiltrar" Text="Filtrar" OnClick="btnFiltrarLista_Click" />
