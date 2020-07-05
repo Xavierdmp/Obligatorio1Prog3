@@ -43,6 +43,14 @@ namespace Obligatorio1.Dominio
             get { return _telefono; }
             set { _telefono = value; }
         }
+        public string Correo
+        {
+            get { return this.CorreoElectronico; }
+        }
+        public string password
+        {
+            get { return this.Contraseña; }
+        }
 
         public Cliente(string pCorreo,string pContraseña,string pNombre,
                        string pApellido,string pCedulaIdentidad,string pDireccion,int pTelefono)

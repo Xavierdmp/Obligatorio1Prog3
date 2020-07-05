@@ -209,6 +209,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
                 Dominio.Controladoras.ControladoraColor unaControladora = new Dominio.Controladoras.ControladoraColor();
                 Dominio.Color unColor = unaControladora.Buscar(IdColor);
                 Session["ColorSeleccionado"] = unColor;
+                this.dplListarColores.SelectedIndex = 0;
             }
         }
 
@@ -270,18 +271,25 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
         {
             if (this.fuFotosAdicionales.HasFile)
             {
-                string urlFoto = "~/Imagenes/FotosAdicionales/" + this.fuFotosAdicionales.FileName;
-                this.fuFotosAdicionales.SaveAs(Server.MapPath(urlFoto));
-                Dominio.FotosAdicionales unaFotoAdicional = new Dominio.FotosAdicionales(urlFoto);
-                if(ListaFotosAdicionales == null)
+                string Extension = System.IO.Path.GetExtension(fuFotosAdicionales.PostedFile.FileName);
+                if (Extension == ".PNG" || Extension == ".png" || Extension == ".JPG" || Extension == ".jpg")
                 {
-                    List<FotosAdicionales> lista = new List<FotosAdicionales>();
-                    lista.Add(unaFotoAdicional);
-                    ListaFotosAdicionales = lista;
-                }
-                else
-                {
-                    ListaFotosAdicionales.Add(unaFotoAdicional);
+                    if (this.fuFotosAdicionales.FileName.Length < 150 && this.fuFotosAdicionales.PostedFile.ContentLength <= maximoTamañoImagen)
+                    {
+                        string urlFoto = "~/Imagenes/FotosAdicionales/" + this.fuFotosAdicionales.FileName;
+                        this.fuFotosAdicionales.SaveAs(Server.MapPath(urlFoto));
+                        Dominio.FotosAdicionales unaFotoAdicional = new Dominio.FotosAdicionales(urlFoto);
+                        if (ListaFotosAdicionales == null)
+                        {
+                            List<FotosAdicionales> lista = new List<FotosAdicionales>();
+                            lista.Add(unaFotoAdicional);
+                            ListaFotosAdicionales = lista;
+                        }
+                        else
+                        {
+                            ListaFotosAdicionales.Add(unaFotoAdicional);
+                        }
+                    }
                 }
 
             }
@@ -505,5 +513,6 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
             ListaFotosAdicionales.Remove(unaFotoAdicional);
             this.ListarFotosAdicionales();
         }
+
     }
 }

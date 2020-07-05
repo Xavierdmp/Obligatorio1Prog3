@@ -14,6 +14,8 @@
                     <asp:TextBox ID="txtNombre" CssClass="form-control" runat="server"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Debe Ingresar Nombre" ForeColor="Maroon" ValidationGroup="vgGestion" ControlToValidate="txtNombre"></asp:RequiredFieldValidator>
                     <br />
+                    <asp:RegularExpressionValidator ID="RegularExpressionValidator3" ValidationGroup="vgGestion" runat="server" ControlToValidate="txtNombre" ErrorMessage="solo letras" ValidationExpression="^[a-zA-Z ]*$" ForeColor="#CC3300"></asp:RegularExpressionValidator>
+                    <br />
                     <div class="form-group">
                         <asp:Label ID="lblDireccion" runat="server" Text="Direccion: "></asp:Label>
                         <br />

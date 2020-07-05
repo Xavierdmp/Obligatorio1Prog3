@@ -17,6 +17,10 @@
             var imagen1 = "/Imagenes/ImagenesVentasTarjetas/FechaTarjeta.png";
             changeImage.src = imagen1;
             break;
+        case 5:
+            var imagen1 = "/Imagenes/ImagenesVentasTarjetas/DNI.png";
+            changeImage.src = imagen1;
+            break;
 
     }
 }

@@ -16,6 +16,7 @@
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtNombre" ErrorMessage="El nombre es obligatorio" ForeColor="#CC3300" ValidationGroup="vgGestion"></asp:RequiredFieldValidator>
                 </div>
                 <div class="form-group">
+                    <br />
                     <asp:Label ID="Label2" runat="server" Text="Descripcion" Font-Bold="True"></asp:Label>
                     <asp:TextBox ID="txtDescripcion" runat="server" placeholder="Ingrese una descripcion" class="form-control" TextMode="MultiLine" Width="281px" Height="35px" Style="resize: none;"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtDescripcion" ErrorMessage="La descripcion es obligatoria" ForeColor="#CC3300" ValidationGroup="vgGestion"></asp:RequiredFieldValidator>
@@ -23,8 +24,9 @@
                 <div class="form-group">
                     <asp:Label ID="Label3" runat="server" Text="Fabricante" Font-Bold="True"></asp:Label>
                     <asp:DropDownList ID="dplListaFabricante" runat="server" class="form-control" Width="281px" AutoPostBack="True" AppendDataBoundItems="True">
-                        <asp:ListItem>Seleccione un fabricante</asp:ListItem>
+                        <asp:ListItem Value="0">Seleccione un fabricante</asp:ListItem>
                     </asp:DropDownList>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator9" InitialValue="0" ControlToValidate="dplListaFabricante" ValidationGroup="vgGestion" runat="server" ErrorMessage="Seleccione un fabricante" ForeColor="#CC3300"></asp:RequiredFieldValidator>
                 </div>
             </article>
             <article class="col-md-3">
@@ -32,6 +34,8 @@
                     <asp:Label ID="Label5" runat="server" Text="Precio" Font-Bold="True"></asp:Label>
                     <asp:TextBox ID="txtPrecio" runat="server" placeholder="Ingrese un Precio" class="form-control" Width="281px"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtPrecio" ErrorMessage="El precio es obligatorio" ForeColor="#CC3300" ValidationGroup="vgGestion"></asp:RequiredFieldValidator>
+                    <br />
+                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ControlToValidate="txtPrecio" runat="server" ErrorMessage="el precio debe ser mayor a 0" ValidationExpression="^(0|[0-9]\d*)$"></asp:RegularExpressionValidator>
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label4" runat="server" Text="Imagen principal" Font-Bold="True"></asp:Label>
@@ -41,8 +45,9 @@
                 <div class="form-group">
                     <asp:Label ID="Label6" runat="server" Text="Subtipo" Font-Bold="True"></asp:Label>
                     <asp:DropDownList ID="dplListarSubtipo" runat="server" class="form-control" Width="280px" AutoPostBack="True" AppendDataBoundItems="True">
-                        <asp:ListItem>Seleccione un subtipo de instrumento</asp:ListItem>
+                        <asp:ListItem Value="0">Seleccione un subtipo de instrumento</asp:ListItem>
                     </asp:DropDownList>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator10" InitialValue="0" ControlToValidate="dplListarSubtipo" ValidationGroup="vgGestion" runat="server" ErrorMessage="Seleccione un subtipo de instrumento" ForeColor="#CC3300"></asp:RequiredFieldValidator>
                 </div>
             </article>
             <aside class="col-md-6 text-center">
@@ -93,7 +98,7 @@
                 <div class="form-group">
                     <asp:Label ID="Label13" runat="server" Text="Url Video" Font-Bold="True"></asp:Label>
                     <asp:TextBox ID="txtVideoYoutube" runat="server" placeholder="Ingrese una url" class="form-control" Width="281px" TextMode="Url"></asp:TextBox>
-                     <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="txtVideoYoutube" ErrorMessage="Url obligatoria" ForeColor="#CC3300" ValidationGroup="vgGestion"></asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="txtVideoYoutube" ErrorMessage="Url obligatoria" ForeColor="#CC3300" ValidationGroup="vgGestion"></asp:RequiredFieldValidator>
                     <br />
                     <asp:CustomValidator OnServerValidate="cvValidarLink_ServerValidate" ID="cvValidarLink" runat="server" ControlToValidate="txtVideoYoutube" ForeColor="Red" ValidationGroup="vgGestion" ErrorMessage="El link no esta permitido"></asp:CustomValidator>
                 </div>
@@ -101,7 +106,8 @@
 
             <article class="col-md-3">
                 <div class="form-group">
-                    <asp:Label ID="Label12" runat="server" Text="Descuento" Font-Bold="True"></asp:Label> <span class="badge badge-info" >Opcional</span>
+                    <asp:Label ID="Label12" runat="server" Text="Descuento" Font-Bold="True"></asp:Label>
+                    <span class="badge badge-info">Opcional</span>
                     &nbsp;<asp:DropDownList ID="dplListaDescuentos" runat="server" AppendDataBoundItems="True" class="form-control" Width="281px" AutoPostBack="True">
                         <asp:ListItem>Seleccione un descuento</asp:ListItem>
                     </asp:DropDownList>
@@ -109,24 +115,29 @@
 
                 <div class="form-group">
                     <br />
+                    <br />
                     <asp:Label ID="Label14" runat="server" Text="Destacado" Font-Bold="True"></asp:Label>
                     <br />
                     <asp:RadioButton ID="btnEsDestacado" runat="server" GroupName="gnDestacado" Text=" Si" />
                     &nbsp;<asp:RadioButton ID="btnNoDestacado" runat="server" GroupName="gnDestacado" Text="No" />
-                &nbsp;</div>
+                    &nbsp;
+                  
+                </div>
             </article>
             <aside class="col-md-6">
                 <div class="form-group text-center">
-                   <span>Imagen seleccionada</span>
+                    <span>Imagen seleccionada</span>
                     <br />
                     <asp:Image ID="MostrarFotoPrincipal" class="img-fluid img-thumbnail" runat="server" Height="130px" Width="281px" />
                 </div>
                 <div class="form-group">
                     <asp:Label ID="Label15" runat="server" Text="Colores: " Font-Bold="True"></asp:Label>
                     <asp:DropDownList ID="dplListarColores" runat="server" class="form-control" Width="281px" AppendDataBoundItems="True" AutoPostBack="True" OnSelectedIndexChanged="dplListarColores_SelectedIndexChanged">
-                        <asp:ListItem>Seleccionar un Color</asp:ListItem>
+                        <asp:ListItem Value="0">Seleccionar un Color</asp:ListItem>
                     </asp:DropDownList>
                     <asp:Button ID="btnAgregarColor" runat="server" Text="Agregar nuevo Color" CssClass="AgregarColor btn btn-success" data-toggle="modal" data-target="#exampleModalCentered" />
+                    <br />
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator11" InitialValue="0" ControlToValidate="dplListarColores" ValidationGroup="vgGestion" runat="server" ErrorMessage="Seleccione colores" ForeColor="#CC3300"></asp:RequiredFieldValidator>
                 </div>
                 <div class="form-group">
                     <asp:GridView ID="gvListarColoresSeleccionados" runat="server" OnSelectedIndexChanged="gvListarColoresSeleccionados_SelectedIndexChanged" CellPadding="4" ForeColor="#333333" GridLines="None">

@@ -209,20 +209,27 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
         {
             if (this.fuFotosAdicionales.HasFile)
             {
-                string urlImagen = "~/Imagenes/FotosAdicionales/" + this.fuFotosAdicionales.FileName;
-                this.fuFotosAdicionales.SaveAs(Server.MapPath("~/Imagenes/FotosAdicionales/" + this.fuFotosAdicionales.FileName));
-                Dominio.FotosAdicionales unaFotoAdicional = new Dominio.FotosAdicionales(urlImagen);
-                if (ListarFotosAdicionales == null)
+                string Extension = System.IO.Path.GetExtension(fuFotosAdicionales.PostedFile.FileName);
+                if (Extension == ".PNG" || Extension == ".png" || Extension == ".JPG" || Extension == ".jpg")
                 {
-                    List<Dominio.FotosAdicionales> lista = new List<Dominio.FotosAdicionales>();
-                    lista.Add(unaFotoAdicional);
-                    ListarFotosAdicionales = lista;
+                    if (this.fuFotosAdicionales.FileName.Length < 150 && this.fuFotosAdicionales.PostedFile.ContentLength <= maximoTamañoImagen)
+                    {
+                        string urlImagen = "~/Imagenes/FotosAdicionales/" + this.fuFotosAdicionales.FileName;
+                        this.fuFotosAdicionales.SaveAs(Server.MapPath("~/Imagenes/FotosAdicionales/" + this.fuFotosAdicionales.FileName));
+                        Dominio.FotosAdicionales unaFotoAdicional = new Dominio.FotosAdicionales(urlImagen);
+                        if (ListarFotosAdicionales == null)
+                        {
+                            List<Dominio.FotosAdicionales> lista = new List<Dominio.FotosAdicionales>();
+                            lista.Add(unaFotoAdicional);
+                            ListarFotosAdicionales = lista;
+                        }
+                        else
+                        {
+                            ListarFotosAdicionales.Add(unaFotoAdicional);
+                        }
+                        this.ListaFotosAdicionales();
+                    }
                 }
-                else
-                {
-                    ListarFotosAdicionales.Add(unaFotoAdicional);
-                }
-                this.ListaFotosAdicionales();
             }
         }
         private void ListaFotosAdicionales()

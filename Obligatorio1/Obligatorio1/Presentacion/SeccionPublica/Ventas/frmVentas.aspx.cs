@@ -125,5 +125,30 @@ namespace Obligatorio1.Presentacion.SeccionPublica.Ventas
                 args.IsValid = false;
             }
         }
+
+        protected void CustomValidator1_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            try
+            {
+                AlgoritmoDeControl.TarjetaCredito DllTarjeta = new AlgoritmoDeControl.TarjetaCredito();
+                args.IsValid = DllTarjeta.VerificarTarjetaDeCredito(this.txtNumeroTarjeta.Text);
+            }
+            catch
+            {
+                args.IsValid = false;
+            }
+        }
+
+        protected void CustomValidator2_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            try
+            {
+                AlgoritmoDeControl.Cedula DllCedula = new AlgoritmoDeControl.Cedula();
+                args.IsValid = DllCedula.VerificarCedula(this.txtCedulaTitularTarjeta.Text);
+            }
+            catch {
+                args.IsValid = false;
+            }
+        }
     }
 }
