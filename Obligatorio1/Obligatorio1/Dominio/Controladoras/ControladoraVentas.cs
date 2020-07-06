@@ -63,5 +63,9 @@ namespace Obligatorio1.Dominio.Controladoras
         {
             throw new NotImplementedException();
         }
+        public List<Item> ArticulosCompradosSegunVenta(int pIdVenta)
+        {
+            return Persistencia.Controladora.Instancia.ArticulosCompradosSegunVenta(pIdVenta);
+        }
     }
 }

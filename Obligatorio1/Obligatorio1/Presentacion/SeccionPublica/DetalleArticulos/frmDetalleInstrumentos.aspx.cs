@@ -71,7 +71,6 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
             if(this.txtNuevaCantidad.Text != ""){
                 Dominio.Controladoras.ControladoraColor unaControladora = new Dominio.Controladoras.ControladoraColor();
                 int IdColor = int.Parse(Session["ColorSeleccionado"].ToString());
-                Dominio.Color unColor = unaControladora.Buscar(IdColor);
                 int cantidad = int.Parse(this.txtNuevaCantidad.Text);
                 Session["CantidadSeleccionada"] = cantidad;
             }
@@ -91,9 +90,9 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
             {
                 if (Session["ColorSeleccionado"] != null && Session["CantidadSeleccionada"] != null )
                 {
-                    int IdAccesorio = int.Parse(Session["InstrumentoDetalle"].ToString());
+                    int IdInstrumento = int.Parse(Session["InstrumentoDetalle"].ToString());
                     Dominio.Controladoras.ControladoraInstrumentos unaControladora = new Dominio.Controladoras.ControladoraInstrumentos();
-                    Dominio.Instrumento unInstrumento = unaControladora.Buscar(IdAccesorio);
+                    Dominio.Instrumento unInstrumento = unaControladora.Buscar(IdInstrumento);
                     int IdColor = int.Parse(Session["ColorSeleccionado"].ToString());
                     Dominio.Controladoras.ControladoraColor unaControladoraColor = new Dominio.Controladoras.ControladoraColor();
                     Dominio.Color unColor = unaControladoraColor.Buscar(IdColor);
@@ -101,7 +100,7 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
                     Dominio.Controladoras.ControladoraCarrito unaControladoraCarrito = new Dominio.Controladoras.ControladoraCarrito();
                     int cantidad = int.Parse(Session["CantidadSeleccionada"].ToString());
                     Dominio.Item unItem = new Dominio.Item(unInstrumento, cantidad, unColor);
-                    if (cantidad <= unInstrumento.Stock && cantidad > 0)
+                    if (cantidad <= unaControladoraColor.CantidadStockDisponibleEnUnColor(unInstrumento.Id,IdColor) && cantidad > 0)
                     {
                         if (unaControladoraCarrito.AltaCarrito(unItem, IdClienteLogueado))
                         {

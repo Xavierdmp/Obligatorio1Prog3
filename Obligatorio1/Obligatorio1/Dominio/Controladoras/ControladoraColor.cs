@@ -42,5 +42,10 @@ namespace Obligatorio1.Dominio.Controladoras
             throw new NotImplementedException();
         }
 
+        public int CantidadStockDisponibleEnUnColor(int pIdArticulo, int pIdColor)
+        {
+            return Persistencia.Controladora.Instancia.CantidadStockDisponibleEnUnColor(pIdArticulo, pIdColor);
+        }
+
     }
 }

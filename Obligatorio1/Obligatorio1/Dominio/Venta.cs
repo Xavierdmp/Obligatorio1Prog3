@@ -67,6 +67,10 @@ namespace Obligatorio1.Dominio
         {
             get { return Cliente.Id; }
         }
+        public string NombreCliente
+        {
+            get { return Cliente.Nombre; }
+        }
 
         private int CalcularMontoTotal(List<Item> pLista)
         {

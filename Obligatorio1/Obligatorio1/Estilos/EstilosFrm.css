@@ -581,3 +581,32 @@ body{
     box-shadow: 0px 0px 2px 0px #000;
     background-color: #fff;
 }
+
+.ContenedorVentaRealizada{
+     margin-top: 5em;
+}
+.ContenedorVentasExitosas {
+    background-color: #27B26C;
+}
+.SpanPagos {
+    color: #fff;
+    font-size: 2em;
+}
+.fa-shopify {
+    font-size: 5em;
+    color: #259344;
+}
+
+.ContenedorIcono {
+    background-color: #fff;
+    border-radius: 50%;
+    width: 1.5em;
+    height: 1.2em;
+}
+.CodigoVentas{
+    font-size: 1.2em;
+    color:#fff;
+}
+.fa-check{
+    color:#fff;
+}

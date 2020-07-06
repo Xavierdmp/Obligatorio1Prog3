@@ -71,6 +71,21 @@ namespace Obligatorio1.Dominio
 
         }
 
+        public string NombreArticulo
+        {
+            get { return Articulo.Nombre; }
+        }
+        public string NombreColor
+        {
+            get {
+                string nombre = "";
+                if (Color != null)
+                {
+                    nombre = Color.Nombre;
+                }
+                return nombre;
+            }
+        }
 
     }
 }

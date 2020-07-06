@@ -87,7 +87,14 @@ namespace Obligatorio1.Presentacion.SeccionPublica.Ventas
                 Session["CiudadSeleccionada"] = nombreCiudad;
             }
         }
-
+        private void Limpiar()
+        {
+            this.txtCedulaTitularTarjeta.Text = "";
+            this.txtCodigoSeguridad.Text = "";
+            this.txtFechaExpiracion.Text = "";
+            this.txtNombreYApellido.Text = "";
+            this.txtNumeroTarjeta.Text = "";
+        }
         protected void btnComprar_Click(object sender, EventArgs e)
         {
             if (Page.IsValid)
@@ -95,20 +102,24 @@ namespace Obligatorio1.Presentacion.SeccionPublica.Ventas
                 Dominio.Controladoras.ControladoraCarrito unaControladoraCarrito = new Dominio.Controladoras.ControladoraCarrito();
                 Dominio.Controladoras.ControladoraCliente unaControladoraCliente = new Dominio.Controladoras.ControladoraCliente();
                 int IdClienteConectado = int.Parse(Session["ClienteLogueado"].ToString());
-
-                string numeroTarjeta = this.txtNumeroTarjeta.Text;
-                string pais = Session["PaisSeleccionado"].ToString();
-                string ciudad = Session["CiudadSeleccionada"].ToString();
-                DateTime fecha = DateTime.Now;
-                List<Dominio.Item> listaArticulos = unaControladoraCarrito.ListaCarritoParaCliente(IdClienteConectado);
-                Dominio.Cliente unCliente = unaControladoraCliente.Buscar(IdClienteConectado);
-
-                Dominio.Venta unaVenta = new Dominio.Venta(fecha, listaArticulos, unCliente, numeroTarjeta, pais, ciudad);
-                this.dplListaCiudades.SelectedIndex = 0;
-                this.dplListaPaises.SelectedIndex = 0;
-                if (this.Instancia().Alta(unaVenta))
+                if (unaControladoraCarrito.CantidadItemsEnElCarrito(IdClienteConectado) > 0)
                 {
+                    string numeroTarjeta = this.txtNumeroTarjeta.Text;
+                    string pais = Session["PaisSeleccionado"].ToString();
+                    string ciudad = Session["CiudadSeleccionada"].ToString();
+                    DateTime fecha = DateTime.Now;
+                    List<Dominio.Item> listaArticulos = unaControladoraCarrito.ListaCarritoParaCliente(IdClienteConectado);
+                    Dominio.Cliente unCliente = unaControladoraCliente.Buscar(IdClienteConectado);
 
+                    Dominio.Venta unaVenta = new Dominio.Venta(fecha, listaArticulos, unCliente, numeroTarjeta, pais, ciudad);
+                    this.dplListaCiudades.SelectedIndex = 0;
+                    this.dplListaPaises.SelectedIndex = 0;
+                    if (this.Instancia().Alta(unaVenta))
+                    {
+                        this.Limpiar();
+                        Response.Redirect("~/Presentacion/SeccionPublica/Ventas/frmVentaConcretada.aspx");
+
+                    }
                 }
             }
         }

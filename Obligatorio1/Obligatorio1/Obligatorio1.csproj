@@ -190,6 +190,7 @@
     <Content Include="Imagenes\ImagenesVentasTarjetas\NumeroAdelante.png" />
     <Content Include="Imagenes\ImagenesVentasTarjetas\numeroAtrasTarjeta.png" />
     <Content Include="Javascript\Scripts.js" />
+    <Content Include="Presentacion\SeccionPrivada\Estadisticas\frmEstadisticasVentas.aspx" />
     <Content Include="Presentacion\SeccionPrivada\Gestion Clientes\frmEliminarCliente.aspx" />
     <Content Include="Presentacion\SeccionPrivada\GestionArticulos\frmGestionAccesorio.aspx" />
     <Content Include="Presentacion\SeccionPrivada\GestionArticulos\frmGestionInstrumento.aspx" />
@@ -210,6 +211,7 @@
     <Content Include="Presentacion\SeccionPublica\GestionCliente\frmRegistrarCliente.aspx" />
     <Content Include="Presentacion\SeccionPublica\ListadoArticulos\frmListadoArticulos.aspx" />
     <Content Include="Presentacion\SeccionPublica\Ventas\frmCarritoDeCompras.aspx" />
+    <Content Include="Presentacion\SeccionPublica\Ventas\frmVentaConcretada.aspx" />
     <Content Include="Presentacion\SeccionPublica\Ventas\frmVentas.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -455,6 +457,13 @@
     <Compile Include="Presentacion\Controles\lblMensaje.ascx.designer.cs">
       <DependentUpon>lblMensaje.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Presentacion\SeccionPrivada\Estadisticas\frmEstadisticasVentas.aspx.cs">
+      <DependentUpon>frmEstadisticasVentas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\SeccionPrivada\Estadisticas\frmEstadisticasVentas.aspx.designer.cs">
+      <DependentUpon>frmEstadisticasVentas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Presentacion\SeccionPrivada\Gestion Clientes\frmEliminarCliente.aspx.cs">
       <DependentUpon>frmEliminarCliente.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -559,6 +568,13 @@
     </Compile>
     <Compile Include="Presentacion\SeccionPublica\Ventas\frmCarritoDeCompras.aspx.designer.cs">
       <DependentUpon>frmCarritoDeCompras.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\SeccionPublica\Ventas\frmVentaConcretada.aspx.cs">
+      <DependentUpon>frmVentaConcretada.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\SeccionPublica\Ventas\frmVentaConcretada.aspx.designer.cs">
+      <DependentUpon>frmVentaConcretada.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\SeccionPublica\Ventas\frmVentas.aspx.cs">
       <DependentUpon>frmVentas.aspx</DependentUpon>

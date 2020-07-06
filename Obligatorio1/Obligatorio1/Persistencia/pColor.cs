@@ -93,5 +93,22 @@ namespace Obligatorio1.Persistencia
         {
             throw new NotImplementedException();
         }
+        public int CantidadStockDisponibleEnUnColor(int pIdArticulo,int pIdColor)
+        {
+            string consulta = "select itc.Cantidad_Color from Instrumentos_tienen_Colores itc where Id_Instrumento=" + pIdArticulo + " and Id_Color=" + pIdColor;
+            DataSet datos = Conexion.Instancia.InicializarSeleccion(consulta);
+            int Stock = -1;
+            if(datos.Tables[0].Rows.Count > 0)
+            {
+                DataRowCollection table = datos.Tables[0].Rows;
+                foreach(DataRow row in table)
+                {
+                    object[] array = row.ItemArray;
+                    Stock = int.Parse(array[0].ToString());
+                }
+                return Stock;
+            }
+            return Stock;
+        }
     }
 }

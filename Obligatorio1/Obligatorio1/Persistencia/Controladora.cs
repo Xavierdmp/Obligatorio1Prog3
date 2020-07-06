@@ -241,6 +241,11 @@ namespace Obligatorio1.Persistencia
         {
             return pColor.Instancia.Buscar(pId);
         }
+
+        public int CantidadStockDisponibleEnUnColor(int pIdArticulo, int pIdColor)
+        {
+            return pColor.Instancia.CantidadStockDisponibleEnUnColor(pIdArticulo, pIdColor);
+        }
         #endregion
 
         #region "Instrumentos"
@@ -368,6 +373,10 @@ namespace Obligatorio1.Persistencia
         public List<Venta> ListadoDeVentas()
         {
             return pVenta.Instancia.ListarVentas();
+        }
+        public List<Item> ArticulosCompradosSegunVenta(int pIdVenta)
+        {
+            return pVenta.Instancia.ArticulosCompradosSegunVenta(pIdVenta);
         }
         #endregion
 

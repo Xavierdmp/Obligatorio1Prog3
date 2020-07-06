@@ -115,5 +115,71 @@ namespace Obligatorio1.Persistencia
         {
             throw new NotImplementedException();
         }
+
+        public List<Venta> EstadisticasVentasFiltrada(DateTime pFechaDesde,DateTime pFechaHasta)
+        {
+            string seleccion = "Select * from ventas where Estado_Venta =1 and Fecha_Venta >=" + "'" + pFechaDesde +"' and Fecha_Venta <=" + "'" + pFechaHasta + "';";
+            DataSet datos = Conexion.Instancia.InicializarSeleccion(seleccion);
+            List<Venta> listaDeVentas = new List<Venta>();
+            if(datos.Tables[0].Rows.Count > 0)
+            {
+                DataRowCollection table = datos.Tables[0].Rows;
+                foreach(DataRow row in table)
+                {
+                    Dominio.Venta unaVenta = new Dominio.Venta();
+                    object[] elementos = row.ItemArray;
+                    unaVenta.Id = int.Parse(elementos[0].ToString());
+                    unaVenta.Fecha = Convert.ToDateTime(elementos[1].ToString());
+                    int IdCliente = int.Parse(elementos[2].ToString());
+                    unaVenta.Cliente = Controladora.Instancia.BuscarCliente(IdCliente);
+                    unaVenta.MontoTotal = int.Parse(elementos[3].ToString());
+                    unaVenta.Tarjeta = elementos[4].ToString();
+                    unaVenta.Pais = elementos[5].ToString();
+                    unaVenta.Ciudad = elementos[7].ToString();
+                    listaDeVentas.Add(unaVenta);
+                }
+                return listaDeVentas;
+            }
+            return listaDeVentas;
+        }
+
+        public List<Item> ArticulosCompradosSegunVenta(int pIdVenta)
+        {
+            string consulta = "select * from Ventas_tienen_Articulos where Id_Venta= " + pIdVenta;
+            DataSet datos = Conexion.Instancia.InicializarSeleccion(consulta);
+            List<Item> ItemsComprados = new List<Item>();
+            if(datos.Tables[0].Rows.Count > 0)
+            {
+                DataRowCollection table = datos.Tables[0].Rows;
+                foreach(DataRow fila in table)
+                {
+                    object[] element = fila.ItemArray;
+                    Dominio.Item unItem = new Dominio.Item();
+                    int IdArticulo = int.Parse(element[2].ToString());
+                    Instrumento unInstrumento = Controladora.Instancia.BuscarInstrumento(IdArticulo);
+                    Accesorio unAccesorio = Controladora.Instancia.BuscarAccesorio(IdArticulo);
+                    if(unInstrumento != null)
+                    {
+                        unItem.Articulo = unInstrumento;
+                    }
+                    else
+                    {
+                        unItem.Articulo = unAccesorio;
+                    }
+                    unItem.Cantidad = int.Parse(element[3].ToString());
+                    unItem.Precio = int.Parse(element[4].ToString());
+                    if (element[5].ToString() != "" && element[5] != null)
+                    {
+                        int IdColor = int.Parse(element[5].ToString());
+                        Color unColor = Controladora.Instancia.BuscarColor(IdColor);
+                        unItem.Color = unColor;
+                    }
+                    ItemsComprados.Add(unItem);
+
+                }
+                return ItemsComprados;
+            }
+            return ItemsComprados;
+        }
     }
 }
