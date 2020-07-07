@@ -189,6 +189,7 @@
     <Content Include="Imagenes\ImagenesVentasTarjetas\NombreTarjeta.png" />
     <Content Include="Imagenes\ImagenesVentasTarjetas\NumeroAdelante.png" />
     <Content Include="Imagenes\ImagenesVentasTarjetas\numeroAtrasTarjeta.png" />
+    <Content Include="Imagenes\SiteMasters\formasdePagos.png" />
     <Content Include="Javascript\Scripts.js" />
     <Content Include="Presentacion\SeccionPrivada\Estadisticas\frmEstadisticasVentas.aspx" />
     <Content Include="Presentacion\SeccionPrivada\Gestion Clientes\frmEliminarCliente.aspx" />
@@ -406,6 +407,7 @@
     <Compile Include="Dominio\Controladoras\ControladoraCliente.cs" />
     <Compile Include="Dominio\Controladoras\ControladoraColor.cs" />
     <Compile Include="Dominio\Controladoras\ControladoraFabricante.cs" />
+    <Compile Include="Dominio\Controladoras\ControladoraInicio.cs" />
     <Compile Include="Dominio\Controladoras\ControladoraInstrumentos.cs" />
     <Compile Include="Dominio\Controladoras\ControladoraListado.cs" />
     <Compile Include="Dominio\Controladoras\ControladoraLogin.cs" />
@@ -436,6 +438,7 @@
     <Compile Include="Persistencia\pCliente.cs" />
     <Compile Include="Persistencia\pColor.cs" />
     <Compile Include="Persistencia\pFabricante.cs" />
+    <Compile Include="Persistencia\pInicio.cs" />
     <Compile Include="Persistencia\pInstrumento.cs" />
     <Compile Include="Persistencia\pListadoArticulos.cs" />
     <Compile Include="Persistencia\pLogin.cs" />

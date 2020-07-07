@@ -378,6 +378,16 @@ namespace Obligatorio1.Persistencia
         {
             return pVenta.Instancia.ArticulosCompradosSegunVenta(pIdVenta);
         }
+        public List<Venta> ListaDeVentasFiltradaPorFechas(DateTime pDesde,DateTime pHasta)
+        {
+            return pVenta.Instancia.EstadisticasVentasFiltrada(pDesde, pHasta);
+        }
+
+        public List<Articulo> ListaDeArticulosConSusVentasTotales()
+        {
+            return pVenta.Instancia.ListaDeArticulosConVentas();
+        }
+
         #endregion
 
         #region "Filtrado Lista"
@@ -401,6 +411,30 @@ namespace Obligatorio1.Persistencia
         {
             return pListadoArticulos.Instancia.ListadoDeArticulosOrdenadoPorDestacados();
         }
+        #endregion
+
+        #region "Listados para el inicio"
+
+        public List<Instrumento> ListaDeInstrumentosEnOferta()
+        {
+            return pInicio.Instancia.ListarInstrumentosEnOferta();
+        }
+
+        public List<Articulo> ListadoDeArticulosRecientes()
+        {
+            return pInicio.Instancia.ListarArticulosMasRecientes();
+        }
+
+        public List<Instrumento> ListaDeInstrumentosDestacados()
+        {
+            return pInicio.Instancia.ListarInstrumentosDestacados();
+        }
+
+        public List<Articulo> ListadoDeArticulosMasVendidos()
+        {
+            return pInicio.Instancia.ListarArticulosMasVendidos();
+        }
+
         #endregion
     }
 }

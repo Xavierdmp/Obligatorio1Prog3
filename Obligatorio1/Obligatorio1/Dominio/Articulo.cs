@@ -16,6 +16,7 @@ namespace Obligatorio1.Dominio
         private int _precio;
         private int _stock;
 
+        private int _cantidadVendidas;
         public int Id
         {
             get { return _id; }
@@ -61,7 +62,11 @@ namespace Obligatorio1.Dominio
             get { return _fabricante.Id; }
         }
 
-
+        public int cantidad
+        {
+            get { return _cantidadVendidas; }
+            set { _cantidadVendidas = value; }
+        }
         public Articulo(string pNombre,string pDescripcion,Fabricante pFabricante,
                         string pFotoPrincipal, List<FotosAdicionales> pFotosAdicionales,
                         int pPrecio,int pStock)

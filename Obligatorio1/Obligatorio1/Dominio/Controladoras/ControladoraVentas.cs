@@ -19,6 +19,7 @@ namespace Obligatorio1.Dominio.Controladoras
                 return _instancia;
             }
         }
+
         private ControladoraVentas()
         {
 
@@ -66,6 +67,15 @@ namespace Obligatorio1.Dominio.Controladoras
         public List<Item> ArticulosCompradosSegunVenta(int pIdVenta)
         {
             return Persistencia.Controladora.Instancia.ArticulosCompradosSegunVenta(pIdVenta);
+        }
+
+        public List<Venta> ListarVentasFiltradasPorFechas(DateTime pDesde,DateTime pHasta)
+        {
+            return Persistencia.Controladora.Instancia.ListaDeVentasFiltradaPorFechas(pDesde, pHasta);
+        }
+        public List<Articulo> ListaDeArticulosConSusVentasTotales()
+        {
+            return Persistencia.Controladora.Instancia.ListaDeArticulosConSusVentasTotales();
         }
     }
 }

@@ -11,5 +11,41 @@ namespace Obligatorio1 {
     
     
     public partial class _Default {
+        
+        /// <summary>
+        /// Control ContenedorArticulosEnOferta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel ContenedorArticulosEnOferta;
+        
+        /// <summary>
+        /// Control ContenedorArticulosMasRecientes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel ContenedorArticulosMasRecientes;
+        
+        /// <summary>
+        /// Control ContenedorArticulosDestacados.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel ContenedorArticulosDestacados;
+        
+        /// <summary>
+        /// Control ContenedorArticulosMasComprados.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel ContenedorArticulosMasComprados;
     }
 }

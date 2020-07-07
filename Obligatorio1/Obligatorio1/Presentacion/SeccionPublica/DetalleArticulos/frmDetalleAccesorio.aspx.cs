@@ -49,6 +49,22 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
             this.lblPrecio.Text = "$" + unAccesorio.Precio;
             this.ImagenPrincipal.ImageUrl = unAccesorio.FotoPrincipal;
 
+            this.GenerarListaDeSubtipos(unAccesorio.Id);
+        }
+
+        private void GenerarListaDeSubtipos(int pIdAccesorio)
+        {
+            Dominio.Controladoras.ControladoraAccesorio unaControladoraAccesorio = new Dominio.Controladoras.ControladoraAccesorio();
+            foreach (Dominio.SubTipo unSubtipo in unaControladoraAccesorio.ListarSubTiposParaAccesorio(pIdAccesorio)) {
+                TableRow fila = new TableRow();
+                TableCell celdaNombreSubtipo = new TableCell();
+                TableCell celdaNombreTipo = new TableCell();
+                celdaNombreSubtipo.Text = unSubtipo.Nombre;
+                celdaNombreTipo.Text = unSubtipo.NombreTipo;
+                fila.Cells.Add(celdaNombreSubtipo);
+                fila.Cells.Add(celdaNombreTipo);
+                this.tablaSubtipos.Rows.Add(fila);
+            }
         }
 
         protected void btnConfirmarCantidadStock_Click(object sender, EventArgs e)

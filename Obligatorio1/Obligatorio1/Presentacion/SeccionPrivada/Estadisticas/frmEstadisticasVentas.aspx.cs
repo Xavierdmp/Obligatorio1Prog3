@@ -14,7 +14,14 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.Estadisticas
             if (!this.IsPostBack)
             {
                 this.ListarVentas();
+                this.ListaArticulosConVentas();
             }
+        }
+        private void ListaArticulosConVentas()
+        {
+            this.gvListarArticulosConVentas.DataSource = null;
+            this.gvListarArticulosConVentas.DataSource = InstanciaVentas().ListaDeArticulosConSusVentasTotales();
+            this.gvListarArticulosConVentas.DataBind();
         }
 
         private Dominio.Controladoras.ControladoraVentas InstanciaVentas()
@@ -54,5 +61,22 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.Estadisticas
             this.CargarDatosModales(IdVenta);
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#exampleModal').modal();", true);
         }
+
+        protected void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            if (this.txtFechaDesde.Text != "" && this.txtFechaHasta.Text != "")
+            {
+                DateTime fechaDesde = Convert.ToDateTime(this.txtFechaDesde.Text);
+                DateTime fechaHasta = Convert.ToDateTime(this.txtFechaHasta.Text);
+                if (fechaDesde <= fechaHasta)
+                {
+                    this.gvListarVentas.DataSource = null;
+                    this.gvListarVentas.DataSource = InstanciaVentas().ListarVentasFiltradasPorFechas(fechaDesde, fechaHasta);
+                    this.gvListarVentas.DataBind();
+
+                }
+            }
+        }
+
     }
 }

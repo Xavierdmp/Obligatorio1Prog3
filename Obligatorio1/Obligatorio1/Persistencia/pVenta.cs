@@ -181,5 +181,41 @@ namespace Obligatorio1.Persistencia
             }
             return ItemsComprados;
         }
+
+
+        public List<Articulo> ListaDeArticulosConVentas()
+        {
+            string consulta = "select vta.Id_Articulo, SUM(vta.Cantidad_Articulo) from Ventas_tienen_Articulos  vta,Ventas v where v.Estado_Venta =1 and vta.Id_Venta = v.Id_Venta group by vta.Id_Articulo order by(SUM(vta.Cantidad_Articulo)) desc";
+            List<Articulo> ListaArticulos = new List<Articulo>();
+            DataSet datos = Conexion.Instancia.InicializarSeleccion(consulta);
+            if(datos.Tables[0].Rows.Count > 0)
+            {
+                DataRowCollection table = datos.Tables[0].Rows;
+                foreach(DataRow row in table)
+                {
+                    Dominio.Instrumento ElInstrumento = new Dominio.Instrumento();
+                    Dominio.Accesorio ElAccesorio = new Dominio.Accesorio();
+                    object[] element = row.ItemArray;
+                    int idArticulo = int.Parse(element[0].ToString());
+                    Dominio.Instrumento unInstrumento = Controladora.Instancia.BuscarInstrumento(idArticulo);
+                    Dominio.Accesorio unAccesorio = Controladora.Instancia.BuscarAccesorio(idArticulo);
+                    int cantidad = int.Parse(element[1].ToString());
+                    if(unInstrumento != null)
+                    {
+                        unInstrumento.cantidad = cantidad;
+                        ListaArticulos.Add(unInstrumento);
+                    }
+                    else
+                    {
+                        unAccesorio.cantidad = cantidad;
+                        ListaArticulos.Add(unAccesorio);
+                    }
+
+                }
+                return ListaArticulos;
+            }
+            return ListaArticulos;
+        }
+
     }
 }

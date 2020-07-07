@@ -18,51 +18,19 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
                 IndiceAnterior = 0;
                 List<string> listaFiltros = new List<string>();
                 listaDeFiltros = listaFiltros;
-                if (Session["FiltrarListaDestacado"] != null)
+                if (Session["FiltrarListaInstrumento"] != null)
                 {
-                    listaDeFiltros.Add(Session["FiltrarListaDestacado"].ToString());
+                    listaDeFiltros.Add(Session["FiltrarListaInstrumento"].ToString());
                     this.ListadoPaginado(IndiceAnterior, listaDeFiltros, "Instrumento");
                     FiltroAplicadoDesdeMenu = "Instrumento";
-                    Session["FiltrarListaDestacado"] = null;
+                    Session["FiltrarListaInstrumento"] = null;
                 }
-                else if(Session["FiltrarListaPrecioAsc"] != null)
+                else if (Session["FiltrarListaAccesorio"] != null)
                 {
-
-                    listaDeFiltros.Add(Session["FiltrarListaPrecioAsc"].ToString());
-                    this.ListadoPaginado(IndiceAnterior, listaDeFiltros, "Instrumento");
-                    FiltroAplicadoDesdeMenu = "Instrumento";
-                    Session["FiltrarListaPrecioAsc"] = null;
-                }
-                else if (Session["FiltrarListaPrecioDesc"] != null)
-                {
-
-                    listaDeFiltros.Add(Session["FiltrarListaPrecioDesc"].ToString());
-                    this.ListadoPaginado(IndiceAnterior, listaDeFiltros, "Instrumento");
-                    FiltroAplicadoDesdeMenu = "Instrumento";
-                    Session["FiltrarListaPrecioDesc"] = null;
-                }
-                else if(Session["FiltrarListaDescuento"] != null)
-                {
-
-                    listaDeFiltros.Add(Session["FiltrarListaDescuento"].ToString());
-                    this.ListadoPaginado(IndiceAnterior, listaDeFiltros, "Instrumento");
-                    FiltroAplicadoDesdeMenu = "Instrumento";
-                    Session["FiltrarListaDescuento"] = null;
-                }
-                else if (Session["FiltrarListaAccesorioPrecioAsc"] != null)
-                {
-                    listaDeFiltros.Add(Session["FiltrarListaAccesorioPrecioAsc"].ToString());
+                    listaDeFiltros.Add(Session["FiltrarListaAccesorio"].ToString());
                     this.ListadoPaginado(IndiceAnterior, listaDeFiltros, "Accesorio");
                     FiltroAplicadoDesdeMenu = "Accesorio";
-                    Session["FiltrarListaAccesorioPrecioAsc"] = null;
-                }
-                else if(Session["FiltrarListaAccesorioPrecioDesc"] != null)
-                {
-
-                    listaDeFiltros.Add(Session["FiltrarListaAccesorioPrecioDesc"].ToString());
-                    this.ListadoPaginado(IndiceAnterior, listaDeFiltros, "Accesorio");
-                    FiltroAplicadoDesdeMenu = "Accesorio";
-                    Session["FiltrarListaAccesorioPrecioDesc"] = null;
+                    Session["FiltrarListaAccesorio"] = null;
                 }
                 else
                 {
@@ -72,7 +40,9 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
             }
             else
             {
-                this.ListadoPaginado(IndiceAnterior, listaDeFiltros, FiltroAplicadoDesdeMenu);
+
+                    this.ListadoPaginado(IndiceAnterior, listaDeFiltros, FiltroAplicadoDesdeMenu);
+                
             }
         }
 

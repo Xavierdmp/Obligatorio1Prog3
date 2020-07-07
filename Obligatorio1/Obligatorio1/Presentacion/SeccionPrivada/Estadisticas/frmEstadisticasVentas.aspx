@@ -11,13 +11,13 @@
             <article class="col-md-12">
                 <asp:TextBox ID="txtFechaDesde" class="form-controlV2" placeholder="Fecha" TextMode="Date" runat="server"></asp:TextBox>
                 <asp:TextBox ID="txtFechaHasta" class="form-controlV2" TextMode="Date" runat="server"></asp:TextBox>
-                <asp:Button ID="btnFiltrar" CssClass="btn btn-primary" runat="server" Text="Filtrar" />
+                <asp:Button ID="btnFiltrar" CssClass="btn btn-primary" runat="server" Text="Filtrar" OnClick="btnFiltrar_Click" />
             </article>
         </section>
         <section class="row">
             <article class="col-md-12">
                 <div class="table-responsive">
-                    <asp:GridView ID="gvListarVentas" runat="server" HorizontalAlign="Center" CssClass="table" BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="3px" CellPadding="4" GridLines="None" Width="846px" EmptyDataText="No hay instrumentos registrados" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" OnSelectedIndexChanged="gvListarVentas_SelectedIndexChanged">
+                    <asp:GridView ID="gvListarVentas" runat="server" HorizontalAlign="Center" CssClass="table" BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="3px" CellPadding="4" GridLines="None" Width="846px" EmptyDataText="No hay ventas en la lista" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" OnSelectedIndexChanged="gvListarVentas_SelectedIndexChanged">
                         <Columns>
                             <asp:CommandField ShowSelectButton="True" ControlStyle-Font-Size="2em" AccessibleHeaderText="Ver detalle" HeaderText="Ver detalle" SelectText="&lt;i class=&quot;fas fa-expand-alt&quot;&gt;&lt;/i&gt;">
                                 <ControlStyle Font-Size="1.5em" ForeColor="green"></ControlStyle>
@@ -42,6 +42,38 @@
                     </asp:GridView>
                 </div>
             </article>
+        </section>
+        <section class="row text-center">
+            <article class="col-md-12">
+                <h2>Lista de articulos con sus cantidades de ventas</h2>
+                <div class="table-responsive">
+                       <asp:GridView ID="gvListarArticulosConVentas" runat="server" HorizontalAlign="Center" CssClass="table" BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="3px" CellPadding="4" GridLines="None" Width="846px" EmptyDataText="No hay ventas en la lista" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" OnSelectedIndexChanged="gvListarVentas_SelectedIndexChanged">
+                        <Columns>
+                            <asp:ImageField AccessibleHeaderText="Foto Principal" DataImageUrlField="FotoPrincipal" HeaderText="Foto Principal">
+                                <ControlStyle Height="40px" Width="40px" />
+                            </asp:ImageField>
+
+                            <asp:BoundField AccessibleHeaderText="Id Venta" DataField="Id" HeaderText="Id Venta" />
+                            <asp:BoundField AccessibleHeaderText="Nombre" DataField="Nombre" HeaderText="Nombre" />
+                            <asp:BoundField AccessibleHeaderText="Descripcion" DataField="Descripcion" HeaderText="Descripcion" />
+                            <asp:BoundField AccessibleHeaderText="Id Fabricante" DataField="IdFabricante" HeaderText="Id Fabricante" />
+                            <asp:BoundField AccessibleHeaderText="Precio" DataField="Precio" HeaderText="Precio" />
+                            <asp:BoundField AccessibleHeaderText="Stock" DataField="Stock" HeaderText="Stock" />
+                            <asp:BoundField AccessibleHeaderText="Cantidad Vendidas" DataField="cantidad" HeaderText="Cantidad Vendidas" />
+                        </Columns>
+                        <FooterStyle BackColor="White" ForeColor="#333333" />
+                        <HeaderStyle BackColor="#336666" Font-Bold="True" ForeColor="White" />
+                        <PagerStyle BackColor="#336666" ForeColor="White" HorizontalAlign="Center" />
+                        <RowStyle BackColor="White" ForeColor="#333333" />
+                        <SelectedRowStyle BackColor="#339966" Font-Bold="True" ForeColor="White" />
+                        <SortedAscendingCellStyle BackColor="#F7F7F7" />
+                        <SortedAscendingHeaderStyle BackColor="#487575" />
+                        <SortedDescendingCellStyle BackColor="#E5E5E5" />
+                        <SortedDescendingHeaderStyle BackColor="#275353" />
+                    </asp:GridView>
+                </div>
+            </article>
+
         </section>
 
 

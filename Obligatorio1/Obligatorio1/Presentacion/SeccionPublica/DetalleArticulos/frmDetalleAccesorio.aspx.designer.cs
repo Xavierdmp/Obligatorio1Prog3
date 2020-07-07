@@ -130,6 +130,24 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos {
         protected global::System.Web.UI.WebControls.Button btnAgregarAlCarrito;
         
         /// <summary>
+        /// Control Label6.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label6;
+        
+        /// <summary>
+        /// Control tablaSubtipos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table tablaSubtipos;
+        
+        /// <summary>
         /// Control Label3.
         /// </summary>
         /// <remarks>

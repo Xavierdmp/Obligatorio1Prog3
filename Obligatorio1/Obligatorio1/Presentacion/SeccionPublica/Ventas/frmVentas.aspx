@@ -49,12 +49,12 @@
                     <br />
                     <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ValidationGroup="vgComprar" runat="server" ControlToValidate="txtCedulaTitularTarjeta" ErrorMessage="debe de tener 8 caracteres" ValidationExpression="^.{8}$"></asp:RegularExpressionValidator>
                     <br />
-                     <asp:CustomValidator ID="CustomValidator2" runat="server" ControlToValidate="txtCedulaTitularTarjeta" ValidationGroup="vgComprar" OnServerValidate="CustomValidator2_ServerValidate" ErrorMessage="La cedula no es correcta"></asp:CustomValidator>
+                    <asp:CustomValidator ID="CustomValidator2" runat="server" ControlToValidate="txtCedulaTitularTarjeta" ValidationGroup="vgComprar" OnServerValidate="CustomValidator2_ServerValidate" ErrorMessage="La cedula no es correcta"></asp:CustomValidator>
                     <br />
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator6" InitialValue="0" ControlToValidate="dplListaPaises" ValidationGroup="vgComprar" runat="server" ErrorMessage="Seleccione un pais" ForeColor="#CC3300"></asp:RequiredFieldValidator>
                     <br />
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator7" InitialValue="0" ControlToValidate="dplListaCiudades" ValidationGroup="vgComprar" runat="server" ErrorMessage="Seleccione una ciudad" ForeColor="#CC3300"></asp:RequiredFieldValidator>
-
+                    <asp:Image runat="server" CssClass="metodoDePago" ImageUrl="~/Imagenes/SiteMasters/formasdePagos.png" />
                 </div>
 
             </article>
