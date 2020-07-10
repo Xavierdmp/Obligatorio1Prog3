@@ -109,7 +109,62 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - Mi aplicación ASP.NET</p>
+                <div class="footer-content">
+                    <div class="footer-section about">
+                        <h1 class="logo-text"><span>Shop</span>Empire</h1>
+                        <p>Lorem ipsum is a problem because its de probabilty games</p>
+                        <div class="contact">
+                            <span><i class="fas fa-phone"></i>123-345-356</span>
+                            <span><i class="fas fa-envelope"></i>123-345-356</span>
+                        </div>
+                        <div class="socials">
+                            <a href="#"><i class="fab fa-facebook social1"></i></a>
+                            <a href="#"><i class="fab fa-instagram social1"></i></a>
+                            <a href="#"><i class="fab fa-twitter social1"></i></a>
+                            <a href="#"><i class="fab fa-youtube social1"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer-section links">
+                        <h2>Enlaces recomendados</h2>
+                        <br />
+                        <ul>
+                            <a>
+                                <li>Acerca nuestro</li>
+                            </a>
+                            <a>
+                                <li>Informacion</li>
+                            </a>
+                            <a>
+                                <li>Eventos</li>
+                            </a>
+                            <a>
+                                <li>Equipo</li>
+                            </a>
+                            <a>
+                                <li>Consultas</li>
+                            </a>
+                            <a>
+                                <li>Desarrollo</li>
+                            </a>
+                        </ul>
+                    </div>
+                    <div class="footer-section contact-form">
+                        <h2>Contactanaos</h2>
+                        <br />
+
+                        <input type="email" name="emial" class="text-input contact-input" placeholder="Tu correo..." />
+                        <textarea name="message" placeholder="Tu Mensaje..." class="text-input textareaFooer contact-input"></textarea>
+                        <br />
+                        <button type="submit" class="btn btn-big contact-btn">
+                            Enviar
+                         <i class="fas fa-envelope"></i>
+                        </button>
+
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    ShopEmpety Todos los derechos reservados
+                </div>
             </footer>
         </div>
     </form>

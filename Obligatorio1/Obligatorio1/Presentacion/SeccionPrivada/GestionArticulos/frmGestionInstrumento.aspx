@@ -26,7 +26,7 @@
                     <asp:DropDownList ID="dplListaFabricante" runat="server" class="form-control" Width="281px" AutoPostBack="True" AppendDataBoundItems="True">
                         <asp:ListItem Value="0">Seleccione un fabricante</asp:ListItem>
                     </asp:DropDownList>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator9" InitialValue="0" ControlToValidate="dplListaFabricante" ValidationGroup="vgGestion" runat="server" ErrorMessage="Seleccione un fabricante" ForeColor="#CC3300"></asp:RequiredFieldValidator>
+                   
                 </div>
             </article>
             <article class="col-md-3">
@@ -47,7 +47,7 @@
                     <asp:DropDownList ID="dplListarSubtipo" runat="server" class="form-control" Width="280px" AutoPostBack="True" AppendDataBoundItems="True">
                         <asp:ListItem Value="0">Seleccione un subtipo de instrumento</asp:ListItem>
                     </asp:DropDownList>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator10" InitialValue="0" ControlToValidate="dplListarSubtipo" ValidationGroup="vgGestion" runat="server" ErrorMessage="Seleccione un subtipo de instrumento" ForeColor="#CC3300"></asp:RequiredFieldValidator>
+                   
                 </div>
             </article>
             <aside class="col-md-6 text-center">
@@ -137,7 +137,7 @@
                     </asp:DropDownList>
                     <asp:Button ID="btnAgregarColor" runat="server" Text="Agregar nuevo Color" CssClass="AgregarColor btn btn-success" data-toggle="modal" data-target="#exampleModalCentered" />
                     <br />
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator11" InitialValue="0" ControlToValidate="dplListarColores" ValidationGroup="vgGestion" runat="server" ErrorMessage="Seleccione colores" ForeColor="#CC3300"></asp:RequiredFieldValidator>
+
                 </div>
                 <div class="form-group">
                     <asp:GridView ID="gvListarColoresSeleccionados" runat="server" OnSelectedIndexChanged="gvListarColoresSeleccionados_SelectedIndexChanged" CellPadding="4" ForeColor="#333333" GridLines="None">

@@ -27,7 +27,7 @@
                     <asp:DropDownList ID="dplListaFabricante" runat="server" class="form-control" Width="281px" AutoPostBack="True" AppendDataBoundItems="True">
                         <asp:ListItem Value="0">Seleccione un fabricante</asp:ListItem>
                     </asp:DropDownList>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator7" InitialValue="0" ControlToValidate="dplListaFabricante" ValidationGroup="vgGestion" runat="server" ErrorMessage="Seleccione un fabricante" ForeColor="#CC3300"></asp:RequiredFieldValidator>
+                    
                 </div>
             </article>
             <article class="col-md-3">
@@ -97,8 +97,6 @@
                     <asp:DropDownList ID="dplListarSubtipo" runat="server" class="form-control CargarSubtipos" Width="281px" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="dplListarSubtipo_SelectedIndexChanged">
                         <asp:ListItem Value="0">Seleccione un subtipo de instrumento</asp:ListItem>
                     </asp:DropDownList>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator5" InitialValue="0" ControlToValidate="dplListarSubtipo" ValidationGroup="vgGestion" runat="server" ErrorMessage="Seleccione un subtipo" ForeColor="#CC3300"></asp:RequiredFieldValidator>
-                   
                 </div>
                 <div class="form-group">
                     <asp:GridView ID="gvListarSubtiposDeAccesorio" runat="server" HorizontalAlign="Center" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="gvListarSubtiposDeAccesorio_SelectedIndexChanged">

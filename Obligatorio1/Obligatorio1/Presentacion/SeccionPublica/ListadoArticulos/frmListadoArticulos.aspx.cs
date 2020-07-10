@@ -24,6 +24,7 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
                     this.ListadoPaginado(IndiceAnterior, listaDeFiltros, "Instrumento");
                     FiltroAplicadoDesdeMenu = "Instrumento";
                     Session["FiltrarListaInstrumento"] = null;
+                    this.DesactivarFiltros(true);
                 }
                 else if (Session["FiltrarListaAccesorio"] != null)
                 {
@@ -31,20 +32,23 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
                     this.ListadoPaginado(IndiceAnterior, listaDeFiltros, "Accesorio");
                     FiltroAplicadoDesdeMenu = "Accesorio";
                     Session["FiltrarListaAccesorio"] = null;
+                    this.DesactivarFiltros(true);
                 }
                 else
                 {
-                    this.ListadoPaginado(IndiceAnterior,null,"");
+                    this.ListadoPaginado(IndiceAnterior, null, "");
                 }
                 this.GenerarListasFiltrado();
             }
             else
             {
+                this.ListadoPaginado(IndiceAnterior, listaDeFiltros, FiltroAplicadoDesdeMenu);
 
-                    this.ListadoPaginado(IndiceAnterior, listaDeFiltros, FiltroAplicadoDesdeMenu);
-                
+
             }
         }
+
+
 
         private List<string> listaDeFiltros
         {
@@ -170,10 +174,10 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
 
         protected void btnSiguiente_Click1(object sender, EventArgs e)
         {
-            
             if (IndicePaginado == 0)
             {
-                IndicePaginado = 13;
+                int cantidadElementosParaMostrar = 13;
+                IndicePaginado = cantidadElementosParaMostrar;
             }
             IndiceAnterior = IndicePaginado;
             IndicePaginado += IndiceAnterior;
@@ -256,8 +260,8 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
             this.dplOferta.Items.Add(decuento50);
             this.dplOferta.DataBind();
 
-            this.dplOrdenar.Items.Add("Ordenar por Nombre");
-            this.dplOrdenar.Items.Add("Orden por fecha fabricacion");
+            this.dplOrdenar.Items.Add("Nombre");
+            this.dplOrdenar.Items.Add("Fecha fabricacion");
             this.dplOrdenar.DataBind();
         }
 
@@ -265,8 +269,8 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
         {
             if(this.dplListarSubtipos.SelectedIndex > 0)
             {
+                FiltroAplicadoDesdeMenu = null;
                 string subtipo = this.dplListarSubtipos.SelectedValue;
-                //Session["NombreSubtipoFiltro"] = subtipo;
                 listaDeFiltros.Add("0 " + subtipo);
                 this.dplListarSubtipos.SelectedIndex = 0;
             }
@@ -274,22 +278,20 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
 
         protected void btnFiltrarLista_Click(object sender, EventArgs e)
         {
-            //this.listaDeFiltros.Clear();
-            //listaDeFiltros.Add("0 "+Session["NombreSubtipoFiltro"].ToString());
-            this.ListadoPaginado(IndiceAnterior, listaDeFiltros,null);
-            this.listaDeFiltros.Clear();
-
+            this.ListadoPaginado(IndiceAnterior, listaDeFiltros, null);
+            this.btnFiltrarLista.Visible = false;
+            this.DesactivarFiltros(true);
         }
 
         protected void dplListarTipos_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.dplListarTipos.SelectedIndex > 0)
             {
+                FiltroAplicadoDesdeMenu = null;
                 string tipos = this.dplListarTipos.SelectedValue;
-                //if (!this.SeEncuentraElFiltroEnLaLista(1)){
-                    listaDeFiltros.Add("1 " + tipos);
-                    this.dplListarTipos.SelectedIndex = 0;
-                //}
+
+                listaDeFiltros.Add("1 " + tipos);
+                this.dplListarTipos.SelectedIndex = 0;
             }
         }
 
@@ -298,11 +300,32 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
             if (this.dplFabricantes.SelectedIndex > 0)
             {
                 string fabricante = this.dplFabricantes.SelectedValue;
-                //if (!this.SeEncuentraElFiltroEnLaLista(2))
-                //{
-                //    listaDeFiltros.Add("2 " + fabricante);
-                    this.dplFabricantes.SelectedIndex = 0;
-                //}
+
+                listaDeFiltros.Add("2 " + fabricante);
+                this.dplFabricantes.SelectedIndex = 0;
+
+            }
+        }
+
+        private void DesactivarFiltros(bool pEstado)
+        {
+            if (pEstado)
+            {
+                this.dplDestacado.Enabled = false;
+                this.dplFabricantes.Enabled = false;
+                this.dplListarSubtipos.Enabled = false;
+                this.dplListarTipos.Enabled = false;
+                this.dplOferta.Enabled = false;
+                this.dplOrdenar.Enabled = false;
+            }
+            else
+            {
+                this.dplDestacado.Enabled = true;
+                this.dplFabricantes.Enabled = true;
+                this.dplListarSubtipos.Enabled = true;
+                this.dplListarTipos.Enabled = true;
+                this.dplOferta.Enabled = true;
+                this.dplOrdenar.Enabled = true;
             }
         }
 
@@ -312,11 +335,10 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
             {
 
                 string destacado = this.dplDestacado.SelectedValue;
-                //if (!this.SeEncuentraElFiltroEnLaLista(3))
-                //{
-                    listaDeFiltros.Add("3 " + destacado);
-                    this.dplDestacado.SelectedIndex = 0;
-                //}
+
+                listaDeFiltros.Add("3 " + destacado);
+                this.dplDestacado.SelectedIndex = 0;
+
             }
         }
 
@@ -325,11 +347,8 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
             if (this.dplOferta.SelectedIndex > 0)
             {
                 string oferta = this.dplOferta.SelectedValue;
-                //if (!this.SeEncuentraElFiltroEnLaLista(4))
-                //{
-                    listaDeFiltros.Add("4 " + oferta);
-                    this.dplOferta.SelectedIndex = 0;
-                //}
+                listaDeFiltros.Add("4 " + oferta);
+                this.dplOferta.SelectedIndex = 0;
             }
         }
 
@@ -339,26 +358,16 @@ namespace Obligatorio1.Presentacion.SeccionPublica.ListadoArticulos
             {
 
                 string ordenar = this.dplOrdenar.SelectedValue;
-                //if (!this.SeEncuentraElFiltroEnLaLista(5))
-                //{
-                    listaDeFiltros.Add("5 " + ordenar);
-                    this.dplOrdenar.SelectedIndex = 0;
-
-                //}
+                listaDeFiltros.Add("5 " + ordenar);
+                this.dplOrdenar.SelectedIndex = 0;
             }
         }
 
-        private bool SeEncuentraElFiltroEnLaLista(int pIndice)
+        protected void btnLimpiarFiltros_Click(object sender, EventArgs e)
         {
-            foreach(string unFiltro in listaDeFiltros)
-            {
-                string[] content = unFiltro.Split(' ');
-                if(int.Parse(content[0])== pIndice)
-                {
-                    return true;
-                }
-            }
-            return false;
+            this.listaDeFiltros.Clear();
+            this.DesactivarFiltros(false);
+            this.btnFiltrarLista.Visible = true;
         }
     }
 }

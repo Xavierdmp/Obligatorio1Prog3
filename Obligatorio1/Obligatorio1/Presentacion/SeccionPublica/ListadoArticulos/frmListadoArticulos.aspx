@@ -23,6 +23,7 @@
                     <asp:ListItem>filtrar por orden</asp:ListItem>
                 </asp:DropDownList>
                 <asp:Button ID="btnFiltrarLista" runat="server" class="btn btn-primary buttonFiltrar" Text="Filtrar" OnClick="btnFiltrarLista_Click" />
+                <asp:Button ID="btnLimpiarFiltros" runat="server" class="btn btn-primary buttonFiltrar" Text="Limpiar" OnClick="btnLimpiarFiltros_Click" Width="72px" />
             </article>
         </section>
         <div class="row text-center">

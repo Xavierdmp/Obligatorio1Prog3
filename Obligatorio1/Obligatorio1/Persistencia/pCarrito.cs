@@ -34,19 +34,26 @@ namespace Obligatorio1.Persistencia
             }
             else
             {
-                //if(unInstrumento.Descuento > 0)
-                //{
-                //    switch (unInstrumento.Descuento)
-                //    {
-                //        case 15:
-                //            //unInstrumento.Precio =   unInstrumento.Precio - 1.15;
-                //        break;
-                //        case 25:
-                //        break;
-                //        case 35:
-                //       break;
-                //    }
-                //}
+                if (unInstrumento.Descuento > 0)
+                {
+                    int descuento = 0;
+                    switch (unInstrumento.Descuento)
+                    { 
+                        case 15:
+                            descuento = 100 - 15;
+                            unInstrumento.Precio =   unInstrumento.Precio  * descuento / 100;
+                            break;
+                        case 25:
+                           descuento = 100 - 25;
+                            unInstrumento.Precio = unInstrumento.Precio * descuento / 100;
+                            break;
+                        case 50:
+                           descuento = 100 - 50;
+                            unInstrumento.Precio = unInstrumento.Precio * descuento / 100;
+                            break;
+                    }
+                }
+                pItem.Precio = unInstrumento.Precio * pItem.Cantidad;
                 return Conexion.Instancia.InicializarConsulta("Insert into CarritoCompras(Id_Cliente,Id_Articulo,Cantidad,Id_Color,Precio_Total) values(" + pIdCliente + "," + pItem.Articulo.Id + "," + pItem.Cantidad + "," + pItem.Color.Id + "," + pItem.Precio + ");");
             }
                 

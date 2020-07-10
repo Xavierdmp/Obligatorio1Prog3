@@ -21,6 +21,8 @@
             var imagen1 = "/Imagenes/ImagenesVentasTarjetas/DNI.png";
             changeImage.src = imagen1;
             break;
-
     }
 }
+
+
+

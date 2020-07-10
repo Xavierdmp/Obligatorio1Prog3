@@ -63,6 +63,11 @@ namespace Obligatorio1.Presentacion.SeccionPublica.DetalleArticulos
             this.lblNombreTipo.Text = unInstrumento.SubTipo.TipoInstrumento.Nombre;
             this.lblSubtipoNombre.Text = unInstrumento.SubTipo.Nombre;
             this.lblFechaFabricacion.Text = unInstrumento.FechaFabricacion.ToShortDateString();
+
+            if (unInstrumento.Descuento != 0)
+            {
+                this.lblDescuento.Text = "%" + unInstrumento.Descuento;
+            }
         }
 
 

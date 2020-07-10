@@ -204,7 +204,6 @@ namespace Obligatorio1.Persistencia
             string fabricante = "";
             string destacado = "";
             string descuento = "";
-            string oferta = "";
             string ordenar = "";
             foreach (string unFiltro in pListaFiltros)
             {
@@ -303,7 +302,7 @@ namespace Obligatorio1.Persistencia
                         break;
                     case 5:
                         ordenar = tempTipo;
-                        if(ordenar == "Ordenar por Nombre")
+                        if(ordenar == "Nombre")
                         {
                             if (ConsultaAccesorioFrom != "")
                             {

@@ -298,7 +298,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
 
         protected void btnAlta_Click(object sender, EventArgs e)
         {
-            if (this.dplListaFabricante.SelectedIndex > 0 && this.dplListarSubtipo.SelectedIndex > 0 && this.UrlFotoPrincipal != "")
+            if (this.dplListaFabricante.SelectedIndex > 0 && this.dplListarSubtipo.SelectedIndex > 0 && this.UrlFotoPrincipal != "" && this.UrlFotoPrincipal != null)
             {
                 string nombre = this.txtNombre.Text;
                 string descripcion = this.txtDescripcion.Text;
@@ -365,6 +365,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
             this.txtDescripcion.Text = unInstrumento.Descripcion;
             this.txtPrecio.Text = unInstrumento.Precio.ToString();
             this.txtVideoYoutube.Text = unInstrumento.VideoYoutube;
+            UrlFotoPrincipal = unInstrumento.FotoPrincipal;
             this.txtFechaFabricacion.Text = String.Format("{0:yyyy-MM-dd}", unInstrumento.FechaFabricacion);
             List<Color> listColores = unaControladora.ListarColoresParaInstrumento(idInstrumento);
             List<FotosAdicionales> listaFotosAd = unaControladora.ListarFotosAdicionalesParaInstrumento(idInstrumento);
@@ -376,7 +377,17 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
             ListaColores = listColores;
             this.ListarColoresSeleccionados();
             this.MostrarFotoPrincipal.ImageUrl = unInstrumento.FotoPrincipal;
-
+            this.dplListarColores.SelectedIndex = 1;
+            this.dplListaFabricante.SelectedIndex = 1;
+            this.dplListarSubtipo.SelectedIndex = 1;
+            if (unInstrumento.Destacado)
+            {
+                this.btnEsDestacado.Checked = true;
+            }
+            else
+            {
+                this.btnEsDestacado.Checked = false;
+            }
 
         }
 
@@ -404,7 +415,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
 
         protected void btnModificar_Click(object sender, EventArgs e)
         {
-            if (this.dplListaFabricante.SelectedIndex > 0 && this.dplListarSubtipo.SelectedIndex > 0 && this.UrlFotoPrincipal != "")
+            if (this.dplListaFabricante.SelectedIndex > 0 && this.dplListarSubtipo.SelectedIndex > 0 && this.UrlFotoPrincipal != "" && this.UrlFotoPrincipal != null)
             {
                 GridViewRow fila = this.gvListarInstrumentos.SelectedRow;
                 int idInstrumento = int.Parse(fila.Cells[1].Text);
@@ -440,7 +451,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
                 unInstrumento.FechaFabricacion = fechaFabricacion;
                 unInstrumento.FotoPrincipal = UrlFotoPrincipal;
                 unInstrumento.Destacado = destacado;
-
+                unInstrumento.VideoYoutube = urlVideo;
                 if (this.dplListaDescuentos.SelectedIndex > 0)
                 {
                     int descuento = int.Parse(this.dplListaDescuentos.SelectedValue);

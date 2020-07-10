@@ -44,16 +44,20 @@ namespace Obligatorio1
                 Panel contenedorTexto = new Panel();
                 contenedorTexto.CssClass = "text-center TextoSlider";
 
+
                 Label precio = new Label();
                 precio.Text = "$" + unInstrumento.Precio +" ";
                 precio.CssClass = "PrecioSlider";
 
-                contenedorTexto.Controls.Add(precio);
-                Label Oferta = new Label();
-                Oferta.Text = "%" + unInstrumento.Descuento.ToString();
-                Oferta.CssClass = "OfertaInstrumento";
 
-                contenedorTexto.Controls.Add(Oferta);
+                contenedorTexto.Controls.Add(precio);
+                if (unInstrumento.Descuento != 0)
+                {
+                    Label Oferta = new Label();
+                    Oferta.Text = "%" + unInstrumento.Descuento.ToString();
+                    Oferta.CssClass = "OfertaInstrumento";
+                    contenedorTexto.Controls.Add(Oferta);
+                }
 
                 Label nombre = new Label();
                 nombre.CssClass = "TituloSlider";
@@ -102,12 +106,13 @@ namespace Obligatorio1
                     precio.CssClass = "PrecioSlider";
 
                     contenedorTexto.Controls.Add(precio);
-                    Label Oferta = new Label();
-                    Oferta.Text = "%" + unInstrumento.Descuento.ToString();
-                    Oferta.CssClass = "OfertaInstrumento";
-
-                    contenedorTexto.Controls.Add(Oferta);
-
+                    if (unInstrumento.Descuento != 0)
+                    {
+                        Label Oferta = new Label();
+                        Oferta.Text = "%" + unInstrumento.Descuento.ToString();
+                        Oferta.CssClass = "OfertaInstrumento";
+                        contenedorTexto.Controls.Add(Oferta);
+                    }
                     Label nombre = new Label();
                     nombre.CssClass = "TituloSlider";
                     nombre.Text = unInstrumento.Nombre;
@@ -239,12 +244,13 @@ namespace Obligatorio1
                     precio.CssClass = "PrecioSlider";
 
                     contenedorTexto.Controls.Add(precio);
-                    Label Oferta = new Label();
-                    Oferta.Text = "%" + unInstrumento.Descuento.ToString();
-                    Oferta.CssClass = "OfertaInstrumento";
-
-                    contenedorTexto.Controls.Add(Oferta);
-
+                    if (unInstrumento.Descuento != 0)
+                    {
+                        Label Oferta = new Label();
+                        Oferta.Text = "%" + unInstrumento.Descuento.ToString();
+                        Oferta.CssClass = "OfertaInstrumento";
+                        contenedorTexto.Controls.Add(Oferta);
+                    }
                     Label nombre = new Label();
                     nombre.CssClass = "TituloSlider";
                     nombre.Text = unInstrumento.Nombre;

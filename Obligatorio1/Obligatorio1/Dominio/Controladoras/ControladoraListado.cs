@@ -40,7 +40,7 @@ namespace Obligatorio1.Dominio.Controladoras
         {
             List<Articulo> ListadoArticulos = new List<Articulo>();
             List<string> listaConFiltros = new List<string>();
-            if (pListaFiltros != null && pListaFiltros.Count ==1 && pTipoArticulo != null)
+            if (pListaFiltros != null && pListaFiltros.Count == 1 && pTipoArticulo != null)
             {
                 string esDestacado = "";
                 string precioAsc = "";

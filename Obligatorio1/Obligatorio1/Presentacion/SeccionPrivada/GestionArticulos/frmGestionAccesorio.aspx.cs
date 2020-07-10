@@ -139,7 +139,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            if (this.dplListaFabricante.SelectedIndex > 0 && this.dplListarSubtipo.SelectedIndex >0 && this.UrlFotoPrincipal !="")
+            if (this.dplListaFabricante.SelectedIndex > 0 && this.dplListarSubtipo.SelectedIndex >0 && this.UrlFotoPrincipal !="" && this.UrlFotoPrincipal != null && this.ListaSubtiposSeleccionados != null && this.ListaSubtiposSeleccionados.Count > 0)
             {
                 Dominio.Controladoras.ControladoraFabricante unaControladoraFabricante = new Dominio.Controladoras.ControladoraFabricante();
                 Dominio.Controladoras.ControladoraAccesorio unaControladoraAccesorio = new Dominio.Controladoras.ControladoraAccesorio();
@@ -278,7 +278,7 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
 
         protected void btnModificar_Click(object sender, EventArgs e)
         {
-            if (this.dplListaFabricante.SelectedIndex > 0 && this.dplListarSubtipo.SelectedIndex > 0 && this.Session["ImagenPrincipal"] != null)
+            if (this.dplListaFabricante.SelectedIndex > 0 && this.dplListarSubtipo.SelectedIndex > 0 && this.Session["ImagenPrincipal"] != null && this.UrlFotoPrincipal != "" && this.UrlFotoPrincipal != null && this.ListaSubtiposSeleccionados != null && this.ListaSubtiposSeleccionados.Count > 0)
             {
                 Dominio.Controladoras.ControladoraFabricante unaControladoraFabricante = new Dominio.Controladoras.ControladoraFabricante();
                 Dominio.Controladoras.ControladoraSubTipos unaControladoraSubtipo = new Dominio.Controladoras.ControladoraSubTipos();
@@ -375,7 +375,10 @@ namespace Obligatorio1.Presentacion.SeccionPrivada.GestionArticulos
             this.ListaFotosAdicionales();
             ListaSubtiposSeleccionados = unaControladoraAccesorio.ListarSubTiposParaAccesorio(id);
             this.ListarSubtiposSeleccionados();
+            this.UrlFotoPrincipal = unAccesorio.FotoPrincipal;
             this.MostrarFotoPrincipal.ImageUrl = unAccesorio.FotoPrincipal;
+            this.dplListaFabricante.SelectedIndex = 1;
+            this.dplListarSubtipo.SelectedIndex = 1;
         }
 
         protected void dplListarSubtipo_SelectedIndexChanged(object sender, EventArgs e)

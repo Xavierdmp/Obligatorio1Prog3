@@ -19,6 +19,7 @@
                 <asp:Label ID="lblFabricante" CssClass="FabricanteDetalle" runat="server" Text="Label"></asp:Label>
                 <br />
                 <asp:Label ID="lblPrecio" runat="server" CssClass="PrecioDetalle" Text="Label"></asp:Label>
+                <asp:Label ID="lblDescuento" runat="server" CssClass="OfertaInstrumento" Text=""></asp:Label>
                 <br />
                 <asp:Label ID="lblStock" runat="server" Text="Seleccione un color: "></asp:Label>
                 <br />

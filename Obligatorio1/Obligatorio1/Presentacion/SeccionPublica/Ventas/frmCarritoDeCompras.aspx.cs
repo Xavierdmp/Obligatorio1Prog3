@@ -152,6 +152,7 @@ namespace Obligatorio1.Presentacion.SeccionPublica.Ventas
                 this.lblCantidadDisponibleAccesorio.Text = "| stock disponible: " + unAccesorio.Stock +"|";
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#ModalAccesorios').modal();", true);
             }
+
         }
 
         protected void btnConfirmarNuevaCantidadAccesorio_Click(object sender, EventArgs e)
@@ -188,6 +189,26 @@ namespace Obligatorio1.Presentacion.SeccionPublica.Ventas
             int StockDisponibleDadoElColor = unaControladoraCarrito.CantidadColorDisponibleParaCambiar(IdArticuloSeleccionado, IdClienteConectado);
             if(cantidadNueva >0 && cantidadNueva <= StockDisponibleDadoElColor)
             {
+                if(unInstrumento.Descuento > 0)
+                {
+                    int descuento = 0;
+                    switch (unInstrumento.Descuento)
+                    {
+                        case 15:
+                            descuento = 100 - 15;
+                            unInstrumento.Precio = unInstrumento.Precio * descuento / 100;
+                            break;
+                        case 25:
+                            descuento = 100 - 25;
+                            unInstrumento.Precio = unInstrumento.Precio * descuento / 100;
+                            break;
+                        case 50:
+                            descuento = 100 - 50;
+                            unInstrumento.Precio = unInstrumento.Precio * descuento / 100;
+                            break;
+                    }
+                    precio = unInstrumento.Precio * cantidadNueva;
+                }
                 if (unaControladoraCarrito.ModificarCantidadCarrito(IdArticuloSeleccionado, IdClienteConectado, cantidadNueva, precio))
                 {
                     this.ContenedorProductos.Controls.Clear();
